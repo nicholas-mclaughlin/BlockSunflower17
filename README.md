@@ -1,2 +1,3 @@
 # BlockSunflower17
-GUI based version of our game
+This is a working GUI based version of our game.
+
