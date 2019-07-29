@@ -26,25 +26,6 @@ public class GardenScene extends BaseScene {
 		super(aSession);
 	}
 	
-	public ImageView spawnZombie() throws FileNotFoundException {
-		Image zImage = new Image(new FileInputStream("C:\\Users\\nickr\\CPSC_233\\images\\Zombie.png"));  
-	      
-	      //Setting the image view 
-	      ImageView zombieImage = new ImageView(zImage); 
-	      
-	      //Row 1 of the garden 
-	      zombieImage.setX(1125); 
-	      zombieImage.setY(220); 
-	      
-	      //Size of the zombie
-	      zombieImage.setFitHeight(80); 
-	      zombieImage.setFitWidth(100); 
-	      
-	      //Setting the preserve ratio of the image view 
-	      zombieImage.setPreserveRatio(true);
-	      return zombieImage;
-	}
-
 	//override abstract parent
 	@Override
 	public void setup() throws Exception{
