@@ -1,22 +1,26 @@
-
+//package gui;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
+//import drivers.Session;
+//import handlers.PlantButtonHandler;
+//import handlers.GardenButtonHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+//import logic.Game;
+//import logic.Player;
 
 public class GardenScene extends BaseScene {
 
 	private Button[] gardenslots;
-	private Button[] plantbuttons;
+
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
@@ -25,17 +29,17 @@ public class GardenScene extends BaseScene {
 	public GardenScene(Session aSession) {
 		super(aSession);
 	}
-	
+
 	//override abstract parent
 	@Override
 	public void setup() throws Exception{
 		StackPane root = new StackPane();
+		Scene scene = new Scene(root, LENGTH, WIDTH);
 
 		//creating garden image and garden image size to fit the buttons and scene
 		ImageView Garden = new ImageView(new Image(new FileInputStream("Garden.PNG")));
         Garden.setFitHeight(800);
         Garden.setFitWidth(1275);
-        
 
 		//Initialize game
 		Player player = new Player();
@@ -44,10 +48,7 @@ public class GardenScene extends BaseScene {
 		//adding the garden first so it doesn't interfere with the clickable buttons
 		root.getChildren().add(Garden);
 		root.getChildren().add(gardenButtons(game.getPlayer()));
-		
-		Group fullImage = new Group(root, spawnZombie());
 
-		Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 		setScene(scene);
 		display();
 
@@ -59,22 +60,30 @@ public class GardenScene extends BaseScene {
 
 		//setup plants buttons in first row of VBox layout
 		HBox box = new HBox();
-		plantbuttons = new Button[5];
-		int theButton = 0;
+
 		for (int column = 0; column <5; ++column){
 			//imports and adds each plant button
 			ImageView plant = new ImageView(new Image(new FileInputStream("Plant"+ column + ".jpg")));
-			plantbuttons[column] = new Button("p"+ column, plant);
-			plantbuttons[column].setFont(new Font(0));
-			box.getChildren().add(column, plantbuttons[theButton]);
-			theButton++;
+			Button plantbuttons = new Button("p"+ column, plant);
+			plantbuttons.setFont(new Font(0));
+			
+			plantbuttons.setOnAction(new PlantButtonHandler(aPlayer));
+			
+			box.getChildren().add(column, plantbuttons);
 		}
-        plantbuttons[0].setOnAction(new PlantButtonHandler(plantbuttons[0]));
-        plantbuttons[1].setOnAction(new PlantButtonHandler(plantbuttons[1]));
-        plantbuttons[2].setOnAction(new PlantButtonHandler(plantbuttons[2]));
-        plantbuttons[3].setOnAction(new PlantButtonHandler(plantbuttons[3]));
-        plantbuttons[4].setOnAction(new PlantButtonHandler(plantbuttons[4]));
-
+		//create sun counter 
+		ImageView sun = new ImageView(new Image(new FileInputStream("sun.png")));
+		Button sunCounter = new Button("Suns: " + aPlayer.getMoney(), sun);
+													//may need to update this method so it updates 
+		box.getChildren().add(sunCounter);
+		
+		/*
+		//creating the sun and for it to appear randomly on screen
+		ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
+		Button sunGif = new Button("", sunGIF);
+		sunGif.setStyle("-fx-background-color: transparent;");
+		*/
+		
 		//create empty button array for garden buttons
 		gardenslots = new Button[MAXSLOTS];	//number of elements must be stated
 
@@ -93,15 +102,13 @@ public class GardenScene extends BaseScene {
 					gardenslots[i].setStyle("-fx-background-color: transparent;");//sets garden slots to be transparent
 					gardenslots[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible' 
 					gardenslots[i].setPrefSize(100,  106);	//set button size
-
+					gardenslots[i].setOnAction(new GardenButtonHandler(aPlayer));
 				}
 				//adding each created button to the gridpane
 				grid.add(gardenslots[button], column, row);
 				++button;
 			}
 		}
-		
-		//gardenslots[0].setOnAction(new GardenButtonHandler(gardenslots[0]));
 
 		//add firstrow (plantwidgets) and secondrow (gardenslots) to root
 		root.getChildren().add(box);
