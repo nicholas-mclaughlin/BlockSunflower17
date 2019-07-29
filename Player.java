@@ -2,7 +2,7 @@
 
 public class Player {
 //	private String name;
-	private int money = 0;
+	private int money = 50;
 	private String plantHeld;
 	
 	public Player(int aMoney, String aPlant) {
