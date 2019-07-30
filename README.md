@@ -30,4 +30,5 @@ Luisa Vargas
 # References for code development
 1) Nathaly Verwaal. Lectures and course material from CPSC 233 Summer 2019.
 2) Java Official Oracle Documentation
+3) Zain Rizvi, TA at University of Calgary, Youtube Tutorials: https://www.youtube.com/watch?v=AAsCDBIet9w&list=PLaKSf4aF5le5vC9K7k9zJlqv48IW7H1JM&index=9&t=3008s
 
