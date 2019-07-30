@@ -46,10 +46,13 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 			player.setPlantHeld("Wallnut");
 		}
 
+		/**
+		 * First plant button is disabled and timer set the time for the later task,
+		 * to enable the button again, to run after a time 0f 10000ms.
+		 */
 		source.setDisable(true);
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
-
 		        @Override
 		        public void run() {
 		            Platform.runLater(new Runnable() {

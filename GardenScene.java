@@ -57,7 +57,11 @@ public class GardenScene extends BaseScene {
 	 */
 	StackPane root = new StackPane();
 
-	//creating garden image and garden image size to fit the buttons and scene
+	/**
+	 * Importing the garden image and setting its size to fit the buttons and scene. 
+	 * 1275 are the length of pixels a bit bigger than the window.		???
+	 * 800 are the pixels are the height of pixels a bit bigger than the window.	???
+	 */
 	ImageView Garden = new ImageView(new Image(new FileInputStream("Garden.PNG")));
 	Garden.setFitHeight(800);
 	Garden.setFitWidth(1275);
@@ -82,7 +86,15 @@ public class GardenScene extends BaseScene {
 	root.getChildren().add(Garden);
 	root.getChildren().add(gardenButtons(game.getPlayer(), game));
 
-
+	/*//creating the sun and for it to appear randomly on screen
+	ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
+	Button sunGif = new Button("", sunGIF);
+	sunGif.setStyle("-fx-background-color: transparent;");
+	*/	
+	
+	/**
+	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere
+	 */
 	Pane fullImage = new Pane(root);
 	
 	/**
@@ -98,7 +110,6 @@ public class GardenScene extends BaseScene {
 	TimeUnit.SECONDS.sleep(6);
 	fullImage.getChildren().add(new Zombie("Flag Zombie").getZombieImage());
 	fullImage.getChildren().add(new Zombie("Football Zombie").getZombieImage());
-	
 	}
 
 	/**
@@ -141,18 +152,14 @@ public class GardenScene extends BaseScene {
 			
 			box.getChildren().add(column, plantbuttons);
 		}
-		//create sun counter 
-		ImageView sun = new ImageView(new Image(new FileInputStream("sun.gif")));
+
+
+		/**
+		 * Importing the sun image and setting setting the counter with the getMoney() form the player class that controls changes in money.
+		 */
+		ImageView sun = new ImageView(new Image(new FileInputStream("sun.png")));
 		Button sunCounter = new Button("Suns: " + aPlayer.getMoney(), sun);
-													//may need to update this method so it updates 
 		box.getChildren().add(sunCounter);
-		
-		/*
-		//creating the sun and for it to appear randomly on screen
-		ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
-		Button sunGif = new Button("", sunGIF);
-		sunGif.setStyle("-fx-background-color: transparent;");
-		*/
 		
 		/**
 		 * Create an empty array for the gardenplot buttons
