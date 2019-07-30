@@ -76,7 +76,7 @@ public class GardenScene extends BaseScene {
 			box.getChildren().add(column, plantbuttons);
 		}
 		//create sun counter 
-		ImageView sun = new ImageView(new Image(new FileInputStream("sun.png")));
+		ImageView sun = new ImageView(new Image(new FileInputStream("sun.gif")));
 		Button sunCounter = new Button("Suns: " + aPlayer.getMoney(), sun);
 													//may need to update this method so it updates 
 		box.getChildren().add(sunCounter);
