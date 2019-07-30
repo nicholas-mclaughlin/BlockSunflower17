@@ -23,7 +23,9 @@ public class Session extends Application {
 		//start button (scene) omitted for now
 
 		//create the scene for gameplay
-		GardenScene scene = new GardenScene(this);
+		//GardenScene scene = new GardenScene(this);
+		//Show start/menu as first scene
+		Menu scene = new Menu(this);
 		scene.setup(); //setup scene for stage (method is in class gardenscene)
 	}
 
