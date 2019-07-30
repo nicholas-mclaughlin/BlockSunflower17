@@ -1,0 +1,145 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.animation.TranslateTransition;
+import javafx.util.Duration;
+
+public class Zombie extends GameCharacter{
+	private double speed = 30000; //How many milliseconds it'll take for the zombie to go across the garden
+	private int row = (int)(Math.random() * 5 + 1); //Which row the zombie will start walking down from
+	private double position = 1250; //1250 is the very right side of the garden
+	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("Zombieidle.gif"))); //Original Zombie image
+	
+
+
+	public Zombie(String typeOfZombie) throws FileNotFoundException {
+		if (typeOfZombie == "Cone Zombie") {
+			setType(typeOfZombie);
+			setFirstChar('c');
+			setHealth(560);
+			setAttack(100);
+			zombieImage = new ImageView(new Image(new FileInputStream("FlagZombie.gif")));
+		}
+		else if (typeOfZombie == "Flag Zombie") {
+			setType(typeOfZombie);
+			setFirstChar('f');
+			setHealth(200);
+			setSpeed(25000);
+			setAttack(100);
+			zombieImage = new ImageView(new Image(new FileInputStream("FlagZombie.gif")));
+		}
+		else if (typeOfZombie == "Football Zombie") {
+			setType(typeOfZombie);
+			setFirstChar('F');
+			setHealth(1600);
+			setSpeed(20000);
+			setAttack(100);
+			zombieImage = new ImageView(new Image(new FileInputStream("Football.gif")));
+		}
+		else {
+			setType(typeOfZombie);
+			setFirstChar('z');
+			setHealth(200);
+			setAttack(100);
+		}
+		
+		
+	      zombieImage.setX(position); 
+	      if (row == 1) {
+	    	  zombieImage.setY(215);
+	      }
+	      else if (row == 2) {
+	    	  zombieImage.setY(310); 
+	      }
+	      
+	      else if (row == 3){ 
+	    	  zombieImage.setY(410);
+	      }
+	      else if (row == 4) {
+	    	  zombieImage.setY(525);
+	      }
+	      
+	      else if (row == 5) {
+	    	  zombieImage.setY(630);
+	      }
+	    //Size of the zombie
+	      zombieImage.setFitHeight(100); 
+	      zombieImage.setFitWidth(130); 
+	      
+	      //Setting the preserve ratio of the image view 
+	      zombieImage.setPreserveRatio(true);
+	      TranslateTransition translateTransition = new TranslateTransition(); 
+	      
+	      translateTransition.setDuration(Duration.millis(speed));
+	      translateTransition.setNode(zombieImage); 
+	      translateTransition.setByX(-1000); 
+	      translateTransition.setCycleCount(1); 
+	      translateTransition.setAutoReverse(false); 
+	      translateTransition.play();  
+	}
+	
+	//Gets the row that the zombie spawns from to be random
+		public void generateRandomRow() {
+			row = (int)(Math.random() * 5 + 1);
+		}
+	
+	public double getSpeed() {
+		return speed;
+	}
+	public int getRow() {
+		return row;
+	}
+	public void setSpeed(double d) {
+		this.speed = d;
+	}
+	
+	public double getPosition() {
+		return position;
+	}
+	public void setPosition(double position) {
+		this.position = position;
+	}
+	public void move(int speed) {
+		
+	}
+
+	@Override
+	public String toString() {
+		return "Zombie [type=" + getType() + ", row=" + row + ", position=" + position + ", getHealth()=" + getHealth()
+				+ " speed= " + speed + "]";
+	}
+	      
+	      
+	public ImageView getZombieImage() {
+		return zombieImage;
+	}
+
+	public void setZombieImage(ImageView zombieImage) {
+		this.zombieImage = zombieImage;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+	
+	public ImageView movingZombie() throws FileNotFoundException {
+
+	      TranslateTransition translateTransition = new TranslateTransition(); 
+	    	  translateTransition.setDuration(Duration.millis(speed));
+	      
+	      translateTransition.setNode(zombieImage); 
+	      translateTransition.setByX(-1000); 
+	      translateTransition.setCycleCount(1); 
+	      translateTransition.setAutoReverse(false); 
+	      translateTransition.play(); 
+	      return zombieImage;
+	}
+
+	public static void main(String[] args) throws FileNotFoundException {
+		Zombie z1 = new Zombie("Zombie");
+		System.out.println(z1.getZombieImage());
+	}
+	
+}
