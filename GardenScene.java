@@ -1,6 +1,5 @@
 //package gui;
 import java.io.FileInputStream;
-
 //import drivers.Session;
 //import handlers.PlantButtonHandler;
 //import handlers.GardenButtonHandler;
@@ -33,28 +32,33 @@ public class GardenScene extends BaseScene {
 	//override abstract parent
 	@Override
 	public void setup() throws Exception{
-		StackPane root = new StackPane();
-		Scene scene = new Scene(root, LENGTH, WIDTH);
+	StackPane root = new StackPane();
 
-		//creating garden image and garden image size to fit the buttons and scene
-		ImageView Garden = new ImageView(new Image(new FileInputStream("Garden.PNG")));
-        Garden.setFitHeight(800);
-        Garden.setFitWidth(1275);
+	//creating garden image and garden image size to fit the buttons and scene
+	ImageView Garden = new ImageView(new Image(new FileInputStream("Garden.PNG")));
+	Garden.setFitHeight(800);
+	Garden.setFitWidth(1275);
 
-		//Initialize game
-		Player player = new Player();
-		Game game = new Game(player);
+	//Initialize game
+	Player player = new Player();
+	String[][] gardenPlot = new String[5][9];
+	Game game = new Game(player, gardenPlot);
 
-		//adding the garden first so it doesn't interfere with the clickable buttons
-		root.getChildren().add(Garden);
-		root.getChildren().add(gardenButtons(game.getPlayer()));
+	//adding the garden first so it doesn't interfere with the clickable buttons
+	root.getChildren().add(Garden);
+	root.getChildren().add(gardenButtons(game.getPlayer(), game));
 
-		setScene(scene);
-		display();
+	ImageView zombieImage = ZombiesGUI.movingZombie("Zombie"); //Example 
+
+	Pane fullImage = new Pane(root, zombieImage);
+
+	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
+	setScene(scene);
+	display();
 
 	}
 
-	public Node gardenButtons(Player aPlayer) throws Exception{
+	public Node gardenButtons(Player aPlayer, Game aGame) throws Exception{
 
 		VBox root = new VBox();
 
@@ -85,7 +89,7 @@ public class GardenScene extends BaseScene {
 		*/
 		
 		//create empty button array for garden buttons
-		gardenslots = new Button[MAXSLOTS];	//number of elements must be stated
+		gardenButtons = new Button[MAXSLOTS];	//number of elements must be stated
 
 		//set up gridpane as second row of layout
 		GridPane grid = new GridPane();
@@ -98,14 +102,14 @@ public class GardenScene extends BaseScene {
 			for (int column = 0; column < 9; ++column) {
 				//add each button to the created button array
 				for (int i = 0; i < MAXSLOTS; ++i) {
-					gardenslots[i] = new Button(column + ","+ row);	//Reference to buttons of their row and column
+					gardenslots[i] = new Button(row + ","+ column);	//Reference to buttons of their row and column
 					gardenslots[i].setStyle("-fx-background-color: transparent;");//sets garden slots to be transparent
 					gardenslots[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible' 
 					gardenslots[i].setPrefSize(100,  106);	//set button size
-					gardenslots[i].setOnAction(new GardenButtonHandler(aPlayer));
+					gardenslots[i].setOnAction(new GardenButtonHandler(aPlayer, aGame));
 				}
 				//adding each created button to the gridpane
-				grid.add(gardenslots[button], column, row);
+				grid.add(gardenButtons[button], column, row);
 				++button;
 			}
 		}
