@@ -24,13 +24,13 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		Button source = (Button) event.getSource();
 		
 		if (source.getText().contains("p0")) {
-			player.setPlantHeld("FrozenPeaShooter");
+			player.setPlantHeld("Frozen PeaShooter");
 		} else if (source.getText().contains("p1")) {
 			player.setPlantHeld("PeaShooter");
 		} else if (source.getText().contains("p2")) {
 			player.setPlantHeld("Sunflower");
 		} else if (source.getText().contains("p3")) {
-			player.setPlantHeld("CherryBomb");
+			player.setPlantHeld("Cherry Bomb");
 		} else if (source.getText().contains("p4")) {
 			player.setPlantHeld("Wallnut");
 		}
