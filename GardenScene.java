@@ -18,7 +18,7 @@ import javafx.scene.text.Font;
 
 public class GardenScene extends BaseScene {
 
-	private Button[] gardenslots;
+	private Button[] gardenButtons;
 
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
@@ -102,11 +102,11 @@ public class GardenScene extends BaseScene {
 			for (int column = 0; column < 9; ++column) {
 				//add each button to the created button array
 				for (int i = 0; i < MAXSLOTS; ++i) {
-					gardenslots[i] = new Button(row + ","+ column);	//Reference to buttons of their row and column
-					gardenslots[i].setStyle("-fx-background-color: transparent;");//sets garden slots to be transparent
-					gardenslots[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible' 
-					gardenslots[i].setPrefSize(100,  106);	//set button size
-					gardenslots[i].setOnAction(new GardenButtonHandler(aPlayer, aGame));
+					gardenButtons[i] = new Button(row + ","+ column);	//Reference to buttons of their row and column
+					gardenButtons[i].setStyle("-fx-background-color: transparent;");//sets garden slots to be transparent
+					gardenButtons[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible' 
+					gardenButtons[i].setPrefSize(100,  106);	//set button size
+					gardenButtons[i].setOnAction(new GardenButtonHandler(aPlayer, aGame));
 				}
 				//adding each created button to the gridpane
 				grid.add(gardenButtons[button], column, row);
