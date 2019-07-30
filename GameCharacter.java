@@ -1,10 +1,13 @@
 //package logic;
-public class GameCharacter {
-	private String type = " ";
-	private int health;
-	private int attack;
-	private char firstChar;
+
+//Class that has all the attributes that all character will inherit from
+public abstract class GameCharacter {
+	private String type = " "; //The type of character ie. PeaShooter
+	private int health; //Health of character
+	private int attack; //Attack of character
+	private char firstChar; //The first character of the type of character ie. if PeaShooter than 'p'
 	
+	//Constructors
 	public GameCharacter() {
 		
 	}
@@ -19,7 +22,7 @@ public class GameCharacter {
 		this.attack = aCharacter.attack;
 	}
 	
-
+	//Getters and setters
 	public int getHealth() {
 		return health;
 	}
@@ -48,6 +51,8 @@ public class GameCharacter {
 	public void setFirstChar(char firstChar) {
 		this.firstChar = firstChar;
 	}
+	
+	//Method to make the character lose health when attacked
 	public void loseHealth(int damage) {
 		health -= damage;
 	}
