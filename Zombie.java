@@ -20,7 +20,7 @@ public class Zombie extends GameCharacter{
 			setFirstChar('c');
 			setHealth(560);
 			setAttack(100);
-			zombieImage = new ImageView(new Image(new FileInputStream("FlagZombie.gif")));
+			zombieImage = new ImageView(new Image(new FileInputStream("ConeHead.gif")));
 		}
 		else if (typeOfZombie == "Flag Zombie") {
 			setType(typeOfZombie);

@@ -58,7 +58,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			game.placePlant("Wallnut", game.getRow(source.getText()), game.getColumn(source.getText()));
 			source.setDisable(true);
 
-		} else if (player.getPlantHeld().equals("CherryBomb")) {
+		} else if (player.getPlantHeld().equals("Cherry Bomb")) {
 			try {
 				//Plant i = player.getPlantHeld();
 				plant = new ImageView(new Image(new FileInputStream("cherry-bomb.gif")));
