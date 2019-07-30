@@ -1,10 +1,14 @@
 import javafx.scene.Scene;
 
-//Setup for the base scene/window
-
+/**
+ * The BaseScene class is an abstract class which
+ * will be the foundation for scenes to be created
+ * in the same stage/window.
+ *
+ */
 public abstract class BaseScene {
 	private Scene scene;	//Scene where we're drawing
-	private Session session;	//Access to Session
+	private Session session;	//Gives access to Session
 	
 	public BaseScene(Session aSession) {
 		this.session = aSession;
@@ -27,13 +31,17 @@ public abstract class BaseScene {
 	}
 	
 	
-	//Setup scene (actual drawing)
-	//abstract, children will setup the scene
-	//example;
-	//start||quit scene sets up screen with start button
-	//garden scene sets up game play scene
+	/**
+	 * Abstract method setup() promises that every scene will have a setup() method.
+	 * Child classes will setup the actual scene.
+	 * example:
+	 * Menu scene sets up screen with start button.
+	 * 
+	 * @throws Exception
+	 */
 	public abstract void setup() throws Exception;
 	
+	//display() will display the drawing/scenes
 	protected void display() {
 		session.setScene(this.scene);
 	}
