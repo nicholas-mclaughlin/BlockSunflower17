@@ -23,7 +23,7 @@ public class Player {
 	}
 
 	public String getPlantHeld() {
-		return this.plantHeld;
+		return new String(this.plantHeld);
 	}
 
 	public void setPlantHeld(String aPlant) {
