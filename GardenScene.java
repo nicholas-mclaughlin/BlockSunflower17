@@ -58,14 +58,11 @@ public class GardenScene extends BaseScene {
 	setScene(scene);
 	display();
 
-	Level1.createLevel();
-	for(int i = 0; i < 4 ; i++) {
-		fullImage.getChildren().add(Level1.zombies[i]);
-	}
-	TimeUnit.SECONDS.sleep(10);
-	for(int i = 4; i < 8 ; i++) {
-		fullImage.getChildren().add(Level1.zombies[i]);
-	}
+	fullImage.getChildren().add(new Zombie("Cone Zombie").getZombieImage());
+	fullImage.getChildren().add(new Zombie("Zombie").getZombieImage());
+	TimeUnit.SECONDS.sleep(6);
+	fullImage.getChildren().add(new Zombie("Flag Zombie").getZombieImage());
+	fullImage.getChildren().add(new Zombie("Football Zombie").getZombieImage());
 	
 	}
 
