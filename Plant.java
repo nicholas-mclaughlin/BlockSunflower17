@@ -3,8 +3,8 @@
 public class Plant extends GameCharacter {
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
-	private int row;
-	private int column;
+	//private int row;
+	//private int column;
 	
 	public Plant(Plant aPlant) {
 		super(aPlant);
@@ -26,16 +26,16 @@ public class Plant extends GameCharacter {
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
 			setFrequency(10);
-		    setAttack(20);
-		    setHealth(200);
-		    setPrice(100);
+			setAttack(20);
+			setHealth(200);
+			setPrice(100);
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
 			setFrequency(10);
 			setAttack(15);
 			setHealth(200);
-		    setPrice(175);
+		   	setPrice(175);
 		}
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
@@ -57,7 +57,7 @@ public class Plant extends GameCharacter {
 		}
 
 	}
-	public String getLocation(){
+/*	public String getLocation(){
 		return "(" + getRow() + ", " + getColumn() + ")";
 	}
 	
@@ -67,13 +67,13 @@ public class Plant extends GameCharacter {
 	public void setColumn(int column){
 		this.column = column;
 	}
-	public void setPrice(int price) {
+*/	public void setPrice(int price) {
 		this.price = price;
 	}
 	public int getPrice() {
 		return price;
 	}
-	public int getRow() {
+/*	public int getRow() {
 		return row;
 	}
 	public int getColumn() {
@@ -86,6 +86,6 @@ public class Plant extends GameCharacter {
 				+ ", getHealth()=" + getHealth() + ", getAttack()=" + getAttack() + ", getType()=" + getType()
 				+ ", getFirstChar()=" + getFirstChar() +  "]";
 	}
-	
+*/	
 	
 }
