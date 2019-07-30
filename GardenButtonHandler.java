@@ -1,6 +1,7 @@
 //package handlers;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,9 +13,11 @@ import javafx.scene.image.ImageView;
 public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 	private Player player;
+	private Game game;
 
-	public GardenButtonHandler(Player aPlayer) {
+	public GardenButtonHandler(Player aPlayer, Game aGame) {
 		this.player = aPlayer;
+		this.game = aGame;
 	}
 
 	@Override
@@ -30,6 +33,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			game.placePlant("Sunflower", game.getRow(source.getText()), game.getColumn(source.getText()));
+			source.setDisable(true);
+			
 		} else if (player.getPlantHeld().equals("PeaShooter")) {
 			try {
 				//Plant i = player.getPlantHeld();
@@ -38,6 +44,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			game.placePlant("PeaShooter", game.getRow(source.getText()), game.getColumn(source.getText()));
+			source.setDisable(true);
+			
 		} else if (player.getPlantHeld().equals("Wallnut")) {
 			try {
 				//Plant i = player.getPlantHeld();
@@ -46,6 +55,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			game.placePlant("Wallnut", game.getRow(source.getText()), game.getColumn(source.getText()));
+			source.setDisable(true);
+
 		} else if (player.getPlantHeld().equals("CherryBomb")) {
 			try {
 				//Plant i = player.getPlantHeld();
@@ -54,6 +66,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			game.placePlant("Cherry Bomb", game.getRow(source.getText()), game.getColumn(source.getText()));
+			source.setDisable(true);
+
 		} else if (player.getPlantHeld().equals("FrozenPeaShooter")) {
 			try {
 				plant = new ImageView(new Image(new FileInputStream("frozen-pea.gif")));
@@ -61,12 +76,18 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			game.placePlant("Frozen PeaShooter", game.getRow(source.getText()), game.getColumn(source.getText()));
+			source.setDisable(true);
 		}
+		
+		player.setPlantHeld("");
 		source.setGraphic(plant);
 		//ISSUE HERE: button is either completely transparent or can see button background too
 		//source.setStyle("-fx-background-image: gardenslotsize.jpg;");
 		source.setStyle("-fx-opacity: 0.5;");
-		source.setDisable(true);
+		
+		System.out.println(source.getText());
+		System.out.println(Arrays.deepToString(game.getGardenPlots()).replace("}, ", "}\n").replace("{{", "{").replace("}}", "}"));
 	}
 
 }
