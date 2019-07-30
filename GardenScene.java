@@ -1,5 +1,7 @@
 //package gui;
 import java.io.FileInputStream;
+import java.util.concurrent.TimeUnit;
+
 //import drivers.Session;
 //import handlers.PlantButtonHandler;
 //import handlers.GardenButtonHandler;
@@ -48,14 +50,23 @@ public class GardenScene extends BaseScene {
 	root.getChildren().add(Garden);
 	root.getChildren().add(gardenButtons(game.getPlayer(), game));
 
-	ImageView zombieImage = ZombiesGUI.movingZombie("Zombie"); //Example 
+	
 
-	Pane fullImage = new Pane(root, zombieImage);
-
+	Pane fullImage = new Pane(root);
+	
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
 
+	Level1.createLevel();
+	for(int i = 0; i < 4 ; i++) {
+		fullImage.getChildren().add(Level1.zombies[i]);
+	}
+	TimeUnit.SECONDS.sleep(10);
+	for(int i = 4; i < 8 ; i++) {
+		fullImage.getChildren().add(Level1.zombies[i]);
+	}
+	
 	}
 
 	public Node gardenButtons(Player aPlayer, Game aGame) throws Exception{
@@ -93,7 +104,7 @@ public class GardenScene extends BaseScene {
 
 		//set up gridpane as second row of layout
 		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(18, 22, 32, 0));
+		grid.setPadding(new Insets(60, 65, 32, 0));
 		grid.setAlignment(Pos.BOTTOM_RIGHT);
 
 		//create and add every button into array

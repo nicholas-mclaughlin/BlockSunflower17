@@ -9,8 +9,8 @@ public class Plant extends GameCharacter {
 	public Plant(Plant aPlant) {
 		super(aPlant);
 		this.price = aPlant.price;
-		this.row = aPlant.price;
-		this.column = aPlant.price;
+		//this.row = aPlant.price;
+		//this.column = aPlant.price;
 	}
 	
 	

@@ -5,6 +5,10 @@ public class GameCharacter {
 	private int attack;
 	private char firstChar;
 	
+	public GameCharacter() {
+		
+	}
+	
 	public GameCharacter(String aType) {
 		this.type = new String(aType);
 	}
