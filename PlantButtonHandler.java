@@ -7,18 +7,29 @@ import javafx.event.*;
 import javafx.scene.control.Button;
 //import logic.Player;
 
-
-
-
-
+/**
+ * PlantButtonHandler is the button handler for the plant buttons.
+ * It sets the plantHeld by the player depending on which plant button
+ * is clicked.
+ *
+ */
 public class PlantButtonHandler implements EventHandler<ActionEvent> {
-	
+	//This will give access to the game's player.
 	private Player player;
 
 	public PlantButtonHandler(Player aPlayer) {
 		this.player = aPlayer;
 	}
 
+	/**
+	 * Override javafx default handler.
+	 * This method will set the plantHeld by the player depending on which plant button
+	 * they click on.
+	 * The plant button clicked will be disabled for a certain amount of time right after.
+	 * 
+	 * @param ActionEvent	event is the case when a (plant) button is clicked by the user.
+	 */
+	@Override
 	public void handle(ActionEvent event){
 	
 		Button source = (Button) event.getSource();
