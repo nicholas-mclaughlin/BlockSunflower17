@@ -92,7 +92,7 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-
+	//Just an example of the 4 zombies we can generate
 	fullImage.getChildren().add(new Zombie("Cone Zombie").getZombieImage());
 	fullImage.getChildren().add(new Zombie("Zombie").getZombieImage());
 	TimeUnit.SECONDS.sleep(6);
