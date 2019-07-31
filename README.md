@@ -16,11 +16,12 @@ This game uses Java and JavaFX. If running in the Eclipse IDE, an external *.jar
 ## Playing
 Once the game starts running, click start to begin playing. Choose a plant type to plant by clicking it and then clicking the garden slot you would like to place the plant in. The strategy to win the game is to place plants in garden slots to block or attack the zombies from reaching the house.
 
-# Version 2
+# Version 1
+Our first iteration of the our game that we presented is a text-based version. It can be run by going to the branch called Text-Based Version and downloading it. Then compiling MainClass.java and running it.
+
+## Version 2
 This is the second iteration of our game that now contains a GUI. The plants and zombies are not interacting yet, and the suns have not yet been created. 
 
-## Version 1 
-This is the link to our first text-based iteration of the game Garden Defense. https://github.com/nicholas-mclaughlin/BlockTower17
 
 # Authors
 Group 17:
