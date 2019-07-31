@@ -6,6 +6,10 @@ public class Plant extends GameCharacter {
 	//private int row;
 	//private int column;
 	
+	public Plant() {
+		
+	}
+	
 	public Plant(Plant aPlant) {
 		super(aPlant);
 		this.price = aPlant.price;
