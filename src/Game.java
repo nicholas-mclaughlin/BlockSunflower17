@@ -1,5 +1,5 @@
 //package logic;
-
+import java.io.FileNotFoundException;
 /**
  * The game class will be responsible for setting and getting the player and
  * keeping track of the changes the player makes to the garden plot.
@@ -107,6 +107,12 @@ public class Game {
 	public void placePlant(String aPlant, int row, int column) {
 		Plant thePlant = new Plant(aPlant);
 		gardenPlots[row][column] = thePlant.getType();
+	}
+	
+	public void trackZombie(String aZombie, int row) throws FileNotFoundException {
+	Zombie theZombie = new Zombie(aZombie);
+	int column = 8;
+	gardenPlots[row][column] = theZombie.getType();
 	}
 
 }
