@@ -41,7 +41,7 @@ This is the second iteration of our game that now contains a GUI. The plants and
 yet been created. 
 
 ## Version 1 
-This is the link to our first text-based iteration of the game Garden Defense. https://github.com/nicholas-mclaughlin/BlockTower17
+For version 1 (Text-based version of our game), go to the branch called text-based and download. Then, compile and run MainClass.java.
 
 # Authors
 Group 17:
