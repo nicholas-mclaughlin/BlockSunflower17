@@ -101,14 +101,18 @@ public class GardenScene extends BaseScene {
 	 * Set and display scene
 	 * setScene(Scene) and display() are methods from BaseScene class
 	 */
+	Level2.createLevel(); //Can be Level1, Level2, or Level3
+	int counter = 0;
+	for (Zombie z : Level2.zombies) {
+		z.addToPosition(counter);
+		fullImage.getChildren().add(z.newZombieImage());
+		counter += 200;
+	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-	//Just an example of the 4 zombies we can generate
-	fullImage.getChildren().add(new Zombie("Cone Zombie").getZombieImage());
-	fullImage.getChildren().add(new Zombie("Zombie").getZombieImage());
-	fullImage.getChildren().add(new Zombie("Flag Zombie").getZombieImage());
-	fullImage.getChildren().add(new Zombie("Football Zombie").getZombieImage());
+	
+	
 	}
 
 	/**
