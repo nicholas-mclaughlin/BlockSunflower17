@@ -1,7 +1,11 @@
 //package gui;
 import java.io.FileInputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
+//import handlers.SunButtonHandler;
+import javafx.application.Platform;
 //import drivers.Session;
 //import handlers.PlantButtonHandler;
 //import handlers.GardenButtonHandler;
@@ -15,8 +19,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
-//import logic.Game;
 //import logic.Player;
+//import logic.Game;
+//import logic.Sun;
 
 /**
  * GardenScene class is an extension of BaseScene.
@@ -35,6 +40,7 @@ public class GardenScene extends BaseScene {
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
+	public static Button sunCounter = new Button();
 
 	/**
 	 * GardenScene constructors. This passes a session to the parent (BaseScene).
@@ -97,6 +103,33 @@ public class GardenScene extends BaseScene {
 	 */
 	Pane fullImage = new Pane(root);
 	
+	//the time for the first sun to appear in milliseconds
+		int timeBetweenSuns = 3000;
+		//adds the suns in a for loop
+		for (int i = 0; i<=20; i++) {
+			Button sunButton = new Sun().getSunButton();
+			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
+			//timer to add the suns after timeBetweenSuns seconds
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	fullImage.getChildren().add(sunButton);
+			                }
+			            });
+
+			        }
+			    }, timeBetweenSuns);
+			//sets the random position of suns
+			sunButton.setLayoutX(generateRandomX());
+			sunButton.setLayoutY(generateRandomY());
+			//increases the time so all suns don't appear around the same time
+			timeBetweenSuns +=1500;
+		}
+	
 	/**
 	 * Set and display scene
 	 * setScene(Scene) and display() are methods from BaseScene class
@@ -114,6 +147,25 @@ public class GardenScene extends BaseScene {
 	
 	
 	}
+	
+	//creates random X and Y positions for the suns to appear in
+		public int generateRandomY() {
+			int randomY = (int)(Math.random() * (700));
+			return randomY;
+		}
+		public int generateRandomX() {
+			int randomX = (int)(Math.random()*(1220));
+			return randomX;
+		}
+		
+		//creates the sunCounter as static to be able to use .setText and change the money displayed
+		public static Button getSunCounter(Player aPlayer) throws Exception {
+			sunCounter.setText("Suns: " + aPlayer.getMoney());
+			sunCounter.setStyle("-fx-background-image: url('/characters/sun.png')");
+			sunCounter.setPrefSize(170,  87);
+			sunCounter.setFont(new Font(20));
+			return sunCounter;
+		}
 
 	/**
 	 * gardenButtons node contains all the buttons on the gardenScene (actual gameplay)
@@ -150,7 +202,8 @@ public class GardenScene extends BaseScene {
 			ImageView plant = new ImageView(new Image(new FileInputStream("Plant"+ column + ".jpg")));
 			Button plantbuttons = new Button("p"+ column, plant);
 			plantbuttons.setFont(new Font(0));
-			
+			//made plant buttons transparent so the visual of 'clicking' them isn't seen when the player did not buy a plant
+			plantbuttons.setStyle("-fx-background-color: transparent;");
 			plantbuttons.setOnAction(new PlantButtonHandler(aPlayer));
 			
 			box.getChildren().add(column, plantbuttons);
@@ -160,9 +213,8 @@ public class GardenScene extends BaseScene {
 		/**
 		 * Importing the sun image and setting setting the counter with the getMoney() form the player class that controls changes in money.
 		 */
-		ImageView sun = new ImageView(new Image(new FileInputStream("sun.png")));
-		Button sunCounter = new Button("Suns: " + aPlayer.getMoney(), sun);
-		box.getChildren().add(sunCounter);
+		//adds the sunCounter to the plant buttons box
+		box.getChildren().add(getSunCounter(aPlayer));
 		
 		/**
 		 * Create an empty array for the gardenplot buttons

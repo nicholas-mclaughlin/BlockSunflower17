@@ -2,6 +2,8 @@
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+//import gui.GardenScene;
 import javafx.application.Platform;
 import javafx.event.*;
 import javafx.scene.control.Button;
@@ -14,11 +16,29 @@ import javafx.scene.control.Button;
  *
  */
 public class PlantButtonHandler implements EventHandler<ActionEvent> {
-	//This will give access to the game's player.
+	//This will give access to the game's player. 
 	private Player player;
+	//This will set the price and the plant and whether to disable it or not
+	private int price;
+	private boolean disable;
+	private String plant;
 
 	public PlantButtonHandler(Player aPlayer) {
 		this.player = aPlayer;
+	}
+	
+	//buys plant only if they player has sufficient funds, after which it decreases the money
+	//also if they were able to buy the plant, it disables the button to show they bought it
+	public void buyPlant() {
+		if (player.getMoney() >= price) {
+			player.decreaseMoney(price);
+			player.setPlantHeld(plant);
+			GardenScene.sunCounter.setText("Suns: " + player.getMoney());
+			disable = true;
+		} else {
+			//System.out.println("need more suns");
+			disable = false;
+		}
 	}
 
 	/**
@@ -35,35 +55,48 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		Button source = (Button) event.getSource();
 		
 		if (source.getText().contains("p0")) {
-			player.setPlantHeld("Frozen PeaShooter");
+			plant = "Frozen PeaShooter";
+			price = 175;
+			buyPlant();
 		} else if (source.getText().contains("p1")) {
-			player.setPlantHeld("PeaShooter");
+			plant = "PeaShooter";
+			price = 100;
+			buyPlant();
 		} else if (source.getText().contains("p2")) {
-			player.setPlantHeld("Sunflower");
+			plant = "Sunflower";
+			price = 50;
+			buyPlant();
 		} else if (source.getText().contains("p3")) {
-			player.setPlantHeld("Cherry Bomb");
+			plant = "Cherry Bomb";
+			price = 150;
+			buyPlant();
 		} else if (source.getText().contains("p4")) {
-			player.setPlantHeld("Wallnut");
+			plant = "Wallnut";
+			price = 50;
+			buyPlant();
 		}
 
 		/**
-		 * First plant button is disabled and timer set the time for the later task,
-		 * to enable the button again, to run after a time 0f 10000ms.
+		 * First plant button is disabled, only if the plant was bought, and timer sets
+		 * the time for the later task, to enable the button again, to run after a time 0f 10000ms.
 		 */
-		source.setDisable(true);
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	source.setDisable(false);
-		                }
-		            });
+		if (disable) {
+			source.setDisable(true);
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
 
-		        }
-		    }, 10000);
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	source.setDisable(false);
+			                }
+			            });
+
+			        }
+			    }, 8000);
+		}
 
 	}
 }

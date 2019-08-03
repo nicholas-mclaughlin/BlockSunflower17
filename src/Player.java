@@ -47,8 +47,8 @@ public class Player {
 		System.out.println(getPlantHeld());
 	}
 	
-	public void increaseMoney(int amount) {
-		this.money += amount;
+	public void increaseMoney() {
+		this.money += 25;
 	}
 	
 	public void decreaseMoney(int amount) {
