@@ -1,16 +1,14 @@
 //package logic;
 
-public class Plant extends GameCharacter {
+public class Plant extends GameCharacter{
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
-	//private int row;
-	//private int column;
+	private int row;
+	private int column;
 	
 	public Plant(Plant aPlant) {
 		super(aPlant);
 		this.price = aPlant.price;
-		//this.row = aPlant.price;
-		//this.column = aPlant.price;
 	}
 	
 	
@@ -26,23 +24,23 @@ public class Plant extends GameCharacter {
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
 			setFrequency(10);
-			setAttack(20);
-			setHealth(200);
-			setPrice(100);
+		    setAttack(20);
+		    setHealth(200);
+		    setPrice(100);
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
 			setFrequency(10);
 			setAttack(15);
 			setHealth(200);
-		   	setPrice(175);
+		    setPrice(175);
 		}
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
 			setFrequency(0);
 			setAttack(0);
 			setPrice(50);
-			setHealth(1000);			
+			setHealth(1000);
 		}
 		else if (typeOfPlant == "Cherry Bomb") {
 			setFirstChar('C');
@@ -57,35 +55,50 @@ public class Plant extends GameCharacter {
 		}
 
 	}
-/*	public String getLocation(){
-		return "(" + getRow() + ", " + getColumn() + ")";
-	}
-	
-	public void setRow(int row){
-		this.row = row;
-	}
-	public void setColumn(int column){
-		this.column = column;
-	}
-*/	public void setPrice(int price) {
+
+	public void setPrice(int price) {
 		this.price = price;
 	}
 	public int getPrice() {
 		return price;
 	}
-/*	public int getRow() {
-		return row;
+	
+	public void attack(Zombie aZombie) {
+		if (aZombie.getRow() == this.getRow()) {
+			aZombie.loseHealth(this.getAttack());
+		}
 	}
+	
+	public void setRow(Game aGame, String coordinate) {
+		int theRow = 0;
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+				if (aGame.getGardenPlots()[row][column].getType().equals(coordinate)) {
+					theRow = row;
+					break;
+				}
+			}
+		} this.row = theRow;
+	}
+	
+	public void setColumn(Game aGame, String coordinate) {
+		int theColumn = 0;
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+				if (aGame.getGardenPlots()[row][column].getType().equals(coordinate)) {
+					theColumn = column;
+					break;
+				}
+			}
+		} this.column = theColumn;
+	}
+	
 	public int getColumn() {
 		return column;
 	}
 
-	@Override
-	public String toString() {
-		return "Plants [price=" + getPrice() + ", frequency=" + getFrequency() + ", row=" + getRow() + ", column=" + getColumn()
-				+ ", getHealth()=" + getHealth() + ", getAttack()=" + getAttack() + ", getType()=" + getType()
-				+ ", getFirstChar()=" + getFirstChar() +  "]";
+	public int getRow() {
+		return row;
 	}
-*/	
 	
 }
