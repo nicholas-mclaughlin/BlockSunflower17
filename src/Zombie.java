@@ -19,15 +19,14 @@ public class Zombie extends GameCharacter{
 	 * @throws FileNotFoundException
 	 */
 	public Zombie(String typeOfZombie) throws FileNotFoundException {
+		super(typeOfZombie);
 		if (typeOfZombie == "Cone Zombie") { // Sets attributes of zombie if it is conehead
-			setType(typeOfZombie);
 			setFirstChar('c');
 			setHealth(560);
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ConeHead.gif")));
 		}
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
-			setType(typeOfZombie);
 			setFirstChar('f');
 			setHealth(200);
 			setSpeed(30000);
@@ -35,7 +34,6 @@ public class Zombie extends GameCharacter{
 			zombieImage = new ImageView(new Image(new FileInputStream("FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
-			setType(typeOfZombie);
 			setFirstChar('F');
 			setHealth(1600);
 			setSpeed(27000);
@@ -43,7 +41,6 @@ public class Zombie extends GameCharacter{
 			zombieImage = new ImageView(new Image(new FileInputStream("Football.gif")));
 		}
 		else { //Just creates a normal zombie if there are any errors
-			setType(typeOfZombie);
 			setFirstChar('z');
 			setHealth(200);
 			setAttack(100);
