@@ -44,7 +44,6 @@ public class Player {
 	//plantHeld setter
 	public void setPlantHeld(String aPlant) {
 		this.plantHeld = aPlant;
-		System.out.println(getPlantHeld());
 	}
 	
 	public void increaseMoney() {
