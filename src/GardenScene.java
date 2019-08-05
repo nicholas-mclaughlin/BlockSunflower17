@@ -40,14 +40,16 @@ public class GardenScene extends BaseScene {
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
+	private int levelNum;	
 	public static Button sunCounter = new Button();
 
 	/**
 	 * GardenScene constructors. This passes a session to the parent (BaseScene).
 	 * @param aSession	session to be passed
 	 */
-	public GardenScene(Session aSession) {
+	public GardenScene(Session aSession, int levelNum) {
 		super(aSession);
+		this.levelNum = levelNum;
 	}
 
 	/**
@@ -134,11 +136,12 @@ public class GardenScene extends BaseScene {
 	 * Set and display scene
 	 * setScene(Scene) and display() are methods from BaseScene class
 	 */
-	Level2.createLevel(); //Can be Level1, Level2, or Level3
+	Level level = new Level(this.levelNum); //Can be Level1, Level2, or Level3
 	int counter = 0;
-	for (Zombie z : Level2.zombies) {
+	for (Zombie z : level.getZombies()) {
 		z.addToPosition(counter);
 		fullImage.getChildren().add(z.newZombieImage());
+		//game.trackZombie(z); //adds zombie to an arraylist of the row
 		counter += 200;
 	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
