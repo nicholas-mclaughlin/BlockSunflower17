@@ -8,9 +8,6 @@ public abstract class GameCharacter {
 	private char firstChar; //The first character of the type of character ie. if PeaShooter than 'p'
 	
 	//Constructors
-	public GameCharacter() {
-		
-	}
 	
 	public GameCharacter(String aType) {
 		this.type = new String(aType);
@@ -30,15 +27,20 @@ public abstract class GameCharacter {
 	public int getAttack() {
 		return attack;
 	}
+	
 	public void setHealth(int health) {
-		this.health = health;
+		if (health > 0) {
+			this.health = health;
+		} else {
+			System.out.println(getType() + " died.");
+		}
 	}
 	
 	public void setAttack(int attack) {
 		this.attack = attack;
 	}
 	public String getType() {
-		return type;
+		return new String(type);
 	}
 
 	public void setType(String type) {
@@ -54,7 +56,7 @@ public abstract class GameCharacter {
 	
 	//Method to make the character lose health when attacked
 	public void loseHealth(int damage) {
-		health -= damage;
+		setHealth(health - damage);
 	}
 
 
