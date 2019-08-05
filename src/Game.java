@@ -9,27 +9,17 @@ public class Game {
 	private Player player;
 	
 	/**
-	 *  gardenPlots is a 2D array of game characters which type contains the string of "<row>,<column>"
+	 *  gardenPlots is a 2D array of string that contains the string of "<row>,<column>"
 	 *  the garden plots as the default.
 	 */
-	private GameCharacter[][] gardenPlots = {{new GameCharacter("0,0"), new GameCharacter("0,1"), new GameCharacter("0,2"), new GameCharacter("0,3"),
-		new GameCharacter("0,4"),new GameCharacter("0,5"), new GameCharacter("0,6"), new GameCharacter("0,7"), new GameCharacter("0,8"), new GameCharacter("0,9")},
-		{new GameCharacter("1,0"), new GameCharacter("1,1"), new GameCharacter("1,2"), new GameCharacter("1,3"), new GameCharacter("1,4"), new GameCharacter("1,5"),
-		new GameCharacter("1,6"), new GameCharacter("1,7"), new GameCharacter("1,8"), new GameCharacter("1,9")}, {new GameCharacter("2,0"), new GameCharacter("2,1"),
-		new GameCharacter("2,2"), new GameCharacter("2,3"), new GameCharacter("2,4"), new GameCharacter("2,5"), new GameCharacter("2,6"), new GameCharacter("2,7"),
-		new GameCharacter("2,8"), new GameCharacter("2,9")}, {new GameCharacter("3,0"), new GameCharacter("3,1"), new GameCharacter("3,2"), new GameCharacter("3,3"),
-		new GameCharacter("3,4"), new GameCharacter("3,5"), new GameCharacter("3,6"), new GameCharacter("3,7"), new GameCharacter("3,8"), new GameCharacter("3,9")},
-		{new GameCharacter("4,0"), new GameCharacter("4,1"), new GameCharacter("4,2"), new GameCharacter("4,3"), new GameCharacter("4,4"), new GameCharacter("4,5"),
-			new GameCharacter("4,6"), new GameCharacter("4,7"), new GameCharacter("4,8"), new GameCharacter("4,9")}};
-	
-	private Zombie[] zombieRow0 = new Zombie[1220];
-	private Zombie[] zombieRow1 = new Zombie[1220];
-	private Zombie[] zombieRow2 = new Zombie[1220];
-	private Zombie[] zombieRow3 = new Zombie[1220];
-	private Zombie[] zombieRow4 = new Zombie[1220];
+	private String[][] gardenPlots = {{"0,0", "0,1", "0,2", "0,3", "0,4", "0,5", "0,6", "0,7", "0,8", "0,9"},
+				{"1,0", "1,1", "1,2", "1,3", "1,4", "1,5", "1,6", "1,7", "1,8", "1,9"},
+				{"2,0", "2,1", "2,2", "2,3", "2,4", "2,5", "2,6", "2,7", "2,8", "2,9"},
+				{"3,0", "3,1", "3,2", "3,3", "3,4", "3,5", "3,6", "3,7", "3,8", "3,9"},
+				{"4,0", "4,1", "4,2", "4,3", "4,4", "4,5", "4,6", "4,7", "4,8", "4,9"}};
 	
 	//constructor
-	public Game(Player aPlayer, GameCharacter[][] aGardenPlot) {
+	public Game(Player aPlayer, String[][] aGardenPlot) {
 		this.player = aPlayer;
 		this.gardenPlots = getGardenPlots();
 	}
@@ -38,8 +28,16 @@ public class Game {
 		return player;
 	}
 	
-	public GameCharacter getCharacter(int row, int column) {
-		return new GameCharacter(this.gardenPlots[row][column]);
+	/**
+	 * getPlot() method creates a new String object containing the string of
+	 * the specified row and column in the 2D array gardenPlots.
+	 * 
+	 * @param row	row is to be used for determining the row in the 2D array
+	 * @param column	column is to be used for determing the column
+	 * @return	the new String of coordinate
+	 */
+	public String getPlot(int row, int column) {
+		return new String(this.gardenPlots[row][column]);
 	}
 	
 	/**
@@ -48,14 +46,54 @@ public class Game {
 	 * 
 	 * @return copy of gardenPlot
 	 */
-	public GameCharacter[][] getGardenPlots() {
-		GameCharacter[][] theGarden = new GameCharacter[5][10];
+	public String[][] getGardenPlots() {
+		String[][] theGarden = new String[5][10];
 		for (int row = 0; row < 5; row++) {
 			for (int column = 0; column < 10; column++) {
-				theGarden[row][column] = getCharacter(row, column);
+				theGarden[row][column] = getPlot(row, column);
 			}
 		}
 		return theGarden;
+	}
+
+	/**
+	 * getRow determines the row of the argument passed through
+	 * a loop that goes through every element and saves the row number and breaks once
+	 * it finds the exact same element in the 2D array
+	 * 
+	 * @param coordinate	String that must mirror a String element in the 2D array
+	 * @return	the row number of where the string was found
+	 */
+	public int getRow(String coordinate) {
+		int theRow = 0;
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+				if (gardenPlots[row][column].equals(coordinate)) {
+					theRow = row;
+					break;
+				}
+			}
+		} return theRow;
+	}
+	
+	/**
+	 * getColumn determines the column of the argument passed through a loop that
+	 * goes through every element and saves the column number and breaks once
+	 * it finds the exact same element in the 2D array
+	 * 
+	 * @param coordinate	String that must mirror a String element in the 2D array
+	 * @return	the column number of where the string was found
+	 */
+	public int getColumn(String coordinate) {
+		int theColumn = 0;
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+				if (gardenPlots[row][column].equals(coordinate)) {
+					theColumn = column;
+					break;
+				}
+			}
+		} return theColumn;
 	}
 	
 	/**
@@ -68,32 +106,13 @@ public class Game {
 	 */
 	public void placePlant(String aPlant, int row, int column) {
 		Plant thePlant = new Plant(aPlant);
-		gardenPlots[row][column] = thePlant;
+		gardenPlots[row][column] = thePlant.getType();
 	}
 	
-	public void trackZombie(Zombie aZombie) throws FileNotFoundException {
-		Zombie theZombie = new Zombie(aZombie);
-		int position = theZombie.getPosition() - 315;
-		if (theZombie.getRow() == 1) {
-			zombieRow0[position] = theZombie;
-		} else if (theZombie.getRow() == 2) {
-			zombieRow1[position] = theZombie;
-		} else if (theZombie.getRow() == 3) {
-			zombieRow2[position] = theZombie;
-		} else if (theZombie.getRow() == 4) {
-			zombieRow3[position] = theZombie;
-		} else if (theZombie.getRow() == 5) {
-			zombieRow4[position] = theZombie;
-		}
+	public void trackZombie(String aZombie, int row) throws FileNotFoundException {
+	Zombie theZombie = new Zombie(aZombie);
+	int column = 9;
+	gardenPlots[row][column] = theZombie.getType();
 	}
-	
-	public String[][] gardenPlotString() {
-		String[][] theGarden = new String[5][10];
-		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 10; column++) {
-				theGarden[row][column] = getCharacter(row, column).getType();
-			}
-		}
-		return theGarden;
-	}
+
 }
