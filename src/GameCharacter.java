@@ -1,7 +1,7 @@
 //package logic;
 
 //Class that has all the attributes that all character will inherit from
-public abstract class GameCharacter {
+public class GameCharacter {
 	private String type = " "; //The type of character ie. PeaShooter
 	private int health; //Health of character
 	private int attack; //Attack of character
