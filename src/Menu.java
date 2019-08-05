@@ -1,10 +1,10 @@
 //package gui;
 //import drivers.Session;
-//import handlers.StartButtonHandler;
+//import handlers.LevelHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 
 /**
@@ -32,12 +32,14 @@ public class Menu extends BaseScene {
 		 * Create a start button that will launch the second scene (gardenScene)
 		 * once clicked.
 		 */
-		Button start = new Button("start");
+		Button level1 = new Button("Level 1");
+		Button level2 = new Button("Level 2");
+		Button level3 = new Button("Level 3");
 //		Button quit = new Button("quit");	//quits
 		
 		//Add buttons to hbox
-		HBox box = new HBox();
-		box.getChildren().add(start);
+		VBox box = new VBox();
+		box.getChildren().addAll(level1, level2, level3);
 //		box.getChildren().add(quit);
 		box.setAlignment(Pos.CENTER);
 		
@@ -45,8 +47,9 @@ public class Menu extends BaseScene {
 		quit.setOnAction(qHandler);
 */		
 		// Attach start button handler to start button.
-		StartButtonHandler sHandler = new StartButtonHandler(getSession());
-		start.setOnAction(sHandler);
+		level1.setOnAction(new LevelHandler(getSession(), 1));
+		level2.setOnAction(new LevelHandler(getSession(), 2));
+		level3.setOnAction(new LevelHandler(getSession(), 3));
 		
 		//Add hbox with the button/s to pane
 		StackPane pane = new StackPane();
