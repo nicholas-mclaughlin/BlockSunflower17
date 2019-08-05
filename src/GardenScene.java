@@ -81,7 +81,7 @@ public class GardenScene extends BaseScene {
 	 * 			it keeps track of where a plant and/or zombie is.
 	 */
 	Player player = new Player();
-	GameCharacter[][] gardenPlot = new GameCharacter[5][9];
+	String[][] gardenPlot = new String[5][9];
 	Game game = new Game(player, gardenPlot);
 
 	/**
