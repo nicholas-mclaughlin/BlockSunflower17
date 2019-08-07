@@ -3,7 +3,7 @@ import java.io.FileInputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
-
+import java.io.File;
 //import handlers.SunButtonHandler;
 import javafx.application.Platform;
 //import drivers.Session;
@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 //import logic.Player;
 //import logic.Game;
@@ -58,6 +60,11 @@ public class GardenScene extends BaseScene {
 	 */
 	@Override
 	public void setup() throws Exception{
+		
+	String grasswalk = "grasswalk.mp3";
+	Media hit = new Media(new File(grasswalk).toURI().toString());
+	MediaPlayer mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer.play();
 		
 	/**
 	 * This root will serve as the root of the plant and gardenplot buttons and
@@ -142,7 +149,6 @@ public class GardenScene extends BaseScene {
 		z.addToPosition(counter);
 		fullImage.getChildren().add(z.newZombieImage());
 		z.zombieTracker();
-		//game.trackZombie(z); //adds zombie to an arraylist of the row
 		counter += 200;
 	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
@@ -164,10 +170,10 @@ public class GardenScene extends BaseScene {
 		
 		//creates the sunCounter as static to be able to use .setText and change the money displayed
 		public static Button getSunCounter(Player aPlayer) throws Exception {
-			sunCounter.setText("Suns: " + aPlayer.getMoney());
-			sunCounter.setStyle("-fx-background-image: url('/characters/sun.png')");
-			sunCounter.setPrefSize(170,  87);
-			sunCounter.setFont(new Font(20));
+			sunCounter.setText("  " + aPlayer.getMoney());
+			sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
+			sunCounter.setPrefSize(170,  70);
+			sunCounter.setFont(new Font("Arial Bold", 38));
 			return sunCounter;
 		}
 
@@ -232,7 +238,7 @@ public class GardenScene extends BaseScene {
 		 * This will be the second row of the root/VBox.
 		 */
 		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(60, 65, 32, 0));
+		grid.setPadding(new Insets(65, 60, 32, 0));
 		grid.setAlignment(Pos.BOTTOM_RIGHT);
 
 		/**
