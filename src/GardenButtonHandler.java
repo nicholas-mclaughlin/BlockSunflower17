@@ -74,7 +74,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 * its string to a similar string in the 2D array list of the garden plot coordinates.
 		 * 
 		 * Buttons are disabled once a plant has been placed on it.
-		 * Buttons are also set to an opacity of 0.5 to be better seen.
 		 */
 		if (plant.getType().equals("Sunflower")) {
 			try {
@@ -84,9 +83,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			source.setDisable(true);			
 			
-			//placing the sunButton
+			//placing the sun gifs which is a sunButton
 			sunButton = null;
 			try {
 				sunButton = new Sun().getSunButton();
@@ -132,7 +131,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			peaBullet.setLayoutX(xPosition + 53);
+			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
 			//making bullet appear afterwards every 1000 milliseconds
 			Timer timer = new Timer();
@@ -191,7 +190,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 
-			frozenBullet.setLayoutX(xPosition + 53);
+			frozenBullet.setLayoutX(xPosition + 60);
 			frozenBullet.setLayoutY(yPosition + 165);
 			//making bullet appear afterwards every 1000 milliseconds
 			Timer timer = new Timer();
@@ -212,7 +211,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		}
 		
 		player.setPlantHeld("");
-		source.setGraphic(plantImage);
+		
+		//adding plant image to fullImage pane
+		plantImage.setLayoutX(xPosition + 25);
+		plantImage.setLayoutY(yPosition + 160);
+		GardenScene.fullImage.getChildren().add(plantImage);
+		
 		//ISSUE HERE: button is either completely transparent or can see button background too
 		//source.setStyle("-fx-opacity: 0.5;");
 
