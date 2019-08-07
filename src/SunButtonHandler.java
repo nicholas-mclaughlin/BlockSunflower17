@@ -48,4 +48,4 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 	}
 	}
 
-}
+
