@@ -3,7 +3,7 @@ import java.io.FileInputStream;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
-
+import java.io.File;
 //import handlers.SunButtonHandler;
 import javafx.application.Platform;
 //import drivers.Session;
@@ -18,6 +18,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 //import logic.Player;
 //import logic.Game;
@@ -40,7 +42,7 @@ public class GardenScene extends BaseScene {
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
-	private int levelNum;	
+	private int levelNum;
 	public static Button sunCounter = new Button();
 	/**
 	 * This root will serve as the root of the plant and gardenplot buttons and
@@ -68,8 +70,14 @@ public class GardenScene extends BaseScene {
 	@Override
 	public void setup() throws Exception{
 
+	String grasswalk = "grasswalk.mp3";
+	Media hit = new Media(new File(grasswalk).toURI().toString());
+	MediaPlayer mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer.play();
+
+
 	/**
-	 * Importing the garden image and setting its size to fit the buttons and scene. 
+	 * Importing the garden image and setting its size to fit the buttons and scene.
 	 * 1275 are the length of pixels a bit bigger than the window.		???
 	 * 800 are the pixels are the height of pixels a bit bigger than the window.	???
 	 */
@@ -101,8 +109,8 @@ public class GardenScene extends BaseScene {
 	ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
 	Button sunGif = new Button("", sunGIF);
 	sunGif.setStyle("-fx-background-color: transparent;");
-	*/	
-	
+	*/
+
 	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
@@ -129,7 +137,7 @@ public class GardenScene extends BaseScene {
 			//increases the time so all suns don't appear around the same time
 			timeBetweenSuns +=5000;
 		}
-	
+
 	/**
 	 * Set and display scene
 	 * setScene(Scene) and display() are methods from BaseScene class
@@ -140,16 +148,15 @@ public class GardenScene extends BaseScene {
 		z.addToPosition(counter);
 		fullImage.getChildren().add(z.newZombieImage());
 		z.zombieTracker();
-		//game.trackZombie(z); //adds zombie to an arraylist of the row
 		counter += 200;
 	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-	
-	
+
+
 	}
-	
+
 	//creates random X and Y positions for the suns to appear in
 		public int generateRandomY() {
 			int randomY = (int)(Math.random() * (700));
@@ -159,13 +166,13 @@ public class GardenScene extends BaseScene {
 			int randomX = (int)(Math.random()*(1220));
 			return randomX;
 		}
-		
+
 		//creates the sunCounter as static to be able to use .setText and change the money displayed
 		public static Button getSunCounter(Player aPlayer) throws Exception {
-			sunCounter.setText("Suns: " + aPlayer.getMoney());
-			sunCounter.setStyle("-fx-background-image: url('/characters/sun.png')");
-			sunCounter.setPrefSize(170,  87);
-			sunCounter.setFont(new Font(20));
+			sunCounter.setText("  " + aPlayer.getMoney());
+			sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
+			sunCounter.setPrefSize(170,  70);
+			sunCounter.setFont(new Font("Arial Bold", 38));
 			return sunCounter;
 		}
 
@@ -173,7 +180,7 @@ public class GardenScene extends BaseScene {
 	 * gardenButtons node contains all the buttons on the gardenScene (actual gameplay)
 	 * such as the plant buttons and gardenplotbuttons.
 	 * It has its own root and will return it to be added to the setup of the scene.
-	 * 
+	 *
 	 * @param Player	aPlayer is the player of the game
 	 * @param Game	aGame is the game that was run (levels perhaps?)
 	 * @return	returns second stack; buttons
@@ -207,7 +214,7 @@ public class GardenScene extends BaseScene {
 			//made plant buttons transparent so the visual of 'clicking' them isn't seen when the player did not buy a plant
 			plantbuttons.setStyle("-fx-background-color: transparent;");
 			plantbuttons.setOnAction(new PlantButtonHandler(aPlayer));
-			
+
 			box.getChildren().add(column, plantbuttons);
 		}
 
@@ -217,7 +224,7 @@ public class GardenScene extends BaseScene {
 		 */
 		//adds the sunCounter to the plant buttons box
 		box.getChildren().add(getSunCounter(aPlayer));
-		
+
 		/**
 		 * Create an empty array for the gardenplot buttons
 		 * @param MAXSLOTS	refers to the constant variable MAXSLOTS which
@@ -230,7 +237,7 @@ public class GardenScene extends BaseScene {
 		 * This will be the second row of the root/VBox.
 		 */
 		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(60, 65, 32, 0));
+		grid.setPadding(new Insets(65, 60, 32, 0));
 		grid.setAlignment(Pos.BOTTOM_RIGHT);
 
 		/**
@@ -245,7 +252,7 @@ public class GardenScene extends BaseScene {
 				for (int i = 0; i < MAXSLOTS; ++i) {
 					gardenButtons[i] = new Button(row + ","+ column);	//Reference to buttons of their row and column
 					gardenButtons[i].setStyle("-fx-background-color: transparent;");//sets garden slots to be transparent
-					gardenButtons[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible' 
+					gardenButtons[i].setFont(new Font(0));//sets garden slot button reference to be 'invisible'
 					gardenButtons[i].setPrefSize(100,  106);	//set button size
 					gardenButtons[i].setOnAction(new GardenButtonHandler(aPlayer, aGame));
 				}
