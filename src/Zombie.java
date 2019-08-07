@@ -14,7 +14,7 @@ public class Zombie extends GameCharacter{
 	private int row; //Which row the zombie will start walking down from
 	private double position = 1500; //1250 is the very right side of the garden
 	private double position2 = 1500;
-	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("Zombieidle.gif"))); //Original Zombie image
+	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
 	
 
 	/**
@@ -28,21 +28,21 @@ public class Zombie extends GameCharacter{
 			setFirstChar('c');
 			setHealth(560);
 			setAttack(100);
-			zombieImage = new ImageView(new Image(new FileInputStream("ConeHead.gif")));
+			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//ConeHead.gif")));
 		}
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
 			setFirstChar('f');
 			setHealth(200);
 			setSpeed(45000);
 			setAttack(100);
-			zombieImage = new ImageView(new Image(new FileInputStream("FlagZombie.gif")));
+			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
 			setFirstChar('F');
 			setHealth(1600);
 			setSpeed(40000);
 			setAttack(100);
-			zombieImage = new ImageView(new Image(new FileInputStream("Football.gif")));
+			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Football.gif")));
 		}
 		else { //Just creates a normal zombie if there are any errors
 			setFirstChar('z');

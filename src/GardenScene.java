@@ -70,7 +70,7 @@ public class GardenScene extends BaseScene {
 	@Override
 	public void setup() throws Exception{
 
-	String grasswalk = "grasswalk.mp3";
+	String grasswalk = "MenuImages//grasswalk.mp3";
 	Media hit = new Media(new File(grasswalk).toURI().toString());
 	MediaPlayer mediaPlayer = new MediaPlayer(hit);
 	mediaPlayer.play();
