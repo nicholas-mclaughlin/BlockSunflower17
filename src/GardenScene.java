@@ -81,7 +81,7 @@ public class GardenScene extends BaseScene {
 	 * 1275 are the length of pixels a bit bigger than the window.		???
 	 * 800 are the pixels are the height of pixels a bit bigger than the window.	???
 	 */
-	ImageView Garden = new ImageView(new Image(new FileInputStream("Garden.PNG")));
+	ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
 	Garden.setFitHeight(800);
 	Garden.setFitWidth(1275);
 
@@ -208,7 +208,7 @@ public class GardenScene extends BaseScene {
 		 * Eventhandlers will also be attached to these buttons.
 		 */
 		for (int column = 0; column <5; ++column){
-			ImageView plant = new ImageView(new Image(new FileInputStream("Plant"+ column + ".jpg")));
+			ImageView plant = new ImageView(new Image(new FileInputStream("PlantImages//Plant"+ column + ".jpg")));
 			Button plantbuttons = new Button("p"+ column, plant);
 			plantbuttons.setFont(new Font(0));
 			//made plant buttons transparent so the visual of 'clicking' them isn't seen when the player did not buy a plant

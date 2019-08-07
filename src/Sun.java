@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 
 public class Sun {
 	
-	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
+	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
 	
 	public Sun() throws Exception{

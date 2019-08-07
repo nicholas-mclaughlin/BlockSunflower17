@@ -77,7 +77,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 */
 		if (plant.getType().equals("Sunflower")) {
 			try {
-				plantImage = new ImageView(new Image(new FileInputStream("Sunflower.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -116,7 +116,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		} else if (plant.getType().equals("PeaShooter")) {
 			try {
 				//Plant i = player.getPlantHeld();
-				plantImage = new ImageView(new Image(new FileInputStream("pea-shooter.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -126,7 +126,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			
 			//creating pea bullet image
 			try {
-				peaBullet = new ImageView(new Image( new FileInputStream("pea-bullet.png")));
+				peaBullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -152,7 +152,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		} else if (plant.getType().equals("Wallnut")) {
 			try {
 				//Plant i = player.getPlantHeld();
-				plantImage = new ImageView(new Image(new FileInputStream("walnut_full_life.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -163,7 +163,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		} else if (plant.getType().equals("Cherry Bomb")) {
 			try {
 				//Plant i = player.getPlantHeld();
-				plantImage = new ImageView(new Image(new FileInputStream("cherry-bomb.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//cherry-bomb.gif")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -174,7 +174,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
 			try {
 				//Plant i = player.getPlantHeld();
-				plantImage = new ImageView(new Image(new FileInputStream("frozen-pea.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -184,7 +184,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			
 			//creating frozen pea bullet image
 			try {
-				frozenBullet = new ImageView(new Image( new FileInputStream("frozen-pea-bullet.png")));
+				frozenBullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
