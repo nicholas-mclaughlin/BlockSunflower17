@@ -1,11 +1,14 @@
 //package gui;
 //import drivers.Session;
 //import handlers.LevelHandler;
+import java.io.FileInputStream;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * Menu class is an extension of BaseScene.
@@ -32,12 +35,18 @@ public class Menu extends BaseScene {
 		 * Create a start button that will launch the second scene (gardenScene)
 		 * once clicked.
 		 */
-		Button level1 = new Button("Level 1");
-		Button level2 = new Button("Level 2");
-		Button level3 = new Button("Level 3");
+		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl1.PNG"))));
+		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl2.PNG"))));
+		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl3.PNG"))));
+		level1.setPrefSize(550, 100);
+		level2.setPrefSize(550, 100);
+		level3.setPrefSize(550, 100);
+		level1.setStyle("-fx-background-color: transparent;");
+		level2.setStyle("-fx-background-color: transparent;");
+		level3.setStyle("-fx-background-color: transparent;");
 //		Button quit = new Button("quit");	//quits
 		
-		//Add buttons to hbox
+		//Add buttons to vbox
 		VBox box = new VBox();
 		box.getChildren().addAll(level1, level2, level3);
 //		box.getChildren().add(quit);
@@ -51,12 +60,17 @@ public class Menu extends BaseScene {
 		level2.setOnAction(new LevelHandler(getSession(), 2));
 		level3.setOnAction(new LevelHandler(getSession(), 3));
 		
-		//Add hbox with the button/s to pane
+		ImageView background = new ImageView(new Image(new FileInputStream("PvZStreet.JPEG")));
+		background.setFitHeight(720);
+		background.setFitWidth(1220);
+		
+		//Add hbox with the button/s to the pane
 		StackPane pane = new StackPane();
+     		pane.getChildren().add(background);
 		pane.getChildren().add(box);
 		
 		//Set the scene with preferred dimensions.
-		setScene(new Scene(pane, 600, 500));
+		setScene(new Scene(pane, 1220, 720));
 		display();
 	}
 
