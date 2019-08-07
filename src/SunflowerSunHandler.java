@@ -42,10 +42,10 @@ public class SunflowerSunHandler implements EventHandler<ActionEvent> {
 			e.printStackTrace();
 		}
 		//sets the button style and increases the money
-		sunCounter.setText("Suns: " + player.getMoney());
-		sunCounter.setStyle("-fx-background-image: url('/characters/sun.png')");
-		sunCounter.setPrefSize(170,  87);
-		sunCounter.setFont(new Font(20));
+		sunCounter.setText("  " + player.getMoney());
+		sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
+		sunCounter.setPrefSize(170,  70);
+		sunCounter.setFont(new Font("Arial Bold", 38));
 		
 		source.setDisable(true);
 		source.setStyle("-fx-opacity: 0.0;");
