@@ -1,15 +1,19 @@
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.util.Duration;
 
 public class Zombie extends GameCharacter{
 	private double speed = 50000; //How many milliseconds it'll take for the zombie to go across the garden
 	private int row; //Which row the zombie will start walking down from
-	private int position = 1500; //1250 is the very right side of the garden
+	private double position = 1500; //1250 is the very right side of the garden
+	private double position2 = 1500;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("Zombieidle.gif"))); //Original Zombie image
 	
 
@@ -90,6 +94,16 @@ public class Zombie extends GameCharacter{
 	      translateTransition.play();  
 	}
 	
+	public Zombie(Zombie c) throws FileNotFoundException {
+		super(c);
+		setFirstChar(c.getFirstChar());
+		setSpeed(c.getSpeed());
+		setRow(c.getRow());
+		setPosition(c.getPosition());
+		zombieImage = c.getZombieImage();
+	}
+	
+	
 		//Getters and setters
 	public double getSpeed() {
 		return speed;
@@ -104,8 +118,8 @@ public class Zombie extends GameCharacter{
 	public double getPosition() {
 		return position;
 	}
-	public void setPosition(int position) {
-		this.position = position;
+	public void setPosition(double d) {
+		this.position = d;
 	}
 	
 	/*public void multiplyPosition(int amount) {
@@ -115,6 +129,7 @@ public class Zombie extends GameCharacter{
 	public void addToPosition(int distance) {
 		this.speed += (speed / position) * distance;
 		this.position += distance;
+		this.position2 += distance;
 		
 	}
     
@@ -173,10 +188,35 @@ public class Zombie extends GameCharacter{
 
 	@Override
 	public String toString() {
-		return "Zombie [type=" + getType() + ", row=" + row + ", position=" + position + ", getHealth()=" + getHealth()
-				+ " speed= " + speed + "]";
+		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
 	
+	public void zombieTracker() throws FileNotFoundException {
+		Zombie theZombie = new Zombie(this);
+		int delay = 0;
+		int updateTime = 1;
+		
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		            @Override
+		             public void run() {
+		            	if ((int)(theZombie.position) % 1250 == 0 && theZombie.position <= 1250) {
+			            	System.out.println(theZombie.toString());
+			            	System.out.println("Zombie has entered the garden");
+			            }
+			            theZombie.position -= (position2 - 250) / (theZombie.speed / updateTime);
+			            if (theZombie.position <= 250) {
+			            	System.out.println(theZombie.toString());
+			            	System.out.println("Zombie has reached the house");
+			            	t.cancel();
+			            	
+			            }
+		             }
+		 }, delay, updateTime);
+	}
 	
-	
+	public static void main(String[] args) throws FileNotFoundException {
+		Zombie z1 = new Zombie("Zombie", 2);
+				z1.zombieTracker();
+	}
 }

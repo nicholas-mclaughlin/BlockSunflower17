@@ -129,7 +129,7 @@ public class GardenScene extends BaseScene {
 			sunButton.setLayoutX(generateRandomX());
 			sunButton.setLayoutY(generateRandomY());
 			//increases the time so all suns don't appear around the same time
-			timeBetweenSuns +=1500;
+			timeBetweenSuns +=5000;
 		}
 	
 	/**
@@ -141,6 +141,7 @@ public class GardenScene extends BaseScene {
 	for (Zombie z : level.getZombies()) {
 		z.addToPosition(counter);
 		fullImage.getChildren().add(z.newZombieImage());
+		z.zombieTracker();
 		//game.trackZombie(z); //adds zombie to an arraylist of the row
 		counter += 200;
 	}

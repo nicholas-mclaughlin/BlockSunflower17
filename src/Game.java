@@ -92,9 +92,9 @@ public class Game {
 		gardenPlots[row][column] = thePlant;
 	}
 
-	public void trackZombie(Zombie aZombie) throws FileNotFoundException {
+	/*public void trackZombie(Zombie aZombie) throws FileNotFoundException {
 		Zombie theZombie = new Zombie(aZombie);
-		int position = theZombie.getPosition() - 315;
+		int position = (int) (theZombie.getPosition() - 315);
 		if (theZombie.getRow() == 1) {
 			zombieRow0[position] = theZombie;
 		} else if (theZombie.getRow() == 2) {
@@ -106,7 +106,7 @@ public class Game {
 		} else if (theZombie.getRow() == 5) {
 			zombieRow4[position] = theZombie;
 		}
-	}
+	} */
 	
 	public String[][] gardenPlotString() {
 		String[][] theGarden = new String[5][10];
