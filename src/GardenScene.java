@@ -42,6 +42,15 @@ public class GardenScene extends BaseScene {
 	private final int WIDTH = 720;
 	private int levelNum;	
 	public static Button sunCounter = new Button();
+	/**
+	 * This root will serve as the root of the plant and gardenplot buttons and
+	 * as well as the background image.
+	 */
+	static StackPane root = new StackPane();
+	/**
+	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere
+	 */
+	public static Pane fullImage = new Pane(root);
 
 	/**
 	 * GardenScene constructors. This passes a session to the parent (BaseScene).
@@ -58,12 +67,6 @@ public class GardenScene extends BaseScene {
 	 */
 	@Override
 	public void setup() throws Exception{
-		
-	/**
-	 * This root will serve as the root of the plant and gardenplot buttons and
-	 * as well as the background image.
-	 */
-	StackPane root = new StackPane();
 
 	/**
 	 * Importing the garden image and setting its size to fit the buttons and scene. 
@@ -100,15 +103,10 @@ public class GardenScene extends BaseScene {
 	sunGif.setStyle("-fx-background-color: transparent;");
 	*/	
 	
-	/**
-	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere
-	 */
-	Pane fullImage = new Pane(root);
-	
 	//the time for the first sun to appear in milliseconds
-		int timeBetweenSuns = 3000;
+		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
-		for (int i = 0; i<=20; i++) {
+		for (int i = 0; i<=30; i++) {
 			Button sunButton = new Sun().getSunButton();
 			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
 			//timer to add the suns after timeBetweenSuns seconds
