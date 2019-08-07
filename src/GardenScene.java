@@ -145,10 +145,8 @@ public class GardenScene extends BaseScene {
 	Level level = new Level(this.levelNum); //Can be Level1, Level2, or Level3
 	int counter = 0;
 	for (Zombie z : level.getZombies()) {
-		z.addToPosition(counter);
 		fullImage.getChildren().add(z.newZombieImage());
 		z.zombieTracker();
-		counter += 200;
 	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);

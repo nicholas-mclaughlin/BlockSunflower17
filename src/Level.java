@@ -19,6 +19,10 @@ public class Level {
 			getZombies()[5] = (new Zombie("Zombie", 2));
 			getZombies()[6] = (new Zombie("Cone Zombie", 5));
 			getZombies()[7] = (new Zombie("Zombie", 3));
+			int counter = 0;
+			for (Zombie z : getZombies()) {
+				z.addToPosition(counter);
+				counter += 200;
 		}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
@@ -33,7 +37,11 @@ public class Level {
 			getZombies()[8] = (new Zombie("Zombie", 2));
 			getZombies()[9] = (new Zombie("Zombie", 5));
 			getZombies()[10] = (new Zombie("Football Zombie", 1));
-			
+			int counter = 0;
+			for (Zombie z : getZombies()) {
+				z.addToPosition(counter);
+				counter += 200;
+
 		}
 		else if (levelNumber == 3) {
 			zombies = new Zombie[13];
@@ -50,6 +58,10 @@ public class Level {
 			getZombies()[10] = (new Zombie("Football Zombie", 3));
 			getZombies()[11] = (new Zombie("Zombie", 5));
 			getZombies()[12] = (new Zombie("Cone Zombie", 2));
+			int counter = 0;
+			for (Zombie z : getZombies()) {
+				z.addToPosition(counter);
+				counter += 200;
 		}
 	}
 
@@ -69,6 +81,6 @@ public class Level {
 	public Zombie[] getZombies() {
 		return zombies;
 	}
-	
+
 
 }

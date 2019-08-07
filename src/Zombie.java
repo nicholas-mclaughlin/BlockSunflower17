@@ -15,11 +15,11 @@ public class Zombie extends GameCharacter{
 	private double position = 1500; //1250 is the very right side of the garden
 	private double position2 = 1500;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
-	
+
 
 	/**
-	 * 
-	 * @param typeOfZombie 
+	 *
+	 * @param typeOfZombie
 	 * @throws FileNotFoundException
 	 */
 	public Zombie(String typeOfZombie, int rowNum) throws FileNotFoundException {
@@ -55,45 +55,45 @@ public class Zombie extends GameCharacter{
 		else {
 			setRow(3);
 		}
-		
+
 	      zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
 	      if (row == 1) {
 	    	  zombieImage.setY(215);
 	      }
 	      else if (row == 2) {
-	    	  zombieImage.setY(310); 
+	    	  zombieImage.setY(310);
 	      }
-	      
-	      else if (row == 3){ 
+
+	      else if (row == 3){
 	    	  zombieImage.setY(410);
 	      }
 	      else if (row == 4) {
 	    	  zombieImage.setY(525);
 	      }
-	      
+
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
 	      }
 	    //Size of the zombie
-	      zombieImage.setFitHeight(100); 
-	      zombieImage.setFitWidth(130); 
-	      
-	      //Setting the preserve ratio of the image view 
+	      zombieImage.setFitHeight(100);
+	      zombieImage.setFitWidth(130);
+
+	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
-	      
+
 	      //Creates the animation of the zombie
-	      TranslateTransition translateTransition = new TranslateTransition(); 
+	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition.setDuration(Duration.millis(speed));
-	      translateTransition.setNode(zombieImage); 
+	      translateTransition.setNode(zombieImage);
 	      //The displacement of the animation
-	      translateTransition.setByX(-position + 250); 
-	      translateTransition.setCycleCount(1); 
-	      translateTransition.setAutoReverse(false); 
-	      translateTransition.play();  
+	      translateTransition.setByX(-position + 250);
+	      translateTransition.setCycleCount(1);
+	      translateTransition.setAutoReverse(false);
+	      translateTransition.play();
 	}
-	
+
 	public Zombie(Zombie c) throws FileNotFoundException {
 		super(c);
 		setFirstChar(c.getFirstChar());
@@ -102,8 +102,8 @@ public class Zombie extends GameCharacter{
 		setPosition(c.getPosition());
 		zombieImage = c.getZombieImage();
 	}
-	
-	
+
+
 		//Getters and setters
 	public double getSpeed() {
 		return speed;
@@ -114,14 +114,14 @@ public class Zombie extends GameCharacter{
 	public void setSpeed(double d) {
 		this.speed = d;
 	}
-	
+
 	public double getPosition() {
 		return position;
 	}
 	public void setPosition(double d) {
 		this.position = d;
 	}
-	
+
 	/*public void multiplyPosition(int amount) {
 		this.position = amount * position;
 		this.speed = amount * speed;
@@ -130,14 +130,14 @@ public class Zombie extends GameCharacter{
 		this.speed += (speed / position) * distance;
 		this.position += distance;
 		this.position2 += distance;
-		
+
 	}
-    
-    
+
+
 	public ImageView getZombieImage() {
 		return zombieImage;
 	}
-	
+
 	public ImageView newZombieImage() {
 		zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
@@ -145,36 +145,36 @@ public class Zombie extends GameCharacter{
 	    	  zombieImage.setY(215);
 	      }
 	      else if (row == 2) {
-	    	  zombieImage.setY(310); 
+	    	  zombieImage.setY(310);
 	      }
-	      
-	      else if (row == 3){ 
+
+	      else if (row == 3){
 	    	  zombieImage.setY(410);
 	      }
 	      else if (row == 4) {
 	    	  zombieImage.setY(525);
 	      }
-	      
+
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
 	      }
 	    //Size of the zombie
-	      zombieImage.setFitHeight(100); 
-	      zombieImage.setFitWidth(130); 
-	      
-	      //Setting the preserve ratio of the image view 
+	      zombieImage.setFitHeight(100);
+	      zombieImage.setFitWidth(130);
+
+	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
-	      
+
 	      //Creates the animation of the zombie
-	      TranslateTransition translateTransition = new TranslateTransition(); 
+	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition.setDuration(Duration.millis(speed));
-	      translateTransition.setNode(zombieImage); 
+	      translateTransition.setNode(zombieImage);
 	      //The displacement of the animation
-	      translateTransition.setByX(-position + 250); 
-	      translateTransition.setCycleCount(1); 
-	      translateTransition.setAutoReverse(false); 
-	      translateTransition.play(); 
+	      translateTransition.setByX(-position + 250);
+	      translateTransition.setCycleCount(1);
+	      translateTransition.setAutoReverse(false);
+	      translateTransition.play();
 	      return zombieImage;
 	}
 
@@ -190,31 +190,36 @@ public class Zombie extends GameCharacter{
 	public String toString() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
-	
+
 	public void zombieTracker() throws FileNotFoundException {
 		Zombie theZombie = new Zombie(this);
-		int delay = 0;
-		int updateTime = 1;
-		
+		int delay = 0; //No delay
+		int updateTime = 100; //Gets the location to update every second
+		double gardenLength = theZombie.position2 - 250;
+		double j=  (theZombie.speed / updateTime);
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
 		            @Override
 		             public void run() {
-		            	if ((int)(theZombie.position) % 1250 == 0 && theZombie.position <= 1250) {
-			            	System.out.println(theZombie.toString());
+
+		            	if ( theZombie.position >= 1248.5 && theZombie.position <= 1251.0) {
+		            		System.out.println(theZombie.toString());
 			            	System.out.println("Zombie has entered the garden");
 			            }
-			            theZombie.position -= (position2 - 250) / (theZombie.speed / updateTime);
-			            if (theZombie.position <= 250) {
-			            	System.out.println(theZombie.toString());
+
+		            	theZombie.position -= gardenLength / j;
+
+			           if (theZombie.position <= 252.0) {
+			        	   System.out.println(theZombie.toString());
 			            	System.out.println("Zombie has reached the house");
 			            	t.cancel();
-			            	
+
 			            }
+
 		             }
 		 }, delay, updateTime);
 	}
-	
+
 	public static void main(String[] args) throws FileNotFoundException {
 		Zombie z1 = new Zombie("Zombie", 2);
 				z1.zombieTracker();
