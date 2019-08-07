@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 
 public class Level {
 	private int levelNum;
-//	private int numberOfWaves;
 	public Zombie[] zombies;
 	static int counter = 0;
 
@@ -12,45 +11,45 @@ public class Level {
 		this.setLevelNum(levelNumber);
 		if (levelNumber == 1) {
 			zombies = new Zombie[8];
-			getZombies()[0] = (new Zombie("Zombie"));
-			getZombies()[1] =  (new Zombie("Zombie"));
-			getZombies()[2] = (new Zombie("Cone Zombie"));
-			getZombies()[3] = (new Zombie("Zombie"));
-			getZombies()[4] = (new Zombie("Flag Zombie"));
-			getZombies()[5] = (new Zombie("Zombie"));
-			getZombies()[6] = (new Zombie("Cone Zombie"));
-			getZombies()[7] = (new Zombie("Football Zombie"));
+			getZombies()[0] = (new Zombie("Zombie", 4));
+			getZombies()[1] =  (new Zombie("Zombie", 3));
+			getZombies()[2] = (new Zombie("Cone Zombie",1));
+			getZombies()[3] = (new Zombie("Zombie", 2));
+			getZombies()[4] = (new Zombie("Flag Zombie", 4));
+			getZombies()[5] = (new Zombie("Zombie", 2));
+			getZombies()[6] = (new Zombie("Cone Zombie", 5));
+			getZombies()[7] = (new Zombie("Zombie", 3));
 		}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
-			getZombies()[0] = (new Zombie("Zombie"));
-			getZombies()[1] =  (new Zombie("Zombie"));
-			getZombies()[2] = (new Zombie("Cone Zombie"));
-			getZombies()[3] = (new Zombie("Zombie"));
-			getZombies()[4] = (new Zombie("Football Zombie"));
-			getZombies()[5] = (new Zombie("Flag Zombie"));
-			getZombies()[6] = (new Zombie("Zombie"));
-			getZombies()[7] = (new Zombie("Cone Zombie"));
-			getZombies()[8] = (new Zombie("Football Zombie"));
-			getZombies()[9] = (new Zombie("Zombie"));
-			getZombies()[10] = (new Zombie("Football Zombie"));
+			getZombies()[0] = (new Zombie("Zombie", 2));
+			getZombies()[1] =  (new Zombie("Zombie", 3));
+			getZombies()[2] = (new Zombie("Cone Zombie", 5));
+			getZombies()[3] = (new Zombie("Zombie", 1));
+			getZombies()[4] = (new Zombie("Football Zombie", 4));
+			getZombies()[5] = (new Zombie("Flag Zombie", 3));
+			getZombies()[6] = (new Zombie("Zombie", 3));
+			getZombies()[7] = (new Zombie("Cone Zombie", 1));
+			getZombies()[8] = (new Zombie("Zombie", 2));
+			getZombies()[9] = (new Zombie("Zombie", 5));
+			getZombies()[10] = (new Zombie("Football Zombie", 1));
 			
 		}
 		else if (levelNumber == 3) {
 			zombies = new Zombie[13];
-			getZombies()[0] = (new Zombie("Cone Zombie"));
-			getZombies()[1] =  (new Zombie("Zombie"));
-			getZombies()[2] = (new Zombie("Cone Zombie"));
-			getZombies()[3] = (new Zombie("Football Zombie"));
-			getZombies()[4] = (new Zombie("Zombie"));
-			getZombies()[5] = (new Zombie("Zombie"));
-			getZombies()[6] = (new Zombie("Flag Zombie"));
-			getZombies()[7] = (new Zombie("Football Zombie"));
-			getZombies()[8] = (new Zombie("Zombie"));
-			getZombies()[9] = (new Zombie("Zombie"));
-			getZombies()[10] = (new Zombie("Football Zombie"));
-			getZombies()[11] = (new Zombie("Zombie"));
-			getZombies()[12] = (new Zombie("Cone Zombie"));
+			getZombies()[0] = (new Zombie("Cone Zombie", 4));
+			getZombies()[1] =  (new Zombie("Zombie", 2));
+			getZombies()[2] = (new Zombie("Cone Zombie", 1));
+			getZombies()[3] = (new Zombie("Football Zombie", 5));
+			getZombies()[4] = (new Zombie("Zombie", 3));
+			getZombies()[5] = (new Zombie("Zombie", 3));
+			getZombies()[6] = (new Zombie("Flag Zombie", 2));
+			getZombies()[7] = (new Zombie("Football Zombie", 4));
+			getZombies()[8] = (new Zombie("Zombie", 1));
+			getZombies()[9] = (new Zombie("Zombie", 1));
+			getZombies()[10] = (new Zombie("Football Zombie", 3));
+			getZombies()[11] = (new Zombie("Zombie", 5));
+			getZombies()[12] = (new Zombie("Cone Zombie", 2));
 		}
 	}
 
