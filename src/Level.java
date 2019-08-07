@@ -24,6 +24,7 @@ public class Level {
 				z.addToPosition(counter);
 				counter += 200;
 		}
+		}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
 			getZombies()[0] = (new Zombie("Zombie", 2));
@@ -42,6 +43,7 @@ public class Level {
 				z.addToPosition(counter);
 				counter += 200;
 
+		}
 		}
 		else if (levelNumber == 3) {
 			zombies = new Zombie[13];
@@ -62,6 +64,7 @@ public class Level {
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
 				counter += 200;
+		}
 		}
 	}
 
