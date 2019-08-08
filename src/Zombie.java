@@ -31,14 +31,14 @@ public class Zombie extends GameCharacter{
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//ConeHead.gif")));
 		}
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
-			setFirstChar('f');
+			setFirstChar('g');
 			setHealth(200);
 			setSpeed(45000);
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
-			setFirstChar('F');
+			setFirstChar('f');
 			setHealth(1600);
 			setSpeed(40000);
 			setAttack(100);
@@ -196,38 +196,138 @@ public class Zombie extends GameCharacter{
 	public String toString() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
+	
+	public boolean zombieOnRow() {
+		return position <= 1250;
+	}
+	
+	public boolean zombieOnGarden() {
+		return position <= 1251 && position >= 1248.5;
+	}
+	public boolean zombieAtHouse() {
+		return position <= 250;
+	}
+	public boolean onColumn1() {
+		return position > 250 && position <= 366;
+	}
+	public boolean onColumn2() {
+		return position > 366 && position <= 477;
+	}
+	public boolean onColumn3() {
+		return position > 477 && position <= 588;
+	}
+	public boolean onColumn4() {
+		return position > 588 && position <= 699;
+	}
+	public boolean onColumn5() {
+		return position > 699 && position <= 810;
+	}
+	public boolean onColumn6() {
+		return position > 810 && position <= 921;
+	}
+	public boolean onColumn7() {
+		return position > 921 && position <= 1032;
+	}
+	public boolean onColumn8() {
+		return position > 1032 && position <= 1143;
+	}
+	public boolean onColumn9() {
+		return position > 1143 && position <= 1254;
+	}
+	public int columnNumber() {
+		if (position > 250 && position <= 366) {
+			return 10;
+		}
+		else if (position > 366 && position <= 477) {
+			return 1;
+		}
+		else if (position > 477 && position <= 588) {
+			return 2;
+		}
+		else if (position > 588 && position <= 699) {
+			return 3;
+		}
+		else if (position > 699 && position <= 810) {
+			return 4;
+		}
+		else if (position > 810 && position <= 921) {
+			return 5;
+		}
+		else if (position > 921 && position <= 1032) {
+			return 6;
+		}
+		else if (position > 1032 && position <= 1143) {
+			return 7;
+		}
+		else if (position > 1143 && position <= 1254) {
+			return 8;
+		}
+		else {
+			return 8;
+		}
+	}
+	
+	public boolean checkForPlant() {
+		return Game.theGarden[row][columnNumber()] == "Sunflower" || Game.theGarden[row][columnNumber()] == "PeaShooter" || Game.theGarden[row][columnNumber()] == "Frozen PeaShooter" || Game.theGarden[row][columnNumber()] == "Wallnut" || Game.theGarden[row][columnNumber()] == "Cherry Bomb"; 
+	}
+	
 
 	public void zombieTracker() throws FileNotFoundException {
-		Zombie theZombie = new Zombie(this);
+		
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
-		double gardenLength = theZombie.position2 - 250;
-		double j=  (theZombie.speed / updateTime);
+		double gardenLength = position2 - 250;
+		double j=  (speed / updateTime);
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
 		            @Override
 		             public void run() {
-
-		            	if ( theZombie.position >= 1248.5 && theZombie.position <= 1251.0) {
-		            		System.out.println(theZombie.toString());
-			            	System.out.println("Zombie has entered the garden");
-			            }
-
-		            	theZombie.position -= gardenLength / j;
-
-			           if (theZombie.position <= 252.0) {
-			        	   System.out.println(theZombie.toString());
-			            	System.out.println("Zombie has reached the house");
-			            	t.cancel();
-
-			            }
-
+		            	/*if (onColumn1()) {
+		            		Level.textGarden[row][0] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn2()) {
+		            		Level.textGarden[row][1] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn3()) {
+		            		Level.textGarden[row][2] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn4()) {
+		            		Level.textGarden[row][3] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn5()) {
+		            		Level.textGarden[row][4] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn6()) {
+		            		Level.textGarden[row][5] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn7()) {
+		            		Level.textGarden[row][6] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn8()) {
+		            		Level.textGarden[row][7] = getFirstChar();
+		            		Level.printGarden();
+		            	}
+		            	else if (onColumn9()) {
+		            		Level.textGarden[row][8] = getFirstChar();
+		            		Level.printGarden();
+		            	} */
+		            	System.out.println(checkForPlant());
+		            	
+		            	position -= gardenLength / j;
+		            	
 		             }
 		 }, delay, updateTime);
-	}
+	} 
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Zombie z1 = new Zombie("Zombie", 2);
-				z1.zombieTracker();
+				//z1.zombieTracker();
 	}
 }
