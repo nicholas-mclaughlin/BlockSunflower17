@@ -41,8 +41,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private ImageView frozenBullet;
 
 	static ImageView plantImage = null;
-	private Rectangle bulletRect;
-	private Rectangle fBulletRect;
+	static Rectangle bulletRect;
+	static Rectangle fBulletRect;
 	
 	
 	
@@ -162,7 +162,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 								
 			bulletRect = getBounds(peaBullet);
-			bulletRect.setStroke(Color.AQUA);
+			bulletRect.setFill(Color.TRANSPARENT);
 
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
@@ -227,7 +227,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			frozenBullet.setLayoutX(xPosition + 60);
 			frozenBullet.setLayoutY(yPosition + 165);
 			fBulletRect = getBounds(frozenBullet);
-			fBulletRect.setStroke(Color.AQUA);
+			fBulletRect.setFill(Color.TRANSPARENT);
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -269,19 +269,25 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 		player.setPlantHeld("");
 		System.out.println(source.getText());
-		System.out.println(Arrays.deepToString(Game.theGarden));
+		//System.out.println(Arrays.deepToString(Game.theGarden));
+		for(int i = 0; i<5; i++)
+		{
+		    for(int j = 0; j<9; j++)
+		    {
+		        System.out.print(Game.theGarden[i][j] + " ");
+		    }
+		    System.out.println();
+		}
 	}
 
-	/*public boolean intersects(Zombie zombie) {
-		return xPosition == zombie.getPosition();
-	} */
+	
 
-	public void damageZombie(Zombie zombie) {
-		if (bulletRect.intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(30);
+	public static void damageZombie(Zombie zombie) {
+		if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
+			zombie.loseHealth(10);
 		}
-		else if (fBulletRect.intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(30);
+		else if (fBulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
+			zombie.loseHealth(10);
 		}
 	}
 

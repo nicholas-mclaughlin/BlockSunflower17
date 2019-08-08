@@ -109,7 +109,7 @@ public class Zombie extends GameCharacter{
 	      zombieImage.setPreserveRatio(true);
 	      
 	      Rectangle rect = getBounds(zombieImage);
-	      rect.setStroke(Color.TRANSPARENT);
+	      rect.setFill(Color.TRANSPARENT);
 	      //Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
@@ -260,7 +260,7 @@ public class Zombie extends GameCharacter{
 	     
 	      
 	      
-	      rect.setStroke(Color.TRANSPARENT);
+	      rect.setFill(Color.TRANSPARENT);
 	     
 	      TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
@@ -325,7 +325,9 @@ public class Zombie extends GameCharacter{
 	public String toString2() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
-	
+	 public Zombie returnSelf() {
+		 return this;
+	 }
 	
 	
 
@@ -456,7 +458,9 @@ public class Zombie extends GameCharacter{
 */
 		            	position -= gardenLength / j;
 		            	
-		            	System.out.println(toString2());
+		            	
+		        		
+		            	//System.out.println(toString2());
 		             }
 		 }, delay, updateTime);
 	}

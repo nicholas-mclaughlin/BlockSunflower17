@@ -16,7 +16,7 @@ public class Level {
 		if (levelNumber == 1) {
 			zombies = new Zombie[1];
 			getZombies()[0] = (new Zombie("Zombie", 4));
-			/*getZombies()[1] =  (new Zombie("Zombie", 3));
+			getZombies()[1] =  (new Zombie("Zombie", 3));
 			getZombies()[2] = (new Zombie("Cone Zombie",1));
 			getZombies()[3] = (new Zombie("Zombie", 2));
 			getZombies()[4] = (new Zombie("Flag Zombie", 4));
@@ -27,7 +27,7 @@ public class Level {
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
 				counter += 200;  
-		} */
+		} 
 		}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
