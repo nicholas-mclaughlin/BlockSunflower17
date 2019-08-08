@@ -32,6 +32,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Game game;
 	//Creates the positions of the button that is clicked.
 	public double xPosition;
+	public double xPosition2;
 	public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
@@ -47,6 +48,30 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		this.game = aGame;
 	}
 
+
+	public void trackBullet() {
+		int intervals = 100;
+		double startPoint = xPosition - 250;
+		int numOfMoves = 3000/intervals;
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		            @Override
+		             public void run() {
+
+		            	xPosition2 += startPoint/numOfMoves;
+		            	System.out.println(xPosition2);
+		             }
+		 }, 0, intervals);
+	}
+
+
+
+
+
+
+
+
+
 	/**
 	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
 	 * to clicking a garden plot. It replaces the player's plantHeld back to default ("") at the end of the method.
@@ -56,7 +81,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
-		
+
 		//ImageView plantImage = null;
 		Plant plant = new Plant(player.getPlantHeld());
 		plant.setRow(this.game, source.getText());
@@ -64,7 +89,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		System.out.println(player.getPlantHeld());
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
+		xPosition2 = source.getLayoutX();
 		yPosition = source.getLayoutY();
+		int bulletEndPosition = (int) (1125 - xPosition);
+
 
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
@@ -134,12 +162,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.setDuration(Duration.millis(3000));
 			          	      translateTransition.setNode(peaBullet);
 			          	      //The displacement of the animation
-			          	      translateTransition.setByX(1125 - xPosition);
+			          	      translateTransition.setByX(bulletEndPosition);
 			          	      translateTransition.setCycleCount(1000);
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);
-			  
+			        			trackBullet();
 
 
 		} else if (plant.getType().equals("Wallnut")) {
@@ -183,11 +211,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.setDuration(Duration.millis(3000));
     	      translateTransition.setNode(frozenBullet);
     	      //The displacement of the animation
-    	      translateTransition.setByX(1125 - xPosition);
+    	      translateTransition.setByX(bulletEndPosition);
     	      translateTransition.setCycleCount(1000);
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
   			GardenScene.fullImage.getChildren().add(frozenBullet);
+  			trackBullet();
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
@@ -205,11 +234,11 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			plantImage.setLayoutY(yPosition + 160);
 			GardenScene.fullImage.getChildren().add(plantImage);
 		 }
-		 
-	
+
+
 		player.setPlantHeld("");
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
-	
+
 }
