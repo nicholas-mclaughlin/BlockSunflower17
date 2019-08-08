@@ -140,6 +140,7 @@ public class Zombie extends GameCharacter{
 		this.position2 += distance;
 
 	}
+	
 
 
 	public ImageView getZombieImage() {

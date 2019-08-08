@@ -240,5 +240,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
+	
+	public boolean intersects(Zombie zombie) {
+		return xPosition == zombie.getPosition();
+	}
+	
+	public void damageZombie(Zombie zombie) {
+		if (intersects(zombie)) {
+			zombie.loseHealth(30);
+		}
+	}
 
 }
