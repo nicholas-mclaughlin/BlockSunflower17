@@ -1,11 +1,13 @@
 //package logic;
 
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 
 public class Level {
 	private int levelNum;
 	public Zombie[] zombies;
 	static int counter = 0;
+	static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
 
 	public Level(int levelNumber) throws FileNotFoundException {
 		this.setLevelNum(levelNumber);
@@ -23,8 +25,7 @@ public class Level {
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
 				counter += 200;
-		}
-		}
+		}}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
 			getZombies()[0] = (new Zombie("Zombie", 2));
@@ -43,8 +44,7 @@ public class Level {
 				z.addToPosition(counter);
 				counter += 200;
 
-		}
-		}
+		}}
 		else if (levelNumber == 3) {
 			zombies = new Zombie[13];
 			getZombies()[0] = (new Zombie("Cone Zombie", 4));
@@ -64,8 +64,7 @@ public class Level {
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
 				counter += 200;
-		}
-		}
+		}}
 	}
 
 /*	public Level(Level toCopy) {
@@ -84,6 +83,22 @@ public class Level {
 	public Zombie[] getZombies() {
 		return zombies;
 	}
+	
+	public static void printGarden() {
+		System.out.println("------------------");
+		for(int i = 0; i<5; i++)
+		{
+		    for(int j = 0; j<9; j++)
+		    {
+		        System.out.print(textGarden[i][j] + " ");
+		    }
+		    System.out.println();
+		}
+		System.out.println("------------------");
+	}
 
+	public static void main(String[] args) {
+		printGarden();
+	}
 
 }

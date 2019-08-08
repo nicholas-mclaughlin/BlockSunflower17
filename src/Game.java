@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 public class Game {
 	
 	private Player player;
+	static String[][] theGarden = new String[5][10];
 	
 	/**
 	 *  gardenPlots is a 2D array of string that contains the string of "<row>,<column>"
@@ -109,7 +110,7 @@ public class Game {
 	} */
 	
 	public String[][] gardenPlotString() {
-		String[][] theGarden = new String[5][10];
+		
 		for (int row = 0; row < 5; row++) {
 			for (int column = 0; column < 10; column++) {
 				theGarden[row][column] = getCharacter(row, column).getType();
@@ -117,4 +118,43 @@ public class Game {
 		}
 		return theGarden;
 	}
+	
+	public char[][] gardenPlotChar(){
+		char[][] theGarden = new char[5][10];
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 10; column++) {
+				theGarden[row][column] = getCharacter(row, column).getFirstChar();
+			}
+		}
+		return theGarden;
+		
+	}
+	public void printGardenPlotString() {
+		String[][] textGarden = gardenPlotString();
+		System.out.println("---------------------------------------");
+		for(int i = 0; i<5; i++)
+		{
+		    for(int j = 0; j<9; j++)
+		    {
+		        System.out.print(textGarden[i][j] + " ");
+		    }
+		    System.out.println();
+		}
+		System.out.println("---------------------------------------");
+	}
+	public void printGardenPlotChar() {
+		char[][] textGarden = gardenPlotChar();
+		System.out.println("---------------------");
+		for(int i = 0; i<5; i++)
+		{
+		    for(int j = 0; j<9; j++)
+		    {
+		        System.out.print(textGarden[i][j] + " ");
+		    }
+		    System.out.println();
+		}
+		System.out.println("----------------------");
+	}
+	
+	
 }
