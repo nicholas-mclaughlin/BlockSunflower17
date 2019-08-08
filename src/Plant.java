@@ -6,6 +6,7 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	
+	//constructor
 	public Plant(Plant aPlant) {
 		super(aPlant);
 		this.price = aPlant.price;
@@ -19,6 +20,7 @@ public class Plant extends GameCharacter{
 		this.frequency = frequency;
 	}
 	
+	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant) {
 		super(typeOfPlant);
 		if (typeOfPlant == "PeaShooter") {
@@ -69,6 +71,7 @@ public class Plant extends GameCharacter{
 		}
 	}
 	
+	//sets row of plant with reference to default gardenPlots
 	public void setRow(Game aGame, String coordinate) {
 		int theRow = 0;
 		for (int row = 0; row < 5; row++) {
@@ -81,6 +84,7 @@ public class Plant extends GameCharacter{
 		} this.row = theRow;
 	}
 	
+	//sets column of plant with reference to default gardenPlots
 	public void setColumn(Game aGame, String coordinate) {
 		int theColumn = 0;
 		for (int row = 0; row < 5; row++) {

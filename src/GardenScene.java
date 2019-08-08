@@ -26,8 +26,7 @@ import javafx.scene.text.Font;
 //import logic.Sun;
 
 /**
- * GardenScene class is an extension of BaseScene.
- * It is the second scene to appear after the 'start' button
+ * GardenScene is the second scene to appear after the 'start' button
  * is clicked on the first scene (Menu class).
  *
  */
@@ -44,46 +43,30 @@ public class GardenScene extends BaseScene {
 	private final int WIDTH = 720;
 	private int levelNum;
 	public static Button sunCounter = new Button();
-	/**
-	 * This root will serve as the root of the plant and gardenplot buttons and
-	 * as well as the background image. 
-	 * It is static to be able to be able to update the fullImage when plants are planted. 
-	 */
+	private static MediaPlayer mediaPlayer;
+
 	static StackPane root = new StackPane();
-	/**
-	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere. 
-	 * It is static so it can be changed, adding the suns and plant image gifs, through the garden button event handlers.
-	 */
 	public static Pane fullImage = new Pane(root);
 
-	/**
-	 * GardenScene constructors. This passes a session to the parent (BaseScene).
-	 * @param aSession	session to be passed
-	 */
+	//constructor
 	public GardenScene(Session aSession, int levelNum) {
 		super(aSession);
 		this.levelNum = levelNum;
 	}
 
-	/**
-	 * Override abstract parent's (BaseScene) method to setup scene
-	 * (actual drawing in window).
-	 */
+	//setup actual drawing in window
 	@Override
 	public void setup() throws Exception{
 
+	//initialize music in-game
 	String grasswalk = "MenuImages//grasswalk.mp3";
 	Media hit = new Media(new File(grasswalk).toURI().toString());
-	MediaPlayer mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer = new MediaPlayer(hit);
 	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	mediaPlayer.play();
 
 
-	/**
-	 * Importing the garden image and setting its size to fit the buttons and scene.
-	 * 1275 are the length of pixels a bit bigger than the window.	
-	 * 800 are the pixels are the height of pixels a bit bigger than the window.
-	 */
+	//create garden image and garden image size to fit the buttons and scene
 	ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
 	Garden.setFitHeight(800);
 	Garden.setFitWidth(1275);
@@ -98,21 +81,9 @@ public class GardenScene extends BaseScene {
 	GameCharacter[][] gardenPlot = new GameCharacter[5][9];
 	Game game = new Game(player, gardenPlot);
 
-	/**
-	 * Setting up the stacks in the stackpane/root
-	 * Garden (image) is the first stack so it wouldn't interfere with clickable buttons in front.
-	 * gardenButtons is a node that takes a player and a game as a parameter.
-	 * gardenButtons is where the user interacts with the window to play
-	 * the game.
-	 */
-	root.getChildren().add(Garden);
-	root.getChildren().add(gardenButtons(game.getPlayer(), game));
-
-	/*//creating the sun and for it to appear randomly on screen
-	ImageView sunGIF = new ImageView(new Image(new FileInputStream("sun.gif")));
-	Button sunGif = new Button("", sunGIF);
-	sunGif.setStyle("-fx-background-color: transparent;");
-	*/
+	//setup stacks in stackpane
+	root.getChildren().add(Garden); //first stack
+	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
 	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
@@ -138,25 +109,20 @@ public class GardenScene extends BaseScene {
 			sunButton.setLayoutX(generateRandomX());
 			sunButton.setLayoutY(generateRandomY());
 			//Increases the time so all suns don't appear at the same time.
-			//The time between each sun appearance is 5 seconds. 
+			//The time between each sun appearance is 5 seconds.
 			timeBetweenSuns +=5000;
 		}
 
-	/**
-	 * Set and display scene
-	 * setScene(Scene) and display() are methods from BaseScene class
-	 */
-	Level level = new Level(this.levelNum); //Can be Level1, Level2, or Level3
+	//level of the game (1, 2, or 3)
+	Level level = new Level(this.levelNum);
 	int counter = 0;
 	for (Zombie z : level.getZombies()) {
 		fullImage.getChildren().add(z.newZombieImage());
-		z.zombieTracker();
+		z.zombieTracker(game);
 	}
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-
-
 	}
 
 	//creates random X and Y positions for the suns to appear in and returns these values
@@ -169,13 +135,7 @@ public class GardenScene extends BaseScene {
 			return randomX;
 		}
 
-		/**
-		 * Creates the sun counter as static to be able to call .setText() on it and update the money 
-		 * with aPlayer.getMoney()
-		 * @param Player	aPlayer is the player of the game 
-		 * @return returns the sunCounter
-		 * @throws Exception
-		 */
+		//creates the sunCounter as static to be able to use .setText and change the money displayed
 		public static Button getSunCounter(Player aPlayer) throws Exception {
 			sunCounter.setText("  " + aPlayer.getMoney());
 			sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
@@ -196,25 +156,13 @@ public class GardenScene extends BaseScene {
 	 */
 	public Node gardenButtons(Player aPlayer, Game aGame) throws Exception{
 
-		/**
-		 * This root is the inner root within the scene.
-		 * It is part of the only node within the scene and creates a VBox.
-		 */
+		//root is the inner root within the scene.
 		VBox root = new VBox();
 
-		/**
-		 * This box will be the layout manager for the plant buttons.
-		 * The plant buttons will be the first row in the root/VBox.
-		 */
+		//box will be the layout manager for the plant buttons.
 		HBox box = new HBox();
 
-		/**
-		 * Loop created instead of manually creating buttons.
-		 * It will import and add each plant button up to 5 times
-		 * Plants will be labeled as p0 to p4 and the respective plants in the eventhandlers are setup to
-		 * match the order of the buttons.
-		 * Eventhandlers will also be attached to these buttons.
-		 */
+		//create plant buttons and attach handlers
 		for (int column = 0; column <5; ++column){
 			ImageView plant = new ImageView(new Image(new FileInputStream("PlantImages//Plant"+ column + ".jpg")));
 			Button plantbuttons = new Button("p"+ column, plant);
@@ -233,27 +181,15 @@ public class GardenScene extends BaseScene {
 		//adds the sunCounter to the plant buttons box
 		box.getChildren().add(getSunCounter(aPlayer));
 
-		/**
-		 * Create an empty array for the gardenplot buttons
-		 * @param MAXSLOTS	refers to the constant variable MAXSLOTS which
-		 * 					gives the max amount of buttons for the grid.
-		 */
+		//create empty array for garden buttons
 		gardenButtons = new Button[MAXSLOTS];
 
-		/**
-		 * This grid will be the layout manager for the gardenplots aligned to adjust and fir the window.
-		 * This will be the second row of the root/VBox.
-		 */
+		// create layout manager for the gardenplots
 		GridPane grid = new GridPane();
 		grid.setPadding(new Insets(65, 60, 32, 0));
 		grid.setAlignment(Pos.BOTTOM_RIGHT);
 
-		/**
-		 * Loop created instead of manually creating 45 buttons.
-		 * It labels and add every button into a nestled loop to have
-		 * the garden buttons in the gui fixed to preferred size and font (of labels).
-		 * Eventhandlers will be attached to every button within the loop.
-		 */
+		//create garden plot buttons and attach handlers
 		int button = 0;
 		for (int row = 0; row < 5; ++row) {
 			for (int column = 0; column < 9; ++column) {
@@ -269,7 +205,7 @@ public class GardenScene extends BaseScene {
 				++button;
 			}
 		}
-		//add firstrow (plantwidgets) and secondrow (gardenplot) to root
+		//add firstrow (plant buttons) and secondrow (gardenplot buttons) to root
 		root.getChildren().add(box);
 		root.getChildren().add(grid);
 
