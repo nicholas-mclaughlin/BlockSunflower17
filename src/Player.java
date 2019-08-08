@@ -9,7 +9,6 @@ public class Player {
 	 * The default start amount of money is 50 suns.
 	 * plantHeld will keep track of which plant did the player pick
 	 */
-//	private String name;
 	private int money = 50;
 	private String plantHeld;
 	
@@ -46,24 +45,14 @@ public class Player {
 		this.plantHeld = aPlant;
 	}
 	
+	//increases the money by 25 because each sun is worth 25 suns
 	public void increaseMoney() {
 		this.money += 25;
 	}
 	
+	//decreases the money by the amount which is the price
 	public void decreaseMoney(int amount) {
-		
-/**		KEEP IN MIND: price have to be lower or equal to your money
- * 		so somewhere in the eventhandlers for plant buttons must have:
-*		if (Player.decreaseMoney(some amount) >= 0) {
-*			<some method to buy the plant that also>
-*		}
-*/		this.money -= amount;
+		this.money -= amount;
 	}
 	
-/**	public Plants buyPlant(Plants aPlant) {
-*		if (this.money >= Plants.getPrice()) {
-*			
-*		}
-*	}
-*/	
 }

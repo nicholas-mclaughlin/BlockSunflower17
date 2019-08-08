@@ -47,6 +47,7 @@ public class SunflowerSunHandler implements EventHandler<ActionEvent> {
 		sunCounter.setPrefSize(170,  70);
 		sunCounter.setFont(new Font("Arial Bold", 38));
 		
+		//disables the sun on the sunflower and makes it invisible until 6 seconds later when the sun appears again
 		source.setDisable(true);
 		source.setStyle("-fx-opacity: 0.0;");
 		Timer timer = new Timer();
@@ -56,6 +57,7 @@ public class SunflowerSunHandler implements EventHandler<ActionEvent> {
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
+		                	//the sun is no longer disabled and as originally created, the background of the sun button is transparent
 		                	source.setDisable(false);
 		                	source.setStyle("-fx-background-color: transparent;");
 		                }

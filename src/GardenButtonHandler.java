@@ -29,8 +29,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	//Give access to the session's game and the game's player.
 	private Player player;
 	private Game game;
+	//Creates the positions of the button that is clicked.
 	public double xPosition;
 	public double yPosition;
+	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
@@ -106,7 +108,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			                @Override
 			                public void run() {
 			                	GardenScene.fullImage.getChildren().add(sunButton);	
-			                	//code to move the bullet goes here
 			                }
 			            });
 
@@ -131,6 +132,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
 			//making bullet appear afterwards every 1000 milliseconds
@@ -189,7 +191,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			//Setting the position of the frozen pea bullet so it starts at the frozen peashooter's mouth.
 			frozenBullet.setLayoutX(xPosition + 60);
 			frozenBullet.setLayoutY(yPosition + 165);
 			//making bullet appear afterwards every 1000 milliseconds
@@ -212,13 +214,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		
 		player.setPlantHeld("");
 		
-		//adding plant image to fullImage pane
+		//adding plant image to fullImage pane, along with the correct position
 		plantImage.setLayoutX(xPosition + 25);
 		plantImage.setLayoutY(yPosition + 160);
 		GardenScene.fullImage.getChildren().add(plantImage);
-		
-		//ISSUE HERE: button is either completely transparent or can see button background too
-		//source.setStyle("-fx-opacity: 0.5;");
 
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(game.gardenPlotString()));

@@ -35,9 +35,9 @@ public class Menu extends BaseScene {
 		 * Create a start button that will launch the second scene (gardenScene)
 		 * once clicked.
 		 */
-		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.PNG"))));
-		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.PNG"))));
-		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.PNG"))));
+		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.png"))));
+		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.png"))));
+		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.png"))));
 		level1.setPrefSize(550, 100);
 		level2.setPrefSize(550, 100);
 		level3.setPrefSize(550, 100);
@@ -60,7 +60,7 @@ public class Menu extends BaseScene {
 		level2.setOnAction(new LevelHandler(getSession(), 2));
 		level3.setOnAction(new LevelHandler(getSession(), 3));
 		
-		ImageView background = new ImageView(new Image(new FileInputStream("MenuImages//PvZStreet.JPEG")));
+		ImageView background = new ImageView(new Image(new FileInputStream("MenuImages//PvZStreet.jpeg")));
 		background.setFitHeight(720);
 		background.setFitWidth(1220);
 		

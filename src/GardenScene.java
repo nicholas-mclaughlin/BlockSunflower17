@@ -46,11 +46,13 @@ public class GardenScene extends BaseScene {
 	public static Button sunCounter = new Button();
 	/**
 	 * This root will serve as the root of the plant and gardenplot buttons and
-	 * as well as the background image.
+	 * as well as the background image. 
+	 * It is static to be able to be able to update the fullImage when plants are planted. 
 	 */
 	static StackPane root = new StackPane();
 	/**
-	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere
+	 * Using a pane as a root since it allows the zombies and unimplemented suns to be positioned anywhere. 
+	 * It is static so it can be changed, adding the suns and plant image gifs, through the garden button event handlers.
 	 */
 	public static Pane fullImage = new Pane(root);
 
@@ -131,10 +133,11 @@ public class GardenScene extends BaseScene {
 
 			        }
 			    }, timeBetweenSuns);
-			//sets the random position of suns
+			//Sets the random position of suns by calling the randomizing methods
 			sunButton.setLayoutX(generateRandomX());
 			sunButton.setLayoutY(generateRandomY());
-			//increases the time so all suns don't appear around the same time
+			//Increases the time so all suns don't appear at the same time.
+			//The time between each sun appearance is 5 seconds. 
 			timeBetweenSuns +=5000;
 		}
 
@@ -155,7 +158,7 @@ public class GardenScene extends BaseScene {
 
 	}
 
-	//creates random X and Y positions for the suns to appear in
+	//creates random X and Y positions for the suns to appear in and returns these values
 		public int generateRandomY() {
 			int randomY = (int)(Math.random() * (700));
 			return randomY;
@@ -165,7 +168,13 @@ public class GardenScene extends BaseScene {
 			return randomX;
 		}
 
-		//creates the sunCounter as static to be able to use .setText and change the money displayed
+		/**
+		 * Creates the sun counter as static to be able to call .setText() on it and update the money 
+		 * with aPlayer.getMoney()
+		 * @param Player	aPlayer is the player of the game 
+		 * @return returns the sunCounter
+		 * @throws Exception
+		 */
 		public static Button getSunCounter(Player aPlayer) throws Exception {
 			sunCounter.setText("  " + aPlayer.getMoney());
 			sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");

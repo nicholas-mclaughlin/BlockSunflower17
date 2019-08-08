@@ -24,15 +24,15 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
-		//disables the sun button and makes it invisible
 		Button source = (Button) event.getSource();
+		//disables the sun button and makes it invisible
 		source.setDisable(true);
 		source.setStyle("-fx-opacity: 0.0;");
 		
 		//increases the money by 25, the value of the suns
 		player.increaseMoney();
 		
-		//creates the button 
+		//creates the sun counter 
 		Button sunCounter = null;
 		try {
 			sunCounter = GardenScene.getSunCounter(player);
@@ -40,7 +40,7 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//sets the button style and increases the money
+		//sets the sun counter style and increases the money
 		sunCounter.setText("  " + player.getMoney());
 		sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
 		sunCounter.setPrefSize(170,  70);
