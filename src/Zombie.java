@@ -114,7 +114,7 @@ public class Zombie extends GameCharacter{
 	public int getRow() {
 		return row;
 	}
-	//if it is an invalid negative number set speed to 45000.0 
+	//if it is an invalid negative number set speed to 45000.0
 	public void setSpeed(double d) {
 		if (d<0) {
 			this.speed = 50000.0;
@@ -185,7 +185,7 @@ public class Zombie extends GameCharacter{
 	      translateTransition.play();
 	      return zombieImage;
 	}
-	
+
 	public ImageView zombieStops() {
 		 //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
@@ -237,11 +237,11 @@ public class Zombie extends GameCharacter{
 	public String toString() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
-	
+
 	public boolean zombieOnRow() {
 		return position <= 1250;
 	}
-	
+
 	public boolean zombieOnGarden() {
 		return position <= 1251 && position >= 1248.5;
 	}
@@ -307,14 +307,13 @@ public class Zombie extends GameCharacter{
 			return 0;
 		}
 	}
-	
+
 	public boolean checkForPlant(Game aGame) {
-		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") ||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter")); 
+		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") ||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"));
 	}
-	
 
 	public void zombieTracker(Game aGame) throws FileNotFoundException {
-		
+
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
 		double gardenLength = position2 - houseLength;
@@ -323,19 +322,19 @@ public class Zombie extends GameCharacter{
 		t.schedule(new TimerTask() {
 		            @Override
 		             public void run() {
-		           
+
 		            	if (checkForPlant(aGame) == true) { //Going to do something if plant and zombie collide
 		            		/*zombieStops();
 		            		GardenScene.fullImage.getChildren().remove(plantImage);
 		            		t.cancel(); */
-		            	}  
-		            	
-		            	 
+		            	}
+
+
 		            	position -= gardenLength / j;
-		            	
+
 		             }
 		 }, delay, updateTime);
-	} 
+	}
 
-	
+
 }
