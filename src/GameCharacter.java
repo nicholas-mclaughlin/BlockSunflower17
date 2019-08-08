@@ -1,6 +1,6 @@
 //package logic;
 
-//Class that has all the attributes that all character will inherit from
+// This class has all the attributes the Plants and Zombies will inherit from.
 public class GameCharacter {
 	private String type = " "; //The type of character ie. PeaShooter
 	private int health; //Health of character
