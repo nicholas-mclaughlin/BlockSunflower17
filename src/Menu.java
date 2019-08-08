@@ -9,13 +9,13 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 
 // Menu is the first scene to appear once the application is run.
 public class Menu extends BaseScene {
 	
-	private static MediaPlayer mediaPlayer;
+	//private static MediaPlayer mediaPlayer;
 
 	//constructor
 	public Menu(Session aSession) {
@@ -27,12 +27,12 @@ public class Menu extends BaseScene {
 	public void setup() throws Exception {
 		
 		//initialize music (intro)
-		String grasswalk = "intro.mp3";
+/*		String grasswalk = "intro.mp3";
 		Media hit = new Media(new File(grasswalk).toURI().toString());
 		mediaPlayer = new MediaPlayer(hit);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
-		
+*/		
 		//Create level buttons that will launch the second scene (gardenScene)
 		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.png"))));
 		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.png"))));
