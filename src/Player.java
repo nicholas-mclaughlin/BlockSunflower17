@@ -10,7 +10,7 @@ public class Player {
 	 * plantHeld will keep track of which plant did the player pick
 	 */
 	private int money = 50;
-	private String plantHeld = null;
+	private String plantHeld = "";
 	
 	//constructor
 	public Player(int aMoney, String aPlant) {
@@ -37,7 +37,7 @@ public class Player {
 	 * @return	new String object of the type of plant
 	 */
 	public String getPlantHeld() {
-		return (this.plantHeld);
+		return new String(this.plantHeld);
 	}
 
 	//plantHeld setter

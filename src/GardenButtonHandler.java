@@ -56,11 +56,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
 		ImageView plantImage = null;
-		Plant plant = null;
+
+		Plant plant = new Plant(player.getPlantHeld());
+		plant.setRow(this.game, source.getText());
+		plant.setColumn(this.game, source.getText());
+		System.out.println(player.getPlantHeld());
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
-
+/*
 		//only runs player.getPlantHeld() and adds it to the game grid if there is a plant being held
 		if (player.getPlantHeld() == null){
 			player.setPlantHeld("");
@@ -69,7 +73,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			plant.setRow(this.game, source.getText());
 			plant.setColumn(this.game, source.getText());
 			System.out.println(player.getPlantHeld());
-		}
+		}*/
 
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
