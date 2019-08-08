@@ -43,7 +43,8 @@ public class GardenScene extends BaseScene {
 	private final int WIDTH = 720;
 	private int levelNum;
 	public static Button sunCounter = new Button();
-	
+	private static MediaPlayer mediaPlayer;
+
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
 
@@ -62,7 +63,8 @@ public class GardenScene extends BaseScene {
 	//initialize music in-game
 	String grasswalk = "MenuImages//grasswalk.mp3";
 	Media hit = new Media(new File(grasswalk).toURI().toString());
-	MediaPlayer mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	mediaPlayer.play();
 
 
@@ -109,7 +111,7 @@ public class GardenScene extends BaseScene {
 			sunButton.setLayoutX(generateRandomX());
 			sunButton.setLayoutY(generateRandomY());
 			//Increases the time so all suns don't appear at the same time.
-			//The time between each sun appearance is 5 seconds. 
+			//The time between each sun appearance is 5 seconds.
 			timeBetweenSuns +=5000;
 		}
 

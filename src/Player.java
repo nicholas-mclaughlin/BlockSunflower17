@@ -10,7 +10,7 @@ public class Player {
 	 * plantHeld will keep track of which plant did the player pick
 	 */
 	private int money = 50;
-	private String plantHeld;
+	private String plantHeld = "";
 	
 	//constructor
 	public Player(int aMoney, String aPlant) {

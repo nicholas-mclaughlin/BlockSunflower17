@@ -38,6 +38,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
 
+	public static Button errorMessage = null;
+
 	//constructor
 	public GardenButtonHandler(Player aPlayer, Game aGame) {
 		this.player = aPlayer;
@@ -47,22 +49,32 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	/**
 	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
 	 * to clicking a garden plot. It replaces the player's plantHeld back to default ("") at the end of the method.
-	 * 
+	 *
 	 * @param ActionEvent	event is the case when a (garden plot) button is clicked by the user.
 	 */
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
 		ImageView plantImage = null;
+
 		Plant plant = new Plant(player.getPlantHeld());
 		plant.setRow(this.game, source.getText());
 		plant.setColumn(this.game, source.getText());
 		System.out.println(player.getPlantHeld());
-		
-		//getting button clicked position to know where to place suns or peas 
+		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
-		
+/*
+		//only runs player.getPlantHeld() and adds it to the game grid if there is a plant being held
+		if (player.getPlantHeld() == null){
+			player.setPlantHeld("");
+		} else if (player.getPlantHeld() != null){
+			plant = new Plant(player.getPlantHeld());
+			plant.setRow(this.game, source.getText());
+			plant.setColumn(this.game, source.getText());
+			System.out.println(player.getPlantHeld());
+		}*/
+
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
 		 * with an existing type of plant in the game (type String), appropriate image will be placed
@@ -70,7 +82,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 *
 		 * Row and column are determined by using the (invisible) text on the buttons and comparing
 		 * its string to a similar string in the 2D array list of the garden plot coordinates.
-		 * 
+		 *
 		 */
 		if (plant.getType().equals("Sunflower")) {
 			try {
@@ -79,8 +91,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);			
-			
+			source.setDisable(true);
+
 			//placing the sun gifs which is a sunButton
 			sunButton = null;
 			try {
@@ -100,13 +112,13 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			            Platform.runLater(new Runnable() {
 			                @Override
 			                public void run() {
-			                	GardenScene.fullImage.getChildren().add(sunButton);	
+			                	GardenScene.fullImage.getChildren().add(sunButton);
 			                }
 			            });
 
 			        }
 			    }, 6000);
-				
+
 		} else if (plant.getType().equals("PeaShooter")) {
 			try {
 				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
@@ -115,7 +127,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			source.setDisable(true);
-			
+
 			//creating pea bullet image
 			try {
 				peaBullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
@@ -125,7 +137,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
-			
+
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
@@ -135,8 +147,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.setCycleCount(1000);
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
-			        			GardenScene.fullImage.getChildren().add(peaBullet);	
-			        			
+			        			GardenScene.fullImage.getChildren().add(peaBullet);
+
 
 		} else if (plant.getType().equals("Wallnut")) {
 			try {
@@ -164,7 +176,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			source.setDisable(true);
-			
+
 			//creating frozen pea bullet image
 			try {
 				frozenBullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
@@ -183,17 +195,25 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.setCycleCount(1000);
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
-  			GardenScene.fullImage.getChildren().add(frozenBullet);	
-			
-		}
-		
-		player.setPlantHeld("");
-		
-		//adding plant image to fullImage pane, along with the correct position
-		plantImage.setLayoutX(xPosition + 25);
-		plantImage.setLayoutY(yPosition + 160);
-		GardenScene.fullImage.getChildren().add(plantImage);
+  			GardenScene.fullImage.getChildren().add(frozenBullet);
 
+		} else if (player.getPlantHeld().equals("")){
+			//if there was no plant being held, it was set to blank thus an error message is created
+			errorMessage = new Button("Buy a plant first!");
+			errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
+			errorMessage.setLayoutX(710);
+			errorMessage.setLayoutY(3);
+			GardenScene.fullImage.getChildren().add(errorMessage);
+		}
+
+		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
+		 if (plantImage != null) {
+			//adding plant image to fullImage pane, along with the correct position
+			plantImage.setLayoutX(xPosition + 25);
+			plantImage.setLayoutY(yPosition + 160);
+			GardenScene.fullImage.getChildren().add(plantImage);
+		 }
+		player.setPlantHeld("");
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
