@@ -238,6 +238,9 @@ public class Zombie extends GameCharacter{
 	public String toString() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
+	
+	
+	
 
 	public boolean zombieOnRow() {
 		return position <= 1250;

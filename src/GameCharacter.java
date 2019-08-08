@@ -62,6 +62,12 @@ public class GameCharacter {
 	public void loseHealth(int damage) {
 		health -= damage;
 	}
+	
+	static void deadCharacter(GameCharacter c) {
+		if (c.health <= 0) {
+			c = null;
+		}
+	}
 
 
 }
