@@ -14,6 +14,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 //import logic.Plant;
 //import logic.Player;
 //import logic.Sun;
@@ -39,6 +41,14 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
 	static ImageView plantImage = null;
+	private Rectangle bulletRect;
+	private Rectangle fBulletRect;
+	
+	
+	
+	public Rectangle getBounds(ImageView z) {
+		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
+	}
 
 	public static Button errorMessage = null;
 
@@ -158,6 +168,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
 								
+			bulletRect = getBounds(peaBullet);
+			bulletRect.setStroke(Color.AQUA);
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
@@ -169,7 +181,18 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);
 			        			//trackBullet();
-
+			        			 
+			        			
+			        			TranslateTransition translateTransition2 = new TranslateTransition();
+				          	      //How long the animation will take
+				          	      translateTransition2.setDuration(Duration.millis(3000));
+				          	      translateTransition2.setNode(bulletRect);
+				          	      //The displacement of the animation
+				          	      translateTransition2.setByX(bulletEndPosition);
+				          	      translateTransition2.setCycleCount(1000);
+				          	      translateTransition2.setAutoReverse(false);
+				          	      translateTransition2.play(); 
+				          	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (plant.getType().equals("Wallnut")) {
 			try {
@@ -204,9 +227,13 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			fBulletRect = getBounds(frozenBullet);
+			fBulletRect.setStroke(Color.AQUA);
 			//Setting the position of the frozen pea bullet so it starts at the frozen peashooter's mouth.
 			frozenBullet.setLayoutX(xPosition + 60);
 			frozenBullet.setLayoutY(yPosition + 165);
+			fBulletRect = getBounds(frozenBullet);
+			fBulletRect.setStroke(Color.AQUA);
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -218,6 +245,16 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.play();
   			GardenScene.fullImage.getChildren().add(frozenBullet);
   			//trackBullet();
+  			TranslateTransition translateTransition2 = new TranslateTransition();
+    	      //How long the animation will take
+    	      translateTransition2.setDuration(Duration.millis(3000));
+    	      translateTransition2.setNode(fBulletRect);
+    	      //The displacement of the animation
+    	      translateTransition2.setByX(bulletEndPosition);
+    	      translateTransition2.setCycleCount(1000);
+    	      translateTransition2.setAutoReverse(false);
+    	      translateTransition2.play(); 
+    	    GardenScene.fullImage.getChildren().add(fBulletRect);
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
@@ -247,7 +284,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	} */
 	
 	public void damageZombie(Zombie zombie) {
-		if (intersects(zombie)) {
+		if (bulletRect.intersects(zombie.newRectangle().getBoundsInParent())) {
+			zombie.loseHealth(30);
+		}
+		else if (fBulletRect.intersects(zombie.newRectangle().getBoundsInParent())) {
 			zombie.loseHealth(30);
 		}
 	}

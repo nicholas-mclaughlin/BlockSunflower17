@@ -28,10 +28,10 @@ public class Zombie extends GameCharacter{
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
 	private Rectangle r = new Rectangle(80, 100);
-	
+	private Rectangle rect = getBounds(zombieImage);
 	
 	public Rectangle getBounds(ImageView z) {
-		return new Rectangle(80, 100, z.getLayoutX(), z.getLayoutY());
+		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 	
 	/**
@@ -74,31 +74,31 @@ public class Zombie extends GameCharacter{
 			setRow(3);
 		}
 		
-		
+		rect = getBounds(zombieImage);
 	      zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
-	      r.setX(position);
+	      rect.setX(position);
 	      if (row == 1) {
 	    	  zombieImage.setY(215);
-	    	  r.setY(215);
+	    	  rect.setY(215);
 	      }
 	      else if (row == 2) {
 	    	  zombieImage.setY(310);
-	    	  r.setY(310);
+	    	  rect.setY(310);
 	      }
 
 	      else if (row == 3){
 	    	  zombieImage.setY(410);
-	    	  r.setY(410);
+	    	  rect.setY(410);
 	      }
 	      else if (row == 4) {
 	    	  zombieImage.setY(525);
-	    	  r.setY(525);
+	    	  rect.setY(525);
 	      }
 
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
-	    	  r.setY(630);
+	    	  rect.setY(630);
 	    	  
 	      }
 	    //Size of the zombie
@@ -109,7 +109,7 @@ public class Zombie extends GameCharacter{
 	      zombieImage.setPreserveRatio(true);
 	      
 	      Rectangle rect = getBounds(zombieImage);
-	      rect.setFill(Color.AQUA);
+	      rect.setStroke(Color.TRANSPARENT);
 	      //Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
@@ -229,7 +229,50 @@ public class Zombie extends GameCharacter{
 	      return zombieImage;
 	}
 	
-	
+	public Rectangle newRectangle() {
+		rect = getBounds(zombieImage);
+	      rect.setX(position);
+	      if (row == 1) {
+	    	  
+	    	  rect.setY(215);
+	      }
+	      else if (row == 2) {
+	    	  
+	    	  rect.setY(310);
+	      }
+
+	      else if (row == 3){
+	    	  
+	    	  rect.setY(410);
+	      }
+	      else if (row == 4) {
+	    	  
+	    	  rect.setY(525);
+	      }
+
+	      else if (row == 5) {
+	    	  
+	    	  rect.setY(630);
+	    	  
+	      }
+	  
+
+	     
+	      
+	      
+	      rect.setStroke(Color.TRANSPARENT);
+	     
+	      TranslateTransition translateTransition2 = new TranslateTransition();
+	      //How long the animation will take
+	      translateTransition2.setDuration(Duration.millis(speed));
+	      translateTransition2.setNode(rect);
+	      //The displacement of the animation
+	      translateTransition2.setByX(-position + 250);
+	      translateTransition2.setCycleCount(1);
+	      translateTransition2.setAutoReverse(false);
+	      translateTransition2.play();
+	      return rect;
+	}
 
 	public ImageView zombieStops() {
 		 //Sets the image at the very right side of the garden
@@ -278,8 +321,8 @@ public class Zombie extends GameCharacter{
 		this.row = row;
 	}
 
-	@Override
-	public String toString() {
+	
+	public String toString2() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
 	
@@ -408,7 +451,8 @@ public class Zombie extends GameCharacter{
 
 
 		            	position -= gardenLength / j;
-		            	System.out.println(toString());
+		            	
+		            	System.out.println(toString2());
 		             }
 		 }, delay, updateTime);
 	}
