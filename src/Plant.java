@@ -105,9 +105,6 @@ public class Plant extends GameCharacter{
 		return row;
 	}
 	
-	//Peashooter checks if there is a zombie on the garden to shoot at
-	public boolean startShooting(Zombie zombie) {
-		return row == zombie.getRow() && zombie.zombieOnRow();
-	}
+	
 	
 }
