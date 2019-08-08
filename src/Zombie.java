@@ -11,9 +11,11 @@ import javafx.util.Duration;
 
 public class Zombie extends GameCharacter{
 	private double speed = 50000; //How many milliseconds it'll take for the zombie to go across the garden
+	private double speed2 = 50000;
 	private int row; //Which row the zombie will start walking down from
 	private double position = 1500; //1250 is the very right side of the garden
 	private double position2 = 1500;
+	private int houseLength = 250;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
 
 
@@ -115,7 +117,7 @@ public class Zombie extends GameCharacter{
 	//if it is an invalid negative number set speed to 45000.0 
 	public void setSpeed(double d) {
 		if (d<0) {
-			this.speed = 45000.0;
+			this.speed = 50000.0;
 		} else {
 			this.speed = d;
 		}
@@ -183,7 +185,46 @@ public class Zombie extends GameCharacter{
 	      translateTransition.play();
 	      return zombieImage;
 	}
+	
+	public ImageView zombieStops() {
+		 //Sets the image at the very right side of the garden
+	      //Sets the y coordinate of the image according to the row itll be in
+	      if (row == 1) {
+	    	  zombieImage.setY(215);
+	      }
+	      else if (row == 2) {
+	    	  zombieImage.setY(310);
+	      }
 
+	      else if (row == 3){
+	    	  zombieImage.setY(410);
+	      }
+	      else if (row == 4) {
+	    	  zombieImage.setY(525);
+	      }
+
+	      else if (row == 5) {
+	    	  zombieImage.setY(630);
+	      }
+	    //Size of the zombie
+	      zombieImage.setFitHeight(100);
+	      zombieImage.setFitWidth(130);
+
+	      //Setting the preserve ratio of the image view
+	      zombieImage.setPreserveRatio(true);
+
+	      //Creates the animation of the zombie
+	      TranslateTransition translateTransition = new TranslateTransition();
+	      //How long the animation will take
+	      translateTransition.setDuration(Duration.millis(speed));
+	      translateTransition.setNode(zombieImage);
+	      //The displacement of the animation
+	      translateTransition.setByX(10);
+	      translateTransition.setCycleCount(0);
+	      translateTransition.setAutoReverse(false);
+	      translateTransition.play();
+	      return zombieImage;
+	}
 	public void setZombieImage(ImageView zombieImage) {
 		this.zombieImage = zombieImage;
 	}
@@ -268,7 +309,7 @@ public class Zombie extends GameCharacter{
 	}
 	
 	public boolean checkForPlant(Game aGame) {
-		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")); 
+		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") ||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb") || aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter")); 
 	}
 	
 
@@ -276,7 +317,7 @@ public class Zombie extends GameCharacter{
 		
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
-		double gardenLength = position2 - 250;
+		double gardenLength = position2 - houseLength;
 		double j=  (speed / updateTime);
 		Timer t = new Timer();
 		t.schedule(new TimerTask() {
@@ -319,7 +360,9 @@ public class Zombie extends GameCharacter{
 		            		Level.printGarden();
 		            	} */
 		            	if (checkForPlant(aGame) == true) {
-		            		System.out.println("COLLISION");
+		            		zombieStops();
+		            		GardenScene.fullImage.getChildren().remove(aGame.plantImage);
+		            		t.cancel();
 		            	}  
 		            	
 		            	 

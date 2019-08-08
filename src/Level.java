@@ -12,20 +12,21 @@ public class Level {
 	public Level(int levelNumber) throws FileNotFoundException {
 		this.setLevelNum(levelNumber);
 		if (levelNumber == 1) {
-			zombies = new Zombie[1];
+			zombies = new Zombie[8];
 			getZombies()[0] = (new Zombie("Zombie", 4));
-			/*getZombies()[1] =  (new Zombie("Zombie", 3));
+			getZombies()[1] =  (new Zombie("Zombie", 3));
 			getZombies()[2] = (new Zombie("Cone Zombie",1));
 			getZombies()[3] = (new Zombie("Zombie", 2));
 			getZombies()[4] = (new Zombie("Flag Zombie", 4));
 			getZombies()[5] = (new Zombie("Zombie", 2));
 			getZombies()[6] = (new Zombie("Cone Zombie", 5));
-			getZombies()[7] = (new Zombie("Zombie", 3)); */
+			getZombies()[7] = (new Zombie("Zombie", 3)); 
 			int counter = 0;
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
-				counter += 200;
-		}}
+				counter += 200; 
+		} 
+		}
 		else if (levelNumber == 2) {
 			zombies  = new Zombie[11];
 			getZombies()[0] = (new Zombie("Zombie", 2));
