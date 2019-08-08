@@ -37,7 +37,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Button sunButton;
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
-	ImageView plantImage = null;
+	static ImageView plantImage = null;
 
 	public static Button errorMessage = null;
 
@@ -65,16 +65,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
-/*
-		//only runs player.getPlantHeld() and adds it to the game grid if there is a plant being held
-		if (player.getPlantHeld() == null){
-			player.setPlantHeld("");
-		} else if (player.getPlantHeld() != null){
-			plant = new Plant(player.getPlantHeld());
-			plant.setRow(this.game, source.getText());
-			plant.setColumn(this.game, source.getText());
-			System.out.println(player.getPlantHeld());
-		}*/
 
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
@@ -215,6 +205,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			plantImage.setLayoutY(yPosition + 160);
 			GardenScene.fullImage.getChildren().add(plantImage);
 		 }
+		 
+	
 		player.setPlantHeld("");
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
