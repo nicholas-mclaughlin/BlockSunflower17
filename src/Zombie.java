@@ -3,11 +3,18 @@ import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.scene.shape.*;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
 	private double speed = 50000; //How many milliseconds it'll take for the zombie to go across the garden
@@ -18,7 +25,15 @@ public class Zombie extends GameCharacter{
 	private int houseLength = 250;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
 	private int deathTime = 0;
-
+	private int IMAGEHEIGHT = 100;
+	private int IMAGEWIDTH = 130;
+	private Rectangle r = new Rectangle(80, 100);
+	
+	
+	public Rectangle getBounds(ImageView z) {
+		return new Rectangle(80, 100, z.getLayoutX(), z.getLayoutY());
+	}
+	
 	/**
 	 *
 	 * @param typeOfZombie
@@ -58,33 +73,43 @@ public class Zombie extends GameCharacter{
 		else {
 			setRow(3);
 		}
-
+		
+		
 	      zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
+	      r.setX(position);
 	      if (row == 1) {
 	    	  zombieImage.setY(215);
+	    	  r.setY(215);
 	      }
 	      else if (row == 2) {
 	    	  zombieImage.setY(310);
+	    	  r.setY(310);
 	      }
 
 	      else if (row == 3){
 	    	  zombieImage.setY(410);
+	    	  r.setY(410);
 	      }
 	      else if (row == 4) {
 	    	  zombieImage.setY(525);
+	    	  r.setY(525);
 	      }
 
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
+	    	  r.setY(630);
+	    	  
 	      }
 	    //Size of the zombie
-	      zombieImage.setFitHeight(100);
-	      zombieImage.setFitWidth(130);
+	      zombieImage.setFitHeight(IMAGEHEIGHT);
+	      zombieImage.setFitWidth(IMAGEWIDTH);
 
 	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
-
+	      
+	      Rectangle rect = getBounds(zombieImage);
+	      rect.setFill(Color.AQUA);
 	      //Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
@@ -95,6 +120,15 @@ public class Zombie extends GameCharacter{
 	      translateTransition.setCycleCount(1);
 	      translateTransition.setAutoReverse(false);
 	      translateTransition.play();
+	      TranslateTransition translateTransition2 = new TranslateTransition();
+	      //How long the animation will take
+	      translateTransition2.setDuration(Duration.millis(speed));
+	      translateTransition2.setNode(rect);
+	      //The displacement of the animation
+	      translateTransition2.setByX(-position + 250);
+	      translateTransition2.setCycleCount(1);
+	      translateTransition2.setAutoReverse(false);
+	      translateTransition2.play();
 	}
 
 	public Zombie(Zombie c) throws FileNotFoundException {
@@ -106,8 +140,16 @@ public class Zombie extends GameCharacter{
 		zombieImage = c.getZombieImage();
 	}
 
+	
+		public Rectangle getR() {
+		return r;
+	}
 
-		//Getters and setters
+	public void setR(Rectangle r) {
+		this.r = r;
+	}
+
+	//Getters and setters
 	public double getSpeed() {
 		return speed;
 	}
@@ -168,8 +210,8 @@ public class Zombie extends GameCharacter{
 	    	  zombieImage.setY(630);
 	      }
 	    //Size of the zombie
-	      zombieImage.setFitHeight(100);
-	      zombieImage.setFitWidth(130);
+	      zombieImage.setFitHeight(IMAGEHEIGHT);
+	      zombieImage.setFitWidth(IMAGEWIDTH);
 
 	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
@@ -186,6 +228,8 @@ public class Zombie extends GameCharacter{
 	      translateTransition.play();
 	      return zombieImage;
 	}
+	
+	
 
 	public ImageView zombieStops() {
 		 //Sets the image at the very right side of the garden
@@ -242,8 +286,8 @@ public class Zombie extends GameCharacter{
 	
 	
 
-	public boolean zombieOnRow() {
-		return position <= 1250;
+	public boolean zombieOnRow(int rowNum) {
+		return row == rowNum && position <= 1250;
 	}
 
 	public boolean zombieOnGarden() {
@@ -353,8 +397,9 @@ public class Zombie extends GameCharacter{
 		            		                public void run() {
 		            		                	GardenButtonHandler.plantImage.setStyle("-fx-opacity: 0.0;");
 		            		                }
+		            		                
 		            		            });
-
+		            		            
 		            		        }
 		            		    }, deathTime);
 		            		//GardenScene.fullImage.getChildren().remove(plantImage);
@@ -363,10 +408,11 @@ public class Zombie extends GameCharacter{
 
 
 		            	position -= gardenLength / j;
-
+		            	System.out.println(toString());
 		             }
 		 }, delay, updateTime);
 	}
+	
 
 
 }

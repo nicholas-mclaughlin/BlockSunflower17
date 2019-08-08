@@ -19,6 +19,8 @@ public class GameCharacter {
 		this.attack = aCharacter.attack;
 	}
 	
+	
+	
 	//Getters and setters
 	public int getHealth() {
 		return health;

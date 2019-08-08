@@ -49,7 +49,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	}
 
 
-	public void trackBullet() {
+	/*public void trackBullet() {
 		int intervals = 100;
 		double startPoint = xPosition - 250;
 		int numOfMoves = 3000/intervals;
@@ -62,7 +62,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		            	System.out.println(xPosition2);
 		             }
 		 }, 0, intervals);
-	}
+	} */
 
 
 
@@ -91,6 +91,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		xPosition = source.getLayoutX();
 		xPosition2 = source.getLayoutX();
 		yPosition = source.getLayoutY();
+		
 		int bulletEndPosition = (int) (1125 - xPosition);
 
 
@@ -156,7 +157,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
-
+								
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
@@ -167,7 +168,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);
-			        			trackBullet();
+			        			//trackBullet();
 
 
 		} else if (plant.getType().equals("Wallnut")) {
@@ -216,7 +217,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
   			GardenScene.fullImage.getChildren().add(frozenBullet);
-  			trackBullet();
+  			//trackBullet();
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
@@ -241,9 +242,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
 	
-	public boolean intersects(Zombie zombie) {
+	/*public boolean intersects(Zombie zombie) {
 		return xPosition == zombie.getPosition();
-	}
+	} */
 	
 	public void damageZombie(Zombie zombie) {
 		if (intersects(zombie)) {
