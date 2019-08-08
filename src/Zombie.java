@@ -409,16 +409,7 @@ public class Zombie extends GameCharacter{
 
 	public void zombieTracker(Game aGame) throws FileNotFoundException {
 
-		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
-			deathTime = 3000;
-		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
-			deathTime = 15000;
-		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")) 
-				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
-			deathTime = 8000;
-		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
-			deathTime = 6000;
-		}
+		
 
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
@@ -428,9 +419,22 @@ public class Zombie extends GameCharacter{
 		t.schedule(new TimerTask() {
 		            @Override
 		             public void run() {
-
+		            	
 		            	if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
 		            		zombieStops();
+		            	}
+		            		/*
+		            		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
+		            			deathTime = 3000;
+		            		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
+		            			deathTime = 15000;
+		            		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")) 
+		            				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
+		            			deathTime = 8000;
+		     
+		            		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
+		            			deathTime = 6000;
+		            		}
 		            		Timer timer = new Timer();
 		            		timer.schedule(new TimerTask() {
 		            		        @Override
@@ -438,7 +442,7 @@ public class Zombie extends GameCharacter{
 		            		            Platform.runLater(new Runnable() {
 		            		                @Override
 		            		                public void run() {
-		            		                	GardenButtonHandler.plantImage.setStyle("-fx-opacity: 0.0;");
+		            		                	//GardenButtonHandler.getPlantImage().setStyle("-fx-opacity: 0.0;");
 		            		                }
 		            		                
 		            		            });
@@ -449,7 +453,7 @@ public class Zombie extends GameCharacter{
 		            		//t.cancel(); 
 		            	}
 
-
+*/
 		            	position -= gardenLength / j;
 		            	
 		            	System.out.println(toString2());

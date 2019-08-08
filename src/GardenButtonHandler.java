@@ -34,12 +34,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Game game;
 	//Creates the positions of the button that is clicked.
 	public double xPosition;
-	public double xPosition2;
 	public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
+
 	static ImageView plantImage = null;
 	private Rectangle bulletRect;
 	private Rectangle fBulletRect;
@@ -49,6 +49,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
 	}
+
 
 	public static Button errorMessage = null;
 
@@ -74,14 +75,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 }, 0, intervals);
 	} */
 
-
-
-
-
-
-
-
-
 	/**
 	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
 	 * to clicking a garden plot. It replaces the player's plantHeld back to default ("") at the end of the method.
@@ -99,9 +92,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		System.out.println(player.getPlantHeld());
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
-		xPosition2 = source.getLayoutX();
 		yPosition = source.getLayoutY();
-		
+
 		int bulletEndPosition = (int) (1125 - xPosition);
 
 
@@ -167,15 +159,17 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
+
 								
 			bulletRect = getBounds(peaBullet);
 			bulletRect.setStroke(Color.AQUA);
+
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
 			          	      translateTransition.setNode(peaBullet);
 			          	      //The displacement of the animation
-			          	      translateTransition.setByX(bulletEndPosition);
+			          	      translateTransition.setByX(1125 - xPosition);
 			          	      translateTransition.setCycleCount(1000);
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
@@ -239,7 +233,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.setDuration(Duration.millis(3000));
     	      translateTransition.setNode(frozenBullet);
     	      //The displacement of the animation
-    	      translateTransition.setByX(bulletEndPosition);
+    	      translateTransition.setByX(1125 - xPosition);
     	      translateTransition.setCycleCount(1000);
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
@@ -273,16 +267,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			GardenScene.fullImage.getChildren().add(plantImage);
 		 }
 
-
 		player.setPlantHeld("");
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
-	
+
 	/*public boolean intersects(Zombie zombie) {
 		return xPosition == zombie.getPosition();
 	} */
-	
+
 	public void damageZombie(Zombie zombie) {
 		if (bulletRect.intersects(zombie.newRectangle().getBoundsInParent())) {
 			zombie.loseHealth(30);
