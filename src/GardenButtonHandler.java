@@ -40,7 +40,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
 
-	static ImageView plantImage = null;
+	ImageView plantImage = null;
 	static Rectangle bulletRect;
 	static Rectangle fBulletRect;
 	
