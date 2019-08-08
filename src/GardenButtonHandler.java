@@ -148,6 +148,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);
+			  
 
 
 		} else if (plant.getType().equals("Wallnut")) {
@@ -217,4 +218,5 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
+	
 }

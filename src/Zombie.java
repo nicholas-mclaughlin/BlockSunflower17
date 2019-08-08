@@ -268,9 +268,12 @@ public class Zombie extends GameCharacter{
 	}
 	
 	public boolean checkForPlant(Game aGame) {
-		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")); 
+		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower"))
+				|| (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut"))
+				|| (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter"))
+				|| (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))
+				|| (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")); 
 	}
-	
 
 	public void zombieTracker(Game aGame) throws FileNotFoundException {
 		
@@ -318,7 +321,7 @@ public class Zombie extends GameCharacter{
 		            		Level.textGarden[row][8] = getFirstChar();
 		            		Level.printGarden();
 		            	} */
-		            	if (checkForPlant(aGame) == true) {
+		            	if (checkForPlant(aGame)) {
 		            		System.out.println("COLLISION");
 		            	}  
 		            	
