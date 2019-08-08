@@ -1,7 +1,7 @@
 //package gui;
 //import drivers.Session;
 //import handlers.LevelHandler;
-import java.io.File;
+
 import java.io.FileInputStream;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
+//import java.io.File;
 
 // Menu is the first scene to appear once the application is run.
 public class Menu extends BaseScene {
@@ -26,7 +27,7 @@ public class Menu extends BaseScene {
 	//setup and display scene (actual drawing in window)
 	@Override
 	public void setup() throws Exception {
-
+/*
 		//initialize music (intro)
 		String grasswalk = "MenuImages//intro.mp3";
 		Media hit = new Media(new File(grasswalk).toURI().toString());

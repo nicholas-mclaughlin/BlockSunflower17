@@ -1,5 +1,5 @@
 //package logic;
-import java.io.FileNotFoundException;
+
 /**
  * The game class will be responsible for setting and getting the player and
  * keeping track of the changes the player makes to the garden plot.
