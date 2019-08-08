@@ -230,7 +230,7 @@ public class Zombie extends GameCharacter{
 	}
 	public int columnNumber() {
 		if (position > 250 && position <= 366) {
-			return 10;
+			return 0;
 		}
 		else if (position > 366 && position <= 477) {
 			return 1;
@@ -312,7 +312,9 @@ public class Zombie extends GameCharacter{
 		            		Level.textGarden[row][8] = getFirstChar();
 		            		Level.printGarden();
 		            	} */
-		            	System.out.println(checkForPlant());
+		            	/*if (checkForPlant()) {
+		            		System.out.println("COLLISION");
+		            	} */
 		            	
 		            	position -= gardenLength / j;
 		            	

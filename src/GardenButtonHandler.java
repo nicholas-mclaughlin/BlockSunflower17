@@ -220,6 +220,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		GardenScene.fullImage.getChildren().add(plantImage);
 
 		System.out.println(source.getText());
-		System.out.println(Arrays.deepToString(game.gardenPlotString()));
+		game.printGardenPlotString();
 	}
 }
