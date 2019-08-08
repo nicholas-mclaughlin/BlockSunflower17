@@ -1,8 +1,7 @@
 import javafx.scene.Scene;
 
 /**
- * The BaseScene class is an abstract class which
- * will be the foundation for scenes to be created
+ * The BaseScene class is an abstract class which will be the foundation for scenes to be created
  * in the same stage/window.
  *
  */
