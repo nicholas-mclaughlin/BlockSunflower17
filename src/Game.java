@@ -10,8 +10,8 @@ public class Game {
 	static String[][] theGarden = new String[5][10];
 	
 	/**
-	 *  gardenPlots is a 2D array of string that contains the string of "<row>,<column>"
-	 *  the garden plots as the default.
+	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
+	 *  the row and column being the garden plots index.
 	 */
 	private GameCharacter[][] gardenPlots = {{new GameCharacter("0,0"), new GameCharacter("0,1"), new GameCharacter("0,2"), new GameCharacter("0,3"),
 		new GameCharacter("0,4"),new GameCharacter("0,5"), new GameCharacter("0,6"), new GameCharacter("0,7"), new GameCharacter("0,8"), new GameCharacter("0,9")},
@@ -45,7 +45,7 @@ public class Game {
 	
 	
 	/**
-	 * getGardenPlots() creates a new 2D array of Strings of the same elements in the local
+	 * getGardenPlots() creates a new 2D array of gamecharacters of the same elements in the local
 	 * gardenPlot and returns it back.
 	 * 
 	 * @return copy of gardenPlot
@@ -81,8 +81,7 @@ public class Game {
 	}
 	
 	/**
-	 * placePlant changes an element in the 2D array list into the String type of plant
-	 * based on the row and column passed into the argument
+	 * placePlant changes an element in the 2D array list into the type of plant passed into the argument
 	 * 
 	 * @param aPlant	GameCharacter, type of plant (e.g. PeaShooter)
 	 * @param row	row where the plant is to be placed
@@ -92,22 +91,6 @@ public class Game {
 		Plant thePlant = new Plant(aPlant);
 		gardenPlots[row][column] = thePlant;
 	}
-
-	/*public void trackZombie(Zombie aZombie) throws FileNotFoundException {
-		Zombie theZombie = new Zombie(aZombie);
-		int position = (int) (theZombie.getPosition() - 315);
-		if (theZombie.getRow() == 1) {
-			zombieRow0[position] = theZombie;
-		} else if (theZombie.getRow() == 2) {
-			zombieRow1[position] = theZombie;
-		} else if (theZombie.getRow() == 3) {
-			zombieRow2[position] = theZombie;
-		} else if (theZombie.getRow() == 4) {
-			zombieRow3[position] = theZombie;
-		} else if (theZombie.getRow() == 5) {
-			zombieRow4[position] = theZombie;
-		}
-	} */
 	
 	public String[][] gardenPlotString() {
 		
