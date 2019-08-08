@@ -30,6 +30,7 @@ public class GameCharacter {
 		return attack;
 	}
 	
+	//health has to be positive
 	public void setHealth(int health) {
 		if (health > 0) {
 			this.health = health;
