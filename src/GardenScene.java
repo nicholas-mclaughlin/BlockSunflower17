@@ -53,6 +53,8 @@ public class GardenScene extends BaseScene {
 		super(aSession);
 		this.levelNum = levelNum;
 	}
+	
+	
 
 	//setup actual drawing in window
 	@Override
@@ -115,11 +117,13 @@ public class GardenScene extends BaseScene {
 
 	//level of the game (1, 2, or 3)
 	Level level = new Level(this.levelNum);
-	int counter = 0;
+	
 	for (Zombie z : level.getZombies()) {
 		fullImage.getChildren().add(z.newZombieImage());
 		z.zombieTracker(game);
-	}
+	} 
+	
+	
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
@@ -211,5 +215,7 @@ public class GardenScene extends BaseScene {
 
 		return root;
 	}
+	
+	
 
 }
