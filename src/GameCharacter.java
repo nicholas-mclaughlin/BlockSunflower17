@@ -35,9 +35,13 @@ public class GameCharacter {
 			System.out.println(getType() + " died.");
 		}
 	}
-	
+	//setting Attack, if it is an invalid negative number it is set to a default of 100
 	public void setAttack(int attack) {
-		this.attack = attack;
+		if (attack >= 0 ) {
+			this.attack = attack;
+		} else {
+			this.attack = 100;
+		}
 	}
 	public String getType() {
 		return new String(type);
