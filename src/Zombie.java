@@ -323,46 +323,11 @@ public class Zombie extends GameCharacter{
 		t.schedule(new TimerTask() {
 		            @Override
 		             public void run() {
-		            	/*if (onColumn1()) {
-		            		Level.textGarden[row][0] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn2()) {
-		            		Level.textGarden[row][1] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn3()) {
-		            		Level.textGarden[row][2] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn4()) {
-		            		Level.textGarden[row][3] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn5()) {
-		            		Level.textGarden[row][4] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn6()) {
-		            		Level.textGarden[row][5] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn7()) {
-		            		Level.textGarden[row][6] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn8()) {
-		            		Level.textGarden[row][7] = getFirstChar();
-		            		Level.printGarden();
-		            	}
-		            	else if (onColumn9()) {
-		            		Level.textGarden[row][8] = getFirstChar();
-		            		Level.printGarden();
-		            	} */
-		            	if (checkForPlant(aGame) == true) {
-		            		zombieStops();
-		            		GardenScene.fullImage.getChildren().remove(aGame.plantImage);
-		            		t.cancel();
+		           
+		            	if (checkForPlant(aGame) == true) { //Going to do something if plant and zombie collide
+		            		/*zombieStops();
+		            		GardenScene.fullImage.getChildren().remove(plantImage);
+		            		t.cancel(); */
 		            	}  
 		            	
 		            	 

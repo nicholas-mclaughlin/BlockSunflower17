@@ -37,6 +37,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Button sunButton;
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
+	ImageView plantImage = null;
 
 	public static Button errorMessage = null;
 
@@ -55,8 +56,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
-		ImageView plantImage = null;
-
+		
+		//ImageView plantImage = null;
 		Plant plant = new Plant(player.getPlantHeld());
 		plant.setRow(this.game, source.getText());
 		plant.setColumn(this.game, source.getText());
