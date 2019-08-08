@@ -267,12 +267,12 @@ public class Zombie extends GameCharacter{
 		}
 	}
 	
-	public boolean checkForPlant() {
-		return (Game.theGarden[(row - 1)][columnNumber()] == "Sunflower"); 
+	public boolean checkForPlant(Game aGame) {
+		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")); 
 	}
 	
 
-	public void zombieTracker() throws FileNotFoundException {
+	public void zombieTracker(Game aGame) throws FileNotFoundException {
 		
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
@@ -318,7 +318,7 @@ public class Zombie extends GameCharacter{
 		            		Level.textGarden[row][8] = getFirstChar();
 		            		Level.printGarden();
 		            	} */
-		            	if (checkForPlant()) {
+		            	if (checkForPlant(aGame) == true) {
 		            		System.out.println("COLLISION");
 		            	}  
 		            	
