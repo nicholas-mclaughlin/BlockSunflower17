@@ -329,6 +329,37 @@ public class Zombie extends GameCharacter{
 		 return this;
 	 }
 	
+	 /*public void killPlant() {
+		 
+ 		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
+ 			deathTime = 3000;
+ 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
+ 			deathTime = 15000;
+ 		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")) 
+ 				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
+ 			deathTime = 8000;
+
+ 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
+ 			deathTime = 6000;
+ 		}
+ 		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	//GardenButtonHandler.getPlantImage().setStyle("-fx-opacity: 0.0;");
+ 		                }
+ 		                
+ 		            });
+ 		            
+ 		        }
+ 		    }, deathTime);
+ 		//GardenScene.fullImage.getChildren().remove(plantImage);
+ 		//t.cancel(); 
+ 	}
+	 } */
 	
 
 	public boolean zombieOnRow(int rowNum) {
@@ -397,7 +428,7 @@ public class Zombie extends GameCharacter{
 			return 8;
 		}
 		else {
-			return 5;
+			return 8;
 		}
 	}
 
@@ -422,45 +453,32 @@ public class Zombie extends GameCharacter{
 		            @Override
 		             public void run() {
 		            	
+		            	/*char[][] zombieGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
+		            	zombieGarden[(row - 1)][columnNumber()] = getFirstChar();
+		            	System.out.println("------------------");
+		        		for(int i = 0; i<5; i++)
+		        		{
+		        		    for(int j = 0; j<9; j++)
+		        		    {
+		        		        System.out.print(zombieGarden[i][j] + " ");
+		        		    }
+		        		    System.out.println();
+		        		}
+		        		System.out.println("------------------");
+		            	*/
+		            	
 		            	if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
 		            		zombieStops();
 		            	}
-		            		/*
-		            		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
-		            			deathTime = 3000;
-		            		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
-		            			deathTime = 15000;
-		            		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")) 
-		            				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
-		            			deathTime = 8000;
-		     
-		            		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
-		            			deathTime = 6000;
-		            		}
-		            		Timer timer = new Timer();
-		            		timer.schedule(new TimerTask() {
-		            		        @Override
-		            		        public void run() {
-		            		            Platform.runLater(new Runnable() {
-		            		                @Override
-		            		                public void run() {
-		            		                	//GardenButtonHandler.getPlantImage().setStyle("-fx-opacity: 0.0;");
-		            		                }
-		            		                
-		            		            });
-		            		            
-		            		        }
-		            		    }, deathTime);
-		            		//GardenScene.fullImage.getChildren().remove(plantImage);
-		            		//t.cancel(); 
-		            	}
+		            	
+		            	
 
-*/
+
 		            	position -= gardenLength / j;
 		            	
 		            	
 		        		
-		            	//System.out.println(toString2());
+		            	//System.out.println(toString2()); // Prints the condition of the zombie
 		             }
 		 }, delay, updateTime);
 	}
