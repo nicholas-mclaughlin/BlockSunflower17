@@ -10,31 +10,19 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-/**
- * Menu class is an extension of BaseScene.
- * It is the first scene to appear once the application is run.
- *
- */
+// Menu is the first scene to appear once the application is run.
 public class Menu extends BaseScene {
 
-	/**
-	 * Menu constructors. This passes a session to the parent (BaseScene).
-	 * @param aSession	session to be passed
-	 */
+	//constructor
 	public Menu(Session aSession) {
 		super(aSession);
 	}
 
-	/**
-	 * Override abstract parent's (BaseScene) method to setup and display scene
-	 * (actual drawing in window).
-	 */
+	//setup and display scene (actual drawing in window)
 	@Override
 	public void setup() throws Exception {
-		/**
-		 * Create a start button that will launch the second scene (gardenScene)
-		 * once clicked.
-		 */
+		
+		//Create level buttons that will launch the second scene (gardenScene)
 		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.png"))));
 		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.png"))));
 		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.png"))));
@@ -60,6 +48,7 @@ public class Menu extends BaseScene {
 		level2.setOnAction(new LevelHandler(getSession(), 2));
 		level3.setOnAction(new LevelHandler(getSession(), 3));
 		
+		//add background image
 		ImageView background = new ImageView(new Image(new FileInputStream("MenuImages//PvZStreet.jpeg")));
 		background.setFitHeight(720);
 		background.setFitWidth(1220);
