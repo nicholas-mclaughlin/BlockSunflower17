@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javafx.animation.TranslateTransition;
 //import gui.GardenScene;
 //import handlers.SunflowerSunHandler;
 import javafx.application.Platform;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 //import logic.Plant;
 //import logic.Player;
 //import logic.Sun;
+import javafx.util.Duration;
 
 
 /**
@@ -123,21 +125,18 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
 			peaBullet.setLayoutX(xPosition + 60 );
 			peaBullet.setLayoutY(yPosition + 165);
-			//making bullet appear afterwards every 1000 milliseconds
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
-			        @Override
-			        public void run() {
-			            Platform.runLater(new Runnable() {
-			                @Override
-			                public void run() {
+			
+			          	      TranslateTransition translateTransition = new TranslateTransition();
+			          	      //How long the animation will take
+			          	      translateTransition.setDuration(Duration.millis(3000));
+			          	      translateTransition.setNode(peaBullet);
+			          	      //The displacement of the animation
+			          	      translateTransition.setByX(1125 - xPosition);
+			          	      translateTransition.setCycleCount(1000);
+			          	      translateTransition.setAutoReverse(false);
+			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);	
-			        			//code to move the bullet goes here 
-			                }
-			            });
-
-			        }
-			    }, 1000);	
+			        			
 
 		} else if (plant.getType().equals("Wallnut")) {
 			try {
@@ -175,20 +174,16 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//Setting the position of the frozen pea bullet so it starts at the frozen peashooter's mouth.
 			frozenBullet.setLayoutX(xPosition + 60);
 			frozenBullet.setLayoutY(yPosition + 165);
-			//making bullet appear afterwards every 1000 milliseconds
-			Timer timer = new Timer();
-			timer.schedule(new TimerTask() {
-			        @Override
-			        public void run() {
-			            Platform.runLater(new Runnable() {
-			                @Override
-			                public void run() {
-			        			GardenScene.fullImage.getChildren().add(frozenBullet);	
-			                }
-			            });
-
-			        }
-			    }, 1000);	
+			TranslateTransition translateTransition = new TranslateTransition();
+    	      //How long the animation will take
+    	      translateTransition.setDuration(Duration.millis(3000));
+    	      translateTransition.setNode(frozenBullet);
+    	      //The displacement of the animation
+    	      translateTransition.setByX(1125 - xPosition);
+    	      translateTransition.setCycleCount(1000);
+    	      translateTransition.setAutoReverse(false);
+    	      translateTransition.play();
+  			GardenScene.fullImage.getChildren().add(frozenBullet);	
 			
 		}
 		
