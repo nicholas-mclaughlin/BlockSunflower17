@@ -2,30 +2,18 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * This session class will be an extension of the class Application
- * and will contain a main method.
- * 
- */
+//This session class will contain a main method.
 public class Session extends Application {
 	
 	//Initialize stage for Application Structure.
 	private Stage stage;
 
-	/*
-	 * Sets scene to be initialized in stage
-	 * or upon running the application.
-	 * 
-	 * @param aScene    scene to be set
-	 */
+	//Sets scene to be initialized in stage or upon running the application.
 	public void setScene(Scene aScene) {
 		stage.setScene(aScene);
 	}
 
-	/**
-	 * Override start() method in Application.
-	 * @param Stage	  stage to be 'drawn' upon running application.
-	 */
+	//Override start() method in Application.
 	@Override
 	public void start(Stage aStage) throws Exception {
 		this.stage = aStage;
