@@ -120,6 +120,7 @@ public class GardenScene extends BaseScene {
 	
 	for (Zombie z : level.getZombies()) {
 		fullImage.getChildren().add(z.newZombieImage());
+		fullImage.getChildren().add(z.getR());
 		z.zombieTracker(game);
 	} 
 	

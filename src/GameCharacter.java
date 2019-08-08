@@ -19,6 +19,8 @@ public class GameCharacter {
 		this.attack = aCharacter.attack;
 	}
 	
+	
+	
 	//Getters and setters
 	public int getHealth() {
 		return health;
@@ -60,7 +62,13 @@ public class GameCharacter {
 	
 	//Method to make the character lose health when attacked
 	public void loseHealth(int damage) {
-		setHealth(health - damage);
+		health -= damage;
+	}
+	
+	static void deadCharacter(GameCharacter c) {
+		if (c.health <= 0) {
+			c = null;
+		}
 	}
 
 

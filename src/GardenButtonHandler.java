@@ -46,10 +46,22 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		this.player = aPlayer;
 		this.game = aGame;
 	}
-	
-	public ImageView getPlantImage() {
-		return plantImage;
-	}
+
+
+	/*public void trackBullet() {
+		int intervals = 100;
+		double startPoint = xPosition - 250;
+		int numOfMoves = 3000/intervals;
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		            @Override
+		             public void run() {
+
+		            	xPosition2 += startPoint/numOfMoves;
+		            	System.out.println(xPosition2);
+		             }
+		 }, 0, intervals);
+	} */
 
 	/**
 	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
@@ -60,7 +72,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
-		
+
 		//ImageView plantImage = null;
 		Plant plant = new Plant(player.getPlantHeld());
 		plant.setRow(this.game, source.getText());
@@ -69,6 +81,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
+
+		int bulletEndPosition = (int) (1125 - xPosition);
+
 
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
@@ -143,7 +158,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(peaBullet);
-			  
+			        			//trackBullet();
 
 
 		} else if (plant.getType().equals("Wallnut")) {
@@ -192,6 +207,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
   			GardenScene.fullImage.getChildren().add(frozenBullet);
+  			//trackBullet();
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
@@ -209,12 +225,20 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			plantImage.setLayoutY(yPosition + 160);
 			GardenScene.fullImage.getChildren().add(plantImage);
 		 }
-		 
+
 		player.setPlantHeld("");
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(Game.theGarden));
 	}
-	
-	
-	
+
+	/*public boolean intersects(Zombie zombie) {
+		return xPosition == zombie.getPosition();
+	} */
+
+	public void damageZombie(Zombie zombie) {
+		if (intersects(zombie)) {
+			zombie.loseHealth(30);
+		}
+	}
+
 }

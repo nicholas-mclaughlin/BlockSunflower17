@@ -8,7 +8,9 @@ public class Level {
 	public Zombie[] zombies;
 	static int counter = 0;
 	static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
-
+	boolean collision = false;
+	
+	
 	public Level(int levelNumber) throws FileNotFoundException {
 		this.setLevelNum(levelNumber);
 		if (levelNumber == 1) {
@@ -24,7 +26,7 @@ public class Level {
 			int counter = 0;
 			for (Zombie z : getZombies()) {
 				z.addToPosition(counter);
-				counter += 200; 
+				counter += 200;  
 		} 
 		}
 		else if (levelNumber == 2) {
@@ -67,6 +69,8 @@ public class Level {
 				counter += 200;
 		}}
 	}
+	
+	
 
 /*	public Level(Level toCopy) {
 		this.levelNum = toCopy.levelNum;
