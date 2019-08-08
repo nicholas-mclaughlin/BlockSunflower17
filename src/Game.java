@@ -29,13 +29,13 @@ public class Game {
 			theGarden[r][column] = gardenPlots[r][column].getType();
 		}}
 	}
-	
+	/*
 	private Zombie[] zombieRow0 = new Zombie[1220];
 	private Zombie[] zombieRow1 = new Zombie[1220];
 	private Zombie[] zombieRow2 = new Zombie[1220];
 	private Zombie[] zombieRow3 = new Zombie[1220];
 	private Zombie[] zombieRow4 = new Zombie[1220];
-	
+	*/
 	//constructor
 	public Game(Player aPlayer, GameCharacter[][] aGardenPlot) {
 		this.player = aPlayer;
