@@ -263,12 +263,12 @@ public class Zombie extends GameCharacter{
 			return 8;
 		}
 		else {
-			return 8;
+			return 0;
 		}
 	}
 	
 	public boolean checkForPlant() {
-		return Game.theGarden[row][columnNumber()] == "Sunflower" || Game.theGarden[row][columnNumber()] == "PeaShooter" || Game.theGarden[row][columnNumber()] == "Frozen PeaShooter" || Game.theGarden[row][columnNumber()] == "Wallnut" || Game.theGarden[row][columnNumber()] == "Cherry Bomb"; 
+		return (Game.theGarden[(row - 1)][columnNumber()] == "Sunflower"); 
 	}
 	
 
@@ -318,18 +318,16 @@ public class Zombie extends GameCharacter{
 		            		Level.textGarden[row][8] = getFirstChar();
 		            		Level.printGarden();
 		            	} */
-		            	/*if (checkForPlant()) {
+		            	if (checkForPlant()) {
 		            		System.out.println("COLLISION");
-		            	} */
+		            	}  
 		            	
+		            	 
 		            	position -= gardenLength / j;
 		            	
 		             }
 		 }, delay, updateTime);
 	} 
 
-	public static void main(String[] args) throws FileNotFoundException {
-		Zombie z1 = new Zombie("Zombie", 2);
-				//z1.zombieTracker();
-	}
+	
 }

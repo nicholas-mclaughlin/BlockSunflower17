@@ -7,7 +7,8 @@ import java.io.FileNotFoundException;
 public class Game {
 	
 	private Player player;
-	static String[][] theGarden = new String[5][10];
+	static String[][] theGarden = new String[5][9];
+	
 	
 	/**
 	 *  gardenPlots is a 2D array of string that contains the string of "<row>,<column>"
@@ -22,6 +23,12 @@ public class Game {
 		new GameCharacter("3,4"), new GameCharacter("3,5"), new GameCharacter("3,6"), new GameCharacter("3,7"), new GameCharacter("3,8"), new GameCharacter("3,9")},
 		{new GameCharacter("4,0"), new GameCharacter("4,1"), new GameCharacter("4,2"), new GameCharacter("4,3"), new GameCharacter("4,4"), new GameCharacter("4,5"),
 			new GameCharacter("4,6"), new GameCharacter("4,7"), new GameCharacter("4,8"), new GameCharacter("4,9")}};
+	{
+	for (int r = 0; r < 5; r++) {
+		for (int column = 0; column < 9; column++) {
+			theGarden[r][column] = gardenPlots[r][column].getType();
+		}}
+	}
 	
 	private Zombie[] zombieRow0 = new Zombie[1220];
 	private Zombie[] zombieRow1 = new Zombie[1220];
@@ -51,9 +58,9 @@ public class Game {
 	 * @return copy of gardenPlot
 	 */
 	public GameCharacter[][] getGardenPlots() {
-		GameCharacter[][] theGarden = new GameCharacter[5][10];
+		GameCharacter[][] theGarden = new GameCharacter[5][9];
 		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 10; column++) {
+			for (int column = 0; column < 9; column++) {
 				theGarden[row][column] = getCharacter(row, column);
 			}
 		}
@@ -91,6 +98,7 @@ public class Game {
 	public void placePlant(Plant aPlant, int row, int column) {
 		Plant thePlant = new Plant(aPlant);
 		gardenPlots[row][column] = thePlant;
+		theGarden[row][column] = thePlant.getType();
 	}
 
 	/*public void trackZombie(Zombie aZombie) throws FileNotFoundException {
@@ -109,52 +117,32 @@ public class Game {
 		}
 	} */
 	
-	public String[][] gardenPlotString() {
+	public void gardenPlotString() {
 		
 		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 10; column++) {
+			for (int column = 0; column < 9; column++) {
 				theGarden[row][column] = getCharacter(row, column).getType();
 			}
 		}
-		return theGarden;
+		//return theGarden;
 	}
 	
-	public char[][] gardenPlotChar(){
-		char[][] theGarden = new char[5][10];
-		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 10; column++) {
-				theGarden[row][column] = getCharacter(row, column).getFirstChar();
-			}
-		}
-		return theGarden;
-		
-	}
+	
 	public void printGardenPlotString() {
-		String[][] textGarden = gardenPlotString();
+		//String[][] textGarden = gardenPlotString();
+		gardenPlotString();
 		System.out.println("---------------------------------------");
 		for(int i = 0; i<5; i++)
 		{
 		    for(int j = 0; j<9; j++)
 		    {
-		        System.out.print(textGarden[i][j] + " ");
+		        System.out.print(theGarden[i][j] + " ");
 		    }
 		    System.out.println();
 		}
 		System.out.println("---------------------------------------");
 	}
-	public void printGardenPlotChar() {
-		char[][] textGarden = gardenPlotChar();
-		System.out.println("---------------------");
-		for(int i = 0; i<5; i++)
-		{
-		    for(int j = 0; j<9; j++)
-		    {
-		        System.out.print(textGarden[i][j] + " ");
-		    }
-		    System.out.println();
-		}
-		System.out.println("----------------------");
-	}
+	
 	
 	
 }
