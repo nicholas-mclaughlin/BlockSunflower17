@@ -279,7 +279,7 @@ public class Zombie extends GameCharacter{
 	public boolean onColumn9() {
 		return position > 1143 && position <= 1254;
 	}
-	public int columnNumber() {
+		public int columnNumber() {
 		if (position > 250 && position <= 366) {
 			return 0;
 		}
@@ -308,7 +308,7 @@ public class Zombie extends GameCharacter{
 			return 8;
 		}
 		else {
-			return 0;
+			return 5;
 		}
 	}
 
