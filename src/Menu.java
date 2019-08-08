@@ -1,6 +1,7 @@
 //package gui;
 //import drivers.Session;
 //import handlers.LevelHandler;
+import java.io.File;
 import java.io.FileInputStream;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,10 +28,10 @@ public class Menu extends BaseScene {
 	public void setup() throws Exception {
 		
 		//initialize music (intro)
-		String grasswalk = "intro.mp3";
+		String grasswalk = "MenuImages//intro.mp3";
 		Media hit = new Media(new File(grasswalk).toURI().toString());
 		mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+		//mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
 		
 		//Create level buttons that will launch the second scene (gardenScene)
