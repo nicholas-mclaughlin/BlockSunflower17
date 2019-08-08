@@ -59,26 +59,6 @@ public class Game {
 		}
 		return theGarden;
 	}
-
-	/**
-	 * getRow determines the row of the argument passed through
-	 * a loop that goes through every element and saves the row number and breaks once
-	 * it finds the exact same element in the 2D array
-	 * 
-	 * @param coordinate	String that must mirror a String element in the 2D array
-	 * @return	the row number of where the string was found
-	 */
-	public int getRow(String coordinate) {
-		int theRow = 0;
-		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 9; column++) {
-				if (gardenPlots[row][column].equals(coordinate)) {
-					theRow = row;
-					break;
-				}
-			}
-		} return theRow;
-	}
 	
 	/**
 	 * placePlant changes an element in the 2D array list into the type of plant passed into the argument
