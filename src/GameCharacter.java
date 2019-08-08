@@ -44,7 +44,7 @@ public class GameCharacter {
 		}
 	}
 	public String getType() {
-		return new String(type);
+		return (type);
 	}
 
 	public void setType(String type) {

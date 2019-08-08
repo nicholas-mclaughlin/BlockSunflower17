@@ -52,6 +52,7 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event){
+		 
 	
 		Button source = (Button) event.getSource();
 		
@@ -73,11 +74,18 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		}
 
 		buyPlant();
+		
+		
 		/**
 		 * First plant button is disabled, only if the plant was bought, and timer sets
 		 * the time for the later task, to enable the button again, to run after a time 0f 10000ms.
+		 * The error message also appears since a plant was bought.
 		 */
 		if (disable) {
+			if (GardenButtonHandler.errorMessage != null) {
+				 GardenButtonHandler.errorMessage.setDisable(true);
+				 GardenButtonHandler.errorMessage.setStyle("-fx-opacity: 0.0;");
+			 }
 			source.setDisable(true);
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {

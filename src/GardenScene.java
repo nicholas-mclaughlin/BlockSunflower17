@@ -75,13 +75,14 @@ public class GardenScene extends BaseScene {
 	String grasswalk = "MenuImages//grasswalk.mp3";
 	Media hit = new Media(new File(grasswalk).toURI().toString());
 	MediaPlayer mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 	mediaPlayer.play();
 
 
 	/**
 	 * Importing the garden image and setting its size to fit the buttons and scene.
-	 * 1275 are the length of pixels a bit bigger than the window.		???
-	 * 800 are the pixels are the height of pixels a bit bigger than the window.	???
+	 * 1275 are the length of pixels a bit bigger than the window.	
+	 * 800 are the pixels are the height of pixels a bit bigger than the window.
 	 */
 	ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
 	Garden.setFitHeight(800);

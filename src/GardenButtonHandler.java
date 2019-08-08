@@ -10,9 +10,12 @@ import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Font;
 //import logic.Plant;
 //import logic.Player;
 //import logic.Sun;
@@ -36,6 +39,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Button sunButton;
 	private ImageView peaBullet;
 	private ImageView frozenBullet;
+	
+	public static Button errorMessage = null;
 
 	//constructor
 	public GardenButtonHandler(Player aPlayer, Game aGame) {
@@ -57,14 +62,21 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();
 		ImageView plantImage = null;
-		Plant plant = new Plant(player.getPlantHeld());
-		plant.setRow(this.game, source.getText());
-		plant.setColumn(this.game, source.getText());
-		System.out.println(player.getPlantHeld());
+		Plant plant = null;
 		//getting button clicked position to know where to place suns or peas 
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
 		
+		//only runs player.getPlantHeld() and adds it to the game grid if there is a plant being held
+		if (player.getPlantHeld() == null){
+			player.setPlantHeld("");
+		} else if (player.getPlantHeld() != null){
+			plant = new Plant(player.getPlantHeld());
+			plant.setRow(this.game, source.getText());
+			plant.setColumn(this.game, source.getText());
+			System.out.println(player.getPlantHeld());
+		}
+			
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
 		 * with an existing type of plant in the game (type String), appropriate image will be placed
@@ -210,15 +222,23 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			        }
 			    }, 1000);	
 			
+		} else if (player.getPlantHeld().equals("")){
+			//if there was no plant being held, it was set to blank thus an error message is created
+			errorMessage = new Button("Buy a plant first!");
+			errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
+			errorMessage.setLayoutX(710);
+			errorMessage.setLayoutY(3);
+			GardenScene.fullImage.getChildren().add(errorMessage);
 		}
 		
+		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
+		 if (plantImage != null) {
+			//adding plant image to fullImage pane, along with the correct position
+			plantImage.setLayoutX(xPosition + 25);
+			plantImage.setLayoutY(yPosition + 160);
+			GardenScene.fullImage.getChildren().add(plantImage);
+		 } 
 		player.setPlantHeld("");
-		
-		//adding plant image to fullImage pane, along with the correct position
-		plantImage.setLayoutX(xPosition + 25);
-		plantImage.setLayoutY(yPosition + 160);
-		GardenScene.fullImage.getChildren().add(plantImage);
-
 		System.out.println(source.getText());
 		System.out.println(Arrays.deepToString(game.gardenPlotString()));
 	}
