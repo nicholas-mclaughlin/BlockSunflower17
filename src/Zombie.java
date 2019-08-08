@@ -44,7 +44,8 @@ public class Zombie extends GameCharacter{
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Football.gif")));
 		}
-		else { //Just creates a normal zombie if there are any errors
+		else { //Just creates a normal zombie if there are any errors, its type would be a general Zombie
+			setType("Zombie");
 			setFirstChar('z');
 			setHealth(200);
 			setAttack(100);
@@ -111,8 +112,13 @@ public class Zombie extends GameCharacter{
 	public int getRow() {
 		return row;
 	}
+	//if it is an invalid negative number set speed to 45000.0 
 	public void setSpeed(double d) {
-		this.speed = d;
+		if (d<0) {
+			this.speed = 45000.0;
+		} else {
+			this.speed = d;
+		}
 	}
 
 	public double getPosition() {
