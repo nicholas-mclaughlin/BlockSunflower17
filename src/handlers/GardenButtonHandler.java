@@ -9,7 +9,7 @@ import java.util.TimerTask;
 import gui.GardenScene;
 import javafx.animation.TranslateTransition;
 //import gui.GardenScene;
-import handlers.SunflowerSunHandler;
+import handlers.SunButtonHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -129,7 +129,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			}
 			sunButton.setText("sunflower button");
 			sunButton.setFont(new Font(0));
-			sunButton.setOnAction(new SunflowerSunHandler(player));
+			sunButton.setOnAction(new SunButtonHandler(player));
 			//positioning the sun button on the sunflower
 			sunButton.setLayoutX(xPosition);
 			sunButton.setLayoutY(yPosition + 150);
