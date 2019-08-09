@@ -1,4 +1,4 @@
-//package logic;
+package logic;
 
 public class Plant extends GameCharacter{
 	private int price;

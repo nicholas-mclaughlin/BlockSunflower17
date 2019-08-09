@@ -1,3 +1,4 @@
+package logic;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Timer;
@@ -436,7 +437,7 @@ public class Zombie extends GameCharacter{
 		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") 
 				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") 
 				||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") 
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")
+				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Potato Mine")
 				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"));
 	}
 

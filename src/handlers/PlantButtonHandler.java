@@ -1,13 +1,14 @@
-//package handlers;
+package handlers;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-//import gui.GardenScene;
 import javafx.application.Platform;
 import javafx.event.*;
 import javafx.scene.control.Button;
-//import logic.Player;
+
+import logic.Player;
+import gui.GardenScene;
 
 // PlantButtonHandler is the button handler for the plant buttons.
 public class PlantButtonHandler implements EventHandler<ActionEvent> {

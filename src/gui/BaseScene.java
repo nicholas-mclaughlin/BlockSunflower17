@@ -1,3 +1,5 @@
+package gui;
+import drivers.Session;
 import javafx.scene.Scene;
 
 /**

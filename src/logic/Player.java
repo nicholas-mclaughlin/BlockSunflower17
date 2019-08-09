@@ -1,4 +1,4 @@
-//package logic;
+package logic;
 
 /**
  * Player class is responsible for keeping track of the player's

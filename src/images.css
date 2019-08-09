@@ -1,7 +1,7 @@
 .button{
      -fx-background-color: transparent; 
      -fx-opacity: 0.0;
-     -fx-background-image: url('/characters/pvzsun.png')
+     -fx-background-image: url('/gui/pvzsun.png')
      -fx-text-fill: black;
      -fx-font-weight: bold;
      -fx-font-size: 40;

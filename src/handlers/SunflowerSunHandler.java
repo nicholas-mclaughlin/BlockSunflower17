@@ -1,3 +1,4 @@
+package handlers;
 
 
 import javafx.application.Platform;
@@ -5,13 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
-//import logic.Player;
-//import logic.Sun;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-//import gui.GardenScene;
+import gui.GardenScene;
+import logic.Player;
 //import handlers.GardenButtonHandler;
 
 
@@ -43,7 +43,7 @@ public class SunflowerSunHandler implements EventHandler<ActionEvent> {
 		}
 		//sets the button style and increases the money
 		sunCounter.setText("  " + player.getMoney());
-		sunCounter.setStyle("-fx-background-image: url('/characters/pvzsun.png')");
+		sunCounter.setStyle("-fx-background-image: url('/gui/pvzsun.png')");
 		sunCounter.setPrefSize(170,  70);
 		sunCounter.setFont(new Font("Arial Bold", 38));
 		

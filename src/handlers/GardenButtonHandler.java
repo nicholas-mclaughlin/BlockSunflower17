@@ -1,3 +1,4 @@
+package handlers;
 //package handlers;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -5,9 +6,10 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gui.GardenScene;
 import javafx.animation.TranslateTransition;
 //import gui.GardenScene;
-//import handlers.SunflowerSunHandler;
+import handlers.SunflowerSunHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +18,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-//import logic.Plant;
-//import logic.Player;
-//import logic.Sun;
+
 import javafx.util.Duration;
+import logic.Game;
+import logic.Plant;
+import logic.Player;
+import logic.Sun;
+import logic.Zombie;
 
 
 /**
