@@ -52,8 +52,8 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 			plant = "Sunflower";
 			price = 50;
 		} else if (source.getText().contains("p3")) {
-			plant = "Cherry Bomb";
-			price = 150;
+			plant = "Potato Mine";
+			price = 25;
 		} else if (source.getText().contains("p4")) {
 			plant = "Wallnut";
 			price = 50;

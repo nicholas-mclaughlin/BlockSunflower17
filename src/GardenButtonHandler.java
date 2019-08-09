@@ -197,12 +197,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			source.setDisable(true);
 
-		} else if (plant.getType().equals("Cherry Bomb")) {
+		} else if (plant.getType().equals("Potato Mine")) {
 			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//cherry-bomb.gif")));
+				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif")));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
+			plantImage.setFitWidth(70);
+			
+			plantImage.setPreserveRatio(true);
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			source.setDisable(true);
 

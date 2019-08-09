@@ -44,11 +44,11 @@ public class Plant extends GameCharacter{
 			setPrice(50);
 			setHealth(1000);
 		}
-		else if (typeOfPlant == "Cherry Bomb") {
-			setFirstChar('C');
+		else if (typeOfPlant == "Potato Mine") {
+			setFirstChar('M');
 			setFrequency(10);
 			setAttack(10000);
-			setPrice(150);
+			setPrice(25);
 			
 		}
 		else if (typeOfPlant == "Sunflower") {
