@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-
+import javafx.scene.text.Font;
 import javafx.util.Duration;
 import logic.Game;
 import logic.Plant;
@@ -127,6 +127,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			sunButton.setText("sunflower button");
+			sunButton.setFont(new Font(0));
 			sunButton.setOnAction(new SunflowerSunHandler(player));
 			//positioning the sun button on the sunflower
 			sunButton.setLayoutX(xPosition);

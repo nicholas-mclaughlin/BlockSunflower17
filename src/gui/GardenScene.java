@@ -99,6 +99,8 @@ public class GardenScene extends BaseScene {
 		//adds the suns in a for loop
 		for (int i = 0; i<=30; i++) {
 			Button sunButton = new Sun().getSunButton();
+			sunButton.setText("sun button");
+			sunButton.setFont(new Font(0));
 			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
 			//timer to add the suns after timeBetweenSuns seconds
 			Timer timer = new Timer();

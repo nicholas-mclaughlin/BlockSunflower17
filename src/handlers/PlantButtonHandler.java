@@ -40,7 +40,6 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event){
 		 
-	
 		Button source = (Button) event.getSource();
 		
 		if (source.getText().contains("p0")) {
@@ -61,7 +60,6 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		}
 
 		buyPlant();
-		
 		
 		/**
 		 * First plant button is disabled, only if the plant was bought, and timer sets
