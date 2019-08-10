@@ -89,6 +89,13 @@ public class Level {
 		return zombies;
 	}
 	
+	public void checkForDeadZombie(Zombie z) {
+		 if (z.getHealth() == 0) {
+			 z = null;
+			 
+		 }
+	 }
+	
 	public static void printGarden() {
 		System.out.println("------------------");
 		for(int i = 0; i<5; i++)

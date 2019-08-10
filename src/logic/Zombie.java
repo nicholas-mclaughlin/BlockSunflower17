@@ -18,8 +18,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
-	private double speed = 50000; //How many milliseconds it'll take for the zombie to go across the garden
-	private double speed2 = 50000;
+	private double speed = 70000; //How many milliseconds it'll take for the zombie to go across the garden
+	private double speed2 = 70000;
 	private int row; //Which row the zombie will start walking down from
 	private double position = 1500; //1250 is the very right side of the garden
 	private double position2 = 1500;
@@ -330,6 +330,8 @@ public class Zombie extends GameCharacter{
 		 return this;
 	 }
 	
+	 
+	 
 	 /*public void killPlant() {
 		 
  		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
