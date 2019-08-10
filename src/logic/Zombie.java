@@ -111,6 +111,8 @@ public class Zombie extends GameCharacter{
 	      
 	      Rectangle rect = getBounds(zombieImage);
 	      rect.setFill(Color.TRANSPARENT);
+	      rect.setStroke(Color.BLACK);
+	      rect.setStrokeWidth(2);
 	      //Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
@@ -262,7 +264,8 @@ public class Zombie extends GameCharacter{
 	      
 	      
 	      rect.setFill(Color.TRANSPARENT);
-	     
+	      rect.setStroke(Color.BLACK);
+	      rect.setStrokeWidth(2);
 	      TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition2.setDuration(Duration.millis(speed));

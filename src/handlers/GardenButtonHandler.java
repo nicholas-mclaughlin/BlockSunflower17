@@ -170,7 +170,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 								
 			bulletRect = getBounds(peaBullet);
 			bulletRect.setFill(Color.TRANSPARENT);
-
+			bulletRect.setStroke(Color.BLACK);
+		    bulletRect.setStrokeWidth(2);
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
@@ -238,6 +239,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			frozenBullet.setLayoutY(yPosition + 165);
 			fBulletRect = getBounds(frozenBullet);
 			fBulletRect.setFill(Color.TRANSPARENT);
+			fBulletRect.setStroke(Color.BLACK);
+		    fBulletRect.setStrokeWidth(2);
+			
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
