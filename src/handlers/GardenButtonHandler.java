@@ -43,14 +43,14 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 	private ImageView bullet;
-	
 
-	//ImageView plantImage = null;
-	static Rectangle bulletRect;
-	
-	
-	//public static Button errorMessage = new Button("Buy a plant first!");	
-	
+
+	ImageView plantImage = null;
+	private Rectangle bulletRect;
+
+
+	//public static Button errorMessage = new Button("Buy a plant first!");
+
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
 	}
@@ -85,7 +85,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event) {
-		
+
 		Button source = (Button) event.getSource();
 
 		//ImageView plantImage = null;
@@ -116,9 +116,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 *
 		 */
 		if (plant.getType().equals("Sunflower")) {
-			
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//placing the sun gifs which is a sunButton
 			sunButton = null;
@@ -149,9 +149,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			    }, 6000);
 
 		} else if (plant.getType().equals("PeaShooter")) {
-			
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//creating pea bullet image
 			try {
@@ -163,7 +163,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			bullet.setLayoutX(xPosition + 60 );
 			bullet.setLayoutY(yPosition + 165);
 
-								
+
 			bulletRect = getBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
@@ -179,8 +179,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(bullet);
 			        			//trackBullet();
-			        			 
-			        			
+
+
 			        			TranslateTransition translateTransition2 = new TranslateTransition();
 				          	      //How long the animation will take
 				          	      translateTransition2.setDuration(Duration.millis(3000));
@@ -189,23 +189,26 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				          	      translateTransition2.setByX(bulletEndPosition);
 				          	      translateTransition2.setCycleCount(1000);
 				          	      translateTransition2.setAutoReverse(false);
-				          	      translateTransition2.play(); 
+				          	      translateTransition2.play();
 				          	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (plant.getType().equals("Wallnut")) {
-			
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 		} else if (plant.getType().equals("Potato Mine")) {
 
+			plant.getPlantImage().setFitWidth(70);
+
+			plant.getPlantImage().setPreserveRatio(true);
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
-			
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//creating frozen pea bullet image
 			try {
@@ -222,7 +225,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-			
+
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -242,7 +245,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition2.setByX(bulletEndPosition);
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play(); 
+    	      translateTransition2.play();
     	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (player.getPlantHeld().equals("")){
@@ -262,7 +265,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			                }
 			            });
 			        }
-			    }, 2500);	
+			    }, 2500);
 		}
 
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
@@ -287,10 +290,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 	}
-	
-	
 
-	
+
+
+
 
 	public ImageView getBullet() {
 		return bullet;
@@ -302,23 +305,16 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	}
 
 
-	public static Rectangle getBulletRect() {
+	public Rectangle getBulletRect() {
 		return bulletRect;
 	}
 
 
-	public static void setBulletRect(Rectangle bulletRect) {
-		GardenButtonHandler.bulletRect = bulletRect;
+	public void setBulletRect(Rectangle bulletRect) {
+		this.bulletRect = bulletRect;
 	}
 
 
-	public static void damageZombie(Zombie zombie) {
-		if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(10);
-		}
-		else if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(10);
-		}
-	}
+
 
 }
