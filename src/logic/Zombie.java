@@ -186,7 +186,15 @@ public class Zombie extends GameCharacter{
 
 	}
 	
+	
 
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
+	}
 
 	public ImageView getZombieImage() {
 		return zombieImage;

@@ -1,10 +1,17 @@
 package logic;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 public class Plant extends GameCharacter{
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
+	//ImageView plantImage = null;
 	
 	//constructor
 	public Plant(Plant aPlant) {
@@ -13,6 +20,19 @@ public class Plant extends GameCharacter{
 	}
 	
 	
+	
+	/*public ImageView getPlantImage() {
+		return plantImage;
+	}
+ */
+
+
+	/*public void setPlantImage(ImageView plantImage) {
+		this.plantImage = plantImage;
+	} */
+
+
+
 	public int getFrequency() {
 		return frequency;
 	}
@@ -21,7 +41,7 @@ public class Plant extends GameCharacter{
 	}
 	
 	//sets default attributes of certain types of plants
-	public Plant(String typeOfPlant) {
+	public Plant(String typeOfPlant){
 		super(typeOfPlant);
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
@@ -29,6 +49,7 @@ public class Plant extends GameCharacter{
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
+		   // plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
@@ -54,6 +75,7 @@ public class Plant extends GameCharacter{
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
 		    setPrice(50);
+		   // plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
 		}
 
 	}

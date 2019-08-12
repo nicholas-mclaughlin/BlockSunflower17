@@ -42,12 +42,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
-	private ImageView peaBullet;
-	private ImageView frozenBullet;
+	private ImageView bullet;
+	
 
 	ImageView plantImage = null;
 	static Rectangle bulletRect;
-	static Rectangle fBulletRect;
+	
 	
 	
 	
@@ -153,35 +153,35 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
-			}
+			} 
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			source.setDisable(true);
 
 			//creating pea bullet image
 			try {
-				peaBullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
+				bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
 			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
-			peaBullet.setLayoutX(xPosition + 60 );
-			peaBullet.setLayoutY(yPosition + 165);
+			bullet.setLayoutX(xPosition + 60 );
+			bullet.setLayoutY(yPosition + 165);
 
 								
-			bulletRect = getBounds(peaBullet);
+			bulletRect = getBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 			          	      TranslateTransition translateTransition = new TranslateTransition();
 			          	      //How long the animation will take
 			          	      translateTransition.setDuration(Duration.millis(3000));
-			          	      translateTransition.setNode(peaBullet);
+			          	      translateTransition.setNode(bullet);
 			          	      //The displacement of the animation
 			          	      translateTransition.setByX(1125 - xPosition);
 			          	      translateTransition.setCycleCount(1000);
 			          	      translateTransition.setAutoReverse(false);
 			          	      translateTransition.play();
-			        			GardenScene.fullImage.getChildren().add(peaBullet);
+			        			GardenScene.fullImage.getChildren().add(bullet);
 			        			//trackBullet();
 			        			 
 			        			
@@ -228,41 +228,41 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			//creating frozen pea bullet image
 			try {
-				frozenBullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
+				bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
-			fBulletRect = getBounds(frozenBullet);
-			fBulletRect.setStroke(Color.AQUA);
+			bulletRect = getBounds(bullet);
+			bulletRect.setStroke(Color.AQUA);
 			//Setting the position of the frozen pea bullet so it starts at the frozen peashooter's mouth.
-			frozenBullet.setLayoutX(xPosition + 60);
-			frozenBullet.setLayoutY(yPosition + 165);
-			fBulletRect = getBounds(frozenBullet);
-			fBulletRect.setFill(Color.TRANSPARENT);
-			fBulletRect.setStroke(Color.BLACK);
-		    fBulletRect.setStrokeWidth(2);
+			bullet.setLayoutX(xPosition + 60);
+			bullet.setLayoutY(yPosition + 165);
+			bulletRect = getBounds(bullet);
+			bulletRect.setFill(Color.TRANSPARENT);
+			bulletRect.setStroke(Color.BLACK);
+		    bulletRect.setStrokeWidth(2);
 			
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
-    	      translateTransition.setNode(frozenBullet);
+    	      translateTransition.setNode(bullet);
     	      //The displacement of the animation
     	      translateTransition.setByX(1125 - xPosition);
     	      translateTransition.setCycleCount(1000);
     	      translateTransition.setAutoReverse(false);
     	      translateTransition.play();
-  			GardenScene.fullImage.getChildren().add(frozenBullet);
+  			GardenScene.fullImage.getChildren().add(bullet);
   			//trackBullet();
   			TranslateTransition translateTransition2 = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition2.setDuration(Duration.millis(3000));
-    	      translateTransition2.setNode(fBulletRect);
+    	      translateTransition2.setNode(bulletRect);
     	      //The displacement of the animation
     	      translateTransition2.setByX(bulletEndPosition);
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
     	      translateTransition2.play(); 
-    	    GardenScene.fullImage.getChildren().add(fBulletRect);
+    	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
@@ -276,8 +276,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
 		 if (plantImage != null) {
 			//adding plant image to fullImage pane, along with the correct position
-			plantImage.setLayoutX(xPosition + 25);
-			plantImage.setLayoutY(yPosition + 160);
+			 plantImage.setLayoutX(xPosition + 25);
+			 plantImage.setLayoutY(yPosition + 160);
 			GardenScene.fullImage.getChildren().add(plantImage);
 		 }
 
@@ -293,14 +293,36 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 	}
+	
+	
 
 	
+
+	public ImageView getBullet() {
+		return bullet;
+	}
+
+
+	public void setBullet(ImageView bullet) {
+		this.bullet = bullet;
+	}
+
+
+	public static Rectangle getBulletRect() {
+		return bulletRect;
+	}
+
+
+	public static void setBulletRect(Rectangle bulletRect) {
+		GardenButtonHandler.bulletRect = bulletRect;
+	}
+
 
 	public static void damageZombie(Zombie zombie) {
 		if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
 			zombie.loseHealth(10);
 		}
-		else if (fBulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
+		else if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
 			zombie.loseHealth(10);
 		}
 	}
