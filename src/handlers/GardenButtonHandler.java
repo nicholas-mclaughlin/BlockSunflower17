@@ -47,9 +47,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 	//public static Button errorMessage = new Button("Buy a plant first!");
 
-	public Rectangle getBounds(ImageView z) {
-		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
-	}
+	
 
 	//constructor
 	public GardenButtonHandler(Player aPlayer, Game aGame) {
@@ -189,43 +187,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e1.printStackTrace();
 			}
 
-			/*//creating frozen pea bullet image
-			try {
-				bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			bulletRect = getBounds(bullet);
-			bulletRect.setStroke(Color.AQUA);
-			//Setting the position of the frozen pea bullet so it starts at the frozen peashooter's mouth.
-			bullet.setLayoutX(xPosition + 60);
-			bullet.setLayoutY(yPosition + 165);
-			bulletRect = getBounds(bullet);
-			bulletRect.setFill(Color.TRANSPARENT);
-			bulletRect.setStroke(Color.BLACK);
-		    bulletRect.setStrokeWidth(2);
-
-			TranslateTransition translateTransition = new TranslateTransition();
-    	      //How long the animation will take
-    	      translateTransition.setDuration(Duration.millis(3000));
-    	      translateTransition.setNode(bullet);
-    	      //The displacement of the animation
-    	      translateTransition.setByX(1125 - xPosition);
-    	      translateTransition.setCycleCount(1000);
-    	      translateTransition.setAutoReverse(false);
-    	      translateTransition.play();
-  			GardenScene.fullImage.getChildren().add(bullet);
-  			//trackBullet();
-  			TranslateTransition translateTransition2 = new TranslateTransition();
-    	      //How long the animation will take
-    	      translateTransition2.setDuration(Duration.millis(3000));
-    	      translateTransition2.setNode(bulletRect);
-    	      //The displacement of the animation
-    	      translateTransition2.setByX(bulletEndPosition);
-    	      translateTransition2.setCycleCount(1000);
-    	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play();
-    	    GardenScene.fullImage.getChildren().add(bulletRect); */
+			
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus the error message is set to being seen

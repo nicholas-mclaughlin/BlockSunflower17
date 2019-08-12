@@ -112,6 +112,43 @@ public class Plant extends GameCharacter{
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
+		    
+		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
+		    bulletRect = getBulletBounds(bullet);
+			bulletRect.setFill(Color.TRANSPARENT);
+			bulletRect.setStroke(Color.BLACK);
+		    bulletRect.setStrokeWidth(2);
+
+		    bulletRect = getBounds(bullet);
+			bulletRect.setStroke(Color.AQUA);
+			
+			
+			bulletRect = getBulletBounds(bullet);
+			bulletRect.setFill(Color.TRANSPARENT);
+			bulletRect.setStroke(Color.BLACK);
+		    bulletRect.setStrokeWidth(2);
+
+			TranslateTransition translateTransition = new TranslateTransition();
+    	      //How long the animation will take
+    	      translateTransition.setDuration(Duration.millis(3000));
+    	      translateTransition.setNode(bullet);
+    	      //The displacement of the animation
+    	      translateTransition.setByX(500);
+    	      translateTransition.setCycleCount(1000);
+    	      translateTransition.setAutoReverse(false);
+    	      translateTransition.play();
+  			
+  			
+  			
+  			TranslateTransition translateTransition2 = new TranslateTransition();
+    	      //How long the animation will take
+    	      translateTransition2.setDuration(Duration.millis(3000));
+    	      translateTransition2.setNode(bulletRect);
+    	      //The displacement of the animation
+    	      translateTransition2.setByX(500);
+    	      translateTransition2.setCycleCount(1000);
+    	      translateTransition2.setAutoReverse(false);
+    	      translateTransition2.play();
 		}
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
