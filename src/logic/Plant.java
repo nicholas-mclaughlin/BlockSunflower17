@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Plant extends GameCharacter{
 	private int price;
@@ -13,7 +15,10 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	public ImageView plantImage;
-    
+	public Rectangle plantRect;
+	public ImageView bullet;
+	public Rectangle bulletRect;
+
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
 
@@ -22,13 +27,13 @@ public class Plant extends GameCharacter{
 		super(aPlant);
 		this.price = aPlant.price;
 	}
-	
+
 	public Button getSunButton() {
 		//sets the background to transparent so only the sun image is seen.
 		sunGif.setStyle("-fx-background-color: transparent;");
-		return sunGif;	
+		return sunGif;
 	}
-	
+
 	public void setSunButton(Button sunGif) {
 		this.sunGif = sunGif;
 	}
@@ -39,7 +44,7 @@ public class Plant extends GameCharacter{
 
 	public void setPlantImage(ImageView plantImage) {
 		this.plantImage = plantImage;
-	} 
+	}
 
 	public int getFrequency() {
 		return frequency;
@@ -51,7 +56,7 @@ public class Plant extends GameCharacter{
 	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant) throws FileNotFoundException{
 		super(typeOfPlant);
-		
+
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
 			setFrequency(10);
@@ -59,7 +64,11 @@ public class Plant extends GameCharacter{
 		    setHealth(200);
 		    setPrice(100);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
-		   
+		    setPlantRect(getBounds(getPlantImage()));
+		    plantRect.setFill(Color.TRANSPARENT);
+		    plantRect.setStroke(Color.BLACK);
+		    plantRect.setStrokeWidth(2);
+
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
@@ -68,6 +77,10 @@ public class Plant extends GameCharacter{
 			setHealth(200);
 		    setPrice(175);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
+		    setPlantRect(getBounds(getPlantImage()));
+		    plantRect.setFill(Color.TRANSPARENT);
+		    plantRect.setStroke(Color.BLACK);
+		    plantRect.setStrokeWidth(2);
 		}
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
@@ -76,6 +89,12 @@ public class Plant extends GameCharacter{
 			setPrice(50);
 			setHealth(1000);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
+			setPlantRect(getBounds(getPlantImage()));
+		    plantRect.setFill(Color.TRANSPARENT);
+		    plantRect.setStroke(Color.BLACK);
+		    plantRect.setStrokeWidth(2);
+		    plantRect.setHeight(80);
+		    plantRect.setWidth(70);
 		}
 		else if (typeOfPlant == "Potato Mine") {
 			setFirstChar('M');
@@ -85,13 +104,25 @@ public class Plant extends GameCharacter{
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
 			getPlantImage().setFitWidth(70);
 			getPlantImage().setPreserveRatio(true);
+			setPlantRect(getBounds(getPlantImage()));
+		    plantRect.setFill(Color.TRANSPARENT);
+		    plantRect.setStroke(Color.BLACK);
+		    plantRect.setStrokeWidth(2);
+		    plantRect.setHeight(60);
+		    plantRect.setWidth(63);
 		}
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
 		    setPrice(50);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
-		 
-		} 
+		    setPlantRect(getBounds(getPlantImage()));
+		    plantRect.setFill(Color.TRANSPARENT);
+		    plantRect.setStroke(Color.BLACK);
+		    plantRect.setStrokeWidth(2);
+		    plantRect.setHeight(80);
+		    plantRect.setWidth(70);
+
+		}
 
 	}
 
@@ -141,5 +172,34 @@ public class Plant extends GameCharacter{
 	public int getRow() {
 		return row;
 	}
+
+	public Rectangle getPlantRect() {
+		return plantRect;
+	}
+
+	public void setPlantRect(Rectangle plantRect) {
+		this.plantRect = plantRect;
+	}
+
+	public ImageView getBullet() {
+		return bullet;
+	}
+
+	public void setBullet(ImageView bullet) {
+		this.bullet = bullet;
+	}
+
+	public Rectangle getBulletRect() {
+		return bulletRect;
+	}
+
+	public void setBulletRect(Rectangle bulletRect) {
+		this.bulletRect = bulletRect;
+	}
+
+	public Rectangle getBounds(ImageView z) {
+		return new Rectangle(z.getLayoutX(), z.getLayoutY(), 60, 65);
+	}
+
 
 }
