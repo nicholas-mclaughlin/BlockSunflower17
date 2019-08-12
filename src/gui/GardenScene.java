@@ -54,6 +54,8 @@ public class GardenScene extends BaseScene {
 
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
+	
+	public static Button errorMessage = new Button("Buy a plant first!");	
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -133,6 +135,8 @@ public class GardenScene extends BaseScene {
 		z.zombieTracker(game);
 	} 
 	
+	fullImage.getChildren().add(errorMessage);
+	errorMessage.setStyle("-fx-opacity: 0.0;");
 	
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);

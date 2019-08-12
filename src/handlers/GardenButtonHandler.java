@@ -49,14 +49,11 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	static Rectangle bulletRect;
 	static Rectangle fBulletRect;
 	
-	
+	//public static Button errorMessage = new Button("Buy a plant first!");	
 	
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
 	}
-
-
-	public static Button errorMessage = null;
 
 	//constructor
 	public GardenButtonHandler(Player aPlayer, Game aGame) {
@@ -88,6 +85,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event) {
+		
 		Button source = (Button) event.getSource();
 
 		//ImageView plantImage = null;
@@ -266,11 +264,23 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus an error message is created
-			errorMessage = new Button("Buy a plant first!");
-			errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
-			errorMessage.setLayoutX(710);
-			errorMessage.setLayoutY(3);
-			GardenScene.fullImage.getChildren().add(errorMessage);
+			GardenScene.errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
+			GardenScene.errorMessage.setLayoutX(710);
+			GardenScene.errorMessage.setLayoutY(3);
+			//GardenScene.fullImage.getChildren().add(errorMessage);
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	GardenScene.errorMessage.setStyle("-fx-opacity: 0.0;");
+			                }
+			            });
+			        }
+			    }, 2000);	
 		}
 
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
