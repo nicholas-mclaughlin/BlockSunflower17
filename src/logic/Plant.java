@@ -31,30 +31,7 @@ public class Plant extends GameCharacter{
 		this.price = aPlant.price;
 	}
 
-	public Button getSunButton() {
-		//sets the background to transparent so only the sun image is seen.
-		sunGif.setStyle("-fx-background-color: transparent;");
-		return sunGif;
-	}
-
-	public void setSunButton(Button sunGif) {
-		this.sunGif = sunGif;
-	}
-
-	public ImageView getPlantImage() {
-		return plantImage;
-	}
-
-	public void setPlantImage(ImageView plantImage) {
-		this.plantImage = plantImage;
-	}
-
-	public int getFrequency() {
-		return frequency;
-	}
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
-	}
+	
 
 	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant) throws FileNotFoundException{
@@ -191,6 +168,8 @@ public class Plant extends GameCharacter{
 		    plantRect.setWidth(70);
 
 		}
+		
+		Player.setPlantHeld("");
 
 	}
 
@@ -270,6 +249,31 @@ public class Plant extends GameCharacter{
 	}
 	public Rectangle getBulletBounds(ImageView b) {
 		return new Rectangle(b.getLayoutX(), b.getLayoutY(), 25, 25);
+	}
+	
+	public Button getSunButton() {
+		//sets the background to transparent so only the sun image is seen.
+		sunGif.setStyle("-fx-background-color: transparent;");
+		return sunGif;
+	}
+
+	public void setSunButton(Button sunGif) {
+		this.sunGif = sunGif;
+	}
+
+	public ImageView getPlantImage() {
+		return plantImage;
+	}
+
+	public void setPlantImage(ImageView plantImage) {
+		this.plantImage = plantImage;
+	}
+
+	public int getFrequency() {
+		return frequency;
+	}
+	public void setFrequency(int frequency) {
+		this.frequency = frequency;
 	}
 
 	public double bulletEndPosition() {

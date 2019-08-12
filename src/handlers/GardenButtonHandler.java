@@ -96,7 +96,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
 
-		int bulletEndPosition = (int) (1125 - xPosition);
+		//int bulletEndPosition = (int) (1125 - xPosition);
 
 
 		/**
@@ -112,6 +112,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
+				game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -150,6 +151,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
+				game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -164,6 +166,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
+				game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -173,6 +176,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
+				game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -182,6 +186,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
+				game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -222,8 +227,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			 plant.getBullet().setLayoutY(yPosition + 165);
 			 plant.getBulletRect().setLayoutX(xPosition + 65);
 			 plant.getBulletRect().setLayoutY(yPosition + 165);
-			 }
+			 
 			 GardenScene.fullImage.getChildren().addAll(plant.getBullet(), plant.getBulletRect());
+			 }
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);
 		 }

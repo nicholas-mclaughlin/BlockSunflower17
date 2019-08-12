@@ -475,9 +475,9 @@ public class Zombie extends GameCharacter{
 		        		System.out.println("------------------");
 		            	*/
 		            	
-		            	if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
+		            	/*if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
 		            		zombieStops();
-		            	}
+		            	} */
 		            	
 		            	
 

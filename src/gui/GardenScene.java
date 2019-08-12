@@ -150,20 +150,23 @@ public class GardenScene extends BaseScene {
 	setScene(scene);
 	display();
 	
-	/*for(int i = 0; i<5; i++)
+	for(int i = 0; i<5; i++)
 	{
 	    for(int j = 0; j<9; j++)
 	    {
-	    	for (int z = 0; z < level.zombies.length; z++) {
-	        if (game.getGardenPlots()[i][j].getType() == "PeaShooter" || game.getGardenPlots()[i][j].getType() == "Frozen PeaShooter") {
-	        	
-	        		checkCollision(game.getGardenPlots()[i][j].getBulletRect(), level.zombies[z].getRect());
+	    	
+	    	if (game.getPlantPlots()[i][j] != null) {
+	        if (game.getPlantPlots()[i][j].getType() == "PeaShooter" || game.getPlantPlots()[i][j].getType() == "Frozen PeaShooter") {
+	        	for (int z = 0; z < 1; z++) {
+	        		checkCollision(game.getPlantPlots()[i][j].getPlantRect(), level.zombies[z].getRect());
 	        }
 	        }
+	    	}
 	    }
-	    
-	} */
 	}
+	    
+	} 
+	
 
 	//creates random X and Y positions for the suns to appear in and returns these values
 		public int generateRandomY() {

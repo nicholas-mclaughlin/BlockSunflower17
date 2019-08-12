@@ -10,12 +10,12 @@ public class Player {
 	 * plantHeld will keep track of which plant did the player pick
 	 */
 	private int money = 50;
-	private String plantHeld = "";
+	private static String plantHeld = "";
 	
 	//constructor
 	public Player(int aMoney, String aPlant) {
 		this.money = aMoney;
-		this.plantHeld = aPlant;
+		plantHeld = aPlant;
 	}
 
 	public Player() {
@@ -41,8 +41,8 @@ public class Player {
 	}
 
 	//plantHeld setter
-	public void setPlantHeld(String aPlant) {
-		this.plantHeld = aPlant;
+	public static void setPlantHeld(String aPlant) {
+		plantHeld = aPlant;
 	}
 	
 	//increases the money by 25 because each sun is worth 25 suns

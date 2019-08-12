@@ -14,30 +14,27 @@ public class Game {
 	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
 	 *  the row and column being the garden plots index.
 	 */
-	private Plant[][] gardenPlots = {{new Plant("0,0"), new Plant("0,1"), new Plant("0,2"), new Plant("0,3"),
-		new Plant("0,4"),new Plant("0,5"), new Plant("0,6"), new Plant("0,7"), new Plant("0,8")},
-		{new Plant("1,0"), new Plant("1,1"), new Plant("1,2"), new Plant("1,3"), new Plant("1,4"), new Plant("1,5"),
-		new Plant("1,6"), new Plant("1,7"), new Plant("1,8")}, {new Plant("2,0"), new Plant("2,1"),
-		new Plant("2,2"), new Plant("2,3"), new Plant("2,4"), new Plant("2,5"), new Plant("2,6"), new Plant("2,7"),
-		new Plant("2,8")}, {new Plant("3,0"), new Plant("3,1"), new Plant("3,2"), new Plant("3,3"),
-		new Plant("3,4"), new Plant("3,5"), new Plant("3,6"), new Plant("3,7"), new Plant("3,8")},
-		{new Plant("4,0"), new Plant("4,1"), new Plant("4,2"), new Plant("4,3"), new Plant("4,4"), new Plant("4,5"),
-			new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
+	private GameCharacter[][] gardenPlots = {{new GameCharacter("0,0"), new GameCharacter("0,1"), new GameCharacter("0,2"), new GameCharacter("0,3"),
+		new GameCharacter("0,4"),new GameCharacter("0,5"), new GameCharacter("0,6"), new GameCharacter("0,7"), new GameCharacter("0,8")},
+		{new GameCharacter("1,0"), new GameCharacter("1,1"), new GameCharacter("1,2"), new GameCharacter("1,3"), new GameCharacter("1,4"), new GameCharacter("1,5"),
+		new GameCharacter("1,6"), new GameCharacter("1,7"), new GameCharacter("1,8")}, {new GameCharacter("2,0"), new GameCharacter("2,1"),
+		new GameCharacter("2,2"), new GameCharacter("2,3"), new GameCharacter("2,4"), new GameCharacter("2,5"), new GameCharacter("2,6"), new GameCharacter("2,7"),
+		new GameCharacter("2,8")}, {new GameCharacter("3,0"), new GameCharacter("3,1"), new GameCharacter("3,2"), new GameCharacter("3,3"),
+		new GameCharacter("3,4"), new GameCharacter("3,5"), new GameCharacter("3,6"), new GameCharacter("3,7"), new GameCharacter("3,8")},
+		{new GameCharacter("4,0"), new GameCharacter("4,1"), new GameCharacter("4,2"), new GameCharacter("4,3"), new GameCharacter("4,4"), new GameCharacter("4,5"),
+			new GameCharacter("4,6"), new GameCharacter("4,7"), new GameCharacter("4,8")}};
 	{
 	for (int r = 0; r < 5; r++) {
 		for (int column = 0; column < 9; column++) {
 			theGarden[r][column] = gardenPlots[r][column].getType();
 		}}
+	
 	}
-	/*
-	private Zombie[] zombieRow0 = new Zombie[1220];
-	private Zombie[] zombieRow1 = new Zombie[1220];
-	private Zombie[] zombieRow2 = new Zombie[1220];
-	private Zombie[] zombieRow3 = new Zombie[1220];
-	private Zombie[] zombieRow4 = new Zombie[1220];
-	*/
+	
+	private Plant[][] plantPlots = new Plant[5][9];
+	
 	//constructor
-	public Game(Player aPlayer, Plant[][] aGardenPlot) {
+	public Game(Player aPlayer, GameCharacter[][] aGardenPlot) {
 		this.player = aPlayer;
 		this.gardenPlots = getGardenPlots();
 	}
@@ -46,10 +43,13 @@ public class Game {
 		return player;
 	}
 
-	public Plant getCharacter(int row, int column) {
-		return new Plant(this.gardenPlots[row][column]);
+	public GameCharacter getCharacter(int row, int column) {
+		return new GameCharacter(this.gardenPlots[row][column]);
 	}
 	
+	public Plant getPlant(int row, int column) throws Exception {
+		return new Plant(this.plantPlots[row][column]);
+	}
 	
 	/**
 	 * getGardenPlots() creates a new 2D array of gamecharacters of the same elements in the local
@@ -57,8 +57,8 @@ public class Game {
 	 * 
 	 * @return copy of gardenPlot
 	 */
-	public Plant[][] getGardenPlots() {
-		Plant[][] theGarden = new Plant[5][9];
+	public GameCharacter[][] getGardenPlots() {
+		GameCharacter[][] theGarden = new GameCharacter[5][9];
 		for (int row = 0; row < 5; row++) {
 			for (int column = 0; column < 9; column++) {
 				theGarden[row][column] = getCharacter(row, column);
@@ -75,10 +75,14 @@ public class Game {
 	 * @param column	column where the plant is to be placed
 	 * @throws Exception 
 	 */
-	public void placePlant(Plant aPlant, int row, int column) throws Exception {
-		Plant thePlant = new Plant(aPlant);
+	public void placePlant(GameCharacter aPlant, int row, int column) throws Exception {
+		GameCharacter thePlant = new GameCharacter(aPlant);
 		gardenPlots[row][column] = thePlant;
 		theGarden[row][column] = thePlant.getType();
+	}
+	public void placePlant2(Plant aPlant, int row, int column) throws Exception{
+		Plant thePlant = new Plant(aPlant);
+		plantPlots[row][column] = thePlant;
 	}
 	
 	public void gardenPlotString() {
@@ -90,6 +94,20 @@ public class Game {
 		}
 		//return theGarden;
 	}
+	
+	
+	public Plant[][] getPlantPlots() throws Exception {
+		Plant[][] thePlants = new Plant[5][9];
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+				if (thePlants[row][column] != null) {
+				thePlants[row][column] = getPlant(row, column);
+				}
+			}
+		}
+		return thePlants;
+	}
+	
 	
 	
 	public void printGardenPlotString() {
