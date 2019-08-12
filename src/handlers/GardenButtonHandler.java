@@ -266,7 +266,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			//adding plant image to fullImage pane, along with the correct position
 			 plant.getPlantImage().setLayoutX(xPosition + 25);
 			 plant.getPlantImage().setLayoutY(yPosition + 160);
-			GardenScene.fullImage.getChildren().add(plant.getPlantImage());
+			 plant.getPlantRect().setLayoutX(xPosition + 25);
+			 plant.getPlantRect().setLayoutY(yPosition + 160);
+			GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect());
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);
 		 }
