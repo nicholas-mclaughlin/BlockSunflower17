@@ -263,11 +263,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	    GardenScene.fullImage.getChildren().add(fBulletRect);
 
 		} else if (player.getPlantHeld().equals("")){
-			//if there was no plant being held, it was set to blank thus an error message is created
+			//if there was no plant being held, it was set to blank thus the error message is set to being seen
 			GardenScene.errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
 			GardenScene.errorMessage.setLayoutX(710);
 			GardenScene.errorMessage.setLayoutY(3);
-			//GardenScene.fullImage.getChildren().add(errorMessage);
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
 
@@ -280,7 +279,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			                }
 			            });
 			        }
-			    }, 2000);	
+			    }, 2500);	
 		}
 
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
