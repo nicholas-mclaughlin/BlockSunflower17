@@ -11,16 +11,16 @@ public class Plant extends GameCharacter{
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
-	//ImageView plantImage = null;
-	
+	public ImageView plantImage = null;
+
 	//constructor
 	public Plant(Plant aPlant) {
 		super(aPlant);
 		this.price = aPlant.price;
 	}
-	
-	
-	
+
+
+
 	/*public ImageView getPlantImage() {
 		return plantImage;
 	}
@@ -39,7 +39,7 @@ public class Plant extends GameCharacter{
 	public void setFrequency(int frequency) {
 		this.frequency = frequency;
 	}
-	
+
 	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant){
 		super(typeOfPlant);
@@ -70,7 +70,7 @@ public class Plant extends GameCharacter{
 			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
-			
+
 		}
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
@@ -86,13 +86,13 @@ public class Plant extends GameCharacter{
 	public int getPrice() {
 		return price;
 	}
-	
+
 	public void attack(Zombie aZombie) {
 		if (aZombie.getRow() == this.getRow()) {
 			aZombie.loseHealth(this.getAttack());
 		}
 	}
-	
+
 	//sets row of plant with reference to default gardenPlots
 	public void setRow(Game aGame, String coordinate) {
 		int theRow = 0;
@@ -105,7 +105,7 @@ public class Plant extends GameCharacter{
 			}
 		} this.row = theRow;
 	}
-	
+
 	//sets column of plant with reference to default gardenPlots
 	public void setColumn(Game aGame, String coordinate) {
 		int theColumn = 0;
@@ -118,7 +118,7 @@ public class Plant extends GameCharacter{
 			}
 		} this.column = theColumn;
 	}
-	
+
 	public int getColumn() {
 		return column;
 	}
@@ -126,7 +126,13 @@ public class Plant extends GameCharacter{
 	public int getRow() {
 		return row;
 	}
-	
-	
-	
+
+	public ImageView getPlantImage() {
+		return plantImage;
+	}
+
+	public void setPlantImage (ImageView plantImage) {
+		this.plantImage = plantImage;
+	}
+
 }

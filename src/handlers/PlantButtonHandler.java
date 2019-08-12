@@ -67,10 +67,11 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		 * The error message also appears since a plant was bought.
 		 */
 		if (disable) {
-			if (GardenButtonHandler.errorMessage != null) {
-				 GardenButtonHandler.errorMessage.setDisable(true);
-				 GardenButtonHandler.errorMessage.setStyle("-fx-opacity: 0.0;");
+			//if the error message is being seen while the player clicks a plant make it invisible again 
+			if (GardenScene.errorMessage.getStyle()=="-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;") {
+				 GardenScene.errorMessage.setStyle("-fx-opacity: 0.0;");
 			 }
+			 
 			source.setDisable(true);
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
