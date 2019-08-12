@@ -73,8 +73,9 @@ public class Game {
 	 * @param aPlant	GameCharacter, type of plant (e.g. PeaShooter)
 	 * @param row	row where the plant is to be placed
 	 * @param column	column where the plant is to be placed
+	 * @throws Exception 
 	 */
-	public void placePlant(Plant aPlant, int row, int column) {
+	public void placePlant(Plant aPlant, int row, int column) throws Exception {
 		Plant thePlant = new Plant(aPlant);
 		gardenPlots[row][column] = thePlant;
 		theGarden[row][column] = thePlant.getType();

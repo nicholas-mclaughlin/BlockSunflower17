@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 
 import gui.GardenScene;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -21,10 +22,23 @@ public class Plant extends GameCharacter{
 	public ImageView bullet = null;
 	public Rectangle bulletRect = null;
 
+	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
+	private Button sunGif = new Button("",sunGIF);
+
 	//constructor
-	public Plant(Plant aPlant) {
+	public Plant(Plant aPlant) throws Exception {
 		super(aPlant);
 		this.price = aPlant.price;
+	}
+
+	public Button getSunButton() {
+		//sets the background to transparent so only the sun image is seen.
+		sunGif.setStyle("-fx-background-color: transparent;");
+		return sunGif;
+	}
+
+	public void setSunButton(Button sunGif) {
+		this.sunGif = sunGif;
 	}
 
 	public ImageView getPlantImage() {
@@ -33,7 +47,7 @@ public class Plant extends GameCharacter{
 
 	public void setPlantImage(ImageView plantImage) {
 		this.plantImage = plantImage;
-	} 
+	}
 
 	public int getFrequency() {
 		return frequency;
@@ -45,7 +59,7 @@ public class Plant extends GameCharacter{
 	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant) throws FileNotFoundException{
 		super(typeOfPlant);
-		
+
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
 			setFrequency(10);
@@ -57,14 +71,14 @@ public class Plant extends GameCharacter{
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
-		    
+
 		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
-		    
+
 		    bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-		    
+
 		    TranslateTransition translateTransition = new TranslateTransition();
 			//How long the animation will take
 			translateTransition.setDuration(Duration.millis(3000));
@@ -74,7 +88,7 @@ public class Plant extends GameCharacter{
 			translateTransition.setCycleCount(1000);
 			translateTransition.setAutoReverse(false);
 			translateTransition.play();
-			
+
 
 			TranslateTransition translateTransition2 = new TranslateTransition();
 			//How long the animation will take
@@ -85,7 +99,7 @@ public class Plant extends GameCharacter{
 		    translateTransition2.setCycleCount(1000);
 		    translateTransition2.setAutoReverse(false);
 		    translateTransition2.play();
-		   
+
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
@@ -138,8 +152,8 @@ public class Plant extends GameCharacter{
 		    plantRect.setStrokeWidth(2);
 		    plantRect.setHeight(80);
 		    plantRect.setWidth(70);
-		 
-		} 
+
+		}
 
 	}
 
@@ -189,7 +203,7 @@ public class Plant extends GameCharacter{
 	public int getRow() {
 		return row;
 	}
-	
+
 	public Rectangle getPlantRect() {
 		return plantRect;
 	}
@@ -220,7 +234,7 @@ public class Plant extends GameCharacter{
 	public Rectangle getBulletBounds(ImageView b) {
 		return new Rectangle(b.getLayoutX(), b.getLayoutY(), 25, 25);
 	}
-	
+
 	public double bulletEndPosition() {
 		return 100;
 	}
