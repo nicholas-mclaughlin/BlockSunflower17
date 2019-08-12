@@ -11,7 +11,7 @@ public class Plant extends GameCharacter{
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
-	public ImageView plantImage = null;
+	public ImageView plantImage;
 
 	//constructor
 	public Plant(Plant aPlant) {
@@ -37,6 +37,7 @@ public class Plant extends GameCharacter{
 	//sets default attributes of certain types of plants
 	public Plant(String typeOfPlant) throws FileNotFoundException{
 		super(typeOfPlant);
+		
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
 			setFrequency(10);

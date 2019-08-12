@@ -93,7 +93,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		try {
 			plant = new Plant(player.getPlantHeld());
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		plant.setRow(this.game, source.getText());
@@ -196,19 +195,13 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 
-
 		} else if (plant.getType().equals("Potato Mine")) {
 
-			plant.getPlantImage().setFitWidth(70);
-
-			plant.getPlantImage().setPreserveRatio(true);
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-
 
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
 
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-
 
 			//creating frozen pea bullet image
 			try {
@@ -290,10 +283,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 	}
-
-
-
-
 
 	public ImageView getBullet() {
 		return bullet;
