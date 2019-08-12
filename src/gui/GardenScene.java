@@ -3,6 +3,7 @@ package gui;
 import java.io.FileInputStream;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
 import drivers.Session;
@@ -12,6 +13,10 @@ import handlers.SunButtonHandler;
 
 import java.io.File;
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -23,6 +28,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 
 import logic.Game;
@@ -143,6 +149,20 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
+	
+	/*for(int i = 0; i<5; i++)
+	{
+	    for(int j = 0; j<9; j++)
+	    {
+	    	for (int z = 0; z < level.zombies.length; z++) {
+	        if (game.getGardenPlots()[i][j].getType() == "PeaShooter" || game.getGardenPlots()[i][j].getType() == "Frozen PeaShooter") {
+	        	
+	        		checkCollision(game.getGardenPlots()[i][j].getBulletRect(), level.zombies[z].getRect());
+	        }
+	        }
+	    }
+	    
+	} */
 	}
 
 	//creates random X and Y positions for the suns to appear in and returns these values
@@ -232,6 +252,28 @@ public class GardenScene extends BaseScene {
 		return root;
 	}
 	
+	
+	public void checkCollision(Rectangle rect1, Rectangle rect2) {
+		
+		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
+
+		        @Override
+		        public Boolean call() throws Exception {
+		            return rect1.getBoundsInParent().intersects(rect2.getBoundsInParent());
+		        }
+
+		    }, rect1.boundsInParentProperty(), rect2.boundsInParentProperty());
+
+		    colliding.addListener(new ChangeListener<Boolean>() {
+		        @Override
+		        public void changed(ObservableValue<? extends Boolean> obs,
+		                Boolean oldValue, Boolean newValue) {
+		            if (newValue) {
+		                System.out.println("Colliding");
+		            } 
+		        }
+		    });
+		}
 	
 
 }

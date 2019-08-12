@@ -28,7 +28,7 @@ public class Zombie extends GameCharacter{
 	private int deathTime = 0;
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
-	private Rectangle r = new Rectangle(80, 100);
+	
 	private Rectangle rect = getBounds(zombieImage);
 	
 	public Rectangle getBounds(ImageView z) {
@@ -144,13 +144,7 @@ public class Zombie extends GameCharacter{
 	}
 
 	
-		public Rectangle getR() {
-		return r;
-	}
-
-	public void setR(Rectangle r) {
-		this.r = r;
-	}
+	
 
 	//Getters and setters
 	public double getSpeed() {
