@@ -42,11 +42,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
-	private ImageView bullet;
-
-
-	ImageView plantImage = null;
-	private Rectangle bulletRect;
+	
 
 
 	//public static Button errorMessage = new Button("Buy a plant first!");
@@ -152,44 +148,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 
 
-			//creating pea bullet image
-			try {
-				bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			//Setting the position of the pea bullet so it starts at the peashooter's mouth.
-			bullet.setLayoutX(xPosition + 60 );
-			bullet.setLayoutY(yPosition + 165);
 
-
-			bulletRect = getBounds(bullet);
-			bulletRect.setFill(Color.TRANSPARENT);
-			bulletRect.setStroke(Color.BLACK);
-		    bulletRect.setStrokeWidth(2);
-			          	      TranslateTransition translateTransition = new TranslateTransition();
-			          	      //How long the animation will take
-			          	      translateTransition.setDuration(Duration.millis(3000));
-			          	      translateTransition.setNode(bullet);
-			          	      //The displacement of the animation
-			          	      translateTransition.setByX(1125 - xPosition);
-			          	      translateTransition.setCycleCount(1000);
-			          	      translateTransition.setAutoReverse(false);
-			          	      translateTransition.play();
-			        			GardenScene.fullImage.getChildren().add(bullet);
-			        			//trackBullet();
-
-
-			        			TranslateTransition translateTransition2 = new TranslateTransition();
-				          	      //How long the animation will take
-				          	      translateTransition2.setDuration(Duration.millis(3000));
-				          	      translateTransition2.setNode(bulletRect);
-				          	      //The displacement of the animation
-				          	      translateTransition2.setByX(bulletEndPosition);
-				          	      translateTransition2.setCycleCount(1000);
-				          	      translateTransition2.setAutoReverse(false);
-				          	      translateTransition2.play();
-				          	    GardenScene.fullImage.getChildren().add(bulletRect);
+			
+		   
 
 		} else if (plant.getType().equals("Wallnut")) {
 
@@ -203,7 +164,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 
-			//creating frozen pea bullet image
+			/*//creating frozen pea bullet image
 			try {
 				bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
 			} catch (FileNotFoundException e) {
@@ -239,7 +200,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
     	      translateTransition2.play();
-    	    GardenScene.fullImage.getChildren().add(bulletRect);
+    	    GardenScene.fullImage.getChildren().add(bulletRect); */
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus the error message is set to being seen
@@ -268,7 +229,11 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			 plant.getPlantImage().setLayoutY(yPosition + 160);
 			 plant.getPlantRect().setLayoutX(xPosition + 25);
 			 plant.getPlantRect().setLayoutY(yPosition + 160);
-			GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect());
+			 plant.getBullet().setLayoutX(xPosition + 65);
+			 plant.getBullet().setLayoutY(yPosition + 165);
+			 plant.getBulletRect().setLayoutX(xPosition + 65);
+			 plant.getBulletRect().setLayoutY(yPosition + 165);
+			GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect(), plant.getBullet(), plant.getBulletRect());
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);
 		 }
@@ -286,24 +251,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		}
 	}
 
-	public ImageView getBullet() {
-		return bullet;
-	}
-
-
-	public void setBullet(ImageView bullet) {
-		this.bullet = bullet;
-	}
-
-
-	public Rectangle getBulletRect() {
-		return bulletRect;
-	}
-
-
-	public void setBulletRect(Rectangle bulletRect) {
-		this.bulletRect = bulletRect;
-	}
+	
 
 
 

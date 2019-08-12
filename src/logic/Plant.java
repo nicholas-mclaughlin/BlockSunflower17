@@ -3,10 +3,13 @@ package logic;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import gui.GardenScene;
+import javafx.animation.TranslateTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Plant extends GameCharacter{
 	private int price;
@@ -15,8 +18,8 @@ public class Plant extends GameCharacter{
 	private int column;
 	public ImageView plantImage;
 	public Rectangle plantRect;
-	public ImageView bullet;
-	public Rectangle bulletRect;
+	public ImageView bullet = null;
+	public Rectangle bulletRect = null;
 
 	//constructor
 	public Plant(Plant aPlant) {
@@ -54,6 +57,34 @@ public class Plant extends GameCharacter{
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
+		    
+		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
+		    
+		    bulletRect = getBulletBounds(bullet);
+			bulletRect.setFill(Color.TRANSPARENT);
+			bulletRect.setStroke(Color.BLACK);
+		    bulletRect.setStrokeWidth(2);
+		    
+		    TranslateTransition translateTransition = new TranslateTransition();
+			//How long the animation will take
+			translateTransition.setDuration(Duration.millis(3000));
+			translateTransition.setNode(bullet);
+			//The displacement of the animation
+			translateTransition.setByX(500);
+			translateTransition.setCycleCount(1000);
+			translateTransition.setAutoReverse(false);
+			translateTransition.play();
+			
+
+			TranslateTransition translateTransition2 = new TranslateTransition();
+			//How long the animation will take
+		    translateTransition2.setDuration(Duration.millis(3000));
+		    translateTransition2.setNode(bulletRect);
+		    //The displacement of the animation
+		    translateTransition2.setByX(500);
+		    translateTransition2.setCycleCount(1000);
+		    translateTransition2.setAutoReverse(false);
+		    translateTransition2.play();
 		   
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -185,6 +216,13 @@ public class Plant extends GameCharacter{
 
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle(z.getLayoutX(), z.getLayoutY(), 60, 65);
+	}
+	public Rectangle getBulletBounds(ImageView b) {
+		return new Rectangle(b.getLayoutX(), b.getLayoutY(), 25, 25);
+	}
+	
+	public double bulletEndPosition() {
+		return 100;
 	}
 
 
