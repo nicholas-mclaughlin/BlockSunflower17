@@ -43,14 +43,14 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 	private ImageView bullet;
-	
+
 
 	ImageView plantImage = null;
 	private Rectangle bulletRect;
-	
-	
-	//public static Button errorMessage = new Button("Buy a plant first!");	
-	
+
+
+	//public static Button errorMessage = new Button("Buy a plant first!");
+
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 25, 25);
 	}
@@ -85,11 +85,17 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	 */
 	@Override
 	public void handle(ActionEvent event) {
-		
+
 		Button source = (Button) event.getSource();
 
 		//ImageView plantImage = null;
-		Plant plant = new Plant(player.getPlantHeld());
+		Plant plant = null;
+		try {
+			plant = new Plant(player.getPlantHeld());
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		plant.setRow(this.game, source.getText());
 		plant.setColumn(this.game, source.getText());
 		System.out.println(player.getPlantHeld());
@@ -110,13 +116,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 *
 		 */
 		if (plant.getType().equals("Sunflower")) {
-			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//placing the sun gifs which is a sunButton
 			sunButton = null;
@@ -147,13 +149,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			    }, 6000);
 
 		} else if (plant.getType().equals("PeaShooter")) {
-			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			} 
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//creating pea bullet image
 			try {
@@ -165,7 +163,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			bullet.setLayoutX(xPosition + 60 );
 			bullet.setLayoutY(yPosition + 165);
 
-								
+
 			bulletRect = getBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
@@ -181,8 +179,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			          	      translateTransition.play();
 			        			GardenScene.fullImage.getChildren().add(bullet);
 			        			//trackBullet();
-			        			 
-			        			
+
+
 			        			TranslateTransition translateTransition2 = new TranslateTransition();
 				          	      //How long the animation will take
 				          	      translateTransition2.setDuration(Duration.millis(3000));
@@ -191,38 +189,26 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				          	      translateTransition2.setByX(bulletEndPosition);
 				          	      translateTransition2.setCycleCount(1000);
 				          	      translateTransition2.setAutoReverse(false);
-				          	      translateTransition2.play(); 
+				          	      translateTransition2.play();
 				          	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (plant.getType().equals("Wallnut")) {
-			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 		} else if (plant.getType().equals("Potato Mine")) {
-			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
-			plantImage.setFitWidth(70);
-			
-			plantImage.setPreserveRatio(true);
+
+			plant.getPlantImage().setFitWidth(70);
+
+			plant.getPlantImage().setPreserveRatio(true);
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
-			try {
-				plantImage = new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif")));
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
-			}
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			
+
 
 			//creating frozen pea bullet image
 			try {
@@ -239,7 +225,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-			
+
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -259,7 +245,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
     	      translateTransition2.setByX(bulletEndPosition);
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play(); 
+    	      translateTransition2.play();
     	    GardenScene.fullImage.getChildren().add(bulletRect);
 
 		} else if (player.getPlantHeld().equals("")){
@@ -279,15 +265,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			                }
 			            });
 			        }
-			    }, 2500);	
+			    }, 2500);
 		}
 
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
-		 if (plantImage != null) {
+		 if (plant.getPlantImage() != null) {
 			//adding plant image to fullImage pane, along with the correct position
-			 plantImage.setLayoutX(xPosition + 25);
-			 plantImage.setLayoutY(yPosition + 160);
-			GardenScene.fullImage.getChildren().add(plantImage);
+			 plant.getPlantImage().setLayoutX(xPosition + 25);
+			 plant.getPlantImage().setLayoutY(yPosition + 160);
+			GardenScene.fullImage.getChildren().add(plant.getPlantImage());
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);
 		 }
@@ -304,10 +290,10 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 	}
-	
-	
 
-	
+
+
+
 
 	public ImageView getBullet() {
 		return bullet;
@@ -329,6 +315,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	}
 
 
-	
+
 
 }

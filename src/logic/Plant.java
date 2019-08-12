@@ -19,19 +19,13 @@ public class Plant extends GameCharacter{
 		this.price = aPlant.price;
 	}
 
-
-
-	/*public ImageView getPlantImage() {
+	public ImageView getPlantImage() {
 		return plantImage;
 	}
- */
 
-
-	/*public void setPlantImage(ImageView plantImage) {
+	public void setPlantImage(ImageView plantImage) {
 		this.plantImage = plantImage;
-	} */
-
-
+	} 
 
 	public int getFrequency() {
 		return frequency;
@@ -41,7 +35,7 @@ public class Plant extends GameCharacter{
 	}
 
 	//sets default attributes of certain types of plants
-	public Plant(String typeOfPlant){
+	public Plant(String typeOfPlant) throws FileNotFoundException{
 		super(typeOfPlant);
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
@@ -49,7 +43,8 @@ public class Plant extends GameCharacter{
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
-		   // plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
+		   
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
@@ -57,6 +52,7 @@ public class Plant extends GameCharacter{
 			setAttack(15);
 			setHealth(200);
 		    setPrice(175);
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
 		}
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
@@ -64,19 +60,22 @@ public class Plant extends GameCharacter{
 			setAttack(0);
 			setPrice(50);
 			setHealth(1000);
+			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
 		}
 		else if (typeOfPlant == "Potato Mine") {
 			setFirstChar('M');
 			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
+			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
 
 		}
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
 		    setPrice(50);
-		   // plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
-		}
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
+		 
+		} 
 
 	}
 
@@ -125,14 +124,6 @@ public class Plant extends GameCharacter{
 
 	public int getRow() {
 		return row;
-	}
-
-	public ImageView getPlantImage() {
-		return plantImage;
-	}
-
-	public void setPlantImage (ImageView plantImage) {
-		this.plantImage = plantImage;
 	}
 
 }
