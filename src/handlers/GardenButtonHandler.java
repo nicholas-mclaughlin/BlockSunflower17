@@ -198,10 +198,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			
 
 		} else if (plant.getType().equals("Potato Mine")) {
-			
-			plant.getPlantImage().setFitWidth(70);
-			
-			plant.getPlantImage().setPreserveRatio(true);
+
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
 			
 

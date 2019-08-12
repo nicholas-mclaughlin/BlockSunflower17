@@ -68,7 +68,8 @@ public class Plant extends GameCharacter{
 			setAttack(10000);
 			setPrice(25);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
-
+			getPlantImage().setFitWidth(70);
+			getPlantImage().setPreserveRatio(true);
 		}
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
