@@ -1,10 +1,13 @@
 package logic;
 
+import javafx.scene.image.ImageView;
+
 public class Plant extends GameCharacter{
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
+	public ImageView plantImage = null;
 	
 	//constructor
 	public Plant(Plant aPlant) {
@@ -105,6 +108,12 @@ public class Plant extends GameCharacter{
 		return row;
 	}
 	
+	public ImageView getPlantImage() {
+		return plantImage;
+	}
 	
+	public void setPlantImage (ImageView plantImage) {
+		this.plantImage = plantImage;
+	}
 	
 }

@@ -116,7 +116,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			
 
 			//placing the sun gifs which is a sunButton
 			sunButton = null;
@@ -153,7 +153,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			
 
 			//creating pea bullet image
 			try {
@@ -201,7 +201,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			
 
 		} else if (plant.getType().equals("Potato Mine")) {
 			try {
@@ -213,7 +213,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			
 			plantImage.setPreserveRatio(true);
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			
 
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
 			try {
@@ -222,7 +222,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				e.printStackTrace();
 			}
 			game.placePlant(plant, plant.getRow(), plant.getColumn());
-			source.setDisable(true);
+			
 
 			//creating frozen pea bullet image
 			try {
@@ -288,6 +288,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			plantImage.setLayoutX(xPosition + 25);
 			plantImage.setLayoutY(yPosition + 160);
 			GardenScene.fullImage.getChildren().add(plantImage);
+			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
+			source.setDisable(true);
 		 }
 
 		player.setPlantHeld("");
