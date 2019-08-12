@@ -46,7 +46,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	
 
 	ImageView plantImage = null;
-	static Rectangle bulletRect;
+	private Rectangle bulletRect;
 	
 	
 	//public static Button errorMessage = new Button("Buy a plant first!");	
@@ -319,23 +319,16 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	}
 
 
-	public static Rectangle getBulletRect() {
+	public Rectangle getBulletRect() {
 		return bulletRect;
 	}
 
 
-	public static void setBulletRect(Rectangle bulletRect) {
-		GardenButtonHandler.bulletRect = bulletRect;
+	public void setBulletRect(Rectangle bulletRect) {
+		this.bulletRect = bulletRect;
 	}
 
 
-	public static void damageZombie(Zombie zombie) {
-		if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(10);
-		}
-		else if (bulletRect.getBoundsInParent().intersects(zombie.newRectangle().getBoundsInParent())) {
-			zombie.loseHealth(10);
-		}
-	}
+	
 
 }
