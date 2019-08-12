@@ -3,6 +3,7 @@ package logic;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -12,11 +13,24 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	public ImageView plantImage;
+    
+	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
+	private Button sunGif = new Button("",sunGIF);
 
 	//constructor
-	public Plant(Plant aPlant) {
+	public Plant(Plant aPlant) throws Exception {
 		super(aPlant);
 		this.price = aPlant.price;
+	}
+	
+	public Button getSunButton() {
+		//sets the background to transparent so only the sun image is seen.
+		sunGif.setStyle("-fx-background-color: transparent;");
+		return sunGif;	
+	}
+	
+	public void setSunButton(Button sunGif) {
+		this.sunGif = sunGif;
 	}
 
 	public ImageView getPlantImage() {

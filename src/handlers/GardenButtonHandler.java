@@ -23,7 +23,7 @@ import javafx.util.Duration;
 import logic.Game;
 import logic.Plant;
 import logic.Player;
-import logic.Sun;
+//import logic.Sun;
 import logic.Zombie;
 
 
@@ -45,7 +45,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private ImageView bullet;
 
 
-	ImageView plantImage = null;
+	//ImageView plantImage = null;
 	private Rectangle bulletRect;
 
 
@@ -116,13 +116,18 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		 */
 		if (plant.getType().equals("Sunflower")) {
 
-			game.placePlant(plant, plant.getRow(), plant.getColumn());
+			try {
+				game.placePlant(plant, plant.getRow(), plant.getColumn());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 
 			//placing the sun gifs which is a sunButton
 			sunButton = null;
 			try {
-				sunButton = new Sun().getSunButton();
+				sunButton = new Plant("").getSunButton();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -149,7 +154,12 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 		} else if (plant.getType().equals("PeaShooter")) {
 
-			game.placePlant(plant, plant.getRow(), plant.getColumn());
+			try {
+				game.placePlant(plant, plant.getRow(), plant.getColumn());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 
 			//creating pea bullet image
@@ -193,15 +203,30 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 		} else if (plant.getType().equals("Wallnut")) {
 
-			game.placePlant(plant, plant.getRow(), plant.getColumn());
+			try {
+				game.placePlant(plant, plant.getRow(), plant.getColumn());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} else if (plant.getType().equals("Potato Mine")) {
 
-			game.placePlant(plant, plant.getRow(), plant.getColumn());
+			try {
+				game.placePlant(plant, plant.getRow(), plant.getColumn());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		} else if (plant.getType().equals("Frozen PeaShooter")) {
 
-			game.placePlant(plant, plant.getRow(), plant.getColumn());
+			try {
+				game.placePlant(plant, plant.getRow(), plant.getColumn());
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 
 			//creating frozen pea bullet image
 			try {

@@ -28,8 +28,9 @@ import javafx.scene.text.Font;
 import logic.Game;
 import logic.GameCharacter;
 import logic.Level;
+import logic.Plant;
 import logic.Player;
-import logic.Sun;
+//import logic.Sun;
 import logic.Zombie;
 
 /**
@@ -100,7 +101,7 @@ public class GardenScene extends BaseScene {
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
 		for (int i = 0; i<=30; i++) {
-			Button sunButton = new Sun().getSunButton();
+			Button sunButton = new Plant("").getSunButton();
 			sunButton.setText("sun button");
 			sunButton.setFont(new Font(0));
 			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
