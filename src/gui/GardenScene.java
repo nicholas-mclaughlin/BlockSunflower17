@@ -65,7 +65,9 @@ public class GardenScene extends BaseScene {
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
-	public static Button errorMessage = new Button("Buy a plant first!");	
+	public static Button errorMessage = new Button("Buy a plant first!");
+	
+	public static Button gameOverMessage = new Button("GAME OVER");
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -164,6 +166,10 @@ public class GardenScene extends BaseScene {
 	//adds the error message but sets it up to not be visible 
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
+	
+	fullImage.getChildren().add(gameOverMessage);
+	gameOverMessage.setStyle("-fx-opacity: 0.0;");
+	gameOverMessage.setDisable(true);
 	
 	for(int i = 0; i<5; i++)
 	{
