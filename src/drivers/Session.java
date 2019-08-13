@@ -26,6 +26,8 @@ public class Session extends Application {
 		//Create new first scene object upon running application.
 		Homepage scene = new Homepage(this);
 		scene.setup(); //setup scene for stage (method is in class gardenscene)
+		
+		
 	}
 
 	//launch application
