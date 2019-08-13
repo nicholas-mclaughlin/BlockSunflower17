@@ -411,11 +411,12 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		                		
 		                	    for(int j = 0; j<9; j++)
 		                	    {
-		                	    	System.out.println("Working");
+		                	    	
 		                	        try {
-										if (game.getPlant(i, j).getType() == "Wallnut" || game.getPlant(i, j).getType() == "PeaShooter") {
+		                	        	
+										if (game.getPlant(i, j).getType().equals( "Wallnut") || game.getPlant(i, j).getType().equals( "PeaShooter")) {
+											System.out.println("yay " + game.getPlant(i, j).getType());
 											
-												
 											
 										}
 									} catch (Exception e) {
