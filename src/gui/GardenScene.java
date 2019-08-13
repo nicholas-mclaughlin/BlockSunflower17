@@ -165,6 +165,11 @@ public class GardenScene extends BaseScene {
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
 	
+	
+	
+	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
+	setScene(scene);
+	display();
 	for(int i = 0; i<5; i++)
 	{
 	    for(int j = 0; j<9; j++)
@@ -178,10 +183,6 @@ public class GardenScene extends BaseScene {
 	    	
 	    }
 	} 
-	
-	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
-	setScene(scene);
-	display();
 	   
 	} 
 	
