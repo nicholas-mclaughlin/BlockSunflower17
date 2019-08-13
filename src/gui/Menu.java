@@ -1,7 +1,7 @@
 package gui;
 
 import drivers.Session;
-import handlers.LevelHandler;
+import handlers.*;
 
 import java.io.FileInputStream;
 
@@ -38,21 +38,22 @@ public class Menu extends BaseScene {
 		mediaPlayer.play();
 */
 		//Create level buttons that will launch the second scene (gardenScene)
-		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.png"))));
-		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.png"))));
-		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.png"))));
+		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl1.PNG"))));
+		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl2.PNG"))));
+		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl3.PNG"))));
+		Button back = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzback.PNG"))));
 		level1.setPrefSize(550, 100);
 		level2.setPrefSize(550, 100);
 		level3.setPrefSize(550, 100);
+		back.setPrefSize(180, 80);
 		level1.setStyle("-fx-background-color: transparent;");
 		level2.setStyle("-fx-background-color: transparent;");
 		level3.setStyle("-fx-background-color: transparent;");
-//		Button quit = new Button("quit");	//quits
+		back.setStyle("-fx-background-color: transparent;");
 
 		//Add buttons to vbox
 		VBox box = new VBox();
-		box.getChildren().addAll(level1, level2, level3);
-//		box.getChildren().add(quit);
+		box.getChildren().addAll(level1, level2, level3, back);
 		box.setAlignment(Pos.CENTER);
 
 /*		BtnQuitHandler qHandler = new BtnQuitHandler();
@@ -62,6 +63,7 @@ public class Menu extends BaseScene {
 		level1.setOnAction(new LevelHandler(getSession(), 1));
 		level2.setOnAction(new LevelHandler(getSession(), 2));
 		level3.setOnAction(new LevelHandler(getSession(), 3));
+		back.setOnAction(new BackHandler(getSession(), "Homepage"));
 
 		//add background image
 		ImageView background = new ImageView(new Image(new FileInputStream("MenuImages//PvZStreet.jpeg")));
