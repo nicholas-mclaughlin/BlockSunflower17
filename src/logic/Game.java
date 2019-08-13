@@ -33,12 +33,6 @@ public class Game {
 		}}
 	}
 	
-	private ArrayList<Zombie> zombieRow0 = new ArrayList<Zombie>();
-	private ArrayList<Zombie> zombieRow1 = new ArrayList<Zombie>();
-	private ArrayList<Zombie> zombieRow2 = new ArrayList<Zombie>();
-	private ArrayList<Zombie> zombieRow3 = new ArrayList<Zombie>();
-	private ArrayList<Zombie> zombieRow4 = new ArrayList<Zombie>();
-	
 	private Plant[][] plantPlots;
 	
 	
@@ -140,35 +134,6 @@ public class Game {
 		    System.out.println();
 		}
 		System.out.println("---------------------------------------");
-	}
-	
-	public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
-		
-		if (aZombie.getRow() == 1) {
-			zombieRow0.add(aZombie);
-		} else if (aZombie.getRow() == 2) {
-			zombieRow1.add(aZombie);
-		} else if (aZombie.getRow() == 3) {
-			zombieRow2.add(aZombie);
-		} else if (aZombie.getRow() == 4) {
-			zombieRow3.add(aZombie);
-		} else if (aZombie.getRow() == 5) {
-			zombieRow4.add(aZombie);
-		}
-	}
-	
-	public Zombie getClosestZombie(int row) throws FileNotFoundException {
-		ArrayList<Zombie> zombieRow = getZombieRow(row);
-		int closestPosition = 0;
-		Zombie zombie = null;
-		for (Zombie z: zombieRow) {
-			if (z.columnNumber() < closestPosition) {
-				closestPosition = z.columnNumber();
-				zombie = z;
-				//System.out.println("" + z.columnNumber());
-			}
-		}
-		return zombie;
 	}
 	
 	
