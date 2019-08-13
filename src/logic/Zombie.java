@@ -31,9 +31,7 @@ public class Zombie extends GameCharacter{
 	
 	private Rectangle rect = getBounds(zombieImage);
 	
-	public Rectangle getBounds(ImageView z) {
-		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
-	}
+	
 	
 	/**
 	 *
@@ -109,7 +107,7 @@ public class Zombie extends GameCharacter{
 	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
 	      
-	      Rectangle rect = getBounds(zombieImage);
+	      
 	      rect.setFill(Color.TRANSPARENT);
 	      rect.setStroke(Color.BLACK);
 	      rect.setStrokeWidth(2);
@@ -123,6 +121,7 @@ public class Zombie extends GameCharacter{
 	      translateTransition.setCycleCount(1);
 	      translateTransition.setAutoReverse(false);
 	      translateTransition.play();
+	      
 	      TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition2.setDuration(Duration.millis(speed));
@@ -132,6 +131,10 @@ public class Zombie extends GameCharacter{
 	      translateTransition2.setCycleCount(1);
 	      translateTransition2.setAutoReverse(false);
 	      translateTransition2.play();
+	}
+	
+	public Rectangle getBounds(ImageView z) {
+		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
 	public Zombie(Zombie c) throws FileNotFoundException {

@@ -137,8 +137,11 @@ public class GardenScene extends BaseScene {
 	Level level = new Level(this.levelNum);
 	
 	for (Zombie z : level.getZombies()) {
-		fullImage.getChildren().add(z.newZombieImage());
-		fullImage.getChildren().add(z.newRectangle());
+		//fullImage.getChildren().add(z.newZombieImage());
+		//fullImage.getChildren().add(z.newRectangle());
+		fullImage.getChildren().add(z.getZombieImage());
+		fullImage.getChildren().add(z.getRect());
+
 		z.zombieTracker(game);
 	} 
 	
@@ -155,11 +158,11 @@ public class GardenScene extends BaseScene {
 	    for(int j = 0; j<9; j++)
 	    {
 	    	
-	    	if (game.getPlantPlots()[i][j] != null) {
-	        
-	        	for (int z = 0; z < 1; z++) {
-	        		checkCollision(game.getPlantPlots()[i][j].getPlantRect(), level.zombies[z].getRect());
-	        }
+	    	
+	        if (game.getPlant(i, j).getPlantRect() != null) {
+	        	for (int z = 0; z < level.zombies.length; z++) {
+	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.zombies[z].getRect());
+	        	}
 	        }
 	    	
 	    }
