@@ -30,6 +30,7 @@ public class Zombie extends GameCharacter{
 	private int deathTime = 0;
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
+	private boolean stopZombie = false;
 	
 	private Rectangle rect = getBounds(zombieImage);
 	
@@ -114,43 +115,7 @@ public class Zombie extends GameCharacter{
 	      rect.setStroke(Color.BLACK);
 	      rect.setStrokeWidth(2);
 	      
-	      Timer timer = new Timer();
-	 		timer.schedule(new TimerTask() {
-	 		        @Override
-	 		        public void run() {
-	 		            Platform.runLater(new Runnable() {
-	 		                @Override
-	 		                public void run() {
-	 		                	position -= 0.5;
-	 		                	zombieImage.setX(position);
-	 		                	rect.setX(position);
-	 		                	if (getHealth() <= 0) {
-	 		                		System.out.println("Dead Zombie");
-	 		                		//zombieImage = null;
-	 		                		
-	 		                		timer.cancel();
-		 		                       timer.purge();
-	 		                	} 
-	 		                	
-	 		                	if (position <= 220) {
-	 		                		System.out.println("GAMEOVER");
-	 		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75;-fx-background-color: transparent; -fx-font-weight: bold;");
-	 		                		GardenScene.gameOverMessage.setDisable(false);
-	 		                		//
-	 		                		GardenScene.gameOverMessage.setLayoutY(20);
-	 		                		GardenScene.gameOverMessage.setLayoutX(40);
-	 		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
-	 		                	
-	 		                		timer.cancel();
-	 		                       timer.purge();
-	 		                       
-	 		                	}
-	 		                }
-	 		                
-	 		            });
-	 		            
-	 		        }
-	 		    }, 0, 10);
+	      startZombie();
 	 		
 	      /*//Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
@@ -191,9 +156,19 @@ public class Zombie extends GameCharacter{
 	
 
 	//Getters and setters
+	
+	
 	public double getSpeed() {
 		return speed;
 	}
+	public boolean isStopZombie() {
+		return stopZombie;
+	}
+
+	public void setStopZombie(boolean stopZombie) {
+		this.stopZombie = stopZombie;
+	}
+
 	public int getRow() {
 		return row;
 	}
@@ -278,61 +253,8 @@ public class Zombie extends GameCharacter{
 	      return zombieImage;
 	}
 	
-	public Rectangle newRectangle() {
-		
-	      
-	      
-	      TranslateTransition translateTransition2 = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition2.setDuration(Duration.millis(speed));
-	      translateTransition2.setNode(rect);
-	      //The displacement of the animation
-	      translateTransition2.setByX(-position + 250);
-	      translateTransition2.setCycleCount(1);
-	      translateTransition2.setAutoReverse(false);
-	      translateTransition2.play();
-	      return rect;
-	}
-
-	public ImageView zombieStops() {
-		 //Sets the image at the very right side of the garden
-	      //Sets the y coordinate of the image according to the row itll be in
-	      if (row == 1) {
-	    	  zombieImage.setY(215);
-	      }
-	      else if (row == 2) {
-	    	  zombieImage.setY(310);
-	      }
-
-	      else if (row == 3){
-	    	  zombieImage.setY(410);
-	      }
-	      else if (row == 4) {
-	    	  zombieImage.setY(525);
-	      }
-
-	      else if (row == 5) {
-	    	  zombieImage.setY(630);
-	      }
-	    //Size of the zombie
-	      zombieImage.setFitHeight(100);
-	      zombieImage.setFitWidth(130);
-
-	      //Setting the preserve ratio of the image view
-	      zombieImage.setPreserveRatio(true);
-
-	      //Creates the animation of the zombie
-	      TranslateTransition translateTransition = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition.setDuration(Duration.millis(speed));
-	      translateTransition.setNode(zombieImage);
-	      //The displacement of the animation
-	      translateTransition.setByX(10);
-	      translateTransition.setCycleCount(0);
-	      translateTransition.setAutoReverse(false);
-	      translateTransition.play();
-	      return zombieImage;
-	}
+	
+	
 	public void setZombieImage(ImageView zombieImage) {
 		this.zombieImage = zombieImage;
 	}
@@ -345,11 +267,57 @@ public class Zombie extends GameCharacter{
 	public String toString2() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
-	/* public Zombie returnSelf() {
-		 return this;
-	 } */
 	
-	 
+	public void startZombie() {
+	stopZombie = false;
+	Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		        @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	position -= 0.5;
+		                	zombieImage.setX(position);
+		                	rect.setX(position);
+		                	
+		                	if (stopZombie == true) {
+		                    	  timer.cancel();
+			                       timer.purge();
+			                       startZombie();
+		                      }
+		                	
+		                	if (getHealth() <= 0) {
+		                		System.out.println("Dead Zombie");
+		                		//zombieImage = null;
+		                		
+		                		timer.cancel();
+ 		                       timer.purge();
+ 		                       //startZombie();
+		                	} 
+		                	
+		                	
+		                	if (position <= 220) {
+		                		System.out.println("GAMEOVER");
+		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75;-fx-background-color: transparent; -fx-font-weight: bold;");
+		                		GardenScene.gameOverMessage.setDisable(false);
+		                		//
+		                		GardenScene.gameOverMessage.setLayoutY(20);
+		                		GardenScene.gameOverMessage.setLayoutX(40);
+		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
+		                	
+		                		timer.cancel();
+		                       timer.purge();
+		                       
+		                      
+		                	}
+		                }
+		                
+		            });
+		            
+		        }
+		    }, 3000, 10);	
+}
 	 
 	 /*public void killPlant() {
 		 

@@ -173,9 +173,7 @@ public class GardenScene extends BaseScene {
 	}
 
 
-	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
-	setScene(scene);
-	display();
+	
 
 	fullImage.getChildren().add(gameOverMessage);
 	gameOverMessage.setStyle("-fx-opacity: 0.0;");
@@ -298,9 +296,9 @@ public class GardenScene extends BaseScene {
  		                public void run() {
  		                	if (rect1.getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
  				                System.out.println("Colliding");
- 				               rect1.setFill(Color.BLACK);
- 				               z.loseHealth(250);
- 				               System.out.println(z.getHealth());
+ 				               fullImage.getChildren().remove(rect1);
+ 				               
+ 				               z.setStopZombie(true);
  				               timer.cancel();
  		                       timer.purge();
 
@@ -338,29 +336,7 @@ public class GardenScene extends BaseScene {
 
 	}
 
-	public void checkGameOver(Rectangle rect1, Rectangle rect2) {
-
-		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
-
-		        @Override
-		        public Boolean call() throws Exception {
-		            return rect1.getBoundsInParent().intersects(rect2.getBoundsInParent());
-		        }
-
-		    }, rect1.boundsInParentProperty(), rect2.boundsInParentProperty());
-
-		    colliding.addListener(new ChangeListener<Boolean>() {
-		        @Override
-		        public void changed(ObservableValue<? extends Boolean> obs,
-		                Boolean oldValue, Boolean newValue) {
-		            if (newValue) {
-		                System.out.println("Colliding");
-
-		            }
-
-		        }
-		    });
-		}
+	
 
 	public void checkPlantZombieCollision(ImageView plant, Zombie z) {
 		Timer timer = new Timer();
