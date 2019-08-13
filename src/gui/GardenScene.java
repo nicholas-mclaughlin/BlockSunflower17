@@ -62,6 +62,7 @@ public class GardenScene extends BaseScene {
 	private int levelNum;
 	public static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
+	Rectangle home = new Rectangle(1100, 225, 100, 500);
 
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
@@ -109,8 +110,8 @@ public class GardenScene extends BaseScene {
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
-	//175
-	Rectangle home = new Rectangle(1100, 225, 100, 500);
+	
+	
 	fullImage.getChildren().add(home);
 	home.setFill(Color.BLUE);
 
@@ -284,6 +285,21 @@ public class GardenScene extends BaseScene {
 
 		return root;
 	}
+	
+	
+	
+
+
+	public Rectangle getHome() {
+		return home;
+	}
+
+
+
+	public void setHome(Rectangle home) {
+		this.home = home;
+	}
+
 
 
 	public void checkCollision(Rectangle rect1, Zombie z) {
@@ -297,7 +313,7 @@ public class GardenScene extends BaseScene {
  		                	if (rect1.getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
  				                System.out.println("Colliding");
  				               fullImage.getChildren().remove(rect1);
- 				               
+ 				               setHome(new Rectangle());
  				               z.setStopZombie(true);
  				               timer.cancel();
  		                       timer.purge();
@@ -319,26 +335,14 @@ public class GardenScene extends BaseScene {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
-	public static void createZombieTransition(Zombie z) {
-		z.setRect(getBounds(z.getZombieImage()));
-		z.getRect().setFill(Color.TRANSPARENT);
-		z.getRect().setStroke(Color.BLACK);
-		z.getRect().setStrokeWidth(2);
-		TranslateTransition translateTransition2 = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition2.setDuration(Duration.millis(z.getSpeed()));
-	      translateTransition2.setNode(z.getRect());
-	      //The displacement of the animation
-	      translateTransition2.setByX(250 - z.getPosition());
-	      translateTransition2.setCycleCount(1);
-	      translateTransition2.setAutoReverse(false);
-	      translateTransition2.play();
-
-	}
+	
 
 	
 
-	public void checkPlantZombieCollision(ImageView plant, Zombie z) {
+	
+	
+	public void checkPlantCollision(Plant p, Zombie z) {
+		
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
  		        @Override
@@ -346,17 +350,55 @@ public class GardenScene extends BaseScene {
  		            Platform.runLater(new Runnable() {
  		                @Override
  		                public void run() {
- 		                	if (plant.getLayoutX() == z.getPosition()) {
- 		           			System.out.println("COLLISION");
+ 		                	if (p.getPlantRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
+ 		                		 System.out.println("Colliding");
+ 		                		p.setPlantImage(null);
+ 		                	p.setPlantRect(null);
+ 		                	 fullImage.getChildren().removeAll(p.getPlantImage(), p.getPlantRect());
+ 		                	z.setStopZombie(true);
+ 				              timer.cancel();
+		                       timer.purge();
+
+ 				}
 
  		                	}
- 		                }
+
 
  		            });
 
  		        }
  		    }, 0, 10);
+}
+	
+public void checkBulletCollision(Plant p, Zombie z) {
+		
+		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	if (p.getBulletRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
+ 		                		 System.out.println("Zombie Hit");
+ 		                		p.setBullet(null);
+ 		                	p.setBulletRect(null);
+ 		                	 fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
+ 		                	 /*if (p.isFreeze()) {
+ 		                	z.setStopZombie(true);
+ 		                	 } */
+ 				              timer.cancel();
+		                       timer.purge();
 
-	}
+ 				}
 
+ 		                	}
+
+
+ 		            });
+
+ 		        }
+ 		    }, 0, 10);
+}
+	
 }

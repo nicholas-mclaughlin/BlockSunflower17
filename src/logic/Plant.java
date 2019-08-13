@@ -2,9 +2,12 @@ package logic;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import gui.GardenScene;
 import javafx.animation.TranslateTransition;
+import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +24,7 @@ public class Plant extends GameCharacter{
 	public Rectangle plantRect;
 	public ImageView bullet = null;
 	public Rectangle bulletRect = null;
+	public boolean freeze = false;
 
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
@@ -84,6 +88,7 @@ public class Plant extends GameCharacter{
 			setAttack(15);
 			setHealth(200);
 		    setPrice(175);
+		    setFreeze(true);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
@@ -105,7 +110,29 @@ public class Plant extends GameCharacter{
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 
-			TranslateTransition translateTransition = new TranslateTransition();
+		    Timer timer = new Timer();
+	 		timer.schedule(new TimerTask() {
+	 		        @Override
+	 		        public void run() {
+	 		            Platform.runLater(new Runnable() {
+	 		                @Override
+	 		                public void run() {
+	 		                	
+	 		                	if (getHealth() <= 0) {
+	 				              timer.cancel();
+			                       timer.purge();
+	 		                	}
+
+	 				
+
+	 		                	}
+
+
+	 		            });
+
+	 		        }
+	 		    }, 0, 10);
+			/*TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
     	      translateTransition.setNode(bullet);
@@ -125,8 +152,9 @@ public class Plant extends GameCharacter{
     	      translateTransition2.setByX(500);
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play();
+    	      translateTransition2.play(); */
 		}
+
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
 			setFrequency(0);
@@ -211,6 +239,20 @@ public class Plant extends GameCharacter{
 			}
 		} this.column = theColumn;
 	}
+
+	
+	
+	public boolean isFreeze() {
+		return freeze;
+	}
+
+
+
+	public void setFreeze(boolean freeze) {
+		this.freeze = freeze;
+	}
+
+
 
 	public int getColumn() {
 		return column;

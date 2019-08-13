@@ -265,10 +265,35 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		
 		    
 		
-	}
+	
 
 
+	/*public boolean checkPlantCollision(Plant p, Zombie z) {
+		boolean result = false;
+	
+		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	if (p.getPlantRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
+ 				               result = true;
+ 				              timer.cancel();
+		                       timer.purge();
+
+ 				}
+
+ 		                	}
 
 
+ 		            });
 
-}
+ 		        }
+ 		    }, 0, 10);
+
+ 		return result;
+
+}*/
+	}}
