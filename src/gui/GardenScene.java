@@ -12,6 +12,8 @@ import handlers.PlantButtonHandler;
 import handlers.SunButtonHandler;
 
 import java.io.File;
+
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -30,7 +32,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-
+import javafx.util.Duration;
 import logic.Game;
 import logic.GameCharacter;
 import logic.Level;
@@ -142,6 +144,8 @@ public class GardenScene extends BaseScene {
 		//fullImage.getChildren().add(z.newZombieImage());
 		//fullImage.getChildren().add(z.newRectangle());
 		fullImage.getChildren().add(z.getZombieImage());
+		createZombieTransition(z) ;
+			
 		fullImage.getChildren().add(z.getRect());
 
 		z.zombieTracker(game);
@@ -285,6 +289,18 @@ public class GardenScene extends BaseScene {
 		    });
 		}
 		
+	public static void createZombieTransition(Zombie z) {
+		TranslateTransition translateTransition2 = new TranslateTransition();
+	      //How long the animation will take
+	      translateTransition2.setDuration(Duration.millis(z.getSpeed()));
+	      translateTransition2.setNode(z.getRect());
+	      //The displacement of the animation
+	      translateTransition2.setByX(250 - z.getPosition());
+	      translateTransition2.setCycleCount(1);
+	      translateTransition2.setAutoReverse(false);
+	      translateTransition2.play(); 
+
+	}
 	
 
 }

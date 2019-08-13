@@ -49,14 +49,14 @@ public class Zombie extends GameCharacter{
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
 			setFirstChar('g');
 			setHealth(200);
-			setSpeed(45000);
+			
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
 			setFirstChar('f');
 			setHealth(1600);
-			setSpeed(40000);
+			
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Football.gif")));
 		}
@@ -122,7 +122,7 @@ public class Zombie extends GameCharacter{
 	      translateTransition.setAutoReverse(false);
 	      translateTransition.play();
 	      
-	      TranslateTransition translateTransition2 = new TranslateTransition();
+	      /*TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition2.setDuration(Duration.millis(speed));
 	      translateTransition2.setNode(rect);
@@ -130,7 +130,7 @@ public class Zombie extends GameCharacter{
 	      translateTransition2.setByX(-position + 250);
 	      translateTransition2.setCycleCount(1);
 	      translateTransition2.setAutoReverse(false);
-	      translateTransition2.play();
+	      translateTransition2.play(); */
 	}
 	
 	public Rectangle getBounds(ImageView z) {
@@ -238,39 +238,9 @@ public class Zombie extends GameCharacter{
 	}
 	
 	public Rectangle newRectangle() {
-		rect = getBounds(zombieImage);
-	      rect.setX(position);
-	      if (row == 1) {
-	    	  
-	    	  rect.setY(215);
-	      }
-	      else if (row == 2) {
-	    	  
-	    	  rect.setY(310);
-	      }
-
-	      else if (row == 3){
-	    	  
-	    	  rect.setY(410);
-	      }
-	      else if (row == 4) {
-	    	  
-	    	  rect.setY(525);
-	      }
-
-	      else if (row == 5) {
-	    	  
-	    	  rect.setY(630);
-	    	  
-	      }
-	  
-
-	     
+		
 	      
 	      
-	      rect.setFill(Color.TRANSPARENT);
-	      rect.setStroke(Color.BLACK);
-	      rect.setStrokeWidth(2);
 	      TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition2.setDuration(Duration.millis(speed));
