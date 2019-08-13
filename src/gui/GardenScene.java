@@ -170,7 +170,7 @@ public class GardenScene extends BaseScene {
 	errorMessage.setStyle("-fx-opacity: 0.0;");
 
 	for (int z = 0; z < level.zombies.length; z++) {
-		checkCollision(home, level.getZombies()[z]);
+		
 	}
 
 
@@ -182,7 +182,7 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-	
+	checkAll(game, level);
 	
 	/*Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -335,45 +335,12 @@ public class GardenScene extends BaseScene {
 
 
 
-	public void checkCollision(Rectangle rect1, Zombie z) {
-		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	if (rect1.getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
- 				                System.out.println("Colliding");
- 				               fullImage.getChildren().remove(rect1);
- 				               setHome(new Rectangle());
- 				               z.setStopZombie(true);
- 				               timer.cancel();
- 		                       timer.purge();
-
-
- 				}
-
- 		                	}
-
-
- 		            });
-
- 		        }
- 		    }, 0, 10);
-
-	}
+	
 
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
-	
-
-	
-
-	
-	
 	public void checkPlantCollision(Plant p, Zombie z) {
 		
 		Timer timer = new Timer();
@@ -433,5 +400,43 @@ public void checkBulletCollision(Plant p, Zombie z) {
  		        }
  		    }, 0, 10);
 }
-	
+	public void checkAll(Game game, Level level) {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		        @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	for(int i = 0; i<5; i++)
+		                	{
+		                		
+		                	    for(int j = 0; j<9; j++)
+		                	    {
+		                	    	System.out.println("Working");
+		                	        try {
+										if (game.getPlant(i, j).getType() == "Wallnut" || game.getPlant(i, j).getType() == "PeaShooter") {
+											
+												
+											
+										}
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
+		                	    }
+		                	}
+
+
+				}
+
+		                	
+
+
+		            });
+
+		        }
+		    }, 0, 100);
+	}
 }
