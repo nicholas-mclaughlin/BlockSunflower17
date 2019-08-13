@@ -156,12 +156,12 @@ public class GardenScene extends BaseScene {
 	    {
 	    	
 	    	if (game.getPlantPlots()[i][j] != null) {
-	        if (game.getPlantPlots()[i][j].getType() == "PeaShooter" || game.getPlantPlots()[i][j].getType() == "Frozen PeaShooter") {
+	        
 	        	for (int z = 0; z < 1; z++) {
 	        		checkCollision(game.getPlantPlots()[i][j].getPlantRect(), level.zombies[z].getRect());
 	        }
 	        }
-	    	}
+	    	
 	    }
 	}
 	    
@@ -274,9 +274,13 @@ public class GardenScene extends BaseScene {
 		            if (newValue) {
 		                System.out.println("Colliding");
 		            } 
+		            else {
+		                System.out.println("Not colliding");
+		            }
 		        }
 		    });
 		}
+		
 	
 
 }
