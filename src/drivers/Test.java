@@ -20,6 +20,7 @@ import javafx.util.Duration;
 import logic.Level;
 import logic.Plant;
 import logic.Zombie;
+import logic.Level;
 
 public class Test extends Application{
 	
