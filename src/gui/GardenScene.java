@@ -154,8 +154,8 @@ public class GardenScene extends BaseScene {
 		
 		
 		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
-		checkCollision(z.getRect(), home);
-		z.zombieTracker(game);
+		//checkCollision(z.getRect(), home);
+		//z.zombieTracker(game);
 	}  
 	
 	/*Level level1 = new Level(1);
@@ -170,16 +170,14 @@ public class GardenScene extends BaseScene {
 	    for(int j = 0; j<9; j++)
 	    {
 	    	
-	    	System.out.println("Inside method");
-	        if (game.getPlant(i, j).getPlantRect() != null) {
+	        if (game.getPlant(i, j).getType() == "Wallnut") {
 	        	for (int z = 0; z < level.zombies.length; z++) {
-	        		checkGameOver(level.zombies[z].getRect(), home);
-	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.zombies[z].getRect());
+	        		checkPlantZombieCollision(game.getPlant(i, j).getPlantImage(), level.getZombies()[z]);
 	        	}
 	        }
 	    	
 	    }
-	}
+	} 
 	
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
@@ -348,5 +346,25 @@ public class GardenScene extends BaseScene {
 		    });
 		}
 	
+	public void checkPlantZombieCollision(ImageView plant, Zombie z) {
+		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	if (plant.getLayoutX() == z.getPosition()) {
+ 		           			System.out.println("COLLISION");
+ 		           		
+ 		                	}
+ 		                }
+ 		                
+ 		            });
+ 		            
+ 		        }
+ 		    }, 0, 10);
+		
+	}
 
 }

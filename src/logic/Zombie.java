@@ -119,10 +119,17 @@ public class Zombie extends GameCharacter{
 	 		            Platform.runLater(new Runnable() {
 	 		                @Override
 	 		                public void run() {
-	 		                	position -= 0.015;
+	 		                	position -= 1.5;
 	 		                	zombieImage.setX(position);
 	 		                	rect.setX(position);
+	 		                	/*if (getHealth() <= 0) {
+	 		                		System.out.println("GAMEOVER");
+	 		                		timer.cancel();
+		 		                       timer.purge();
+	 		                	} */
+	 		                	
 	 		                	if (position <= 220) {
+	 		                		System.out.println("GAMEOVER");
 	 		                		timer.cancel();
 	 		                       timer.purge();
 	 		                	}
