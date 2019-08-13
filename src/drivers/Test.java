@@ -17,6 +17,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import logic.Level;
 import logic.Plant;
 import logic.Zombie;
 
@@ -42,13 +43,24 @@ public class Test extends Application{
 		            if (newValue) {
 		                System.out.println("Colliding");
 		            } 
-		            else {
-		                System.out.println("Not colliding");
-		            }
+		           
 		        }
 		    });
 		}
 		
+	
+		public static void createZombieTransition(Zombie z) {
+			TranslateTransition translateTransition2 = new TranslateTransition();
+		      //How long the animation will take
+		      translateTransition2.setDuration(Duration.millis(z.getSpeed()));
+		      translateTransition2.setNode(z.getRect());
+		      //The displacement of the animation
+		      translateTransition2.setByX(250 - z.getPosition());
+		      translateTransition2.setCycleCount(1);
+		      translateTransition2.setAutoReverse(false);
+		      translateTransition2.play(); 
+
+		}
 		
 		
 		@Override
@@ -85,26 +97,36 @@ public class Test extends Application{
 	        primaryStage.setScene(scene);
 	        primaryStage.show();
 	        
+	        Level level1 = new Level(1);
 	       // checkCollision(rect1, rect2);
 	        
-	        Zombie z1 = new Zombie("Zombie", 2);
+	        /*Zombie z1 = level1.getZombies()[0];
 	        z1.getZombieImage().setX(200);
 	        z1.getZombieImage().setY(200);
 	        z1.getRect().setX(200);
 	        z1.getRect().setY(200);
 	        z1.getRect().setFill(Color.TRANSPARENT);
-		    z1.getRect().setStroke(Color.BLACK);
+		    z1.getRect().setStroke(Color.BLACK); */
 		    
-		    TranslateTransition translateTransition3 = new TranslateTransition();
-		    translateTransition3.setDuration(Duration.millis(5000));
-		      translateTransition3.setNode(z1.getRect());
+	        level1.getZombies()[0].getZombieImage().setX(200);
+	        level1.getZombies()[0].getZombieImage().setY(200);
+	        level1.getZombies()[0].getRect().setX(200);
+	        level1.getZombies()[0].getRect().setY(200);
+	        level1.getZombies()[0].getRect().setFill(Color.TRANSPARENT);
+	        level1.getZombies()[0].getRect().setStroke(Color.BLACK);
+	        
+		    createZombieTransition(level1.getZombies()[0]);
+		   /* TranslateTransition translateTransition2 = new TranslateTransition();
+		      //How long the animation will take
+		      translateTransition2.setDuration(Duration.millis(70000));
+		      translateTransition2.setNode(z1.getRect());
 		      //The displacement of the animation
-		      translateTransition3.setByX(-250);
-		      translateTransition3.setCycleCount(1);
-		      translateTransition3.setAutoReverse(false);
-		      translateTransition3.play();
+		      translateTransition2.setByX(-1250);
+		      translateTransition2.setCycleCount(1);
+		      translateTransition2.setAutoReverse(false);
+		      translateTransition2.play();  */
 
-	        root.getChildren().addAll(z1.getZombieImage(), z1.getRect());
+	        root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect());
 	        
 	        Plant p1 = new Plant("Wallnut");
 	        
@@ -114,7 +136,8 @@ public class Test extends Application{
 	        p1.getPlantRect().setY(200);
 	        
 	        root.getChildren().addAll(p1.getPlantImage(), p1.getPlantRect());
-	        checkCollision(z1.getRect(), p1.getPlantRect());
+	        checkCollision(level1.getZombies()[0].getRect(), p1.getPlantRect());
+	        
 	    }
 		
 
