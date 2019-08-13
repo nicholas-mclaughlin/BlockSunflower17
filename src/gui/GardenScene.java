@@ -32,6 +32,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 import logic.Game;
@@ -152,8 +153,8 @@ public class GardenScene extends BaseScene {
 		//z.setRect(getBounds(z.getZombieImage()));
 		//createZombieTransition(z) ;
 		
-		
 		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
+		
 		//checkCollision(z.getRect(), home);
 		//z.zombieTracker(game);
 	}  
@@ -165,24 +166,27 @@ public class GardenScene extends BaseScene {
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
 	
+	for (int z = 0; z < level.zombies.length; z++) {
+		checkCollision(home, level.getZombies()[z]);
+	}
 	
 	
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-	for(int i = 0; i<5; i++)
+	/*for(int i = 0; i<5; i++)
 	{
 	    for(int j = 0; j<9; j++)
 	    {
 	    	
 	        if (game.getPlant(i, j).getType() == "Wallnut") {
 	        	for (int z = 0; z < level.zombies.length; z++) {
-	        		checkPlantZombieCollision(game.getPlant(i, j).getPlantImage(), level.getZombies()[z]);
+	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
 	        	}
 	        }
 	    	
 	    }
-	} 
+	} */
 	   
 	} 
 	
@@ -275,32 +279,34 @@ public class GardenScene extends BaseScene {
 	}
 	
 	
-	public void checkCollision(Rectangle rect1, Rectangle rect2) {
+	public void checkCollision(Rectangle rect1, Zombie z) {
+		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	if (rect1.getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
+ 				                System.out.println("Colliding");
+ 				               rect1.setFill(Color.BLACK);
+ 				               z.loseHealth(250);
+ 				               System.out.println(z.getHealth());
+ 				               timer.cancel();
+ 		                       timer.purge();
+ 		                      
+
+ 				}
+ 		           		
+ 		                	}
+ 		                
+ 		                
+ 		            });
+ 		            
+ 		        }
+ 		    }, 0, 10);
 		
-		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
-
-		        @Override
-		        public Boolean call() throws Exception {
-		            return rect1.getBoundsInParent().intersects(rect2.getBoundsInParent());
-		        }
-
-		    }, rect1.boundsInParentProperty(), rect2.boundsInParentProperty());
-
-		    colliding.addListener(new ChangeListener<Boolean>() {
-		        @Override
-		        public void changed(ObservableValue<? extends Boolean> obs,
-		                Boolean oldValue, Boolean newValue) {
-		            if (newValue) {
-		                System.out.println("Colliding");
-		                
-		            } 
-		            else {
-		            	System.out.println("Not Colliding");
-		            }
-		            
-		        }
-		    });
-		}
+	}
 	
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);

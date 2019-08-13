@@ -122,11 +122,13 @@ public class Zombie extends GameCharacter{
 	 		                	position -= 1.5;
 	 		                	zombieImage.setX(position);
 	 		                	rect.setX(position);
-	 		                	/*if (getHealth() <= 0) {
-	 		                		System.out.println("GAMEOVER");
+	 		                	if (getHealth() <= 0) {
+	 		                		System.out.println("Dead Zombie");
+	 		                		//zombieImage = null;
+	 		                		
 	 		                		timer.cancel();
 		 		                       timer.purge();
-	 		                	} */
+	 		                	} 
 	 		                	
 	 		                	if (position <= 220) {
 	 		                		System.out.println("GAMEOVER");

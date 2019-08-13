@@ -49,6 +49,7 @@ public class Game {
 				new Plant("3,4"), new Plant("3,5"), new Plant("3,6"), new Plant("3,7"), new Plant("3,8")},
 				{new Plant("4,0"), new Plant("4,1"), new Plant("4,2"), new Plant("4,3"), new Plant("4,4"), new Plant("4,5"),
 					new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
+		
 	}
 
 	public Player getPlayer() {
