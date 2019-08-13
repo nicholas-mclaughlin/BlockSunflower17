@@ -12,7 +12,6 @@ public class Game {
 	public static String[][] theGarden = new String[5][9];
 	public Zombie zombie;
 	public Plant plant;
-	public static String[][] thePlants = new String[5][9];
 	
 	/**
 	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
@@ -121,18 +120,6 @@ public class Game {
 		}
 		return thePlants;
 	}
-	
-	public String[][] getStringPlantPlots(){
-		for (int row = 0; row < 5; row++) {
-			for (int column = 0; column < 9; column++) {
-					thePlants[row][column] = getCharacter(row, column).getType();
-				}
-			}
-		return thePlants;
-		}
-		
-
-	
 	
 	public void printGardenPlotString() {
 		//String[][] textGarden = gardenPlotString();
