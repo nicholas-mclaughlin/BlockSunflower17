@@ -176,9 +176,7 @@ public class GardenScene extends BaseScene {
 
 	
 
-	fullImage.getChildren().add(gameOverMessage);
-	gameOverMessage.setStyle("-fx-opacity: 0.0;");
-	gameOverMessage.setDisable(true);
+
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
