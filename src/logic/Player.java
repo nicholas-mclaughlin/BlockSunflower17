@@ -37,7 +37,7 @@ public class Player {
 	 * @return	new String object of the type of plant
 	 */
 	public String getPlantHeld() {
-		return (this.plantHeld);
+		return (plantHeld);
 	}
 
 	//plantHeld setter

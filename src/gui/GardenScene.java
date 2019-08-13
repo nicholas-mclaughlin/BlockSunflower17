@@ -273,10 +273,9 @@ public class GardenScene extends BaseScene {
 		                Boolean oldValue, Boolean newValue) {
 		            if (newValue) {
 		                System.out.println("Colliding");
+		                
 		            } 
-		            else {
-		                System.out.println("Not colliding");
-		            }
+		            
 		        }
 		    });
 		}

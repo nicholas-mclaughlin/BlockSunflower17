@@ -10,7 +10,9 @@ public class Game {
 	
 	private Player player;
 	public static String[][] theGarden = new String[5][9];
-	
+	public Zombie zombie;
+	public Plant plant;
+	public static String[][] thePlants = new String[5][9];
 	
 	/**
 	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
@@ -28,9 +30,8 @@ public class Game {
 	{
 	for (int r = 0; r < 5; r++) {
 		for (int column = 0; column < 9; column++) {
-			theGarden[r][column] = gardenPlots[r][column].getType();
+			theGarden[r][column] = gardenPlots[r][column].getType(); 
 		}}
-	
 	}
 	
 	private Plant[][] plantPlots;
@@ -92,6 +93,7 @@ public class Game {
 		gardenPlots[row][column] = thePlant;
 		theGarden[row][column] = thePlant.getType();
 	}
+	
 	public void placePlant2(Plant aPlant, int row, int column) throws Exception{
 		Plant thePlant = new Plant(aPlant);
 		plantPlots[row][column] = thePlant;
@@ -113,13 +115,23 @@ public class Game {
 		for (int row = 0; row < 5; row++) {
 			for (int column = 0; column < 9; column++) {
 				if (thePlants[row][column] != null) {
-				thePlants[row][column] = getPlant(row, column);
+					thePlants[row][column] = getPlant(row, column);
 				}
 			}
 		}
 		return thePlants;
 	}
 	
+	public String[][] getStringPlantPlots(){
+		for (int row = 0; row < 5; row++) {
+			for (int column = 0; column < 9; column++) {
+					thePlants[row][column] = getCharacter(row, column).getType();
+				}
+			}
+		return thePlants;
+		}
+		
+
 	
 	
 	public void printGardenPlotString() {
@@ -136,7 +148,6 @@ public class Game {
 		}
 		System.out.println("---------------------------------------");
 	}
-	
 	
 	
 }

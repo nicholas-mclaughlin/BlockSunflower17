@@ -24,7 +24,7 @@ public class Zombie extends GameCharacter{
 	private double position = 1500; //1250 is the very right side of the garden
 	private double position2 = 1500;
 	private int houseLength = 250;
-	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
+	public ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
 	private int deathTime = 0;
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;

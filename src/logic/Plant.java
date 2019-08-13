@@ -18,7 +18,7 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	public ImageView plantImage;
-	public Rectangle plantRect;
+	public static Rectangle plantRect;
 	public ImageView bullet = null;
 	public Rectangle bulletRect = null;
 
@@ -220,7 +220,7 @@ public class Plant extends GameCharacter{
 		return row;
 	}
 
-	public Rectangle getPlantRect() {
+	public static Rectangle getPlantRect() {
 		return plantRect;
 	}
 
@@ -281,4 +281,9 @@ public class Plant extends GameCharacter{
 	}
 
 
-}
+
+		
+	}
+
+
+
