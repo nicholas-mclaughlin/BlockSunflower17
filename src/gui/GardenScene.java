@@ -105,7 +105,7 @@ public class GardenScene extends BaseScene {
 	Player player = new Player();
 	Plant[][] gardenPlot = new Plant[5][9];
 	Game game = new Game(player, gardenPlot);
-
+	
 	//setup stacks in stackpane
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
@@ -180,6 +180,39 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
+	
+	
+	/*Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		        @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	for(int i = 0; i<5; i++)
+		                	{
+		                	    for(int j = 0; j<9; j++)
+		                	    {
+
+		                	        if (game.getPlant(i, j).getType() == "Wallnut") {
+		                	        	for (int z = 0; z < level.zombies.length; z++) {
+		                	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
+		                	        	}
+		                	        }
+
+		                	    }
+		                	}
+
+
+				}
+
+		                	}
+
+
+		            });
+
+		        }
+		    }, 0, 10); */
 	/*for(int i = 0; i<5; i++)
 	{
 	    for(int j = 0; j<9; j++)
