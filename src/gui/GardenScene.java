@@ -149,9 +149,10 @@ public class GardenScene extends BaseScene {
 	for (Zombie z : level.getZombies()) {
 		//fullImage.getChildren().add(z.newZombieImage());
 		//fullImage.getChildren().add(z.newRectangle());
+		//z.setRect(getBounds(z.getZombieImage()));
+		//createZombieTransition(z) ;
 		
-		createZombieTransition(z) ;
-			
+		
 		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
 		checkCollision(z.getRect(), home);
 		z.zombieTracker(game);
@@ -301,8 +302,16 @@ public class GardenScene extends BaseScene {
 		        }
 		    });
 		}
+	
+	public static Rectangle getBounds(ImageView z) {
+		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
+	}
 		
 	public static void createZombieTransition(Zombie z) {
+		z.setRect(getBounds(z.getZombieImage()));
+		z.getRect().setFill(Color.TRANSPARENT);
+		z.getRect().setStroke(Color.BLACK);
+		z.getRect().setStrokeWidth(2);
 		TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition2.setDuration(Duration.millis(z.getSpeed()));

@@ -111,7 +111,29 @@ public class Zombie extends GameCharacter{
 	      rect.setFill(Color.TRANSPARENT);
 	      rect.setStroke(Color.BLACK);
 	      rect.setStrokeWidth(2);
-	      //Creates the animation of the zombie
+	      
+	      Timer timer = new Timer();
+	 		timer.schedule(new TimerTask() {
+	 		        @Override
+	 		        public void run() {
+	 		            Platform.runLater(new Runnable() {
+	 		                @Override
+	 		                public void run() {
+	 		                	position -= 0.015;
+	 		                	zombieImage.setX(position);
+	 		                	rect.setX(position);
+	 		                	if (position <= 220) {
+	 		                		timer.cancel();
+	 		                       timer.purge();
+	 		                	}
+	 		                }
+	 		                
+	 		            });
+	 		            
+	 		        }
+	 		    }, 0, 10);
+	 		
+	      /*//Creates the animation of the zombie
 	      TranslateTransition translateTransition = new TranslateTransition();
 	      //How long the animation will take
 	      translateTransition.setDuration(Duration.millis(speed));
@@ -120,7 +142,7 @@ public class Zombie extends GameCharacter{
 	      translateTransition.setByX(-position + 250);
 	      translateTransition.setCycleCount(1);
 	      translateTransition.setAutoReverse(false);
-	      translateTransition.play();
+	      translateTransition.play(); */
 	      
 	      /*TranslateTransition translateTransition2 = new TranslateTransition();
 	      //How long the animation will take
@@ -304,9 +326,9 @@ public class Zombie extends GameCharacter{
 	public String toString2() {
 		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
 	}
-	 public Zombie returnSelf() {
+	/* public Zombie returnSelf() {
 		 return this;
-	 }
+	 } */
 	
 	 
 	 
