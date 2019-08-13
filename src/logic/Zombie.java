@@ -112,7 +112,7 @@ public class Zombie extends GameCharacter{
 	      
 	      
 	      rect.setFill(Color.TRANSPARENT);
-	      rect.setStroke(Color.BLACK);
+	      //rect.setStroke(Color.BLACK);
 	      rect.setStrokeWidth(2);
 	      
 	      startZombie();

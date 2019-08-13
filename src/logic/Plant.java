@@ -50,14 +50,14 @@ public class Plant extends GameCharacter{
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
+		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 
 		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
 
 		    bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
-			bulletRect.setStroke(Color.BLACK);
+			//bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 
 		    TranslateTransition translateTransition = new TranslateTransition();
@@ -98,7 +98,7 @@ public class Plant extends GameCharacter{
 		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
 		    bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
-			bulletRect.setStroke(Color.BLACK);
+			//bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 
 		    bulletRect = getBounds(bullet);
@@ -107,7 +107,7 @@ public class Plant extends GameCharacter{
 			
 			bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
-			bulletRect.setStroke(Color.BLACK);
+			//bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 
 		    Timer timer = new Timer();
@@ -164,7 +164,7 @@ public class Plant extends GameCharacter{
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
 			setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
+		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 		    plantRect.setHeight(80);
 		    plantRect.setWidth(70);
@@ -179,7 +179,7 @@ public class Plant extends GameCharacter{
 			getPlantImage().setPreserveRatio(true);
 			setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
+		   // plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 		    plantRect.setHeight(60);
 		    plantRect.setWidth(63);
@@ -190,7 +190,7 @@ public class Plant extends GameCharacter{
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
+		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 		    plantRect.setHeight(80);
 		    plantRect.setWidth(70);

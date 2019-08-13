@@ -112,7 +112,7 @@ public class GardenScene extends BaseScene {
 
 	
 	
-	fullImage.getChildren().add(home);
+	//fullImage.getChildren().add(home);
 	home.setFill(Color.BLUE);
 
 	//the time for the first sun to appear in milliseconds
@@ -180,7 +180,7 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
-	checkAll(game, level);
+	//checkAll(game, level);
 	
 	/*Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -350,9 +350,10 @@ public class GardenScene extends BaseScene {
  		                public void run() {
  		                	if (p.getPlantRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
  		                		 System.out.println("Colliding");
+ 		                		fullImage.getChildren().removeAll(p.getPlantImage(), p.getPlantRect());
  		                		p.setPlantImage(null);
  		                	p.setPlantRect(null);
- 		                	 fullImage.getChildren().removeAll(p.getPlantImage(), p.getPlantRect());
+ 		                	 
  		                	z.setStopZombie(true);
  				              timer.cancel();
 		                       timer.purge();
@@ -417,13 +418,14 @@ public void checkBulletCollision(Plant p, Zombie z) {
 										if (game.getPlant(i, j).getType().equals( "Wallnut") || game.getPlant(i, j).getType().equals( "PeaShooter")) {
 											for (int z = 0; z < level.zombies.length; z++) {
 											checkPlantCollision(game.getPlant(i, j), level.getZombies()[z]);
-											}
 											
+											}
 										}
 									} catch (Exception e) {
 										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
+		                	        
 
 		                	    }
 		                	}
