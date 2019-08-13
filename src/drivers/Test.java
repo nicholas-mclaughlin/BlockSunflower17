@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import logic.Plant;
 import logic.Zombie;
+import logic.Level;
 
 public class Test extends Application{
 	

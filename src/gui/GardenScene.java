@@ -132,6 +132,8 @@ public class GardenScene extends BaseScene {
 			//The time between each sun appearance is 5 seconds.
 			timeBetweenSuns +=5000;
 		}
+		
+	
 
 	//level of the game (1, 2, or 3)
 	Level level = new Level(this.levelNum);
@@ -149,16 +151,12 @@ public class GardenScene extends BaseScene {
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
 	
-	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
-	setScene(scene);
-	display();
-	
 	for(int i = 0; i<5; i++)
 	{
 	    for(int j = 0; j<9; j++)
 	    {
 	    	
-	    	
+	    	System.out.println("Inside method");
 	        if (game.getPlant(i, j).getPlantRect() != null) {
 	        	for (int z = 0; z < level.zombies.length; z++) {
 	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.zombies[z].getRect());
@@ -167,7 +165,11 @@ public class GardenScene extends BaseScene {
 	    	
 	    }
 	}
-	    
+	
+	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
+	setScene(scene);
+	display();
+	   
 	} 
 	
 
