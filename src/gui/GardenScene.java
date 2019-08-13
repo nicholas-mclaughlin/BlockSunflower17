@@ -66,15 +66,17 @@ public class GardenScene extends BaseScene {
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
-	public static Button errorMessage = new Button("Buy a plant first!");	
+	public static Button errorMessage = new Button("Buy a plant first!");
+
+	public static Button gameOverMessage = new Button("GAME OVER");
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
 		super(aSession);
 		this.levelNum = levelNum;
 	}
-	
-	
+
+
 
 	//setup actual drawing in window
 	@Override
@@ -106,7 +108,7 @@ public class GardenScene extends BaseScene {
 	//setup stacks in stackpane
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
-	
+
 	//175
 	Rectangle home = new Rectangle(1100, 225, 100, 500);
 	fullImage.getChildren().add(home);
@@ -141,36 +143,43 @@ public class GardenScene extends BaseScene {
 			//The time between each sun appearance is 5 seconds.
 			timeBetweenSuns +=5000;
 		}
-		
-	
+
+
 
 	//level of the game (1, 2, or 3)
 	Level level = new Level(this.levelNum);
-	
+
 	for (Zombie z : level.getZombies()) {
 		//fullImage.getChildren().add(z.newZombieImage());
 		//fullImage.getChildren().add(z.newRectangle());
 		//z.setRect(getBounds(z.getZombieImage()));
 		//createZombieTransition(z) ;
-		
+
 		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
-		
+
 		//checkCollision(z.getRect(), home);
 		//z.zombieTracker(game);
-	}  
-	
+	}
+
 	/*Level level1 = new Level(1);
 	 root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect()); */
-	
-	//adds the error message but sets it up to not be visible 
+
+	//adds the error message but sets it up to not be visible
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
-	
+
 	for (int z = 0; z < level.zombies.length; z++) {
 		checkCollision(home, level.getZombies()[z]);
 	}
-	
-	
+
+
+	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
+	setScene(scene);
+	display();
+
+	fullImage.getChildren().add(gameOverMessage);
+	gameOverMessage.setStyle("-fx-opacity: 0.0;");
+	gameOverMessage.setDisable(true);
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
@@ -178,18 +187,18 @@ public class GardenScene extends BaseScene {
 	{
 	    for(int j = 0; j<9; j++)
 	    {
-	    	
+
 	        if (game.getPlant(i, j).getType() == "Wallnut") {
 	        	for (int z = 0; z < level.zombies.length; z++) {
 	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
 	        	}
 	        }
-	    	
+
 	    }
 	} */
-	   
-	} 
-	
+
+	}
+
 
 	//creates random X and Y positions for the suns to appear in and returns these values
 		public int generateRandomY() {
@@ -277,8 +286,8 @@ public class GardenScene extends BaseScene {
 
 		return root;
 	}
-	
-	
+
+
 	public void checkCollision(Rectangle rect1, Zombie z) {
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
@@ -294,24 +303,24 @@ public class GardenScene extends BaseScene {
  				               System.out.println(z.getHealth());
  				               timer.cancel();
  		                       timer.purge();
- 		                      
+
 
  				}
- 		           		
+
  		                	}
- 		                
- 		                
+
+
  		            });
- 		            
+
  		        }
  		    }, 0, 10);
-		
+
 	}
-	
+
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
-		
+
 	public static void createZombieTransition(Zombie z) {
 		z.setRect(getBounds(z.getZombieImage()));
 		z.getRect().setFill(Color.TRANSPARENT);
@@ -325,12 +334,12 @@ public class GardenScene extends BaseScene {
 	      translateTransition2.setByX(250 - z.getPosition());
 	      translateTransition2.setCycleCount(1);
 	      translateTransition2.setAutoReverse(false);
-	      translateTransition2.play(); 
+	      translateTransition2.play();
 
 	}
-	
+
 	public void checkGameOver(Rectangle rect1, Rectangle rect2) {
-		
+
 		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
 
 		        @Override
@@ -346,13 +355,13 @@ public class GardenScene extends BaseScene {
 		                Boolean oldValue, Boolean newValue) {
 		            if (newValue) {
 		                System.out.println("Colliding");
-		                
-		            } 
-		            
+
+		            }
+
 		        }
 		    });
 		}
-	
+
 	public void checkPlantZombieCollision(ImageView plant, Zombie z) {
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
@@ -363,15 +372,15 @@ public class GardenScene extends BaseScene {
  		                public void run() {
  		                	if (plant.getLayoutX() == z.getPosition()) {
  		           			System.out.println("COLLISION");
- 		           		
+
  		                	}
  		                }
- 		                
+
  		            });
- 		            
+
  		        }
  		    }, 0, 10);
-		
+
 	}
 
 }

@@ -3,7 +3,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
+import gui.GardenScene;
 import javafx.scene.shape.*;
 
 import javafx.scene.image.Image;
@@ -119,7 +121,7 @@ public class Zombie extends GameCharacter{
 	 		            Platform.runLater(new Runnable() {
 	 		                @Override
 	 		                public void run() {
-	 		                	position -= 1.5;
+	 		                	position -= 0.5;
 	 		                	zombieImage.setX(position);
 	 		                	rect.setX(position);
 	 		                	if (getHealth() <= 0) {
@@ -132,8 +134,16 @@ public class Zombie extends GameCharacter{
 	 		                	
 	 		                	if (position <= 220) {
 	 		                		System.out.println("GAMEOVER");
+	 		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75;-fx-background-color: transparent; -fx-font-weight: bold;");
+	 		                		GardenScene.gameOverMessage.setDisable(false);
+	 		                		//
+	 		                		GardenScene.gameOverMessage.setLayoutY(20);
+	 		                		GardenScene.gameOverMessage.setLayoutX(40);
+	 		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
+	 		                	
 	 		                		timer.cancel();
 	 		                       timer.purge();
+	 		                       
 	 		                	}
 	 		                }
 	 		                
