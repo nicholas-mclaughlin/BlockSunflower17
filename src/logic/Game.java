@@ -1,5 +1,7 @@
 package logic;
 
+import java.io.FileNotFoundException;
+
 /**
  * The game class will be responsible for setting and getting the player and
  * keeping track of the changes the player makes to the garden plot.
@@ -31,12 +33,22 @@ public class Game {
 	
 	}
 	
-	private Plant[][] plantPlots = new Plant[5][9];
+	private Plant[][] plantPlots;
+	
 	
 	//constructor
-	public Game(Player aPlayer, GameCharacter[][] aGardenPlot) {
+	public Game(Player aPlayer, GameCharacter[][] aGardenPlot) throws FileNotFoundException {
 		this.player = aPlayer;
 		this.gardenPlots = getGardenPlots();
+		this.plantPlots = new Plant[][] {{new Plant("0,0"), new Plant("0,1"), new Plant("0,2"), new Plant("0,3"),
+			new Plant("0,4"),new Plant("0,5"), new Plant("0,6"), new Plant("0,7"), new Plant("0,8")},
+				{new Plant("1,0"), new Plant("1,1"), new Plant("1,2"), new Plant("1,3"), new Plant("1,4"), new Plant("1,5"),
+				new Plant("1,6"), new Plant("1,7"), new Plant("1,8")}, {new Plant("2,0"), new Plant("2,1"),
+				new Plant("2,2"), new Plant("2,3"), new Plant("2,4"), new Plant("2,5"), new Plant("2,6"), new Plant("2,7"),
+				new Plant("2,8")}, {new Plant("3,0"), new Plant("3,1"), new Plant("3,2"), new Plant("3,3"),
+				new Plant("3,4"), new Plant("3,5"), new Plant("3,6"), new Plant("3,7"), new Plant("3,8")},
+				{new Plant("4,0"), new Plant("4,1"), new Plant("4,2"), new Plant("4,3"), new Plant("4,4"), new Plant("4,5"),
+					new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
 	}
 
 	public Player getPlayer() {

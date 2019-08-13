@@ -246,6 +246,20 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 		
+		for(int i = 0; i<5; i++)
+		{
+		    for(int j = 0; j<9; j++)
+		    {
+		        try {
+					System.out.print(game.getPlantPlots()[i][j].getType() + " ");
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    }
+		    System.out.println();
+		} 
+		
 		    
 		
 	}
