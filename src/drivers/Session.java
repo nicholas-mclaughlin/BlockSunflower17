@@ -1,5 +1,5 @@
 package drivers;
-import gui.Menu;
+import gui.Homepage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -19,12 +19,12 @@ public class Session extends Application {
 	@Override
 	public void start(Stage aStage) throws Exception {
 		this.stage = aStage;
-		stage.setTitle("PvZ");
+		stage.setTitle("Garden Defense");
 		stage.setResizable(false); //Window will not be resizable; images will not be moved
 		stage.show();
 		
 		//Create new first scene object upon running application.
-		Menu scene = new Menu(this);
+		Homepage scene = new Homepage(this);
 		scene.setup(); //setup scene for stage (method is in class gardenscene)
 	}
 
