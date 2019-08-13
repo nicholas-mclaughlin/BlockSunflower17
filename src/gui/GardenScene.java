@@ -415,8 +415,9 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		                	        try {
 		                	        	
 										if (game.getPlant(i, j).getType().equals( "Wallnut") || game.getPlant(i, j).getType().equals( "PeaShooter")) {
-											System.out.println("yay " + game.getPlant(i, j).getType());
-											
+											for (int z = 0; z < level.zombies.length; z++) {
+											checkPlantCollision(game.getPlant(i, j), level.getZombies()[z]);
+											}
 											
 										}
 									} catch (Exception e) {
