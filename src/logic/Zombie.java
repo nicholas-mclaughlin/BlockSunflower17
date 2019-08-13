@@ -300,9 +300,9 @@ public class Zombie extends GameCharacter{
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
 		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
-		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-font-weight: bold;");
+		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
 		                		GardenScene.gameOverMessage.setDisable(false);
-		                		//-fx-background-color: transparent;
+		                		
 		                		GardenScene.gameOverMessage.setLayoutY(0);
 		                		GardenScene.gameOverMessage.setLayoutX(0);
 		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
