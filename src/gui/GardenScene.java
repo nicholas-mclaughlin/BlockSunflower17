@@ -30,6 +30,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
@@ -104,6 +105,11 @@ public class GardenScene extends BaseScene {
 	//setup stacks in stackpane
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
+	
+	//175
+	Rectangle home = new Rectangle(1100, 225, 100, 500);
+	root.getChildren().add(home);
+	home.setFill(Color.BLUE);
 
 	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
@@ -141,13 +147,16 @@ public class GardenScene extends BaseScene {
 	for (Zombie z : level.getZombies()) {
 		//fullImage.getChildren().add(z.newZombieImage());
 		//fullImage.getChildren().add(z.newRectangle());
-		fullImage.getChildren().add(z.getZombieImage());
+		
 		createZombieTransition(z) ;
 			
-		fullImage.getChildren().add(z.getRect());
-
+		root.getChildren().addAll(z.getZombieImage(), z.getRect());
+		checkCollision(z.getRect(), home);
 		z.zombieTracker(game);
-	} 
+	}  
+	
+	/*Level level1 = new Level(1);
+	 root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect()); */
 	
 	//adds the error message but sets it up to not be visible 
 	fullImage.getChildren().add(errorMessage);
@@ -165,6 +174,7 @@ public class GardenScene extends BaseScene {
 	    	
 	        if (game.getPlant(i, j).getPlantRect() != null) {
 	        	for (int z = 0; z < level.zombies.length; z++) {
+	        		checkGameOver(level.zombies[z].getRect(), home);
 	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.zombies[z].getRect());
 	        	}
 	        }
@@ -282,6 +292,9 @@ public class GardenScene extends BaseScene {
 		                System.out.println("Colliding");
 		                
 		            } 
+		            else {
+		            	System.out.println("Not Colliding");
+		            }
 		            
 		        }
 		    });
@@ -299,6 +312,30 @@ public class GardenScene extends BaseScene {
 	      translateTransition2.play(); 
 
 	}
+	
+	public void checkGameOver(Rectangle rect1, Rectangle rect2) {
+		
+		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
+
+		        @Override
+		        public Boolean call() throws Exception {
+		            return rect1.getBoundsInParent().intersects(rect2.getBoundsInParent());
+		        }
+
+		    }, rect1.boundsInParentProperty(), rect2.boundsInParentProperty());
+
+		    colliding.addListener(new ChangeListener<Boolean>() {
+		        @Override
+		        public void changed(ObservableValue<? extends Boolean> obs,
+		                Boolean oldValue, Boolean newValue) {
+		            if (newValue) {
+		                System.out.println("Colliding");
+		                
+		            } 
+		            
+		        }
+		    });
+		}
 	
 
 }

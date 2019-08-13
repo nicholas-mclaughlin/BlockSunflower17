@@ -25,16 +25,16 @@ public class Test extends Application{
 	
 	private ArrayList<Shape> nodes;
 	
-	public void checkCollision(Rectangle rect1, Rectangle rect2) {
+	public void checkCollision(Plant p, Zombie z) {
 		
 		 ObservableBooleanValue colliding = Bindings.createBooleanBinding(new Callable<Boolean>() {
 
 		        @Override
 		        public Boolean call() throws Exception {
-		            return rect1.getBoundsInParent().intersects(rect2.getBoundsInParent());
+		            return p.getPlantRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent());
 		        }
 
-		    }, rect1.boundsInParentProperty(), rect2.boundsInParentProperty());
+		    }, p.getPlantRect().boundsInParentProperty(), z.getRect().boundsInParentProperty());
 
 		    colliding.addListener(new ChangeListener<Boolean>() {
 		        @Override
@@ -42,11 +42,13 @@ public class Test extends Application{
 		                Boolean oldValue, Boolean newValue) {
 		            if (newValue) {
 		                System.out.println("Colliding");
+		                killPlant(p);
 		            } 
 		           
 		        }
 		    });
 		}
+	
 		
 	
 		public static void createZombieTransition(Zombie z) {
@@ -62,6 +64,10 @@ public class Test extends Application{
 
 		}
 		
+		public void killPlant(Plant p) {
+			p = null;
+		}
+		
 		
 		@Override
 	    public void start(Stage primaryStage) throws FileNotFoundException {
@@ -73,7 +79,7 @@ public class Test extends Application{
 	        Rectangle rect1 = new Rectangle(10, 100, 50, 50);
 	        rect1.setFill(Color.BLUE);
 	        
-	        Rectangle rect2 = new Rectangle(200, 100, 50, 50);
+	        Rectangle rect2 = new Rectangle(50, 100, 50, 50);
 	        rect2.setFill(Color.RED);
 	        nodes.add(rect1);
 	        nodes.add(rect2);
@@ -89,9 +95,9 @@ public class Test extends Application{
 		      
 
 	        root.getChildren().addAll(nodes);
-	        if (rect1.intersects(rect2.getBoundsInParent())) {
+	        /*if (rect1.intersects(rect2.getBoundsInParent())) {
 	        	System.out.println("Intersect");
-	        }
+	        } */
 
 	        primaryStage.setTitle("java-buddy.blogspot.com");
 	        primaryStage.setScene(scene);
@@ -130,13 +136,21 @@ public class Test extends Application{
 	        
 	        Plant p1 = new Plant("Wallnut");
 	        
-	        p1.getPlantImage().setX(10);
+	        p1.getPlantImage().setX(100);
 	        p1.getPlantImage().setY(200);
-	        p1.getPlantRect().setX(10);
+	        p1.getPlantRect().setX(100);
 	        p1.getPlantRect().setY(200);
 	        
-	        root.getChildren().addAll(p1.getPlantImage(), p1.getPlantRect());
-	        checkCollision(level1.getZombies()[0].getRect(), p1.getPlantRect());
+	        Plant p2 = new Plant("Wallnut");
+	        
+	        p2.getPlantImage().setX(0);
+	        p2.getPlantImage().setY(200);
+	        p2.getPlantRect().setX(0);
+	        p2.getPlantRect().setY(200);
+	        
+	        root.getChildren().addAll(p1.getPlantImage(), p1.getPlantRect(), p2.getPlantImage(), p2.getPlantRect());
+	        checkCollision(p1, level1.getZombies()[0]);
+	        
 	        
 	    }
 		
