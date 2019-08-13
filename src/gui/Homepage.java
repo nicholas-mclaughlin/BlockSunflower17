@@ -6,6 +6,7 @@ import drivers.Session;
 import handlers.CreditsHandler;
 import handlers.LevelHandler;
 import handlers.PlayHandler;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,7 +62,7 @@ public class Homepage extends BaseScene {
 		credits.setOnAction(new CreditsHandler(getSession()));
 		
 		//add background image
-		ImageView background = new ImageView(new Image(new FileInputStream("PvZStreet.JPEG")));
+		ImageView background = new ImageView(new Image(new FileInputStream("MenuImages//PvZStreet.jpeg")));
         background.setFitHeight(720);
         background.setFitWidth(1220);
 		

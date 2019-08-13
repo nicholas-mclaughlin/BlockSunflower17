@@ -38,9 +38,9 @@ public class Menu extends BaseScene {
 		mediaPlayer.play();
 */
 		//Create level buttons that will launch the second scene (gardenScene)
-		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl1.PNG"))));
-		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl2.PNG"))));
-		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("pvzlvl3.PNG"))));
+		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.PNG"))));
+		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.PNG"))));
+		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.PNG"))));
 		Button back = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzback.PNG"))));
 		level1.setPrefSize(550, 100);
 		level2.setPrefSize(550, 100);

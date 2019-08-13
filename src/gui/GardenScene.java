@@ -108,7 +108,7 @@ public class GardenScene extends BaseScene {
 	
 	//175
 	Rectangle home = new Rectangle(1100, 225, 100, 500);
-	root.getChildren().add(home);
+	fullImage.getChildren().add(home);
 	home.setFill(Color.BLUE);
 
 	//the time for the first sun to appear in milliseconds
@@ -152,7 +152,7 @@ public class GardenScene extends BaseScene {
 		
 		createZombieTransition(z) ;
 			
-		root.getChildren().addAll(z.getZombieImage(), z.getRect());
+		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
 		checkCollision(z.getRect(), home);
 		z.zombieTracker(game);
 	}  
