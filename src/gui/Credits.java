@@ -15,7 +15,6 @@ import javafx.scene.layout.StackPane;
 import logic.Game;
 import logic.Player;
 
-
 /*
  * Credits scene has an image showing the credits scene and
  * a back button.
@@ -55,7 +54,7 @@ public class Credits extends BaseScene {
 		scene.getChildren().addAll(background, button);
 		
 		//Set the scene with preferred dimensions.
-				setScene(new Scene(scene, 1220, 720));
-				display();
+		setScene(new Scene(scene, 1220, 720));
+		display();
 	}
 }

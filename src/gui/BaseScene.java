@@ -31,7 +31,6 @@ public abstract class BaseScene {
 		this.session = aSession;
 	}
 	
-	
 	/**
 	 * Abstract method setup() promises that every scene will have a setup() method.
 	 * Child classes will setup the actual scene.
