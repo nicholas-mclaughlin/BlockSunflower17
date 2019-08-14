@@ -152,19 +152,12 @@ public class GardenScene extends BaseScene {
 	Level level = new Level(this.levelNum);
 
 	for (Zombie z : level.getZombies()) {
-		//fullImage.getChildren().add(z.newZombieImage());
-		//fullImage.getChildren().add(z.newRectangle());
-		//z.setRect(getBounds(z.getZombieImage()));
-		//createZombieTransition(z) ;
 
 		fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
 
-		//checkCollision(z.getRect(), home);
-		//z.zombieTracker(game);
 	}
 
-	/*Level level1 = new Level(1);
-	 root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect()); */
+	
 
 	//adds the error message but sets it up to not be visible
 	fullImage.getChildren().add(errorMessage);
@@ -174,59 +167,11 @@ public class GardenScene extends BaseScene {
 		
 	}
 
-
-	
-
-
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
 	//checkAll(game, level);
 	
-	/*Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	for(int i = 0; i<5; i++)
-		                	{
-		                	    for(int j = 0; j<9; j++)
-		                	    {
-
-		                	        if (game.getPlant(i, j).getType() == "Wallnut") {
-		                	        	for (int z = 0; z < level.zombies.length; z++) {
-		                	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
-		                	        	}
-		                	        }
-
-		                	    }
-		                	}
-
-
-				}
-
-		                	}
-
-
-		            });
-
-		        }
-		    }, 0, 10); */
-	/*for(int i = 0; i<5; i++)
-	{
-	    for(int j = 0; j<9; j++)
-	    {
-
-	        if (game.getPlant(i, j).getType() == "Wallnut") {
-	        	for (int z = 0; z < level.zombies.length; z++) {
-	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
-	        	}
-	        }
-
-	    }
-	} */
 
 	}
 
@@ -318,28 +263,23 @@ public class GardenScene extends BaseScene {
 		return root;
 	}
 	
-	
-	
-
 
 	public Rectangle getHome() {
 		return home;
 	}
 
-
-
 	public void setHome(Rectangle home) {
 		this.home = home;
 	}
 
-
-
 	
-
+	//Creates a rectangle using bounds of image
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
+	
+	//Method for collision between zombie and plant
 	public void checkPlantCollision(Plant p, Zombie z) {
 		
 		Timer timer = new Timer();
@@ -370,6 +310,7 @@ public class GardenScene extends BaseScene {
  		    }, 0, 10);
 }
 	
+	//Going to be used for the collisions between the bullets and zombies
 public void checkBulletCollision(Plant p, Zombie z) {
 		
 		Timer timer = new Timer();
@@ -381,6 +322,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
  		                public void run() {
  		                	if (p.getBulletRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
  		                		 System.out.println("Zombie Hit");
+ 		                		 z.loseHealth(p.getAttack());
  		                		p.setBullet(null);
  		                	p.setBulletRect(null);
  		                	 fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
@@ -400,6 +342,8 @@ public void checkBulletCollision(Plant p, Zombie z) {
  		        }
  		    }, 0, 10);
 }
+
+	//Iterates through all plants plots to find collision between zombie and plant
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
