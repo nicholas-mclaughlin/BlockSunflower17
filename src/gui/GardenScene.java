@@ -80,12 +80,12 @@ public class GardenScene extends BaseScene {
 		mediaPlayer = new MediaPlayer(hit);
 		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
 		mediaPlayer.play();
-	
+
 		//create garden image and garden image size to fit the buttons and scene
 		ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
 		Garden.setFitHeight(800);
 		Garden.setFitWidth(1275);
-	
+
 		/**
 		 * Initialize game and arguments needed for game
 		 * @param Player	player of the session being run
@@ -95,14 +95,14 @@ public class GardenScene extends BaseScene {
 		Player player = new Player();
 		Plant[][] gardenPlot = new Plant[5][9];
 		Game game = new Game(player, gardenPlot);
-		
+
 		//setup stacks in stackpane
 		root.getChildren().add(Garden); //first stack
-		root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack	
-		
+		root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
+
 		//fullImage.getChildren().add(home);
 		home.setFill(Color.BLUE);
-	
+
 		//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
@@ -122,7 +122,7 @@ public class GardenScene extends BaseScene {
 				                	fullImage.getChildren().add(sunButton);
 				                }
 				            });
-	
+
 				        }
 				}, timeBetweenSuns);
 			//Sets the random position of suns by calling the randomizing methods
@@ -132,22 +132,22 @@ public class GardenScene extends BaseScene {
 			//The time between each sun appearance is 5 seconds.
 			timeBetweenSuns +=5000;
 		}
-	
+
 		//level of the game (1, 2, or 3)
 		Level level = new Level(this.levelNum);
-	
+
 		for (Zombie z : level.getZombies()) {
 			//z.setRect(getBounds(z.getZombieImage()));
 			fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
 			//checkCollision(z.getRect(), home);
 		}
-	
+
 		//adds the error message but sets it up to not be visible
 		fullImage.getChildren().add(errorMessage);
 		errorMessage.setStyle("-fx-opacity: 0.0;");
-	
+
 		//for (int z = 0; z < level.zombies.length; z++) {}
-	
+
 		Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 		setScene(scene);
 		display();
@@ -158,7 +158,7 @@ public class GardenScene extends BaseScene {
 		int randomY = (int)(Math.random() * (700));
 		return randomY;
 	}
-	
+
 	public int generateRandomX() {
 		int randomX = (int)(Math.random()*(1220));
 		return randomX;
@@ -244,11 +244,13 @@ public class GardenScene extends BaseScene {
 	public void setHome(Rectangle home) {
 		this.home = home;
 	}
-	
+
+//Creates a rectangle using bounds of image
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
+	//Method for collision between zombie and plant
 	public void checkPlantCollision(Plant p, Zombie z) {
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
@@ -262,7 +264,7 @@ public class GardenScene extends BaseScene {
  		                		fullImage.getChildren().removeAll(p.getPlantImage(), p.getPlantRect());
  		                		p.setPlantImage(null);
  		                		p.setPlantRect(null);
- 		                	 
+
  		                		z.setStopZombie(true);
  		                		timer.cancel();
  		                		timer.purge();
@@ -272,7 +274,7 @@ public class GardenScene extends BaseScene {
  		        }
  		}, 0, 10);
 	}
-	
+
 	public void checkBulletCollision(Plant p, Zombie z) {
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
@@ -283,6 +285,7 @@ public class GardenScene extends BaseScene {
  		                public void run() {
  		                	if (p.getBulletRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
  		                		System.out.println("Zombie Hit");
+												z.loseHealth(p.getAttack());
  		                		p.setBullet(null);
  		                		p.setBulletRect(null);
  		                		fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
@@ -295,9 +298,9 @@ public class GardenScene extends BaseScene {
  		                }
  		            });
  		        }
- 		}, 0, 10);
+ 		 }, 0, 10);
 	}
-	
+
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -306,23 +309,23 @@ public class GardenScene extends BaseScene {
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	for(int i = 0; i<5; i++){		              	
-		                	    for(int j = 0; j<9; j++){		                	    	
+		                	for(int i = 0; i<5; i++){
+		                	    for(int j = 0; j<9; j++){
 		                	        try {
 										if (game.getPlant(i, j).getType().equals( "Wallnut") || game.getPlant(i, j).getType().equals( "PeaShooter")) {
 											for (int z = 0; z < level.zombies.length; z++) {
-												checkPlantCollision(game.getPlant(i, j), level.getZombies()[z]);											
+												checkPlantCollision(game.getPlant(i, j), level.getZombies()[z]);
 											}
 										}
 									} catch (Exception e) {
 										e.printStackTrace();
-									}               	        
+									}
 		                	    }
 		                	}
-		                }               	
+		                }
 		            });
 		        }
 		}, 0, 100);
 	}
-	
+
 }

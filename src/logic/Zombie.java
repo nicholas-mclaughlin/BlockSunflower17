@@ -231,7 +231,7 @@ public class Zombie extends GameCharacter{
 
 		                		timer.cancel();
  		                       timer.purge();
- 		                       //startZombie();
+ 		                       
 		                	}
 
 
@@ -264,7 +264,7 @@ public class Zombie extends GameCharacter{
 }
 
 
-	//Methods not used at the moment
+	//Methods not used at the moment but could be useful in future
 		/*
 	public boolean zombieOnRow(int rowNum) {
 		return row == rowNum && position <= 1250;

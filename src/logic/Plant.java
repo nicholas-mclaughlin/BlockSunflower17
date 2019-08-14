@@ -20,9 +20,9 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	public ImageView plantImage;
-	public Rectangle plantRect;
+	public Rectangle plantRect; //Rectangle around plantImage for collision detection
 	public ImageView bullet = null;
-	public Rectangle bulletRect = null;
+	public Rectangle bulletRect = null; ////Rectangle around plantBullet for collision detection
 	public boolean freeze = false;
 
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
@@ -89,7 +89,6 @@ public class Plant extends GameCharacter{
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 		    
 		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));

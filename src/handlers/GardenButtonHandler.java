@@ -55,22 +55,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		this.game = aGame;
 	}
 
-
-	/*public void trackBullet() {
-		int intervals = 100;
-		double startPoint = xPosition - 250;
-		int numOfMoves = 3000/intervals;
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		            @Override
-		             public void run() {
-
-		            	xPosition2 += startPoint/numOfMoves;
-		            	System.out.println(xPosition2);
-		             }
-		 }, 0, intervals);
-	} */
-
 	/**
 	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
 	 * to clicking a garden plot. It replaces the player's plantHeld back to default ("") at the end of the method.
@@ -95,9 +79,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		//getting button clicked position to know where to place suns or peas
 		xPosition = source.getLayoutX();
 		yPosition = source.getLayoutY();
-
-		//int bulletEndPosition = (int) (1125 - xPosition);
-
 
 		/**
 		 * By calling for the (type String) plantheld by the player and comparing it
@@ -156,11 +137,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-
-
-
-
 
 		} else if (plant.getType().equals("Wallnut")) {
 
@@ -246,6 +222,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    System.out.println();
 		}
 		
+		
+		//Could be used in future for collision detection
 		/*for(int i = 0; i<5; i++)
 		{
 		    for(int j = 0; j<9; j++)
@@ -267,7 +245,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		
 	
 
-
+		//Method that could later be used for plant and zombie collision
 	/*public boolean checkPlantCollision(Plant p, Zombie z) {
 		boolean result = false;
 	
