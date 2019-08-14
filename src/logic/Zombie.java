@@ -195,47 +195,7 @@ public class Zombie extends GameCharacter{
 		return zombieImage;
 	}
 
-	public ImageView newZombieImage() {
-		zombieImage.setX(position); //Sets the image at the very right side of the garden
-	      //Sets the y coordinate of the image according to the row itll be in
-	      if (row == 1) {
-	    	  zombieImage.setY(215);
-	      }
-	      else if (row == 2) {
-	    	  zombieImage.setY(310);
-	      }
-
-	      else if (row == 3){
-	    	  zombieImage.setY(410);
-	      }
-	      else if (row == 4) {
-	    	  zombieImage.setY(525);
-	      }
-
-	      else if (row == 5) {
-	    	  zombieImage.setY(630);
-	      }
-	    //Size of the zombie
-	      zombieImage.setFitHeight(IMAGEHEIGHT);
-	      zombieImage.setFitWidth(IMAGEWIDTH);
-
-	      //Setting the preserve ratio of the image view
-	      zombieImage.setPreserveRatio(true);
-
-	      //Creates the animation of the zombie
-	      TranslateTransition translateTransition = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition.setDuration(Duration.millis(speed));
-	      translateTransition.setNode(zombieImage);
-	      //The displacement of the animation
-	      translateTransition.setByX(-position + 250);
-	      translateTransition.setCycleCount(1);
-	      translateTransition.setAutoReverse(false);
-	      translateTransition.play();
-	      return zombieImage;
-	}
-
-
+	
 
 	public void setZombieImage(ImageView zombieImage) {
 		this.zombieImage = zombieImage;
@@ -246,10 +206,6 @@ public class Zombie extends GameCharacter{
 	}
 
 
-	public String toString2() {
-		return "Zombie [type= " + getType() + ", row= " + row + ", position= " + position + ", getHealth()= " + getHealth() + "]";
-	}
-
 	public void startZombie() {
 	stopZombie = false;
 	Timer timer = new Timer();
@@ -259,7 +215,7 @@ public class Zombie extends GameCharacter{
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	position -= 0.5;
+		                	position -= 0.15;
 		                	zombieImage.setX(position);
 		                	rect.setX(position);
 
@@ -304,39 +260,9 @@ public class Zombie extends GameCharacter{
 		    }, 3000, 10);
 }
 
-	 /*public void killPlant() {
 
- 		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
- 			deathTime = 3000;
- 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
- 			deathTime = 15000;
- 		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter"))
- 				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
- 			deathTime = 8000;
-
- 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
- 			deathTime = 6000;
- 		}
- 		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	//GardenButtonHandler.getPlantImage().setStyle("-fx-opacity: 0.0;");
- 		                }
-
- 		            });
-
- 		        }
- 		    }, deathTime);
- 		//GardenScene.fullImage.getChildren().remove(plantImage);
- 		//t.cancel();
- 	}
-	 } */
-
-
+	//Methods not used at the moment
+		/*
 	public boolean zombieOnRow(int rowNum) {
 		return row == rowNum && position <= 1250;
 	}
@@ -347,6 +273,7 @@ public class Zombie extends GameCharacter{
 	public boolean zombieAtHouse() {
 		return position <= 250;
 	}
+	
 	public boolean onColumn1() {
 		return position > 250 && position <= 366;
 	}
@@ -405,58 +332,7 @@ public class Zombie extends GameCharacter{
 		else {
 			return 8;
 		}
-	}
-
-	public boolean checkForPlant(Game aGame) {
-		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")
-				||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Potato Mine")
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"));
-	}
-
-	public void zombieTracker(Game aGame) throws FileNotFoundException {
-
-
-
-		int delay = 0; //No delay
-		int updateTime = 100; //Gets the location to update every second
-		double gardenLength = position2 - houseLength;
-		double j=  (speed / updateTime);
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		            @Override
-		             public void run() {
-
-		            	/*char[][] zombieGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
-		            	zombieGarden[(row - 1)][columnNumber()] = getFirstChar();
-		            	System.out.println("------------------");
-		        		for(int i = 0; i<5; i++)
-		        		{
-		        		    for(int j = 0; j<9; j++)
-		        		    {
-		        		        System.out.print(zombieGarden[i][j] + " ");
-		        		    }
-		        		    System.out.println();
-		        		}
-		        		System.out.println("------------------");
-		            	*/
-
-		            	/*if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
-		            		zombieStops();
-		            	} */
-
-
-
-
-		            	position -= gardenLength / j;
-
-
-
-		            	//System.out.println(toString2()); // Prints the condition of the zombie
-		             }
-		 }, delay, updateTime);
-	}
+	} */
 
 
 
