@@ -17,7 +17,6 @@ import javafx.util.Duration;
 
 public class Plant extends GameCharacter{
 	private int price;
-	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
 	public ImageView plantImage;
@@ -43,7 +42,6 @@ public class Plant extends GameCharacter{
 
 		if (typeOfPlant == "PeaShooter") {
 			setFirstChar('P');
-			setFrequency(10);
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
@@ -84,7 +82,6 @@ public class Plant extends GameCharacter{
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			setFirstChar('F');
-			setFrequency(10);
 			setAttack(15);
 			setHealth(200);
 		    setPrice(175);
@@ -110,7 +107,8 @@ public class Plant extends GameCharacter{
 			//bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 
-		    Timer timer = new Timer();
+		    //Bullets havent been converted from translateTransition to a timer that updates position yet
+		    /*Timer timer = new Timer();
 	 		timer.schedule(new TimerTask() {
 	 		        @Override
 	 		        public void run() {
@@ -131,8 +129,8 @@ public class Plant extends GameCharacter{
 	 		            });
 
 	 		        }
-	 		    }, 0, 10);
-			/*TranslateTransition translateTransition = new TranslateTransition();
+	 		    }, 0, 10); */
+			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
     	      translateTransition.setNode(bullet);
@@ -152,12 +150,11 @@ public class Plant extends GameCharacter{
     	      translateTransition2.setByX(500);
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play(); */
+    	      translateTransition2.play(); 
 		}
 
 		else if (typeOfPlant == "Wallnut") {
 			setFirstChar('W');
-			setFrequency(0);
 			setAttack(0);
 			setPrice(50);
 			setHealth(1000);
@@ -171,7 +168,6 @@ public class Plant extends GameCharacter{
 		}
 		else if (typeOfPlant == "Potato Mine") {
 			setFirstChar('M');
-			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
@@ -311,20 +307,7 @@ public class Plant extends GameCharacter{
 		this.plantImage = plantImage;
 	}
 
-	public int getFrequency() {
-		return frequency;
-	}
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
-	}
-
-	public double bulletEndPosition() {
-		return 100;
-	}
-
-
-
-		
+	
 	}
 
 
