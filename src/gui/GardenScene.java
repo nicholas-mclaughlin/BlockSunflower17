@@ -69,7 +69,7 @@ public class GardenScene extends BaseScene {
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
 	public static Button errorMessage = new Button("Buy a plant first!");
 
-	public static Button gameOverMessage = new Button("GAME OVER");
+	public static Button gameOverMessage;
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -118,7 +118,7 @@ public class GardenScene extends BaseScene {
 	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
-		for (int i = 0; i<=30; i++) {
+		for (int i = 0; i<=30 || gameOverMessage!= null; i++) {
 			Button sunButton = new Plant("").getSunButton();
 			sunButton.setText("sun button");
 			sunButton.setFont(new Font(0));
