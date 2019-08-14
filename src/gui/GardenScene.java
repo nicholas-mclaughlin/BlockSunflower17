@@ -69,6 +69,7 @@ public class GardenScene extends BaseScene {
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
 	public static Button errorMessage = new Button("Buy a plant first!");
 
+	//creates the gameOverMessage, initially null
 	public static Button gameOverMessage;
 
 	//constructor

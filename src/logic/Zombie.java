@@ -300,8 +300,9 @@ public class Zombie extends GameCharacter{
 
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
-												GardenScene.gameOverMessage = new Button("GAME OVER");
-												try {
+		                		//creates a new gameover mesage to go on top everytime a zombie enters the house so no suns are clickable
+								GardenScene.gameOverMessage = new Button("GAME OVER");
+								try {
 
 		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
 		                		}
@@ -310,7 +311,7 @@ public class Zombie extends GameCharacter{
 		                		}
 		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
 		                		GardenScene.gameOverMessage.setDisable(false);
-
+		                		//the message is as big as the window size so nothing is clickable
 		                		GardenScene.gameOverMessage.setLayoutY(0);
 		                		GardenScene.gameOverMessage.setLayoutX(0);
 		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
