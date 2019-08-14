@@ -62,7 +62,7 @@ public class GardenScene extends BaseScene {
 	public static Button errorMessage = new Button("Buy a plant first!");
 
 	//creates the gameOverMessage, initially null
-	public static Button gameOverMessage;
+	public static Button gameOverMessage = new Button("");
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -106,31 +106,35 @@ public class GardenScene extends BaseScene {
 		//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
-		for (int i = 0; i<=30 || gameOverMessage!= null; i++) {
-			Button sunButton = new Plant("").getSunButton();
-			sunButton.setText("sun button");
-			sunButton.setFont(new Font(0));
-			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
-			//timer to add the suns after timeBetweenSuns seconds
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-				        @Override
-				        public void run() {
-				            Platform.runLater(new Runnable() {
-				                @Override
-				                public void run() {
-				                	fullImage.getChildren().add(sunButton);
-				                }
-				            });
-
-				        }
-				}, timeBetweenSuns);
-			//Sets the random position of suns by calling the randomizing methods
-			sunButton.setLayoutX(generateRandomX());
-			sunButton.setLayoutY(generateRandomY());
-			//Increases the time so all suns don't appear at the same time.
-			//The time between each sun appearance is 5 seconds.
-			timeBetweenSuns +=5000;
+		for (int i = 0; i<=30; i++) {
+			if (gameOverMessage.getText().equals("")) {
+				Button sunButton = new Plant("").getSunButton();
+				sunButton.setText("sun button");
+				sunButton.setFont(new Font(0));
+				sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
+				//timer to add the suns after timeBetweenSuns seconds
+					Timer timer = new Timer();
+					timer.schedule(new TimerTask() {
+					        @Override
+					        public void run() {
+					            Platform.runLater(new Runnable() {
+					                @Override
+					                public void run() {
+					                	fullImage.getChildren().add(sunButton);
+					                }
+					            });
+	
+					        }
+					}, timeBetweenSuns);
+				//Sets the random position of suns by calling the randomizing methods
+				sunButton.setLayoutX(generateRandomX());
+				sunButton.setLayoutY(generateRandomY());
+				//Increases the time so all suns don't appear at the same time.
+				//The time between each sun appearance is 5 seconds.
+				timeBetweenSuns +=5000;
+			} else if (gameOverMessage.getText().equals("GAME OVER")) {
+				i = 31;
+			}
 		}
 
 		//level of the game (1, 2, or 3)
@@ -288,7 +292,7 @@ public class GardenScene extends BaseScene {
 												z.loseHealth(p.getAttack());
  		                		p.setBullet(null);
  		                		p.setBulletRect(null);
- 		                		fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
+ 		                		fullImage.getChildren().removeAll(p.getBulletImage(), p.getBulletRect());
  		                		/*if (p.isFreeze()) {
  		                			z.setStopZombie(true);
  		                	 	} */
@@ -301,6 +305,7 @@ public class GardenScene extends BaseScene {
  		 }, 0, 10);
 	}
 
+	
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -326,6 +331,7 @@ public class GardenScene extends BaseScene {
 		            });
 		        }
 		}, 0, 100);
+		
 	}
 
 }

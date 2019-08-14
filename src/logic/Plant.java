@@ -21,12 +21,17 @@ public class Plant extends GameCharacter{
 	private int column;
 	public ImageView plantImage;
 	public Rectangle plantRect; //Rectangle around plantImage for collision detection
-	public ImageView bullet = null;
+	public String bullet = null;
+
+	public ImageView bulletImage = null;
 	public Rectangle bulletRect = null; ////Rectangle around plantBullet for collision detection
 	public boolean freeze = false;
 
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
+	
+	private double xPosition;
+	private double yPosition;
 
 	//constructor
 	public Plant(Plant aPlant) throws Exception {
@@ -51,7 +56,8 @@ public class Plant extends GameCharacter{
 		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 
-		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
+		    setBullet("PlantImages//pea-bullet.png");
+		    /*
 
 		    bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
@@ -78,6 +84,7 @@ public class Plant extends GameCharacter{
 		    translateTransition2.setCycleCount(1000);
 		    translateTransition2.setAutoReverse(false);
 		    translateTransition2.play();
+		    */
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -91,7 +98,8 @@ public class Plant extends GameCharacter{
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStrokeWidth(2);
 		    
-		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
+		    setBullet("PlantImages//frozen-pea-bullet.png");
+		    /*
 		    bulletRect = getBulletBounds(bullet);
 			bulletRect.setFill(Color.TRANSPARENT);
 			//bulletRect.setStroke(Color.BLACK);
@@ -129,6 +137,7 @@ public class Plant extends GameCharacter{
 
 	 		        }
 	 		    }, 0, 10); */
+		    /*
 			TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -150,6 +159,7 @@ public class Plant extends GameCharacter{
     	      translateTransition2.setCycleCount(1000);
     	      translateTransition2.setAutoReverse(false);
     	      translateTransition2.play(); 
+    	      */
 		}
 
 		else if (typeOfPlant == "Wallnut") {
@@ -195,6 +205,43 @@ public class Plant extends GameCharacter{
 		Player.setPlantHeld("");
 
 	}
+	
+	public void setBullet(String bullet) {
+		this.bullet = bullet;
+	}
+	
+	public String getBullet() {
+		return bullet;
+	}
+	
+	public ImageView moveBullet(ImageView bullet, double positionX, double positionY) throws FileNotFoundException {
+	//	bulletImage = new ImageView(new Image( new FileInputStream(bullet)));
+		xPosition = positionX;
+		bullet.setLayoutX(xPosition);
+		yPosition = positionY;
+		bullet.setLayoutY(yPosition);
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	if (xPosition < 1220) {
+			                		xPosition +=1;
+			                		bullet.setLayoutX(xPosition);
+			                	}else if (xPosition >= 1220) {
+			                		GardenScene.fullImage.getChildren().remove(bullet);
+			                	}
+			                }
+	
+			            });
+	
+			        }
+			    }, 0, 10);
+			return bullet;
+		}
+	
 
 	public void setPrice(int price) {
 		this.price = price;
@@ -265,12 +312,12 @@ public class Plant extends GameCharacter{
 		this.plantRect = plantRect;
 	}
 
-	public ImageView getBullet() {
-		return bullet;
+	public ImageView getBulletImage() {
+		return bulletImage;
 	}
 
-	public void setBullet(ImageView bullet) {
-		this.bullet = bullet;
+	public void setBulletImage(ImageView bullet) {
+		this.bulletImage = bullet;
 	}
 
 	public Rectangle getBulletRect() {

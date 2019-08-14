@@ -42,6 +42,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
+	private Plant plant = null;
 
 
 
@@ -67,7 +68,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		Button source = (Button) event.getSource();
 
 		//ImageView plantImage = null;
-		Plant plant = null;
+		
 		try {
 			plant = new Plant(player.getPlantHeld());
 		} catch (FileNotFoundException e1) {
@@ -199,12 +200,40 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			 plant.getPlantRect().setLayoutY(yPosition + 160);
 			 GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect());
 			 if (plant.getBullet() != null) {
-			 plant.getBullet().setLayoutX(xPosition + 65);
-			 plant.getBullet().setLayoutY(yPosition + 165);
-			 plant.getBulletRect().setLayoutX(xPosition + 65);
-			 plant.getBulletRect().setLayoutY(yPosition + 165);
 			 
-			 GardenScene.fullImage.getChildren().addAll(plant.getBullet(), plant.getBulletRect());
+			 int timeBetweenBullets = 0;
+			 for (int i = 0; i<=30; i++) {
+				
+				// plant.getBulletImage().setLayoutX(xPosition + 65);
+				// plant.getBulletImage().setLayoutY(yPosition + 165);
+				// plant.getBulletRect().setLayoutX(xPosition + 65);
+				 //plant.getBulletRect().setLayoutY(yPosition + 165);
+				 Timer timer = new Timer();
+					timer.schedule(new TimerTask() {
+					        @Override
+					        public void run() {
+					            Platform.runLater(new Runnable() {
+					                @Override
+					                public void run() {
+					                	try {
+					                
+					        					ImageView bulletImage = new ImageView(new Image( new FileInputStream(plant.getBullet() ) ) );
+					        				
+											GardenScene.fullImage.getChildren().add(plant.moveBullet(bulletImage, xPosition + 65, yPosition + 165));
+										} catch (FileNotFoundException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+					                }
+					            });
+	
+					        }
+					}, timeBetweenBullets);
+					timeBetweenBullets+=5000;
+				 //, plant.getBulletRect()
+			 }
+			 
+			
 			 }
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);

@@ -1,6 +1,10 @@
 package logic;
 
 import java.io.FileNotFoundException;
+import java.util.concurrent.TimeUnit;
+
+import gui.GardenScene;
+import javafx.scene.control.Button;
 
 /**
  * The game class will be responsible for setting and getting the player and
@@ -11,7 +15,7 @@ public class Game {
 	private Player player;
 	public static String[][] theGarden = new String[5][9];
 	public Zombie zombie;
-	public Plant plant;
+	public Plant plant;	
 	
 	/**
 	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
@@ -135,6 +139,24 @@ public class Game {
 		    System.out.println();
 		}
 		System.out.println("---------------------------------------");
+	}
+	
+	public static void gameOver(boolean gameOver, String gameStatus) {
+		if (gameOver) {
+			GardenScene.gameOverMessage = new Button(gameStatus);
+	
+	
+			GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
+	
+			GardenScene.gameOverMessage.setStyle("-fx-opacity: 0.4;-fx-font-size: 75;  -fx-font-weight: bold;");
+			//-fx-background-color: transparent;
+			GardenScene.gameOverMessage.setDisable(false);
+			//the message is as big as the window size so nothing is clickable
+			GardenScene.gameOverMessage.setLayoutY(0);
+			GardenScene.gameOverMessage.setLayoutX(0);
+			GardenScene.gameOverMessage.setPrefSize(1220,720);
+	
+		}
 	}
 	
 	
