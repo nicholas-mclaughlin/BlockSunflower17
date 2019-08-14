@@ -5,10 +5,17 @@ import gui.Credits;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/**
+ * CreditsHandler is the button handler for the back buttons.
+ * It creates a new scene of the desired destination/scene
+ *
+ */
 public class CreditsHandler implements EventHandler<ActionEvent> {
 	
+	//gives access to session
 	private Session session;
 	
+	//constructor
 	public CreditsHandler(Session aSession) {
 		this.session = aSession;
 	}
@@ -20,9 +27,7 @@ public class CreditsHandler implements EventHandler<ActionEvent> {
 		try {
 			scene.setup();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }
