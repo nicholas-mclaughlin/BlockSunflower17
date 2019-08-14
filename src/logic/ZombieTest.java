@@ -15,14 +15,14 @@ public class ZombieTest {
 		}
 
 		@Test
-		public void test_Constructor_AllUpperCaseAndNegative() throws FileNotFoundException {
+		public void test_Constructor_NegativeRow() throws FileNotFoundException {
 			Zombie c = new Zombie("Flag Zombie", -1);
 			assertEquals("Created zombie with 'Flag Zombie' type and row -1 - testing type", "Flag Zombie", c.getType());
 			assertEquals("Created zombie with 'Flag Zombie' type and row -1 - testing row", 3, c.getRow());
 		}
 
 		@Test
-		public void test_Constructor_MixedCaseAndTooBig() throws FileNotFoundException {
+		public void test_Constructor_InvalidRow() throws FileNotFoundException {
 			Zombie c = new Zombie("Cone Zombie", 11);
 			assertEquals("Created zombie with 'Cone Zombie' type and row 11 - testing type", "Cone Zombie", c.getType());
 			assertEquals("Created zombie with 'Cone Zombie' type and row 11 - testing row", 3, c.getRow());
