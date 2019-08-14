@@ -9,7 +9,11 @@ import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-
+/**
+ * BackHandler is the button handler for the back buttons.
+ * It creates a new scene of the desired destination/scene
+ *
+ */
 public class BackHandler implements EventHandler<ActionEvent> {
 	
 	private Session session;
@@ -28,15 +32,11 @@ public class BackHandler implements EventHandler<ActionEvent> {
 			try {
 				scene.setup();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else if (sceneType.equals("Menu")) {
 			Menu scene = new Menu(session);
 			try {
-				//GardenScene.root.pause();
-				//Timeline anim = TimelineBuilder.create();
-				
 				scene.setup();
 			} catch (Exception e) {
 				e.printStackTrace();
