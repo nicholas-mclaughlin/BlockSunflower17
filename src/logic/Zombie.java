@@ -117,26 +117,7 @@ public class Zombie extends GameCharacter{
 	      
 	      startZombie();
 	 		
-	      /*//Creates the animation of the zombie
-	      TranslateTransition translateTransition = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition.setDuration(Duration.millis(speed));
-	      translateTransition.setNode(zombieImage);
-	      //The displacement of the animation
-	      translateTransition.setByX(-position + 250);
-	      translateTransition.setCycleCount(1);
-	      translateTransition.setAutoReverse(false);
-	      translateTransition.play(); */
-	      
-	      /*TranslateTransition translateTransition2 = new TranslateTransition();
-	      //How long the animation will take
-	      translateTransition2.setDuration(Duration.millis(speed));
-	      translateTransition2.setNode(rect);
-	      //The displacement of the animation
-	      translateTransition2.setByX(-position + 250);
-	      translateTransition2.setCycleCount(1);
-	      translateTransition2.setAutoReverse(false);
-	      translateTransition2.play(); */
+	     
 	}
 	
 	public Rectangle getBounds(ImageView z) {
@@ -299,12 +280,9 @@ public class Zombie extends GameCharacter{
 		                	
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
-		                		try {
+		                		
 		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
-		                		}
-		                		catch (Exception e) {
-		                			throw new IllegalArgumentException();
-		                		}
+		                		
 		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
 		                		GardenScene.gameOverMessage.setDisable(false);
 		                		
