@@ -70,7 +70,7 @@ public class GardenScene extends BaseScene {
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
 	public static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
-	public static Button gameOverMessage = new Button("GAME OVER");
+	public static Button gameOverMessage = new Button("");
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -175,7 +175,7 @@ public class GardenScene extends BaseScene {
 		}
 		
 		//while (gameOver != true) {
-			checkAll(game, level);
+			
 		//}
 
 
@@ -194,6 +194,8 @@ public class GardenScene extends BaseScene {
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
+	
+	checkAll(game, level);
 	//checkAll(game, level);
 	
 	/*Timer timer = new Timer();
@@ -438,19 +440,25 @@ public void checkBulletCollision(Plant p, Zombie z) {
             	        	Plant p = game.getPlant(i, j);
 							if (p.getType().equals( "Wallnut")
 								|| p.getType().equals( "PeaShooter")
-								|| p.getType().equals("Frozen Peashooter")
+								|| p.getType().equals("Frozen PeaShooter")
 								|| p.getType().equals("Sunflower")
 								|| p.getType().equals("Potato Mine")) {
 								if (game.getZombieRow(i+1) != null) {
 									for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 										Zombie z = game.getZombieRow(i+1).get(k);
 										if (p.getColumn() == z.getColumn()){
+											z.setStopZombie(true);
+											if (p.getType().equals("Potato Mine")) {
+												z.loseHealth(p.getAttack());
+												game.removeZombie(i+1, k);
+												//remove PlantImage and ZombieImage
+											} else {
 			 		                		//System.out.println("Colliding");
-			 		                		z.setStopZombie(true);
 			 		                		p.loseHealth(z.getAttack());
 			 		                		if (p.getHealth() <= 0) {
-			 		                			fullImage.getChildren().remove(p.getPlantImage());
-			 		                			game.resetPlot(p.getRow(), p.getColumn());
+			 		                			GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+			 		                			game.resetPlot(p);
+			 		                		}
 			 		                		}
 										}
 									}

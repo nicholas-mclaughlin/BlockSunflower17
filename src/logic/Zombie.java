@@ -17,6 +17,7 @@ import javafx.util.Duration;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
@@ -234,6 +235,7 @@ public class Zombie extends GameCharacter{
 		                	
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
+		                		GardenScene.gameOverMessage = new Button("GAME OVER");
 		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
 		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
 		                		GardenScene.gameOverMessage.setDisable(false);

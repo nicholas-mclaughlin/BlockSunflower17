@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import gui.GardenScene;
 import javafx.application.Platform;
 
 /**
@@ -77,11 +78,14 @@ public class Game {
 		theGarden[row][column] = thePlant.getType();
 	}
 	
-	public void resetPlot(int row, int column) throws FileNotFoundException {
-		Plant thePlant = new Plant(row + "," + column);
-		thePlant.setPlantImage(null);
-		gardenPlots[row][column] = thePlant;
-		theGarden[row][column] = thePlant.getType();
+	public void resetPlot(Plant plant) throws FileNotFoundException {
+		Plant thePlant = new Plant(plant.getRow() + "," + plant.getColumn());
+/*		thePlant.getPlantImage().setLayoutX(plant.getxPosition() + 25);
+		 thePlant.getPlantImage().setLayoutY(plant.getyPosition() + 160);
+		 GardenScene.fullImage.getChildren().add(null);
+*/		//thePlant.setPlantImage(null);
+		gardenPlots[plant.getRow()][plant.getColumn()] = thePlant;
+		theGarden[plant.getRow()][plant.getColumn()] = thePlant.getType();
 	}
 	
 	public String gardenPlotString() throws Exception {
@@ -114,6 +118,20 @@ public class Game {
 			newZombieRow.add(z);
 		}
 		return newZombieRow;
+	}
+	
+	public void removeZombie(int row, int index) {
+		if (row == 1) {
+			zombieRow1.remove(index);
+		} else if (row == 2) {
+			zombieRow2.remove(index);
+		} else if (row == 3) {
+			zombieRow3.remove(index);
+		} else if (row == 4) {
+			zombieRow4.remove(index);
+		} else if (row == 5) {
+			zombieRow5.remove(index);
+		} System.out.println(rowsToString());
 	}
 
 	
@@ -193,5 +211,5 @@ public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		}
 		return zombieRow1 + zombieRow2 + zombieRow3 + zombieRow4 + zombieRow5 + "\n";
 	}
-		
+	
 }
