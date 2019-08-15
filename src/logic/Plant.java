@@ -276,8 +276,8 @@ public class Plant extends GameCharacter{
  		            Platform.runLater(new Runnable() {
  		                @Override
  		                public void run() {
- 		                	bulletXPosition += 5;
- 		                	if (bulletXPosition >= 1000) {
+ 		                	bulletXPosition += 4;
+ 		                	if (bulletXPosition >= 1200) {
  		                		bulletXPosition = bulletStartPosition;
  		                	}
  		                	
