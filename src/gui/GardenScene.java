@@ -114,13 +114,13 @@ public class GardenScene extends BaseScene {
 		{new Plant("4,0"), new Plant("4,1"), new Plant("4,2"), new Plant("4,3"), new Plant("4,4"), new Plant("4,5"),
 			new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
 	Game game = new Game(player, gardenPlot);
-	
+
 	//setup stacks in stackpane
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
-	
-	
+
+
 	//fullImage.getChildren().add(home);
 	home.setFill(Color.BLUE);
 
@@ -173,9 +173,9 @@ public class GardenScene extends BaseScene {
 			game.zombieTracker(z);
 			System.out.println(game.rowsToString());
 		}
-		
+
 		//while (gameOver != true) {
-			checkAll(game, level);
+
 		//}
 
 
@@ -188,14 +188,16 @@ public class GardenScene extends BaseScene {
 
 
 
-	
+
 
 
 	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
 	setScene(scene);
 	display();
+
+	checkAll(game, level);
 	//checkAll(game, level);
-	
+
 	/*Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 		        @Override
@@ -330,9 +332,9 @@ public class GardenScene extends BaseScene {
 
 		return root;
 	}
-	
-	
-	
+
+
+
 
 
 	public Rectangle getHome() {
@@ -347,14 +349,14 @@ public class GardenScene extends BaseScene {
 
 
 
-	
+
 
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
 	public void checkPlantCollision(Plant p, Zombie z) {
-		
+
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
  		        @Override
@@ -376,9 +378,9 @@ public class GardenScene extends BaseScene {
  		        }
  		    }, 0, 10);
 }
-	
+
 public void checkBulletCollision(Plant p, Zombie z) {
-		
+
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
  		        @Override
@@ -413,7 +415,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			@SuppressWarnings("static-access")
 			@Override
             public void run() {
-				
+
 /*				for (int j = 0; j<9; j++) {
 					try {
 						if (game.getPlant(3, j).getType().equals("Wallnut")) {
@@ -433,7 +435,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 				}
 */				//System.out.println("Checked");
           	for(int i = 0; i<5; i++) {
-            	    for(int j = 0; j<9; j++) {         	    	
+            	    for(int j = 0; j<9; j++) {
             	        try {
             	        	Plant p = game.getPlant(i, j);
 							if (p.getType().equals( "Wallnut")
@@ -445,8 +447,13 @@ public void checkBulletCollision(Plant p, Zombie z) {
 									for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 										Zombie z = game.getZombieRow(i+1).get(k);
 										if (p.getColumn() == z.getColumn()){
+											z.setStopZombie(true);
+											if (p.getType().equals("Potato Mine")) {
+												z.loseHealth(p.getAttack());
+												game.removeZombie(i+1, k);
+												//remove PlantImage and ZombieImage
+											} else {
 			 		                		//System.out.println("Colliding");
-			 		                		z.setStopZombie(true);
 			 		                		p.loseHealth(z.getAttack());
 			 		                		if (p.getHealth() <= 0) {
 			 		                			fullImage.getChildren().remove(p.getPlantImage());
@@ -460,7 +467,8 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			 		                			} else if (p.plantImage!= null){
 			 		                				System.out.println("plant image exists");
 			 		                			}
-			 		                			game.resetPlot(p.getRow(), p.getColumn());
+			 		                		//	game.resetPlot(p.getRow(), p.getColumn());
+																game.resetPlot(p);
 			 		                		}
 										}
 									}
@@ -470,7 +478,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-            	        
+
 
             	    }
             	}
