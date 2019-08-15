@@ -39,7 +39,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Game game;
 	//Creates the positions of the button that is clicked.
 	public double xPosition;
-	public double yPosition;
+	//public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 
@@ -102,13 +102,15 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		plant.setxPosition(source.getLayoutX());
-		plant.setyPosition(source.getLayoutY());
+		//xPosition = source.getLayoutX() + 65;
+		//plant.setyPosition(source.getLayoutY());
 		System.out.println(player.getPlantHeld());
 		//getting button clicked position to know where to place suns or peas
-		xPosition = source.getLayoutX();
-		yPosition = source.getLayoutY();
-
+		plant.setxPosition(source.getLayoutX() + 25);
+		plant.setyPosition(source.getLayoutY() + 160);
+		plant.setBulletXPosition(source.getLayoutX() + 65);
+		plant.setBulletYPosition(source.getLayoutY() + 165);
+		plant.setBulletStartPosition(source.getLayoutX() + 65);
 		//int bulletEndPosition = (int) (1125 - xPosition);
 
 
@@ -143,8 +145,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			sunButton.setFont(new Font(0));
 			sunButton.setOnAction(new SunButtonHandler(player));
 			//positioning the sun button on the sunflower
-			sunButton.setLayoutX(xPosition);
-			sunButton.setLayoutY(yPosition + 150);
+			sunButton.setLayoutX(plant.getxPosition() - 25);
+			sunButton.setLayoutY(plant.getyPosition() - 10);
 			//to add the sunButton after 6000 milliseconds
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
@@ -226,26 +228,57 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			        }
 			    }, 2500);
 		}
-
+		/*
+		
 		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
 		 if (plant.getPlantImage() != null) {
 			//adding plant image to fullImage pane, along with the correct position
-			 plant.getPlantImage().setLayoutX(xPosition + 25);
-			 plant.getPlantImage().setLayoutY(yPosition + 160);
-			 plant.getPlantRect().setLayoutX(xPosition + 25);
-			 plant.getPlantRect().setLayoutY(yPosition + 160);
+			 plant.getPlantImage().setLayoutX(plant.getxPosition());
+			 plant.getPlantImage().setLayoutY(plant.getyPosition());
+			 plant.getPlantRect().setLayoutX(plant.getxPosition());
+			 plant.getPlantRect().setLayoutY(plant.getyPosition());
 			 GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect());
 			 if (plant.getBullet() != null) {
-			 plant.getBullet().setLayoutX(xPosition + 65);
-			 plant.getBullet().setLayoutY(yPosition + 165);
-			 plant.getBulletRect().setLayoutX(xPosition + 65);
-			 plant.getBulletRect().setLayoutY(yPosition + 165);
+			 plant.getBullet().setLayoutX(xPosition);
+			 plant.getBullet().setLayoutY(plant.getBulletYPosition());
+			 plant.getBulletRect().setLayoutX(plant.getBulletXPosition());
+			 plant.getBulletRect().setLayoutY(plant.getBulletYPosition());
 			 
 			 GardenScene.fullImage.getChildren().addAll(plant.getBullet(), plant.getBulletRect());
+			 //plant.moveBullet();
+			 
+			 Timer timer = new Timer();
+		 		timer.schedule(new TimerTask() {
+		 		        @Override
+		 		        public void run() {
+		 		            Platform.runLater(new Runnable() {
+		 		                @Override
+		 		                public void run() {
+		 		                	xPosition += 1;
+		 		                	
+		 		                	if (plant.getHealth() <= 0) {
+		 				              timer.cancel();
+				                       timer.purge();
+		 		                	}
+									
+		 				
+
+		 		                	}
+
+
+		 		            });
+
+		 		        }
+		 		    }, 0, 10); 
 			 }
+		 
+			 
+			 
+			 
+			 
 			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
 			source.setDisable(true);
-		 }
+		 } */
 
 		player.setPlantHeld("");
 		System.out.println(source.getText());

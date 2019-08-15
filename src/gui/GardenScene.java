@@ -438,7 +438,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
             	        	Plant p = game.getPlant(i, j);
 							if (p.getType().equals( "Wallnut")
 								|| p.getType().equals( "PeaShooter")
-								|| p.getType().equals("Frozen Peashooter")
+								|| p.getType().equals("Frozen PeaShooter")
 								|| p.getType().equals("Sunflower")
 								|| p.getType().equals("Potato Mine")) {
 								if (game.getZombieRow(i+1) != null) {
