@@ -447,8 +447,9 @@ public void checkBulletCollision(Plant p, Zombie z) {
 										if (p.getColumn() == z.getColumn()){
 			 		                		//System.out.println("Colliding");
 			 		                		z.setStopZombie(true);
-			 		                		p.setHealth(p.getHealth() - z.getAttack());
+			 		                		p.loseHealth(z.getAttack());
 			 		                		if (p.getHealth() <= 0) {
+			 		                			fullImage.getChildren().remove(p.getPlantImage());
 			 		                			game.resetPlot(p.getRow(), p.getColumn());
 			 		                		}
 										}
