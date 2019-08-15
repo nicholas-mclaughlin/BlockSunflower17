@@ -130,6 +130,7 @@ public class Plant extends GameCharacter{
 		    
 		    
 		    
+		    
 		    /*
 		    TranslateTransition translateTransition = new TranslateTransition();
 			//How long the animation will take
@@ -247,7 +248,7 @@ public class Plant extends GameCharacter{
 		                		plantImage.setLayoutY(yPosition);
 		                		plantRect.setLayoutX(xPosition);
 		                		plantRect.setLayoutY(yPosition);
-		                		 GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+		                		
 		                		 }
 		                		 if (bullet != null) {
 		                		 bullet.setLayoutX(bulletXPosition);
@@ -256,16 +257,48 @@ public class Plant extends GameCharacter{
 		                		 bulletRect.setLayoutY(bulletYPosition);
 		                		 
 		                		 
-		                		 GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
+		                		 
 		                		 }
 		                }
 		            });
 		        }
-		    } 0);
+		    }, 0, 10);
+		if (plantImage != null) {
+		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+		}
+		 if (bullet != null) {
+		GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
 		 
+		Timer timer2 = new Timer();
+ 		timer2.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	bulletXPosition += 5;
+ 		                	if (bulletXPosition >= 1000) {
+ 		                		bulletXPosition = bulletStartPosition;
+ 		                	}
+ 		                	
+ 		                	if (getHealth() <= 0) {
+ 				              timer.cancel();
+		                       timer.purge();
+ 		                	}
+							
+ 				
+
+ 		                	}
+
+
+ 		            });
+
+ 		        }
+ 		    }, 0, 10); 
+		 }
+	 }
 		 
-		 
-	}
+	
 
 	public void setPrice(int price) {
 		this.price = price;
