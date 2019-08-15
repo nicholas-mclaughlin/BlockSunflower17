@@ -470,6 +470,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			 		                		//	game.resetPlot(p.getRow(), p.getColumn());
 																game.resetPlot(p);
 			 		                		}
+			 		                		}
 										}
 									}
 								}
