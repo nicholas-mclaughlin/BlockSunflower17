@@ -17,7 +17,6 @@ import javafx.util.Duration;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
@@ -32,11 +31,12 @@ public class Zombie extends GameCharacter{
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
-
+	private int column;
+	
 	private Rectangle rect = getBounds(zombieImage);
-
-
-
+	
+	
+	
 	/**
 	 *
 	 * @param typeOfZombie
@@ -53,14 +53,14 @@ public class Zombie extends GameCharacter{
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
 			setFirstChar('g');
 			setHealth(200);
-
+			
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
 			setFirstChar('f');
 			setHealth(1600);
-
+			
 			setAttack(100);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Football.gif")));
 		}
@@ -76,7 +76,7 @@ public class Zombie extends GameCharacter{
 		else {
 			setRow(3);
 		}
-
+		
 		rect = getBounds(zombieImage);
 	      zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
@@ -102,7 +102,7 @@ public class Zombie extends GameCharacter{
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
 	    	  rect.setY(630);
-
+	    	  
 	      }
 	    //Size of the zombie
 	      zombieImage.setFitHeight(IMAGEHEIGHT);
@@ -110,17 +110,15 @@ public class Zombie extends GameCharacter{
 
 	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
-
-
+	      
+	      
 	      rect.setFill(Color.TRANSPARENT);
 	      //rect.setStroke(Color.BLACK);
 	      rect.setStrokeWidth(2);
-
+	      
 	      startZombie();
-
-
 	}
-
+	
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
@@ -134,12 +132,12 @@ public class Zombie extends GameCharacter{
 		zombieImage = c.getZombieImage();
 	}
 
-
-
+	
+	
 
 	//Getters and setters
-
-
+	
+	
 	public double getSpeed() {
 		return speed;
 	}
@@ -180,8 +178,8 @@ public class Zombie extends GameCharacter{
 		this.position2 += distance;
 
 	}
-
-
+	
+	
 
 	public Rectangle getRect() {
 		return rect;
@@ -194,9 +192,8 @@ public class Zombie extends GameCharacter{
 	public ImageView getZombieImage() {
 		return zombieImage;
 	}
-
-
-
+	
+	
 	public void setZombieImage(ImageView zombieImage) {
 		this.zombieImage = zombieImage;
 	}
@@ -204,8 +201,7 @@ public class Zombie extends GameCharacter{
 	public void setRow(int row) {
 		this.row = row;
 	}
-
-
+	
 	public void startZombie() {
 	stopZombie = false;
 	Timer timer = new Timer();
@@ -215,47 +211,83 @@ public class Zombie extends GameCharacter{
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	position -= 0.15;
+		                	position -= 0.5;
+		                	columnNumber(position);
 		                	zombieImage.setX(position);
 		                	rect.setX(position);
-
+		                	
 		                	if (stopZombie == true) {
 		                    	  timer.cancel();
 			                       timer.purge();
 			                       startZombie();
 		                      }
-
+		                	
 		                	if (getHealth() <= 0) {
 		                		System.out.println("Dead Zombie");
 		                		//zombieImage = null;
-
+		                		
 		                		timer.cancel();
  		                       timer.purge();
- 		                       
-		                	}
-
-
+ 		                       //startZombie();
+		                	} 
+		                	
+		                	
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
-		                		//creates a new gameover mesage to go on top everytime a zombie enters the house so no suns are clickable
-								
-		                		Game.gameOver(true, "GAME OVER");
+		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
+		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
+		                		GardenScene.gameOverMessage.setDisable(false);
+		                		
+		                		GardenScene.gameOverMessage.setLayoutY(0);
+		                		GardenScene.gameOverMessage.setLayoutX(0);
+		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
+		                	
 		                		timer.cancel();
 		                       timer.purge();
-
-
+		                       
+		                      
 		                	}
 		                }
-
+		                
 		            });
-
+		            
 		        }
-		    }, 3000, 10);
+		    }, 3000, 10);	
 }
+	 
+	 /*public void killPlant() {
+		 
+ 		if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower")){
+ 			deathTime = 3000;
+ 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut")) {
+ 			deathTime = 15000;
+ 		} else if ((aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter")) 
+ 				||(aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"))) {
+ 			deathTime = 8000;
 
+ 		} else if (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Cherry Bomb")) {
+ 			deathTime = 6000;
+ 		}
+ 		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	//GardenButtonHandler.getPlantImage().setStyle("-fx-opacity: 0.0;");
+ 		                }
+ 		                
+ 		            });
+ 		            
+ 		        }
+ 		    }, deathTime);
+ 		//GardenScene.fullImage.getChildren().remove(plantImage);
+ 		//t.cancel(); 
+ 	}
+	 } */
+	
 
-	//Methods not used at the moment but could be useful in future
-		/*
 	public boolean zombieOnRow(int rowNum) {
 		return row == rowNum && position <= 1250;
 	}
@@ -266,7 +298,6 @@ public class Zombie extends GameCharacter{
 	public boolean zombieAtHouse() {
 		return position <= 250;
 	}
-
 	public boolean onColumn1() {
 		return position > 250 && position <= 366;
 	}
@@ -294,39 +325,134 @@ public class Zombie extends GameCharacter{
 	public boolean onColumn9() {
 		return position > 1143 && position <= 1254;
 	}
-		public int columnNumber() {
+	
+	
+	public void columnNumber(double position) {
 		if (position > 250 && position <= 366) {
-			return 0;
+			this.column = 0;
 		}
 		else if (position > 366 && position <= 477) {
-			return 1;
+			this.column = 1;
 		}
 		else if (position > 477 && position <= 588) {
-			return 2;
+			this.column = 2;
 		}
 		else if (position > 588 && position <= 699) {
-			return 3;
+			this.column = 3;
 		}
 		else if (position > 699 && position <= 810) {
-			return 4;
+			this.column = 4;
 		}
 		else if (position > 810 && position <= 921) {
-			return 5;
+			this.column = 5;
 		}
 		else if (position > 921 && position <= 1032) {
-			return 6;
+			this.column = 6;
 		}
 		else if (position > 1032 && position <= 1143) {
-			return 7;
+			this.column = 7;
 		}
 		else if (position > 1143 && position <= 1254) {
-			return 8;
+			this.column = 8;
 		}
 		else {
-			return 8;
+			this.column = 9;
 		}
-	} */
+	}
+		
+		public ImageView zombieStops() {
+			 //Sets the image at the very right side of the garden
+		      //Sets the y coordinate of the image according to the row itll be in
+		      if (row == 1) {
+		    	  zombieImage.setY(215);
+		      }
+		      else if (row == 2) {
+		    	  zombieImage.setY(310);
+		      }
+
+		      else if (row == 3){
+		    	  zombieImage.setY(410);
+		      }
+		      else if (row == 4) {
+		    	  zombieImage.setY(525);
+		      }
+
+		      else if (row == 5) {
+		    	  zombieImage.setY(630);
+		      }
+		    //Size of the zombie
+		      zombieImage.setFitHeight(100);
+		      zombieImage.setFitWidth(130);
+
+		      //Setting the preserve ratio of the image view
+		      zombieImage.setPreserveRatio(true);
+
+		      //Creates the animation of the zombie
+		      TranslateTransition translateTransition = new TranslateTransition();
+		      //How long the animation will take
+		      translateTransition.setDuration(Duration.millis(speed));
+		      translateTransition.setNode(zombieImage);
+		      //The displacement of the animation
+		      translateTransition.setByX(10);
+		      translateTransition.setCycleCount(0);
+		      translateTransition.setAutoReverse(false);
+		      translateTransition.play();
+		      return zombieImage;
+		}
+
+	public boolean checkForPlant(Game aGame) {
+		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") 
+				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") 
+				||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") 
+				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Potato Mine")
+				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"));
+	}
+
+	public void zombieTracker(Game aGame) throws FileNotFoundException {
+
+		
+
+		int delay = 0; //No delay
+		int updateTime = 100; //Gets the location to update every second
+		double gardenLength = position2 - houseLength;
+		double j=  (speed / updateTime);
+		Timer t = new Timer();
+		t.schedule(new TimerTask() {
+		            @Override
+		             public void run() {
+		            	
+		            	/*char[][] zombieGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
+		            	zombieGarden[(row - 1)][columnNumber()] = getFirstChar();
+		            	System.out.println("------------------");
+		        		for(int i = 0; i<5; i++)
+		        		{
+		        		    for(int j = 0; j<9; j++)
+		        		    {
+		        		        System.out.print(zombieGarden[i][j] + " ");
+		        		    }
+		        		    System.out.println();
+		        		}
+		        		System.out.println("------------------");
+		            	*/
+		            	
+		            	/*if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
+		            		zombieStops();
+		            	} */
+		            	
+		            	
 
 
+		            	position -= gardenLength / j;
+		            	
+		            	
+		        		
+		            	//System.out.println(toString2()); // Prints the condition of the zombie
+		             }
+		 }, delay, updateTime);
+	}
+
+	public int getColumn() {
+		return this.column;
+	}
 
 }

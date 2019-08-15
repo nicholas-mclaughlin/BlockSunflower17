@@ -1,11 +1,12 @@
 package logic;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Level {
 	private int levelNum;
-	public Zombie[] zombies;
+	public ArrayList<Zombie> zombies = new ArrayList<>();
 	static int counter = 0;
 	static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
@@ -18,58 +19,55 @@ public class Level {
 	public Level(int levelNumber) throws FileNotFoundException {
 		this.setLevelNum(levelNumber);
 		if (levelNumber == 1) {
-			zombies = new Zombie[8];
-			getZombies()[0] = (new Zombie("Zombie", 4));
-			getZombies()[1] =  (new Zombie("Zombie", 3));
-			getZombies()[2] = (new Zombie("Cone Zombie",1));
-			getZombies()[3] = (new Zombie("Zombie", 2));
-			getZombies()[4] = (new Zombie("Flag Zombie", 4));
-			getZombies()[5] = (new Zombie("Zombie", 2));
-			getZombies()[6] = (new Zombie("Cone Zombie", 5));
-			getZombies()[7] = (new Zombie("Zombie", 3)); 
+			zombies.add(new Zombie("Zombie", 4));
+			zombies.add(new Zombie("Zombie", 3));
+			zombies.add(new Zombie("Cone Zombie",1));
+			zombies.add(new Zombie("Zombie", 2));
+			zombies.add(new Zombie("Flag Zombie", 4));
+			zombies.add(new Zombie("Zombie", 2));
+			zombies.add(new Zombie("Cone Zombie", 5));
+			zombies.add(new Zombie("Zombie", 3)); 
 			int counter = 0;
-			for (Zombie z : getZombies()) {
-				z.addToPosition(counter);
+			for (int z = 0; z < zombies.size(); z++) {
+				zombies.get(z).addToPosition(counter);
 				counter += 200;  
 		} 
 		}
 		else if (levelNumber == 2) {
-			zombies  = new Zombie[11];
-			getZombies()[0] = (new Zombie("Zombie", 2));
-			getZombies()[1] =  (new Zombie("Zombie", 3));
-			getZombies()[2] = (new Zombie("Cone Zombie", 5));
-			getZombies()[3] = (new Zombie("Zombie", 1));
-			getZombies()[4] = (new Zombie("Football Zombie", 4));
-			getZombies()[5] = (new Zombie("Flag Zombie", 3));
-			getZombies()[6] = (new Zombie("Zombie", 3));
-			getZombies()[7] = (new Zombie("Cone Zombie", 1));
-			getZombies()[8] = (new Zombie("Zombie", 2));
-			getZombies()[9] = (new Zombie("Zombie", 5));
-			getZombies()[10] = (new Zombie("Football Zombie", 1));
+			zombies.add(new Zombie("Zombie", 2));
+			zombies.add(new Zombie("Zombie", 3));
+			zombies.add(new Zombie("Cone Zombie", 5));
+			zombies.add(new Zombie("Zombie", 1));
+			zombies.add(new Zombie("Football Zombie", 4));
+			zombies.add(new Zombie("Flag Zombie", 3));
+			zombies.add(new Zombie("Zombie", 3));
+			zombies.add(new Zombie("Cone Zombie", 1));
+			zombies.add(new Zombie("Zombie", 2));
+			zombies.add(new Zombie("Zombie", 5));
+			zombies.add(new Zombie("Football Zombie", 1));
 			int counter = 0;
-			for (Zombie z : getZombies()) {
-				z.addToPosition(counter);
+			for (int z = 0; z < zombies.size(); z++) {
+				zombies.get(z).addToPosition(counter);
 				counter += 200;
 
 		}}
 		else if (levelNumber == 3) {
-			zombies = new Zombie[13];
-			getZombies()[0] = (new Zombie("Cone Zombie", 4));
-			getZombies()[1] =  (new Zombie("Zombie", 2));
-			getZombies()[2] = (new Zombie("Cone Zombie", 1));
-			getZombies()[3] = (new Zombie("Football Zombie", 5));
-			getZombies()[4] = (new Zombie("Zombie", 3));
-			getZombies()[5] = (new Zombie("Zombie", 3));
-			getZombies()[6] = (new Zombie("Flag Zombie", 2));
-			getZombies()[7] = (new Zombie("Football Zombie", 4));
-			getZombies()[8] = (new Zombie("Zombie", 1));
-			getZombies()[9] = (new Zombie("Zombie", 1));
-			getZombies()[10] = (new Zombie("Football Zombie", 3));
-			getZombies()[11] = (new Zombie("Zombie", 5));
-			getZombies()[12] = (new Zombie("Cone Zombie", 2));
+			zombies.add(new Zombie("Cone Zombie", 4));
+			zombies.add(new Zombie("Zombie", 2));
+			zombies.add(new Zombie("Cone Zombie", 1));
+			zombies.add(new Zombie("Football Zombie", 5));
+			zombies.add(new Zombie("Zombie", 3));
+			zombies.add(new Zombie("Zombie", 3));
+			zombies.add(new Zombie("Flag Zombie", 2));
+			zombies.add(new Zombie("Football Zombie", 4));
+			zombies.add(new Zombie("Zombie", 1));
+			zombies.add(new Zombie("Zombie", 1));
+			zombies.add(new Zombie("Football Zombie", 3));
+			zombies.add(new Zombie("Zombie", 5));
+			zombies.add(new Zombie("Cone Zombie", 2));
 			int counter = 0;
-			for (Zombie z : getZombies()) {
-				z.addToPosition(counter);
+			for (int z = 0; z < zombies.size(); z++) {
+				zombies.get(z).addToPosition(counter);
 				counter += 200;
 		}}
 	}
@@ -89,7 +87,7 @@ public class Level {
 		this.levelNum = levelNum;
 	}
 
-	public Zombie[] getZombies() {
+	public ArrayList<Zombie> getZombies() {
 		return zombies;
 	}
 	

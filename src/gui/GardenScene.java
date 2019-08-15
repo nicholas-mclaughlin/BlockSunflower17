@@ -1,9 +1,11 @@
 package gui;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
 
 import drivers.Session;
 import handlers.GardenButtonHandler;
@@ -12,6 +14,7 @@ import handlers.SunButtonHandler;
 
 import java.io.File;
 
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
@@ -24,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,7 +35,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
-import logic.*;
+import javafx.util.Duration;
+import logic.Game;
+import logic.GameCharacter;
+import logic.Level;
+import logic.Plant;
+import logic.Player;
+//import logic.Sun;
+import logic.Zombie;
 
 /**
  * GardenScene is the second scene to appear after the 'start' button
@@ -49,20 +60,17 @@ public class GardenScene extends BaseScene {
 	private final int MAXSLOTS = 45;
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
-
 	private int levelNum;
 	public static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
 	Rectangle home = new Rectangle(1100, 225, 100, 500);
 
-	//creates the panes where the gardenButtons and images will be added
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
 	public static Button errorMessage = new Button("Buy a plant first!");
-
-	//creates the gameOverMessage, initially null
-	public static Button gameOverMessage = new Button("");
+	private boolean gameOver = false;
+	public static Button gameOverMessage = new Button("GAME OVER");
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -70,112 +78,190 @@ public class GardenScene extends BaseScene {
 		this.levelNum = levelNum;
 	}
 
+
+
 	//setup actual drawing in window
 	@Override
 	public void setup() throws Exception{
 
-		//initialize music in-game
-		String grasswalk = "MenuImages//grasswalk.mp3";
-		Media hit = new Media(new File(grasswalk).toURI().toString());
-		mediaPlayer = new MediaPlayer(hit);
-		mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-		mediaPlayer.play();
+	//initialize music in-game
+	String grasswalk = "MenuImages//grasswalk.mp3";
+	Media hit = new Media(new File(grasswalk).toURI().toString());
+	mediaPlayer = new MediaPlayer(hit);
+	mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+	mediaPlayer.play();
 
-		//create garden image and garden image size to fit the buttons and scene
-		ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
-		Garden.setFitHeight(800);
-		Garden.setFitWidth(1275);
 
-		/**
-		 * Initialize game and arguments needed for game
-		 * @param Player	player of the session being run
-		 * @param String[][]	gardenPlot is the logic version of the gardenplot buttons;
-		 * 			it keeps track of where a plant and/or zombie is.
-		 */
-		Player player = new Player();
-		Plant[][] gardenPlot = new Plant[5][9];
-		Game game = new Game(player, gardenPlot);
+	//create garden image and garden image size to fit the buttons and scene
+	ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
+	Garden.setFitHeight(800);
+	Garden.setFitWidth(1275);
 
-		//setup stacks in stackpane
-		root.getChildren().add(Garden); //first stack
-		root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
+	/**
+	 * Initialize game and arguments needed for game
+	 * @param Player	player of the session being run
+	 * @param String[][]	gardenPlot is the logic version of the gardenplot buttons;
+	 * 			it keeps track of where a plant and/or zombie is.
+	 */
+	Player player = new Player();
+	Plant[][] gardenPlot = {{new Plant("0,0"), new Plant("0,1"), new Plant("0,2"), new Plant("0,3"),
+		new Plant("0,4"),new Plant("0,5"), new Plant("0,6"), new Plant("0,7"), new Plant("0,8")},
+		{new Plant("1,0"), new Plant("1,1"), new Plant("1,2"), new Plant("1,3"), new Plant("1,4"), new Plant("1,5"),
+		new Plant("1,6"), new Plant("1,7"), new Plant("1,8")}, {new Plant("2,0"), new Plant("2,1"),
+		new Plant("2,2"), new Plant("2,3"), new Plant("2,4"), new Plant("2,5"), new Plant("2,6"), new Plant("2,7"),
+		new Plant("2,8")}, {new Plant("3,0"), new Plant("3,1"), new Plant("3,2"), new Plant("3,3"),
+		new Plant("3,4"), new Plant("3,5"), new Plant("3,6"), new Plant("3,7"), new Plant("3,8")},
+		{new Plant("4,0"), new Plant("4,1"), new Plant("4,2"), new Plant("4,3"), new Plant("4,4"), new Plant("4,5"),
+			new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
+	Game game = new Game(player, gardenPlot);
+	
+	//setup stacks in stackpane
+	root.getChildren().add(Garden); //first stack
+	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
-		//fullImage.getChildren().add(home);
-		home.setFill(Color.BLUE);
+	
+	
+	//fullImage.getChildren().add(home);
+	home.setFill(Color.BLUE);
 
-		//the time for the first sun to appear in milliseconds
+	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
 		for (int i = 0; i<=30; i++) {
-			if (gameOverMessage.getText().equals("")) {
-				Button sunButton = new Plant("").getSunButton();
-				sunButton.setText("sun button");
-				sunButton.setFont(new Font(0));
-				sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
-				//timer to add the suns after timeBetweenSuns seconds
-					Timer timer = new Timer();
-					timer.schedule(new TimerTask() {
-					        @Override
-					        public void run() {
-					            Platform.runLater(new Runnable() {
-					                @Override
-					                public void run() {
-					                	fullImage.getChildren().add(sunButton);
-					                }
-					            });
-	
-					        }
-					}, timeBetweenSuns);
-				//Sets the random position of suns by calling the randomizing methods
-				sunButton.setLayoutX(generateRandomX());
-				sunButton.setLayoutY(generateRandomY());
-				//Increases the time so all suns don't appear at the same time.
-				//The time between each sun appearance is 5 seconds.
-				timeBetweenSuns +=5000;
-			} else if (gameOverMessage.getText().equals("GAME OVER")) {
-				i = 31;
-			}
+			Button sunButton = new Plant("").getSunButton();
+			sunButton.setText("sun button");
+			sunButton.setFont(new Font(0));
+			sunButton.setOnAction(new SunButtonHandler(game.getPlayer()));
+			//timer to add the suns after timeBetweenSuns seconds
+			Timer timer = new Timer();
+			timer.schedule(new TimerTask() {
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	fullImage.getChildren().add(sunButton);
+			                }
+			            });
+
+			        }
+			    }, timeBetweenSuns);
+			//Sets the random position of suns by calling the randomizing methods
+			sunButton.setLayoutX(generateRandomX());
+			sunButton.setLayoutY(generateRandomY());
+			//Increases the time so all suns don't appear at the same time.
+			//The time between each sun appearance is 5 seconds.
+			timeBetweenSuns +=5000;
 		}
 
-		//level of the game (1, 2, or 3)
-		Level level = new Level(this.levelNum);
 
-		for (Zombie z : level.getZombies()) {
+
+	//level of the game (1, 2, or 3)
+	Level level = new Level(this.levelNum);
+	ArrayList<Zombie> zombies = level.getZombies();
+
+		for (int i = 0; i < zombies.size(); i++) {
+			Zombie z = zombies.get(i);
+			//fullImage.getChildren().add(z.newZombieImage());
+			//fullImage.getChildren().add(z.newRectangle());
 			//z.setRect(getBounds(z.getZombieImage()));
+			//createZombieTransition(z) ;
+
 			fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
+
 			//checkCollision(z.getRect(), home);
+			game.zombieTracker(z);
+			System.out.println(game.rowsToString());
 		}
+		
+		//while (gameOver != true) {
+			checkAll(game, level);
+		//}
 
-		//adds the error message but sets it up to not be visible
-		fullImage.getChildren().add(errorMessage);
-		errorMessage.setStyle("-fx-opacity: 0.0;");
 
-		//for (int z = 0; z < level.zombies.length; z++) {}
+	/*Level level1 = new Level(1);
+	 root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect()); */
 
-		Scene scene = new Scene(fullImage, LENGTH, WIDTH);
-		setScene(scene);
-		display();
+	//adds the error message but sets it up to not be visible
+	fullImage.getChildren().add(errorMessage);
+	errorMessage.setStyle("-fx-opacity: 0.0;");
+
+
+
+	
+
+
+	Scene scene = new Scene(fullImage, LENGTH, WIDTH);
+	setScene(scene);
+	display();
+	//checkAll(game, level);
+	
+	/*Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+		        @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	for(int i = 0; i<5; i++)
+		                	{
+		                	    for(int j = 0; j<9; j++)
+		                	    {
+
+		                	        if (game.getPlant(i, j).getType() == "Wallnut") {
+		                	        	for (int z = 0; z < level.zombies.length; z++) {
+		                	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
+		                	        	}
+		                	        }
+
+		                	    }
+		                	}
+
+
+				}
+
+		                	}
+
+
+		            });
+
+		        }
+		    }, 0, 10); */
+	/*for(int i = 0; i<5; i++)
+	{
+	    for(int j = 0; j<9; j++)
+	    {
+
+	        if (game.getPlant(i, j).getType() == "Wallnut") {
+	        	for (int z = 0; z < level.zombies.length; z++) {
+	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
+	        	}
+	        }
+
+	    }
+	} */
+
 	}
+
 
 	//creates random X and Y positions for the suns to appear in and returns these values
-	public int generateRandomY() {
-		int randomY = (int)(Math.random() * (700));
-		return randomY;
-	}
+		public int generateRandomY() {
+			int randomY = (int)(Math.random() * (700));
+			return randomY;
+		}
+		public int generateRandomX() {
+			int randomX = (int)(Math.random()*(1220));
+			return randomX;
+		}
 
-	public int generateRandomX() {
-		int randomX = (int)(Math.random()*(1220));
-		return randomX;
-	}
-
-	//creates the sunCounter as static to be able to use .setText and change the money displayed
-	public static Button getSunCounter(Player aPlayer) throws Exception {
-		sunCounter.setText("  " + aPlayer.getMoney());
-		sunCounter.setStyle("-fx-background-image: url('/gui/pvzsun.png')");
-		sunCounter.setPrefSize(170,  70);
-		sunCounter.setFont(new Font("Arial Bold", 38));
-		return sunCounter;
-	}
+		//creates the sunCounter as static to be able to use .setText and change the money displayed
+		public static Button getSunCounter(Player aPlayer) throws Exception {
+			sunCounter.setText("  " + aPlayer.getMoney());
+			sunCounter.setStyle("-fx-background-image: url('/gui/pvzsun.png')");
+			sunCounter.setPrefSize(170,  70);
+			sunCounter.setFont(new Font("Arial Bold", 38));
+			return sunCounter;
+		}
 
 	/**
 	 * gardenButtons node contains all the buttons on the gardenScene (actual gameplay)
@@ -207,6 +293,10 @@ public class GardenScene extends BaseScene {
 			box.getChildren().add(column, plantbuttons);
 		}
 
+
+		/**
+		 * Importing the sun image and setting setting the counter with the getMoney() form the player class that controls changes in money.
+		 */
 		//adds the sunCounter to the plant buttons box
 		box.getChildren().add(getSunCounter(aPlayer));
 
@@ -240,22 +330,31 @@ public class GardenScene extends BaseScene {
 
 		return root;
 	}
+	
+	
+	
+
 
 	public Rectangle getHome() {
 		return home;
 	}
 
+
+
 	public void setHome(Rectangle home) {
 		this.home = home;
 	}
 
-//Creates a rectangle using bounds of image
+
+
+	
+
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
-	//Method for collision between zombie and plant
 	public void checkPlantCollision(Plant p, Zombie z) {
+		
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
  		        @Override
@@ -263,23 +362,23 @@ public class GardenScene extends BaseScene {
  		            Platform.runLater(new Runnable() {
  		                @Override
  		                public void run() {
- 		                	if (p.getPlantRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
- 		                		System.out.println("Colliding");
- 		                		fullImage.getChildren().removeAll(p.getPlantImage(), p.getPlantRect());
- 		                		p.setPlantImage(null);
- 		                		p.setPlantRect(null);
+ 		                	if (p.getxPosition() == z.getPosition()){
+ 		                		 System.out.println("Colliding");
+ 		                		 z.setStopZombie(true);
+ 				              timer.cancel();
+		                       timer.purge();
 
- 		                		z.setStopZombie(true);
- 		                		timer.cancel();
- 		                		timer.purge();
  		                	}
  		                }
- 		            });
- 		        }
- 		}, 0, 10);
-	}
 
-	public void checkBulletCollision(Plant p, Zombie z) {
+ 		            });
+
+ 		        }
+ 		    }, 0, 10);
+}
+	
+public void checkBulletCollision(Plant p, Zombie z) {
+		
 		Timer timer = new Timer();
  		timer.schedule(new TimerTask() {
  		        @Override
@@ -288,50 +387,85 @@ public class GardenScene extends BaseScene {
  		                @Override
  		                public void run() {
  		                	if (p.getBulletRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
- 		                		System.out.println("Zombie Hit");
-												z.loseHealth(p.getAttack());
+ 		                		 System.out.println("Zombie Hit");
  		                		p.setBullet(null);
- 		                		p.setBulletRect(null);
- 		                		fullImage.getChildren().removeAll(p.getBulletImage(), p.getBulletRect());
- 		                		/*if (p.isFreeze()) {
- 		                			z.setStopZombie(true);
- 		                	 	} */
- 		                		timer.cancel();
- 		                		timer.purge();
- 		                	}
- 		                }
- 		            });
- 		        }
- 		 }, 0, 10);
-	}
+ 		                	p.setBulletRect(null);
+ 		                	 fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
+ 		                	 /*if (p.isFreeze()) {
+ 		                	z.setStopZombie(true);
+ 		                	 } */
+ 				              timer.cancel();
+		                       timer.purge();
 
-	
+ 				}
+
+ 		                	}
+
+
+ 		            });
+
+ 		        }
+ 		    }, 0, 10);
+}
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	for(int i = 0; i<5; i++){
-		                	    for(int j = 0; j<9; j++){
-		                	        try {
-										if (game.getPlant(i, j).getType().equals( "Wallnut") || game.getPlant(i, j).getType().equals( "PeaShooter")) {
-											for (int z = 0; z < level.zombies.length; z++) {
-												checkPlantCollision(game.getPlant(i, j), level.getZombies()[z]);
-											}
+			@SuppressWarnings("static-access")
+			@Override
+            public void run() {
+				
+/*				for (int j = 0; j<9; j++) {
+					try {
+						if (game.getPlant(3, j).getType().equals("Wallnut")) {
+							for (int z = 0; z < game.getZombieRow(4).size(); z++) {
+								//System.out.println(game.getPlant(3, j).getColumn() + ",,," + game.getPlant(3, j).getRow());
+								//System.out.println(game.getPlant(3, j).getType());
+								//System.out.println(game.getPlant(3, j).getColumn() + "," + game.getZombieRow(4).get(z).getColumn());
+								if (game.getPlant(3, j).getColumn() == game.getZombieRow(4).get(z).getColumn()){
+						    		 System.out.println("Colliding");
+						    		game.getZombieRow(4).get(z).setStopZombie(true);
+								}
+							}
+						}
+					}  catch (Exception e) {
+						System.out.println("Exception");
+					}
+				}
+*/				//System.out.println("Checked");
+          	for(int i = 0; i<5; i++) {
+            	    for(int j = 0; j<9; j++) {         	    	
+            	        try {
+            	        	Plant p = game.getPlant(i, j);
+							if (p.getType().equals( "Wallnut")
+								|| p.getType().equals( "PeaShooter")
+								|| p.getType().equals("Frozen Peashooter")
+								|| p.getType().equals("Sunflower")
+								|| p.getType().equals("Potato Mine")) {
+								if (game.getZombieRow(i+1) != null) {
+									for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
+										Zombie z = game.getZombieRow(i+1).get(k);
+										if (p.getColumn() == z.getColumn()){
+			 		                		//System.out.println("Colliding");
+			 		                		z.setStopZombie(true);
+			 		                		p.setHealth(p.getHealth() - z.getAttack());
+			 		                		if (p.getHealth() <= 0) {
+			 		                			game.resetPlot(p.getRow(), p.getColumn());
+			 		                		}
 										}
-									} catch (Exception e) {
-										e.printStackTrace();
 									}
-		                	    }
-		                	}
-		                }
-		            });
-		        }
-		}, 0, 100);
-		
-	}
+								}
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+            	        
 
+            	    }
+            	}
+
+
+	}
+		    }, 0, 100);
+	}
 }
