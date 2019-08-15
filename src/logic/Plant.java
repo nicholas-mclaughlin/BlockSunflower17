@@ -27,6 +27,11 @@ public class Plant extends GameCharacter{
 	public boolean freeze = false;
 	private double xPosition;
 	private double yPosition;
+	private double bulletStartPosition;
+	private double bulletXPosition;
+	private double bulletYPosition;
+	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
+	private Button sunGif = new Button("",sunGIF);
 
 	public double getxPosition() {
 		return xPosition;
@@ -49,9 +54,44 @@ public class Plant extends GameCharacter{
 	public void setyPosition(double yPosition) {
 		this.yPosition = yPosition;
 	}
+	
+	
+	
+	public double getBulletXPosition() {
+		return bulletXPosition;
+	}
 
-	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
-	private Button sunGif = new Button("",sunGIF);
+
+
+	public void setBulletXPosition(double bulletXPosition) {
+		this.bulletXPosition = bulletXPosition;
+	}
+
+
+
+	public double getBulletYPosition() {
+		return bulletYPosition;
+	}
+
+
+
+	public void setBulletYPosition(double bulletYPosition) {
+		this.bulletYPosition = bulletYPosition;
+	}
+	
+	
+
+
+
+	public double getBulletStartPosition() {
+		return bulletStartPosition;
+	}
+
+
+
+	public void setBulletStartPosition(double bulletStartPosition) {
+		this.bulletStartPosition = bulletStartPosition;
+	}
 
 	//constructor
 	public Plant(Plant aPlant) throws Exception {
@@ -80,12 +120,18 @@ public class Plant extends GameCharacter{
 		    plantRect.setStrokeWidth(2);
 
 		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
-
+		    
 		    bulletRect = getBulletBounds(bullet);
-			bulletRect.setFill(Color.TRANSPARENT);
-			//bulletRect.setStroke(Color.BLACK);
+			
+		    bulletRect.setFill(Color.TRANSPARENT);
+			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-
+		    
+		    
+		    
+		    
+		    
+		    /*
 		    TranslateTransition translateTransition = new TranslateTransition();
 			//How long the animation will take
 			translateTransition.setDuration(Duration.millis(3000));
@@ -105,7 +151,7 @@ public class Plant extends GameCharacter{
 		    translateTransition2.setByX(500);
 		    translateTransition2.setCycleCount(1000);
 		    translateTransition2.setAutoReverse(false);
-		    translateTransition2.play();
+		    translateTransition2.play(); */
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -120,44 +166,8 @@ public class Plant extends GameCharacter{
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
+		  
 		    
-		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//frozen-pea-bullet.png")));
-		    bulletRect = getBulletBounds(bullet);
-			bulletRect.setFill(Color.TRANSPARENT);
-			//bulletRect.setStroke(Color.BLACK);
-		    bulletRect.setStrokeWidth(2);
-
-		    bulletRect = getBounds(bullet);
-			bulletRect.setStroke(Color.AQUA);
-			
-			
-			bulletRect = getBulletBounds(bullet);
-			bulletRect.setFill(Color.TRANSPARENT);
-			//bulletRect.setStroke(Color.BLACK);
-		    bulletRect.setStrokeWidth(2);
-
-		    Timer timer = new Timer();
-	 		timer.schedule(new TimerTask() {
-	 		        @Override
-	 		        public void run() {
-	 		            Platform.runLater(new Runnable() {
-	 		                @Override
-	 		                public void run() {
-	 		                	
-	 		                	if (getHealth() <= 0) {
-	 				              timer.cancel();
-			                       timer.purge();
-	 		                	}
-
-	 				
-
-	 		                	}
-
-
-	 		            });
-
-	 		        }
-	 		    }, 0, 10);
 			/*TranslateTransition translateTransition = new TranslateTransition();
     	      //How long the animation will take
     	      translateTransition.setDuration(Duration.millis(3000));
@@ -224,8 +234,71 @@ public class Plant extends GameCharacter{
 		}
 		
 		Player.setPlantHeld("");
+		
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
 
-	}
+		        @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	if (plantImage != null) {
+		                		plantImage.setLayoutX(xPosition);
+		                		plantImage.setLayoutY(yPosition);
+		                		plantRect.setLayoutX(xPosition);
+		                		plantRect.setLayoutY(yPosition);
+		                		
+		                		 }
+		                		 if (bullet != null) {
+		                		 bullet.setLayoutX(bulletXPosition);
+		                		 bullet.setLayoutY(bulletYPosition);
+		                		 bulletRect.setLayoutX(bulletXPosition);
+		                		 bulletRect.setLayoutY(bulletYPosition);
+		                		 
+		                		 
+		                		 
+		                		 }
+		                }
+		            });
+		        }
+		    }, 0, 10);
+		if (plantImage != null) {
+		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+		}
+		 if (bullet != null) {
+		GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
+		 
+		Timer timer2 = new Timer();
+ 		timer2.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	bulletXPosition += 4;
+ 		                	if (bulletXPosition >= 1200) {
+ 		                		bulletXPosition = bulletStartPosition;
+ 		                	}
+ 		                	
+ 		                	if (getHealth() <= 0) {
+ 				              timer.cancel();
+		                       timer.purge();
+ 		                	}
+							
+ 				
+
+ 		                	}
+
+
+ 		            });
+
+ 		        }
+ 		    }, 0, 10); 
+		 }
+	 }
+		 
+	
 
 	public void setPrice(int price) {
 		this.price = price;
@@ -344,8 +417,31 @@ public class Plant extends GameCharacter{
 		this.frequency = frequency;
 	}
 
-	public double bulletEndPosition() {
-		return 100;
+	public void moveBullet() {
+		Timer timer = new Timer();
+ 		timer.schedule(new TimerTask() {
+ 		        @Override
+ 		        public void run() {
+ 		            Platform.runLater(new Runnable() {
+ 		                @Override
+ 		                public void run() {
+ 		                	bulletXPosition += 1;
+ 		                	/*
+ 		                	if (getHealth() <= 0) {
+ 				              timer.cancel();
+		                       timer.purge();
+ 		                	}
+ 		                	*/
+						
+ 				
+
+ 		                	}
+
+
+ 		            });
+
+ 		        }
+ 		    }, 0, 10);
 	}
 
 /*	public void checkForZombie(game) {
