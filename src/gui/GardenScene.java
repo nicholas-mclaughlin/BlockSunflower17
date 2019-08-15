@@ -450,6 +450,16 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			 		                		p.loseHealth(z.getAttack());
 			 		                		if (p.getHealth() <= 0) {
 			 		                			fullImage.getChildren().remove(p.getPlantImage());
+			 		                			//p.getPlantImage().imageProperty().set(null);
+			 		                			//p.getPlantImage().relocate(1300, 760);
+			 		                			//p.getPlantImage().resize(0, 0);
+			 		                			//p.getPlantImage().setStyle("-fx-opacity: 0.0;");
+			 		                			//p.getPlantImage().setVisible(false);
+			 		                			if (p.plantImage==null) {
+			 		                				System.out.println("no plant image exists");
+			 		                			} else if (p.plantImage!= null){
+			 		                				System.out.println("plant image exists");
+			 		                			}
 			 		                			game.resetPlot(p.getRow(), p.getColumn());
 			 		                		}
 										}

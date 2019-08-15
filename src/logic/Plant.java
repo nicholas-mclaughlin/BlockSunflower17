@@ -113,7 +113,8 @@ public class Plant extends GameCharacter{
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
-		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
+		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
+		    setPlantImage(plantImage);
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -161,7 +162,8 @@ public class Plant extends GameCharacter{
 			setHealth(200);
 		    setPrice(175);
 		    setFreeze(true);
-		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
+		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif")));
+		    setPlantImage(plantImage);
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
@@ -197,7 +199,8 @@ public class Plant extends GameCharacter{
 			setAttack(0);
 			setPrice(50);
 			setHealth(1000);
-			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
+			plantImage = new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif")));
+			setPlantImage(plantImage);
 			setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -210,7 +213,8 @@ public class Plant extends GameCharacter{
 			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
-			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
+			plantImage = new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif")));
+			setPlantImage(plantImage);
 			getPlantImage().setFitWidth(70);
 			getPlantImage().setPreserveRatio(true);
 			setPlantRect(getBounds(getPlantImage()));
@@ -223,7 +227,8 @@ public class Plant extends GameCharacter{
 		else if (typeOfPlant == "Sunflower") {
 		    setHealth(300);
 		    setPrice(50);
-		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
+		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
+		    setPlantImage(plantImage);
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -403,7 +408,7 @@ public class Plant extends GameCharacter{
 	}
 
 	public ImageView getPlantImage() {
-		return plantImage;
+		return this.plantImage;
 	}
 
 	public void setPlantImage(ImageView plantImage) {
