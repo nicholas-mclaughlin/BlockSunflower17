@@ -400,56 +400,6 @@ public class Zombie extends GameCharacter{
 		      return zombieImage;
 		}
 
-	public boolean checkForPlant(Game aGame) {
-		return (aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Sunflower") 
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Wallnut") 
-				||  aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("PeaShooter") 
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Potato Mine")
-				|| aGame.getGardenPlots()[(row - 1)][columnNumber()].getType().equals("Frozen PeaShooter"));
-	}
-
-	public void zombieTracker(Game aGame) throws FileNotFoundException {
-
-		
-
-		int delay = 0; //No delay
-		int updateTime = 100; //Gets the location to update every second
-		double gardenLength = position2 - houseLength;
-		double j=  (speed / updateTime);
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		            @Override
-		             public void run() {
-		            	
-		            	/*char[][] zombieGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
-		            	zombieGarden[(row - 1)][columnNumber()] = getFirstChar();
-		            	System.out.println("------------------");
-		        		for(int i = 0; i<5; i++)
-		        		{
-		        		    for(int j = 0; j<9; j++)
-		        		    {
-		        		        System.out.print(zombieGarden[i][j] + " ");
-		        		    }
-		        		    System.out.println();
-		        		}
-		        		System.out.println("------------------");
-		            	*/
-		            	
-		            	/*if (checkForPlant(aGame)) { //Going to do something if plant and zombie collide
-		            		zombieStops();
-		            	} */
-		            	
-		            	
-
-
-		            	position -= gardenLength / j;
-		            	
-		            	
-		        		
-		            	//System.out.println(toString2()); // Prints the condition of the zombie
-		             }
-		 }, delay, updateTime);
-	}
 
 	public int getColumn() {
 		return this.column;

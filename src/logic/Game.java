@@ -115,12 +115,7 @@ public class Game {
 		}
 		return newZombieRow;
 	}
-	
-	public boolean checkForPlant(Zombie aZombie) {
-		//System.out.println("" + (aZombie.getRow() - 1));
-		//System.out.println("" + aZombie.columnNumber());
-		return (getGardenPlots()[(aZombie.getRow() - 1)][aZombie.columnNumber()].getType().equals("Sunflower")); 
-	}
+
 	
 public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		
