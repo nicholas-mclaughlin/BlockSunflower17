@@ -83,7 +83,7 @@ public class Game {
 /*		thePlant.getPlantImage().setLayoutX(plant.getxPosition() + 25);
 		 thePlant.getPlantImage().setLayoutY(plant.getyPosition() + 160);
 		 GardenScene.fullImage.getChildren().add(null);
-*/		//thePlant.setPlantImage(null);
+*/		thePlant.setPlantImage(null);
 		gardenPlots[plant.getRow()][plant.getColumn()] = thePlant;
 		theGarden[plant.getRow()][plant.getColumn()] = thePlant.getType();
 	}

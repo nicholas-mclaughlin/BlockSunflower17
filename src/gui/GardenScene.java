@@ -412,10 +412,10 @@ public void checkBulletCollision(Plant p, Zombie z) {
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
-			@SuppressWarnings("static-access")
-			@Override
-            public void run() {
-
+		@SuppressWarnings("static-access")
+		@Override
+        public void run() {
+			
 /*				for (int j = 0; j<9; j++) {
 					try {
 						if (game.getPlant(3, j).getType().equals("Wallnut")) {
@@ -435,56 +435,72 @@ public void checkBulletCollision(Plant p, Zombie z) {
 				}
 */				//System.out.println("Checked");
           	for(int i = 0; i<5; i++) {
-            	    for(int j = 0; j<9; j++) {
-            	        try {
-            	        	Plant p = game.getPlant(i, j);
-							if (p.getType().equals( "Wallnut")
-								|| p.getType().equals( "PeaShooter")
-								|| p.getType().equals("Frozen PeaShooter")
-								|| p.getType().equals("Sunflower")
-								|| p.getType().equals("Potato Mine")) {
-								if (game.getZombieRow(i+1) != null) {
-									for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
-										Zombie z = game.getZombieRow(i+1).get(k);
-										if (p.getColumn() == z.getColumn()){
-											z.setStopZombie(true);
-											if (p.getType().equals("Potato Mine")) {
-												z.loseHealth(p.getAttack());
-												game.removeZombie(i+1, k);
-												//remove PlantImage and ZombieImage
-											} else {
-			 		                		//System.out.println("Colliding");
-			 		                		p.loseHealth(z.getAttack());
-			 		                		if (p.getHealth() <= 0) {
-			 		                			fullImage.getChildren().remove(p.getPlantImage());
-			 		                			//p.getPlantImage().imageProperty().set(null);
-			 		                			//p.getPlantImage().relocate(1300, 760);
-			 		                			//p.getPlantImage().resize(0, 0);
-			 		                			//p.getPlantImage().setStyle("-fx-opacity: 0.0;");
-			 		                			//p.getPlantImage().setVisible(false);
-			 		                			if (p.plantImage==null) {
-			 		                				System.out.println("no plant image exists");
-			 		                			} else if (p.plantImage!= null){
-			 		                				System.out.println("plant image exists");
-			 		                			}
-			 		                		//	game.resetPlot(p.getRow(), p.getColumn());
-																game.resetPlot(p);
-			 		                		}
-			 		                		}
-										}
+        	    for(int j = 0; j<9; j++) {
+        	        try {
+        	        	
+        	        	Plant p = game.getPlant(i, j);
+        	        	//p.setImage();
+        	        	
+						if (p.getType().equals( "Wallnut")
+							|| p.getType().equals( "PeaShooter")
+							|| p.getType().equals("Frozen PeaShooter")
+							|| p.getType().equals("Sunflower")
+							|| p.getType().equals("Potato Mine")) {
+							if (game.getZombieRow(i+1) != null) {
+								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
+									
+									Zombie z = game.getZombieRow(i+1).get(k);
+									if (p.getColumn() == z.getColumn()) {
+										z.setStopZombie(true);
+										if (p.getType().equals("Potato Mine")) {
+											z.loseHealth(p.getAttack());
+											game.removeZombie(i+1, k);
+											game.resetPlot(p);
+											//remove PlantImage and ZombieImage
+										} else {
+		 		                		p.loseHealth(z.getAttack());
+		 		                		if (p.getHealth() <= 0) {
+		 		                			//fullImage.getChildren().remove(p.plantImage);
+		 		                			p.setNotDestroyed(false);
+		 		                			
+		 		                			
+		 		              /*  			if (p.hasImage && p.plantNotDestroyed == false) {
+		 		                				System.out.println("remove");
+		 				                		GardenScene.fullImage.getChildren().remove(p.plantImage);
+		 				                	}
+		 		              */  			//fullImage.getChildren().remove(p.getPlantImage());
+		 		                			//p.getPlantImage().imageProperty().set(null);
+		 		                			//p.getPlantImage().relocate(1300, 760);
+		 		                			//p.getPlantImage().resize(0, 0);
+		 		                			//p.getPlantImage().setStyle("-fx-opacity: 0.0;");
+		 		                			//p.getPlantImage().setVisible(false);
+		 		                			
+		 		                			
+		 		                		/*	if (p.plantImage==null) {
+		 		                				System.out.println("no plant image exists");
+		 		                			} else if (p.plantImage!= null){
+		 		                				System.out.println("plant image exists");
+		 		                			}
+										*/	game.resetPlot(p);
+		 		                		}
+		 		                		}
 									}
 								}
 							}
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						} else {
+							for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
+								Zombie z = game.getZombieRow(i+1).get(k);
+								if (p.getColumn() == z.getColumn()){
+									z.setStopZombie(false);
+								}
+							}
 						}
-
-
-            	    }
-            	}
-
-
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+        	    }
+        	}
 	}
 		    }, 0, 100);
 	}

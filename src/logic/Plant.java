@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import gui.GardenScene;
+import javafx.animation.AnimationTimer;
 import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
@@ -25,6 +26,8 @@ public class Plant extends GameCharacter{
 	public ImageView bullet = null;
 	public Rectangle bulletRect = null;
 	public boolean freeze = false;
+	public boolean plantNotDestroyed = true;
+	public boolean hasImage = false;
 	private double xPosition;
 	private double yPosition;
 	private double bulletStartPosition;
@@ -32,7 +35,17 @@ public class Plant extends GameCharacter{
 	private double bulletYPosition;
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
+	
+	
+	public boolean isNotDestroyed() {
+		return plantNotDestroyed;
+	}
 
+	public void setNotDestroyed(boolean bool) {
+		this.plantNotDestroyed = bool;
+	}
+	
+	
 	public double getxPosition() {
 		return xPosition;
 	}
@@ -108,13 +121,14 @@ public class Plant extends GameCharacter{
 		super(typeOfPlant);
 
 		if (typeOfPlant == "PeaShooter") {
+			this.plantNotDestroyed = true;
+			//hasImage = true;
 			setFirstChar('P');
 			setFrequency(10);
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
-		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif")));
-		    setPlantImage(plantImage);
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -156,14 +170,15 @@ public class Plant extends GameCharacter{
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
+			this.plantNotDestroyed = true;
+			//hasImage = true;
 			setFirstChar('F');
 			setFrequency(10);
 			setAttack(15);
 			setHealth(200);
 		    setPrice(175);
 		    setFreeze(true);
-		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif")));
-		    setPlantImage(plantImage);
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
@@ -194,13 +209,14 @@ public class Plant extends GameCharacter{
 		}
 
 		else if (typeOfPlant == "Wallnut") {
+			this.plantNotDestroyed = true;
+			//hasImage = true;
 			setFirstChar('W');
 			setFrequency(0);
 			setAttack(0);
 			setPrice(50);
 			setHealth(1000);
-			plantImage = new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif")));
-			setPlantImage(plantImage);
+			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
 			setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -209,11 +225,13 @@ public class Plant extends GameCharacter{
 		    plantRect.setWidth(70);
 		}
 		else if (typeOfPlant == "Potato Mine") {
+			this.plantNotDestroyed = true;
+			//hasImage = true;
 			setFirstChar('M');
 			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
-			plantImage = new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif")));
+			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
 			setPlantImage(plantImage);
 			getPlantImage().setFitWidth(70);
 			getPlantImage().setPreserveRatio(true);
@@ -225,10 +243,11 @@ public class Plant extends GameCharacter{
 		    plantRect.setWidth(63);
 		}
 		else if (typeOfPlant == "Sunflower") {
+			this.plantNotDestroyed = true;
+			//hasImage = true;
 		    setHealth(300);
 		    setPrice(50);
-		    plantImage = new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif")));
-		    setPlantImage(plantImage);
+		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    //plantRect.setStroke(Color.BLACK);
@@ -240,70 +259,119 @@ public class Plant extends GameCharacter{
 		
 		Player.setPlantHeld("");
 		
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+		setImage();
+	 }
+		 
+	public void setImage() {
+		
+	Timer timer = new Timer();
+	
+	//plantNotDestroyed = true;
+	timer.schedule(new TimerTask() {
 
+        @Override
+        public void run() {
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+               	
+               	System.out.println(plantImage);
+                	//System.out.println("pnd " + hasImage);
+                	
+                	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
+                		System.out.println("I'm a little shit");
+                		plantImage.setLayoutX(xPosition);
+                		plantImage.setLayoutY(yPosition);
+                		plantRect.setLayoutX(xPosition);
+                		plantRect.setLayoutY(yPosition);
+                		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+                		hasImage = true;
+                		
+                	} if (getPlantImage() != null && plantNotDestroyed == false) {
+            				System.out.println("remove");
+            				//timer.cancel();
+            				//timer.purge();
+            				//plantImage.imageProperty().set(null);
+	                		//plantImage.relocate(0, 0);
+	                		//plantImage.resize(0, 0);
+	                		//plantImage.setStyle("-fx-opacity: 0.0;");
+	                		//plantImage.setVisible(false);
+	                		GardenScene.fullImage.getChildren().removeAll(plantImage, plantRect);
+	                		
+	                	}
+                	
+                	//GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+                		 if (bullet != null) {
+                		 bullet.setLayoutX(bulletXPosition);
+                		 bullet.setLayoutY(bulletYPosition);
+                		 bulletRect.setLayoutX(bulletXPosition);
+                		 bulletRect.setLayoutY(bulletYPosition);
+                		 
+                		 
+                		 
+                		 }
+               }
+            });
+        }
+    }, 0, 10);
+	
+	/*		AnimationTimer t = new AnimationTimer() {
+
+	@Override
+	public void handle(long now) {
+		if (plantImage != null && hasImage == false
+    			&& plantNotDestroyed) {
+    		plantImage.setLayoutX(xPosition);
+    		plantImage.setLayoutY(yPosition);
+    		plantRect.setLayoutX(xPosition);
+    		plantRect.setLayoutY(yPosition);
+    		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+    		hasImage = true;
+
+    	} else if (hasImage && plantNotDestroyed == false) {
+				System.out.println("remove");
+     		GardenScene.fullImage.getChildren().remove(plantImage);
+     	}
+    		 if (bullet != null) {
+    		 bullet.setLayoutX(bulletXPosition);
+    		 bullet.setLayoutY(bulletYPosition);
+    		 bulletRect.setLayoutX(bulletXPosition);
+    		 bulletRect.setLayoutY(bulletYPosition);
+    		 
+    		 
+    		 
+    		 }
+		}
+		
+	}; t.start();
+	*/		
+	
+	if (bullet != null) {
+	GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
+	 
+	Timer timer2 = new Timer();
+		timer2.schedule(new TimerTask() {
 		        @Override
 		        public void run() {
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	if (plantImage != null) {
-		                		plantImage.setLayoutX(xPosition);
-		                		plantImage.setLayoutY(yPosition);
-		                		plantRect.setLayoutX(xPosition);
-		                		plantRect.setLayoutY(yPosition);
-		                		
-		                		 }
-		                		 if (bullet != null) {
-		                		 bullet.setLayoutX(bulletXPosition);
-		                		 bullet.setLayoutY(bulletYPosition);
-		                		 bulletRect.setLayoutX(bulletXPosition);
-		                		 bulletRect.setLayoutY(bulletYPosition);
-		                		 
-		                		 
-		                		 
-		                		 }
-		                }
-		            });
-		        }
-		    }, 0, 10);
-		if (plantImage != null) {
-		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
-		}
-		 if (bullet != null) {
-		GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
-		 
-		Timer timer2 = new Timer();
- 		timer2.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	bulletXPosition += 4;
- 		                	if (bulletXPosition >= 1200) {
- 		                		bulletXPosition = bulletStartPosition;
- 		                	}
- 		                	
- 		                	if (getHealth() <= 0) {
- 				              timer.cancel();
-		                       timer.purge();
- 		                	}
-							
- 				
-
- 		                	}
-
-
- 		            });
-
- 		        }
- 		    }, 0, 10); 
-		 }
-	 }
-		 
+		                	bulletXPosition += 4;
+		                	if (bulletXPosition >= 1200) {
+		                		bulletXPosition = bulletStartPosition;
+		                	}
+						
+				
 	
+		                	}
+	
+	
+		            });
+	
+		        }
+		    }, 0, 10); 
+	 }
+	}
 
 	public void setPrice(int price) {
 		this.price = price;
