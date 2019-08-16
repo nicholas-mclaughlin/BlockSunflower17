@@ -109,9 +109,13 @@ public class Plant extends GameCharacter{
 	//constructor
 	public Plant(Plant aPlant) throws Exception {
 		super(aPlant);
-		this.price = aPlant.price;
+		setPrice(aPlant.getPrice());
+		setAttack(aPlant.getAttack());
 		this.column = aPlant.getColumn();
 		this.row = aPlant.getRow();
+		setxPosition(aPlant.getxPosition());
+		setyPosition(aPlant.getyPosition());
+		setPlantImage(aPlant.getPlantImage());
 	}
 
 	
@@ -275,7 +279,7 @@ public class Plant extends GameCharacter{
                 @Override
                 public void run() {
                	
-               	//System.out.println(plantImage);
+               	//System.out.println(plantNotDestroyed);
                 	//System.out.println("pnd " + hasImage);
                 	
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
