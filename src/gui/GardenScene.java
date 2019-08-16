@@ -457,13 +457,19 @@ public void checkBulletCollision(Plant p, Zombie z) {
 									if (p.getColumn() == z.getColumn()) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
+											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											game.removeZombie(i+1, k);
 											game.resetPlot(p);
 											//remove PlantImage and ZombieImage
-										} else {
+										} 
+										
+										else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
+		 		                		
+										}
+										
 		 		                		if (p.getHealth() < 0 && p.plantNotDestroyed) {
 		 		                			//fullImage.getChildren().remove(p.plantImage);
 		 		                			p.setNotDestroyed(false);
@@ -489,6 +495,12 @@ public void checkBulletCollision(Plant p, Zombie z) {
 										*/	//game.resetPlot(p);
 		 		                		}
 		 		                		}
+									if (p.getType().equals("PeaShooter")) {
+										System.out.println(p.getBulletXPosition());
+										if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
+											z.loseHealth(p.getAttack());
+											System.out.println(z.getHealth());
+										}
 									}
 								}
 							}
