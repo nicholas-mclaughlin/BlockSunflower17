@@ -423,29 +423,30 @@ public void checkBulletCollision(Plant p, Zombie z) {
         	        try {
         	        	Plant p = game.getPlant(i, j);
         	        	p.setImage();
-        	        	
+
 						if (p.getType().equals( "Wallnut")
 							|| p.getType().equals( "PeaShooter")
 							|| p.getType().equals("Frozen PeaShooter")
 							|| p.getType().equals("Sunflower")
 							|| p.getType().equals("Potato Mine")) {
-							
+
 							//System.out.println(p.getType() + " , " + p.getPlantImage());
-							
+
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
-									
+
 									Zombie z = game.getZombieRow(i+1).get(k);
 									//System.out.println(z.getType() + " , " + z.getAttack());
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
+											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 	//this just prints out grid again
-	//to make sure the plot hasbeen reset		 		                			
+	//to make sure the plot hasbeen reset
 		for(int l = 0; l<5; l++)
 		{
 		    for(int m = 0; m<9; m++)
@@ -458,7 +459,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		    }
 		    System.out.println();
 		}
-										
+
 										} else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
@@ -480,10 +481,16 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		    }
 		    System.out.println();
 		}
-										
-										
+
+
 		 		                		}
 		 		                		}
+									if (p.getType().equals("PeaShooter")) {
+										System.out.println(p.getBulletXPosition());
+										if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
+											z.loseHealth(p.getAttack());
+											System.out.println(z.getHealth());
+										}
 									}
 								}
 							}

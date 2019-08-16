@@ -212,7 +212,7 @@ public class Zombie extends GameCharacter{
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	position -= 0.5;
+		                	position -= 0.2;
 		                	columnNumber(position);
 		                	zombieImage.setX(position);
 		                	rect.setX(position);
@@ -229,7 +229,6 @@ public class Zombie extends GameCharacter{
 		                		
 		                		timer.cancel();
  		                       timer.purge();
- 		                       //startZombie();
 		                	} 
 		                	
 		                	
