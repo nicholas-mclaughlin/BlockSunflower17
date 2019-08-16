@@ -275,7 +275,7 @@ public class Plant extends GameCharacter{
                 @Override
                 public void run() {
                	
-               	System.out.println(plantImage);
+               	//System.out.println(plantImage);
                 	//System.out.println("pnd " + hasImage);
                 	
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
