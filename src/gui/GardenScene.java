@@ -409,6 +409,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
  		        }
  		    }, 0, 10);
 }
+
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -463,10 +464,10 @@ public void checkBulletCollision(Plant p, Zombie z) {
 										} else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
-		 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
-		 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
-		 		                			p.setNotDestroyed(false);
-		 		                			game.resetPlot(p);
+			 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
+			 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                			p.setNotDestroyed(false);
+			 		                			game.resetPlot(p);
 		//this just prints out grid again
 		//to make sure the plot hasbeen reset
 		for(int l = 0; l<5; l++)
@@ -483,22 +484,23 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		}
 
 
+			 		                		}
 		 		                		}
-		 		                		}
-									if (p.getType().equals("PeaShooter")) {
-										System.out.println(p.getBulletXPosition());
-										if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
-											z.loseHealth(p.getAttack());
-											System.out.println(z.getHealth());
+										if (p.getType().equals("PeaShooter")) {
+											System.out.println(p.getBulletXPosition());
+											if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
+												z.loseHealth(p.getAttack());
+												System.out.println(z.getHealth());
+											}
 										}
 									}
 								}
-							}
-						} else {
-							for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
-								Zombie z = game.getZombieRow(i+1).get(k);
-								if (p.getColumn() == z.getColumn()){
-									z.setStopZombie(false);
+							} else {
+								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
+									Zombie z = game.getZombieRow(i+1).get(k);
+									if (p.getColumn() == z.getColumn()){
+										z.setStopZombie(false);
+									}
 								}
 							}
 						}
@@ -509,7 +511,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
         	    }
         	}
 			}});
-	}
+			}
 		    }, 1, 100);
-	}
+		}
 }
