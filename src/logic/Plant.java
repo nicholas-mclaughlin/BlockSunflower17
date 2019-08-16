@@ -116,6 +116,10 @@ public class Plant extends GameCharacter{
 		setxPosition(aPlant.getxPosition());
 		setyPosition(aPlant.getyPosition());
 		setPlantImage(aPlant.getPlantImage());
+		this.hasImage = aPlant.hasImage;
+		this.plantNotDestroyed = aPlant.plantNotDestroyed;
+		this.bullet = aPlant.bullet;
+		this.bulletRect = aPlant.bulletRect;
 	}
 
 	
@@ -146,31 +150,6 @@ public class Plant extends GameCharacter{
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
 		    
-		    
-		    
-		    
-		    
-		    /*
-		    TranslateTransition translateTransition = new TranslateTransition();
-			//How long the animation will take
-			translateTransition.setDuration(Duration.millis(3000));
-			translateTransition.setNode(bullet);
-			//The displacement of the animation
-			translateTransition.setByX(500);
-			translateTransition.setCycleCount(1000);
-			translateTransition.setAutoReverse(false);
-			translateTransition.play();
-
-
-			TranslateTransition translateTransition2 = new TranslateTransition();
-			//How long the animation will take
-		    translateTransition2.setDuration(Duration.millis(3000));
-		    translateTransition2.setNode(bulletRect);
-		    //The displacement of the animation
-		    translateTransition2.setByX(500);
-		    translateTransition2.setCycleCount(1000);
-		    translateTransition2.setAutoReverse(false);
-		    translateTransition2.play(); */
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -188,28 +167,6 @@ public class Plant extends GameCharacter{
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 		  
-		    
-			/*TranslateTransition translateTransition = new TranslateTransition();
-    	      //How long the animation will take
-    	      translateTransition.setDuration(Duration.millis(3000));
-    	      translateTransition.setNode(bullet);
-    	      //The displacement of the animation
-    	      translateTransition.setByX(500);
-    	      translateTransition.setCycleCount(1000);
-    	      translateTransition.setAutoReverse(false);
-    	      translateTransition.play();
-  			
-  			
-  			
-  			TranslateTransition translateTransition2 = new TranslateTransition();
-    	      //How long the animation will take
-    	      translateTransition2.setDuration(Duration.millis(3000));
-    	      translateTransition2.setNode(bulletRect);
-    	      //The displacement of the animation
-    	      translateTransition2.setByX(500);
-    	      translateTransition2.setCycleCount(1000);
-    	      translateTransition2.setAutoReverse(false);
-    	      translateTransition2.play(); */
 		}
 
 		else if (typeOfPlant == "Wallnut") {
@@ -263,12 +220,12 @@ public class Plant extends GameCharacter{
 		
 		Player.setPlantHeld("");
 		
-		setImage();
+		//setImage();
 	 }
 		 
 	public void setImage() {
 		
-	Timer timer = new Timer();
+/*	Timer timer = new Timer();
 	
 	//plantNotDestroyed = true;
 	timer.schedule(new TimerTask() {
@@ -278,33 +235,19 @@ public class Plant extends GameCharacter{
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-               	
-               	//System.out.println(plantNotDestroyed);
-                	//System.out.println("pnd " + hasImage);
-                	
+               	System.out.println(getPlantImage());
+               	System.out.println("pImage" + (getPlantImage() != null));
+                	System.out.println("hasImage " + (hasImage == false));
+                	System.out.println("pnd" + plantNotDestroyed);
+*/                	
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
                 		System.out.println("I'm a little shit");
                 		plantImage.setLayoutX(xPosition);
                 		plantImage.setLayoutY(yPosition);
-                		plantRect.setLayoutX(xPosition);
-                		plantRect.setLayoutY(yPosition);
-                		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+                		GardenScene.fullImage.getChildren().addAll(plantImage);
                 		hasImage = true;
                 		
-                	} if (getPlantImage() != null && plantNotDestroyed == false) {
-            				System.out.println("remove");
-            				//timer.cancel();
-            				//timer.purge();
-            				//plantImage.imageProperty().set(null);
-	                		//plantImage.relocate(0, 0);
-	                		//plantImage.resize(0, 0);
-	                		//plantImage.setStyle("-fx-opacity: 0.0;");
-	                		//plantImage.setVisible(false);
-	                		GardenScene.fullImage.getChildren().removeAll(plantImage, plantRect);
-	                		
-	                	}
-                	
-                	//GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
+                	}
                 		 if (bullet != null) {
                 		 bullet.setLayoutX(bulletXPosition);
                 		 bullet.setLayoutY(bulletYPosition);
@@ -314,45 +257,16 @@ public class Plant extends GameCharacter{
                 		 
                 		 
                 		 }
-               }
+/*               }
             });
         }
     }, 0, 10);
-	
-	/*		AnimationTimer t = new AnimationTimer() {
-
-	@Override
-	public void handle(long now) {
-		if (plantImage != null && hasImage == false
-    			&& plantNotDestroyed) {
-    		plantImage.setLayoutX(xPosition);
-    		plantImage.setLayoutY(yPosition);
-    		plantRect.setLayoutX(xPosition);
-    		plantRect.setLayoutY(yPosition);
-    		GardenScene.fullImage.getChildren().addAll(plantImage, plantRect);
-    		hasImage = true;
-
-    	} else if (hasImage && plantNotDestroyed == false) {
-				System.out.println("remove");
-     		GardenScene.fullImage.getChildren().remove(plantImage);
-     	}
-    		 if (bullet != null) {
-    		 bullet.setLayoutX(bulletXPosition);
-    		 bullet.setLayoutY(bulletYPosition);
-    		 bulletRect.setLayoutX(bulletXPosition);
-    		 bulletRect.setLayoutY(bulletYPosition);
-    		 
-    		 
-    		 
-    		 }
-		}
-		
-	}; t.start();
-	*/		
+*/	
+			
 	
 	if (bullet != null) {
 	GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
-	 
+	
 	Timer timer2 = new Timer();
 		timer2.schedule(new TimerTask() {
 		        @Override
@@ -360,18 +274,15 @@ public class Plant extends GameCharacter{
 		            Platform.runLater(new Runnable() {
 		                @Override
 		                public void run() {
-		                	bulletXPosition += 4;
-		                	if (bulletXPosition >= 1200) {
+		                	bulletXPosition += 5;
+		                	if (bulletXPosition >= 1000) {
 		                		bulletXPosition = bulletStartPosition;
 		                	}
-						
-				
-	
 		                	}
-	
-	
+
+
 		            });
-	
+
 		        }
 		    }, 0, 10); 
 	 }

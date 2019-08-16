@@ -415,31 +415,14 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		@SuppressWarnings("static-access")
 		@Override
         public void run() {
-			
-/*				for (int j = 0; j<9; j++) {
-					try {
-						if (game.getPlant(3, j).getType().equals("Wallnut")) {
-							for (int z = 0; z < game.getZombieRow(4).size(); z++) {
-								//System.out.println(game.getPlant(3, j).getColumn() + ",,," + game.getPlant(3, j).getRow());
-								//System.out.println(game.getPlant(3, j).getType());
-								//System.out.println(game.getPlant(3, j).getColumn() + "," + game.getZombieRow(4).get(z).getColumn());
-								if (game.getPlant(3, j).getColumn() == game.getZombieRow(4).get(z).getColumn()){
-						    		 System.out.println("Colliding");
-						    		game.getZombieRow(4).get(z).setStopZombie(true);
-								}
-							}
-						}
-					}  catch (Exception e) {
-						System.out.println("Exception");
-					}
-				}
-*/				//System.out.println("Checked");
+			Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
           	for(int i = 0; i<5; i++) {
         	    for(int j = 0; j<9; j++) {
         	        try {
-        	        	
         	        	Plant p = game.getPlant(i, j);
-        	        	//p.setImage();
+        	        	p.setImage();
         	        	
 						if (p.getType().equals( "Wallnut")
 							|| p.getType().equals( "PeaShooter")
@@ -454,39 +437,51 @@ public void checkBulletCollision(Plant p, Zombie z) {
 									
 									Zombie z = game.getZombieRow(i+1).get(k);
 									//System.out.println(z.getType() + " , " + z.getAttack());
-									if (p.getColumn() == z.getColumn()) {
+									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
 											z.loseHealth(p.getAttack());
 											game.removeZombie(i+1, k);
-											game.resetPlot(p);
-											//remove PlantImage and ZombieImage
+											p.setNotDestroyed(false);
+		 		                			game.resetPlot(p);
+	//this just prints out grid again
+	//to make sure the plot hasbeen reset		 		                			
+		for(int l = 0; l<5; l++)
+		{
+		    for(int m = 0; m<9; m++)
+		    {
+		        try {
+					System.out.print(Game.theGarden[l][m] + " ");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		    System.out.println();
+		}
+										
 										} else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
-		 		                		if (p.getHealth() < 0 && p.plantNotDestroyed) {
-		 		                			//fullImage.getChildren().remove(p.plantImage);
+		 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
+		 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
 		 		                			p.setNotDestroyed(false);
-		 		                			System.out.println("plant destroyed" + p.plantNotDestroyed);
-		 		                			
-		 		              /*  			if (p.hasImage && p.plantNotDestroyed == false) {
-		 		                				System.out.println("remove");
-		 				                		GardenScene.fullImage.getChildren().remove(p.plantImage);
-		 				                	}
-		 		              */  			//fullImage.getChildren().remove(p.getPlantImage());
-		 		                			//p.getPlantImage().imageProperty().set(null);
-		 		                			//p.getPlantImage().relocate(1300, 760);
-		 		                			//p.getPlantImage().resize(0, 0);
-		 		                			//p.getPlantImage().setStyle("-fx-opacity: 0.0;");
-		 		                			//p.getPlantImage().setVisible(false);
-		 		                			
-		 		                			
-		 		                		/*	if (p.plantImage==null) {
-		 		                				System.out.println("no plant image exists");
-		 		                			} else if (p.plantImage!= null){
-		 		                				System.out.println("plant image exists");
-		 		                			}
-										*/	//game.resetPlot(p);
+		 		                			game.resetPlot(p);
+		//this just prints out grid again
+		//to make sure the plot hasbeen reset
+		for(int l = 0; l<5; l++)
+		{
+		    for(int m = 0; m<9; m++)
+		    {
+		        try {
+					System.out.print(Game.theGarden[l][m] + " ");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+		    }
+		    System.out.println();
+		}
+										
+										
 		 		                		}
 		 		                		}
 									}
@@ -506,6 +501,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 					}
         	    }
         	}
+			}});
 	}
 		    }, 1, 100);
 	}
