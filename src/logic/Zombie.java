@@ -336,25 +336,25 @@ public class Zombie extends GameCharacter{
 		else if (position > 366 && position <= 477) {
 			this.column = 1;
 		}
-		else if (position > 477 && position <= 588) {
+		else if (position > 477 && position <= 569) {
 			this.column = 2;
 		}
-		else if (position > 588 && position <= 699) {
+		else if (position > 569 && position <= 671) {
 			this.column = 3;
 		}
-		else if (position > 699 && position <= 810) {
+		else if (position > 671 && position <= 774) {
 			this.column = 4;
 		}
-		else if (position > 810 && position <= 921) {
+		else if (position > 774 && position <= 878) {
 			this.column = 5;
 		}
-		else if (position > 921 && position <= 1032) {
+		else if (position > 878 && position <= 978) {
 			this.column = 6;
 		}
-		else if (position > 1032 && position <= 1143) {
+		else if (position > 978 && position <= 1074) {
 			this.column = 7;
 		}
-		else if (position > 1143 && position <= 1254) {
+		else if (position > 1074 && position <= 1170) {
 			this.column = 8;
 		}
 		else {
