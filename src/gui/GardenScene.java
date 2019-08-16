@@ -507,6 +507,6 @@ public void checkBulletCollision(Plant p, Zombie z) {
         	    }
         	}
 	}
-		    }, 0, 100);
+		    }, 1, 100);
 	}
 }
