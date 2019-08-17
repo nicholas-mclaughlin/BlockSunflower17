@@ -150,10 +150,6 @@ public class Zombie extends GameCharacter{
 		this.position = d;
 	}
 
-	/*public void multiplyPosition(int amount) {
-		this.position = amount * position;
-		this.speed = amount * speed;
-	} */
 	public void addToPosition(int distance) {
 		this.position += distance;
 	}
