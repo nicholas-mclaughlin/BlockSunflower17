@@ -255,7 +255,7 @@ public class Plant extends GameCharacter{
 				                public void run() {
 				                	bulletTimer += 1;
 				                	if (bulletXPosition <= 1200) {
-				                		bulletXPosition += 0.70;
+				                		bulletXPosition += 0.75;
 				                		
 				                	}
 				                	else {

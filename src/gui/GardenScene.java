@@ -360,7 +360,7 @@ public class GardenScene extends BaseScene {
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
 										//System.out.println("looooooooooooooooooooop");
-										if ((p.getBulletXPosition() + 2) >= z.getPosition() && (p.getBulletXPosition() - 2) <= z.getPosition()) {
+										if ((p.getBulletXPosition() + 3) >= z.getPosition() && (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											fullImage.getChildren().remove(p.bullet);
 											//p.setBulletXPosition(p.getBulletStartPosition());

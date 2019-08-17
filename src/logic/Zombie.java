@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
 	
-	private double speed = 0.35;
+	private double speed = 0.2;
 	private int row; //Which row the zombie will start walking down from
 	private double position = 1500; //1250 is the very right side of the garden
 	private int houseLength = 250;
