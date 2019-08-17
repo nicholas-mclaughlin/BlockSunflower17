@@ -116,6 +116,7 @@ public class Plant extends GameCharacter{
 		setAttack(aPlant.getAttack());
 		this.column = aPlant.getColumn();
 		this.row = aPlant.getRow();
+		setHealth(aPlant.getHealth());
 		setxPosition(aPlant.getxPosition());
 		setyPosition(aPlant.getyPosition());
 		setBulletXPosition(aPlant.getBulletXPosition());
@@ -276,7 +277,30 @@ public class Plant extends GameCharacter{
 				    }, 0, 1); 
 		}
 	}
-                
+             
+	
+/*	public void potatoExplosion() {
+		Timer t = new Timer();
+			t.schedule(new TimerTask() {
+				  @Override
+		        public void run() {
+		            Platform.runLater(new Runnable() {
+		                @Override
+		                public void run() {
+		                	
+		                	GardenScene.fullImage.getChildren().removeAll(plantImage);
+		                	
+		                	
+		                	}
+
+
+		            });
+
+		        }
+		    }, 0, 1); 
+		
+	}
+*/	
 
 	public void setPrice(int price) {
 		this.price = price;

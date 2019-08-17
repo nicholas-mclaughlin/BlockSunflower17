@@ -173,7 +173,7 @@ public class GardenScene extends BaseScene {
 
 			//checkCollision(z.getRect(), home);
 			game.zombieTracker(z);
-			System.out.println(game.rowsToString());
+			//System.out.println(game.rowsToString());
 		}
 
 		//while (gameOver != true) {
@@ -357,8 +357,10 @@ public class GardenScene extends BaseScene {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
 
-									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
-										if ((p.getBulletXPosition() + 3) >= z.getPosition() && (p.getBulletXPosition() - 3) <= z.getPosition()) {
+									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter"))
+											&& (p.getRow()+1) == z.getRow()) {
+										if ((p.getBulletXPosition() + 3) >= z.getPosition() &&
+												(p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											fullImage.getChildren().remove(p.bullet);
 											//p.setBulletXPosition(p.getBulletStartPosition());
@@ -381,6 +383,26 @@ public class GardenScene extends BaseScene {
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 										}
+										
+			//instead of the if potato mine loop above, i was trying to use this loop below
+										
+			/*								if (p.getType().equals("Potato Mine")) {
+												if (p.newImageSet == false) {
+													System.out.println("ImageSet");
+													GardenScene.fullImage.getChildren().removeAll(p.plantImage, z.zombieImage);
+													p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
+													p.newImageSet = true;
+												}
+												System.out.println(p.getHealth());
+												p.loseHealth(50);
+												
+											}	if (p.getHealth() <= 6000) {
+												z.loseHealth(p.getAttack());
+												GardenScene.fullImage.getChildren().removeAll(p.plantImage);
+												p.setNotDestroyed(false);
+			 		                			game.resetPlot(p);
+											}
+			*/							
 									else {
 		 		                		p.loseHealth(z.getAttack());
 
@@ -404,6 +426,7 @@ public class GardenScene extends BaseScene {
 		 		                		}
 									}
 									//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
+									
 									
 									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.newImageSet == false) {
 	 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
