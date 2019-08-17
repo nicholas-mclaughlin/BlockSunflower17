@@ -9,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Plant is an object with attributes inherited from GameCharacter.
+ * Different types of Plants have different attributes set as default.
+ */
 public class Plant extends GameCharacter{
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
@@ -32,8 +36,8 @@ public class Plant extends GameCharacter{
 	private boolean newImageSet = false;
 
 
-	/*
-	 * copy constructor that makes sure every attribute is copied
+	/**
+	 * Copy constructor that makes sure every attribute is copied
 	 * 
 	 * @param Plant   aPlant is the object Plant to be copied
 	 * @throws Exception   FileNotFoundException, NullPointerException, etc
@@ -62,7 +66,7 @@ public class Plant extends GameCharacter{
 
 	
 
-	/*
+	/**
 	 * Constructor sets default attributes depending on what the type is.
 	 * Last method sets plantHeld of Player class to an empty string.
 	 * 
@@ -145,7 +149,7 @@ public class Plant extends GameCharacter{
     	}
 	}
 	
-	/*
+	/**
 	 * sets the ImageView of bullet and its position on the scene
 	 * if no ImageView has been set yet and if the Plant is not dead/destroyed
 	 */
@@ -159,7 +163,7 @@ public class Plant extends GameCharacter{
 		}
 	}
 	
-	/*
+	/**
 	 * translates a bullet's position using a timer
 	 * 
 	 * Shoots a new bullet after a certain amount of timer
@@ -320,7 +324,13 @@ public class Plant extends GameCharacter{
 		}
 	}
 
-	//sets row of plant with reference to default gardenPlots
+	/**
+	 * setRow sets row of plant with reference to the default gardenPlot clicked from
+	 * where the method is called in gardenButtonHandler
+	 * 
+	 * @param Game
+	 * @param String  coordinate must be a string of coordinate with format "<row>,<column>"
+	 */
 	public void setRow(Game aGame, String coordinate) throws Exception {
 		int theRow = 0;
 		for (int row = 0; row < 5; row++) {
@@ -333,7 +343,13 @@ public class Plant extends GameCharacter{
 		} this.row = theRow;
 	}
 
-	//sets column of plant with reference to default gardenPlots
+	/**
+	 * setColumn sets row of plant with reference to the default gardenPlot clicked from
+	 * where the method is called in gardenButtonHandler
+	 * 
+	 * @param Game
+	 * @param String  coordinate must be a string of coordinate with format "<row>,<column>"
+	 */
 	public void setColumn(Game aGame, String coordinate) throws Exception {
 		int theColumn = 0;
 		for (int row = 0; row < 5; row++) {

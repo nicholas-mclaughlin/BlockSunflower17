@@ -11,6 +11,13 @@ import logic.Plant;
 import logic.Player;
 
 
+/**
+ * handler sets up the sun buttons (disabled and invisible by default).
+ * player increases the money by 25 when sun is clicked, the value of the suns.
+ * Creates the sun counter that shows on the scene how many suns a player have.
+ * sun counter is updated everytime a sun is clicked and then disables the sun
+ * on the sunflower and makes it invisible until 6 seconds later when the sun appears again
+ */
 public class SunButtonHandler implements EventHandler<ActionEvent> {
 	
 	private Player player;
@@ -19,13 +26,6 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 		this.player = player;
 	}
 
-	/*
-	 * handler sets up the sun buttons (disabled and invisible by default).
-	 * player increases the money by 25 when sun is clicked, the value of the suns.
-	 * Creates the sun counter that shows on the scene how many suns a player have.
-	 * sun counter is updated everytime a sun is clicked and then disables the sun
-	 * on the sunflower and makes it invisible until 6 seconds later when the sun appears again
-	 */
 	@Override
 	public void handle(ActionEvent event) {
 		Button source = (Button) event.getSource();

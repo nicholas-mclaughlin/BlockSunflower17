@@ -1,10 +1,10 @@
 package logic;
 
-/*
+/**
  * Class that has all the attributes that all character will inherit from
  */
 public class GameCharacter {
-	/*
+	/**
 	 * attributes child classes will inherit
 	 */
 	private String type = " ";
@@ -40,7 +40,7 @@ public class GameCharacter {
 			this.health = health;
 		}
 	}
-	/*
+	/**
 	 * setting Attack, if it is an invalid negative number it is set to a default of 100
 	 */
 	public void setAttack(int attack) {
@@ -63,7 +63,7 @@ public class GameCharacter {
 		this.firstChar = firstChar;
 	}
 	
-	/*
+	/**
 	 * Method to make the character lose health when attacked
 	 */
 	public void loseHealth(int damage) {

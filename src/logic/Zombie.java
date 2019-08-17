@@ -9,13 +9,18 @@ import javafx.scene.image.ImageView;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 
+
+/**
+ * Plant is an object with attributes inherited from GameCharacter.
+ * Different types of Plants have different attributes set as default.
+ */
 public class Zombie extends GameCharacter{
 	
 	private double speed = 0.2;
 	private int row;
 	
-	/*
-	 * initial position is set far away from the edge of the right side of the garden in order
+	/**
+	 * Initial position is set far away from the edge of the right side of the garden in order
 	 * to time their entrance to the actual GUI of the garden
 	 */
 	private double position = 1650;
@@ -29,8 +34,11 @@ public class Zombie extends GameCharacter{
 	
 	
 	/**
+	 * Constructor sets default attributes depending on what the type is.
+	 * Sets the zombieImage at the very right side of the garden
+	 * Sets the y coordinate of the image according to the row it'll be in
 	 *
-	 * @param typeOfZombie
+	 * @param typeOfZombie  if typeOfPlant is any of the given characters specific attributes are set as default
 	 * @throws FileNotFoundException
 	 */
 	public Zombie(String typeOfZombie, int rowNum) throws FileNotFoundException {
@@ -67,11 +75,7 @@ public class Zombie extends GameCharacter{
 		else {
 			setRow(3);
 		}
-		
-		/*
-		 * Sets the image at the very right side of the garden
-	     * 	Sets the y coordinate of the image according to the row it'll be in
-		 */
+
 		
 	      zombieImage.setX(position);
 
@@ -103,7 +107,12 @@ public class Zombie extends GameCharacter{
 	}
 	
 
-	//copy constructor
+	/**
+	 * Copy constructor that makes sure every attribute is copied
+	 * 
+	 * @param Zombie   c is the object Plant to be copied
+	 * @throws Exception   FileNotFoundException
+	 */
 	public Zombie(Zombie c) throws FileNotFoundException {
 		super(c);
 		setFirstChar(c.getFirstChar());
@@ -176,7 +185,7 @@ public class Zombie extends GameCharacter{
 	}
 
 
-	/*
+	/**
 	 * translates the zombie's position and GUI position using a timer if stopZombie is false
 	 * zombie stops if stopZombie is true
 	 * if zombie reaches 220 or below (house position) then a gameOver scene comes on
@@ -232,7 +241,7 @@ public class Zombie extends GameCharacter{
 	}
 	 
 	
-	/*
+	/**
 	 * sets column depending on which pixels/position the zombie is for better accuracy
 	 */
 	public void columnNumber(double position) {

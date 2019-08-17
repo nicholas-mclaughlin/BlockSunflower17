@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 
-/*
+/**
  * Level class is where the zombies (number of zombies and their rows) get set up for
  * a game depending on which level was desired.
  */
@@ -18,7 +18,7 @@ public class Level {
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
 	boolean collision = false;
 	
-	/*
+	/**
 	 * Adds certain zombies and sets their row
 	 * 
 	 * @param int   leveNumber can be 1, 2, or 3
