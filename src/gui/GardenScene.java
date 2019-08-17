@@ -357,7 +357,8 @@ public class GardenScene extends BaseScene {
 							|| p.getType().equals("Sunflower")
 							|| p.getType().equals("Potato Mine")) {
 
-
+							// because plant rows go by 0 to 4 while zombie rows go by 1 to 5
+							// 1 has to be added to i (when comparing plant and zombie rows)
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
