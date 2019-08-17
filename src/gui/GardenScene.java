@@ -72,6 +72,7 @@ public class GardenScene extends BaseScene {
 	public static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
 	public static Button gameOverMessage = new Button("");
+	public static int deathCounter = 0;
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -311,12 +312,11 @@ public class GardenScene extends BaseScene {
 	}
 	
 
-	public void checkIfGameOver(Level level) throws FileNotFoundException {
+	public void gameOver() {
 		//System.out.println(level.getZombies().get(0).getType());
-		
-		if (level.getZombies().get(0).getType() == null) {
-			System.out.println("GAMEOVER");
-    		GardenScene.gameOverMessage = new Button("GAME OVER");
+
+			System.out.println("YOU WIN");
+    		GardenScene.gameOverMessage = new Button("YOU WON");
     		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
     		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
     		GardenScene.gameOverMessage.setDisable(false);
@@ -324,7 +324,7 @@ public class GardenScene extends BaseScene {
     		GardenScene.gameOverMessage.setLayoutY(0);
     		GardenScene.gameOverMessage.setLayoutX(0);
     		GardenScene.gameOverMessage.setPrefSize(1220,720);
-		}
+		
 	}
 
 
@@ -337,7 +337,7 @@ public class GardenScene extends BaseScene {
 			Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-
+            
           	for(int i = 0; i<5; i++) {
         	    for(int j = 0; j<9; j++) {
         	        try {
@@ -364,9 +364,6 @@ public class GardenScene extends BaseScene {
 											z.loseHealth(p.getAttack());
 											p.setBulletXPosition(p.getBulletStartPosition());
 											System.out.println("Health" + z.getHealth());
-											if (z.getHealth() <= 0) {
-												fullImage.getChildren().remove(z.zombieImage);
-											}
 										}
 
 									}
@@ -382,8 +379,6 @@ public class GardenScene extends BaseScene {
 											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
-										//	 GardenScene.fullImage.getChildren().remove(z.zombieImage);
-										//	game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 		 		                			//this just prints out grid again
@@ -416,19 +411,6 @@ public class GardenScene extends BaseScene {
 			 		                			}
 			 		                		p.setNotDestroyed(false);
 			 		                		game.resetPlot(p);
-			 		                		//this just prints out grid again
-		//to make sure the plot hasbeen reset
-		for(int l = 0; l<5; l++)
-		{
-		    for(int m = 0; m<9; m++)
-		    {
-		        try {
-					System.out.print(Game.theGarden[l][m] + " ");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		    }System.out.println();
-		}
 
 
 			 		                		}
@@ -437,7 +419,8 @@ public class GardenScene extends BaseScene {
 									if (z.getHealth() <= 0) {
 										GardenScene.fullImage.getChildren().remove(z.zombieImage);
 										game.removeZombie(i+1, k);
-										}
+										deathCounter += 1;
+									}
 								} 
 								
 							} else {
@@ -455,12 +438,14 @@ public class GardenScene extends BaseScene {
 					}
         	    }
         	}
-        	try {
-				checkIfGameOver(level);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+          	System.out.println("deathCounter " + deathCounter + "zlist   " + level.getZombies().size());
+				if (deathCounter == level.getZombies().size()) {
+					gameOver();
+					timer.cancel();
+					timer.purge();
+				
+				}
+                
                 }});
 			}
 		    }, 1, 10);
