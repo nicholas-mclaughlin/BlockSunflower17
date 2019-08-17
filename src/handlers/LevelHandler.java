@@ -5,10 +5,14 @@ import drivers.Session;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-// Levelhandler is the button handler for the first scene's button's
+/*
+ *  Levelhandler is the button handler for the first scene's button's
+ */
 public class LevelHandler implements EventHandler<ActionEvent> {
 	
-	//This gives access to the session.
+	/*
+	 * This gives access to the session.
+	 */
 	private Session session;
 	private int levelNum;
 	
@@ -20,7 +24,9 @@ public class LevelHandler implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		
-		//Create the second scene and set it up depending on which level was clicked
+		/*
+		 * Create the second scene and set it up depending on which level was clicked
+		 */
 		GardenScene scene = new GardenScene(session, levelNum);
 		try {
 			scene.setup();

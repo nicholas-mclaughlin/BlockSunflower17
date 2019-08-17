@@ -12,17 +12,20 @@ import javafx.event.EventHandler;
  */
 public class CreditsHandler implements EventHandler<ActionEvent> {
 	
-	//gives access to session
+	/*
+	 * gives access to session
+	 */
 	private Session session;
 	
-	//constructor
 	public CreditsHandler(Session aSession) {
 		this.session = aSession;
 	}
 
 	@Override
 	public void handle(ActionEvent event) {
-		//Create the second scene and set it up
+		/*
+		 * Create the second scene and set it up
+		 */
 		Credits scene = new Credits(session);
 		try {
 			scene.setup();

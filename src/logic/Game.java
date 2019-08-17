@@ -1,12 +1,6 @@
 package logic;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-
-import gui.GardenScene;
-import javafx.application.Platform;
 
 /**
  * The game class will be responsible for setting and getting the player and
@@ -16,15 +10,16 @@ public class Game {
 	
 	private Player player;
 	private static String[][] theGarden = new String[5][9];
-	private Zombie zombie;
-	private Plant plant;
 	
 	/**
-	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
+	 *  gardenPlots is a 2D array of Plant objects with type string format "<row>,<column>"
 	 *  the row and column being the garden plots index.
 	 */
 	private static Plant[][] gardenPlots;
 	
+	/*
+	 *  keeps track of where zombies are (row) 
+	 */
 	private ArrayList<Zombie> zombieRow1 = new ArrayList<>();
 	private ArrayList<Zombie> zombieRow2 = new ArrayList<>();
 	private ArrayList<Zombie> zombieRow3 = new ArrayList<>();
@@ -42,7 +37,6 @@ public class Game {
 	public Player getPlayer() {
 		return player;
 	}
-	
 	
 	
 	public static String[][] getTheGarden() {
@@ -77,7 +71,7 @@ public class Game {
 	/**
 	 * placePlant changes an element in the 2D array list into the type of plant passed into the argument
 	 * 
-	 * @param aPlant	GameCharacter, type of plant (e.g. PeaShooter)
+	 * @param aPlant	Plant, type of plant (e.g. PeaShooter)
 	 * @param row	row where the plant is to be placed
 	 * @param column	column where the plant is to be placed
 	 * @throws Exception 
@@ -88,12 +82,18 @@ public class Game {
 		theGarden[row][column] = thePlant.getType();
 	}
 	
+	
+	/*
+	 * resetPlot resets a plot of where a given plant was in the grid
+	 * it replaces a Plant in the grid with the default Plant object with
+	 * with type string format "<row>,<column>" just like when the game was initialized.
+	 * 
+	 * @param Plant   given param is supposedly a Plant that died during a game.
+	 * 					it provides the row and column of the plant as well.
+	 */
 	public void resetPlot(Plant plant) throws FileNotFoundException {
 		Plant thePlant = new Plant(plant.getRow() + "," + plant.getColumn());
-/*		thePlant.getPlantImage().setLayoutX(plant.getxPosition() + 25);
-		 thePlant.getPlantImage().setLayoutY(plant.getyPosition() + 160);
-		 GardenScene.fullImage.getChildren().add(null);
-*/		thePlant.setPlantImage(null);
+		thePlant.setPlantImage(null);
 		gardenPlots[plant.getRow()][plant.getColumn()] = thePlant;
 		theGarden[plant.getRow()][plant.getColumn()] = thePlant.getType();
 	}
@@ -110,6 +110,12 @@ public class Game {
 		return s;
 	}
 	
+	/*
+	 * getZombieRow gets an arraylist containing the zombies in a specified row
+	 * 
+	 * @param int 	row is the specified row
+	 * @returns ArrayList<Zombie>   returns a new arraylist containing a list of the zombies
+	 */
 	public ArrayList<Zombie> getZombieRow(int row) throws FileNotFoundException {
 		ArrayList<Zombie> zombieRow = null;
 		if (row == 1) {
@@ -130,6 +136,9 @@ public class Game {
 		return newZombieRow;
 	}
 	
+	/*
+	 * removes a zombie from a specified arraylist
+	 */
 	public void removeZombie(int row, int index) {
 		if (row == 1) {
 			getZombieRow1().remove(index);
@@ -141,11 +150,13 @@ public class Game {
 			getZombieRow4().remove(index);
 		} else if (row == 5) {
 			getZombieRow5().remove(index);
-		} System.out.println(rowsToString());
+		}
 	}
 
-	
-public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
+	/*
+	 * add a zombie to an arraylist depending which row it was in
+	 */
+	public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		
 		if (aZombie.getRow() == 1) {
 			getZombieRow1().add(aZombie);
@@ -158,37 +169,9 @@ public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		} else if (aZombie.getRow() == 5) {
 			getZombieRow5().add(aZombie);
 		}
-		
-		/*
-		int delay = 0; //No delay
-		int updateTime = 100; //Gets the location to update every second
-		double j=  (aZombie.getSpeed() / updateTime);
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		            @Override
-		             public void run() {
+}		
 
-		            	//aZombie.setPosition(aZombie.getPosition() - gardenLength / j);
-
-		             }
-		 }, delay, updateTime);
-		 */
-	} 
 	
-/*	public Zombie getClosestZombie(int row) throws FileNotFoundException {
-		ArrayList<Zombie> zombieRow = getZombieRow(row);
-		int closestPosition = 0;
-		Zombie zombie = null;
-		for (Zombie z: zombieRow) {
-			if (z.columnNumber() < closestPosition) {
-				closestPosition = z.columnNumber();
-				zombie = z;
-				//System.out.println("" + z.columnNumber());
-			}
-		}
-		return zombie;
-	}
-*/	
 	public String rowsToString() {
 		String zombieRow1 = "Row1: ";
 		String zombieRow2 = "\nRow2: ";

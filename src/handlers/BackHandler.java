@@ -1,11 +1,7 @@
 package handlers;
-
 import drivers.Session;
-import gui.GardenScene;
 import gui.Homepage;
 import gui.Menu;
-import javafx.animation.Timeline;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 

@@ -3,30 +3,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.TimeUnit;
-
 import gui.GardenScene;
-import javafx.scene.shape.*;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.util.Duration;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
 	
 	private double speed = 0.2;
-	private int row; //Which row the zombie will start walking down from
-	private double position = 1650; //1250 is the very right side of the garden
-	private int houseLength = 250;
-	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
+	private int row;
+	
+	/*
+	 * initial position is set far away from the edge of the right side of the garden in order
+	 * to time their entrance to the actual GUI of the garden
+	 */
+	private double position = 1650;
+	
+	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif")));
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
@@ -41,20 +35,20 @@ public class Zombie extends GameCharacter{
 	 */
 	public Zombie(String typeOfZombie, int rowNum) throws FileNotFoundException {
 		super(typeOfZombie);
-		if (typeOfZombie == "Cone Zombie") { // Sets attributes of zombie if it is conehead
+		if (typeOfZombie == "Cone Zombie") {
 			setFirstChar('c');
 			setHealth(350);
 			setAttack(10);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//ConeHead.gif")));
 		}
-		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
+		else if (typeOfZombie == "Flag Zombie") {
 			setFirstChar('g');
 			setHealth(250);
 			setSpeed(0.25);
 			setAttack(10);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
-		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
+		else if (typeOfZombie == "Football Zombie") {
 			setFirstChar('f');
 			setHealth(500);
 			setSpeed(0.33);
@@ -74,8 +68,12 @@ public class Zombie extends GameCharacter{
 			setRow(3);
 		}
 		
-	      zombieImage.setX(position); //Sets the image at the very right side of the garden
-	      //Sets the y coordinate of the image according to the row itll be in
+		/*
+		 * Sets the image at the very right side of the garden
+	     * 	Sets the y coordinate of the image according to the row it'll be in
+		 */
+		
+	      zombieImage.setX(position);
 
 	      if (row == 1) {
 	    	  zombieImage.setY(215);
@@ -95,7 +93,6 @@ public class Zombie extends GameCharacter{
 	    	  zombieImage.setY(630);
 	    	  
 	      }
-	    //Size of the zombie
 	      zombieImage.setFitHeight(IMAGEHEIGHT);
 	      zombieImage.setFitWidth(IMAGEWIDTH);
 
@@ -106,6 +103,7 @@ public class Zombie extends GameCharacter{
 	}
 	
 
+	//copy constructor
 	public Zombie(Zombie c) throws FileNotFoundException {
 		super(c);
 		setFirstChar(c.getFirstChar());
@@ -115,11 +113,9 @@ public class Zombie extends GameCharacter{
 		zombieImage = c.getZombieImage();
 	}
 
-	
-	
+
 
 	//Getters and setters
-	
 	
 	public double getSpeed() {
 		return speed;
@@ -180,6 +176,11 @@ public class Zombie extends GameCharacter{
 	}
 
 
+	/*
+	 * translates the zombie's position and GUI position using a timer if stopZombie is false
+	 * zombie stops if stopZombie is true
+	 * if zombie reaches 220 or below (house position) then a gameOver scene comes on
+	 */
 	public void startZombie() {
 	stopZombie = false;
 	Timer timer = new Timer();
@@ -201,10 +202,8 @@ public class Zombie extends GameCharacter{
 		                	
 		                	if (getHealth() <= 0) {
 		                		System.out.println("Dead " + getType());
-		                		//zombieImage = null;
-		                		
 		                		timer.cancel();
- 		                       timer.purge();
+ 		                        timer.purge();
 		                	} 
 		                	
 		                	
@@ -230,48 +229,12 @@ public class Zombie extends GameCharacter{
 		            
 		        }
 		    }, 0, 10);	
-}
+	}
 	 
-
-	public boolean zombieOnRow(int rowNum) {
-		return row == rowNum && position <= 1250;
-	}
-
-	public boolean zombieOnGarden() {
-		return position <= 1251 && position >= 1248.5;
-	}
-	public boolean zombieAtHouse() {
-		return position <= 250;
-	}
-	public boolean onColumn1() {
-		return position > 250 && position <= 366;
-	}
-	public boolean onColumn2() {
-		return position > 366 && position <= 477;
-	}
-	public boolean onColumn3() {
-		return position > 477 && position <= 588;
-	}
-	public boolean onColumn4() {
-		return position > 588 && position <= 699;
-	}
-	public boolean onColumn5() {
-		return position > 699 && position <= 810;
-	}
-	public boolean onColumn6() {
-		return position > 810 && position <= 921;
-	}
-	public boolean onColumn7() {
-		return position > 921 && position <= 1032;
-	}
-	public boolean onColumn8() {
-		return position > 1032 && position <= 1143;
-	}
-	public boolean onColumn9() {
-		return position > 1143 && position <= 1254;
-	}
 	
-	
+	/*
+	 * sets column depending on which pixels/position the zombie is for better accuracy
+	 */
 	public void columnNumber(double position) {
 		if (position > 250 && position <= 366) {
 			this.column = 0;

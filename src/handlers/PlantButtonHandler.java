@@ -10,10 +10,13 @@ import javafx.scene.control.Button;
 import logic.Player;
 import gui.GardenScene;
 
-// PlantButtonHandler is the button handler for the plant buttons.
+
+
 public class PlantButtonHandler implements EventHandler<ActionEvent> {
 	
-	//This will give access to the game's player. 
+	/*
+	 * This will give access to the game's player. 
+	 */
 	private Player player;
 	private int price;
 	private boolean disable;
@@ -23,13 +26,17 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		this.player = aPlayer;
 	}
 	
-	//buys plant only if they player has sufficient funds, after which it decreases the money
-	//also if they were able to buy the plant, it disables the button to show they bought it
+	/*
+	 * buys plant only if they player has sufficient funds, after which it decreases the money.
+	 * also if they were able to buy the plant, it disables the button to show they bought it.
+	 * buyPlant() sets plantHeld by player to plant bought and changes sun amount accordingly.
+	 */
+	@SuppressWarnings("static-access")
 	public void buyPlant() {
 		if (player.getMoney() >= price) {
 			player.decreaseMoney(price);
-			player.setPlantHeld(plant); //sets plantHeld by player to plant bought
-			GardenScene.getSunCounter().setText("  " + player.getMoney()); //changes sun amount
+			player.setPlantHeld(plant);
+			GardenScene.getSunCounter().setText("  " + player.getMoney());
 			disable = true;
 		} else {
 			disable = false;

@@ -32,7 +32,7 @@ public class Player {
 
 	/**
 	 * getPlantHeld returns the type of plant picked by the player
-	 * by clicking the plant's button on the gardescene
+	 * by clicking the plant's button on the gardenscene
 	 * 
 	 * @return	new String object of the type of plant
 	 */
@@ -40,17 +40,20 @@ public class Player {
 		return (plantHeld);
 	}
 
-	//plantHeld setter
 	public static void setPlantHeld(String aPlant) {
 		plantHeld = aPlant;
 	}
 	
-	//increases the money by 25 because each sun is worth 25 suns
+	/*
+	 * increases the money by 25 because each sun is worth 25 suns
+	 */
 	public void increaseMoney() {
 		this.money += 25;
 	}
 	
-	//decreases the money by the amount which is the price
+	/*
+	 * decreases the money by the amount which is the price
+	 */
 	public void decreaseMoney(int amount) {
 		this.money -= amount;
 	}

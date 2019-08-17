@@ -13,7 +13,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-// Menu is the first scene to appear once the application is run.
+/*
+ *  Menu is the second scene to appear once the 'play' button from homepage is clicked.
+ *  It contains level buttons that will launch the third scene (gardenScene)
+ */
 public class Menu extends BaseScene {
 
 	//constructor
@@ -21,11 +24,11 @@ public class Menu extends BaseScene {
 		super(aSession);
 	}
 
-	//setup and display scene (actual drawing in window)
+
 	@Override
 	public void setup() throws Exception {
 		
-		//Create level buttons that will launch the second scene (gardenScene)
+		
 		Button level1 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl1.PNG"))));
 		Button level2 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl2.PNG"))));
 		Button level3 = new Button("", new ImageView(new Image(new FileInputStream("MenuImages//pvzlvl3.PNG"))));
@@ -44,10 +47,10 @@ public class Menu extends BaseScene {
 		box.getChildren().addAll(level1, level2, level3, back);
 		box.setAlignment(Pos.CENTER);
 
-/*		BtnQuitHandler qHandler = new BtnQuitHandler();
-		quit.setOnAction(qHandler);
-*/
-		// Attach start button handler to start button.
+
+		/*
+		 *  Attach button handlers to buttons.
+		 */
 		level1.setOnAction(new LevelHandler(getSession(), 1));
 		level2.setOnAction(new LevelHandler(getSession(), 2));
 		level3.setOnAction(new LevelHandler(getSession(), 3));

@@ -1,9 +1,12 @@
 package logic;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+
+/*
+ * Level class is where the zombies (number of zombies and their rows) get set up for
+ * a game depending on which level was desired.
+ */
 public class Level {
 	private int levelNum;
 	private ArrayList<Zombie> zombies = new ArrayList<>();
@@ -15,7 +18,11 @@ public class Level {
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
 	boolean collision = false;
 	
-	
+	/*
+	 * Adds certain zombies and sets their row
+	 * 
+	 * @param int   leveNumber can be 1, 2, or 3
+	 */
 	public Level(int levelNumber) throws FileNotFoundException {
 		this.setLevelNum(levelNumber);
 		if (levelNumber == 1) {
@@ -72,13 +79,6 @@ public class Level {
 		}}
 	}
 	
-	
-
-/*	public Level(Level toCopy) {
-		this.levelNum = toCopy.levelNum;
-		this.
-	}
-*/
 	public int getLevelNum() {
 		return levelNum;
 	}
@@ -91,12 +91,6 @@ public class Level {
 		return zombies;
 	}
 	
-	public void checkForDeadZombie(Zombie z) {
-		 if (z.getHealth() == 0) {
-			 z = null;
-			 
-		 }
-	 }
 	
 	public static void printGarden() {
 		System.out.println("------------------");
@@ -110,7 +104,5 @@ public class Level {
 		}
 		System.out.println("------------------");
 	}
-
-	
 
 }

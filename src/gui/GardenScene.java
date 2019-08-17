@@ -41,7 +41,7 @@ public class GardenScene extends BaseScene {
 	private static MediaPlayer mediaPlayer;
 	static StackPane root = new StackPane();
 	private static Pane fullImage = new Pane(root);
-	//creates the error message that the player has to buy a plant before clicking on the garden buttons
+
 	private static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
 	private static Button gameOverMessage = new Button("");
@@ -64,7 +64,9 @@ public class GardenScene extends BaseScene {
 	mediaPlayer.play();
 
 
-	//create garden image and garden image size to fit the buttons and scene
+	/*
+	 * set up garden image and garden image size to fit the buttons and scene
+	 */
 	ImageView Garden = new ImageView(new Image(new FileInputStream("PlantImages//Garden.PNG")));
 	Garden.setFitHeight(800);
 	Garden.setFitWidth(1275);
@@ -94,7 +96,10 @@ public class GardenScene extends BaseScene {
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
 
-	//the time for the first sun to appear in milliseconds
+	/*
+	 * Setup the random suns that'll appear while the game is
+	 * being played.
+	 */
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
 		for (int i = 0; i<=30; i++) {
@@ -138,12 +143,12 @@ public class GardenScene extends BaseScene {
 	}
 
 
-	//adds the error message but sets it up to not be visible
+	/*
+	 * 	Creates the error message that the player has to buy a plant before clicking on the garden buttons
+	 *  adds it to the scene but sets it up to not be visible
+	 */
 	fullImage.getChildren().add(errorMessage);
 	errorMessage.setStyle("-fx-opacity: 0.0;");
-
-
-
 
 
 
@@ -156,7 +161,9 @@ public class GardenScene extends BaseScene {
 	}
 
 
-	//creates random X and Y positions for the suns to appear in and returns these values
+	/*
+	 * creates random X and Y positions for the suns to appear in and returns these values
+	 */
 		public int generateRandomY() {
 			int randomY = (int)(Math.random() * (700));
 			return randomY;
@@ -166,7 +173,9 @@ public class GardenScene extends BaseScene {
 			return randomX;
 		}
 
-		//creates the sunCounter as static to be able to use .setText and change the money displayed
+		/*
+		 * creates the sunCounter as static to be able to use .setText and change the money displayed
+		 */
 		public static Button getSunCounter(Player aPlayer) throws Exception {
 			sunCounter.setText("  " + aPlayer.getMoney());
 			sunCounter.setStyle("-fx-background-image: url('/gui/pvzsun.png')");
@@ -181,35 +190,37 @@ public class GardenScene extends BaseScene {
 	 * It has its own root and will return it to be added to the setup of the scene.
 	 *
 	 * @param Player	aPlayer is the player of the game
-	 * @param Game	aGame is the game that was run (levels perhaps?)
+	 * @param Game	aGame is the game that was run depending on which level was chosen
 	 * @return	returns second stack; buttons
 	 * @throws Exception
 	 */
 	public Node gardenButtons(Player aPlayer, Game aGame) throws Exception{
 
-		//root is the inner root within the scene.
+		/*
+		 * root is the inner root within the scene.
+		 * box will be the layout manager for the plant buttons.
+		 */
 		VBox root = new VBox();
-
-		//box will be the layout manager for the plant buttons.
 		HBox box = new HBox();
 
-		//create plant buttons and attach handlers
+		/*
+		 * create plant buttons and attach handlers.
+		 * made plant buttons transparent so the visual of 'clicking' them isn't seen when the player did not buy a plant
+		 */
 		for (int column = 0; column <5; ++column){
 			ImageView plant = new ImageView(new Image(new FileInputStream("PlantImages//Plant"+ column + ".jpg")));
 			Button plantbuttons = new Button("p"+ column, plant);
 			plantbuttons.setFont(new Font(0));
-			//made plant buttons transparent so the visual of 'clicking' them isn't seen when the player did not buy a plant
 			plantbuttons.setStyle("-fx-background-color: transparent;");
 			plantbuttons.setOnAction(new PlantButtonHandler(aPlayer));
-
 			box.getChildren().add(column, plantbuttons);
 		}
 
 
 		/**
-		 * Importing the sun image and setting setting the counter with the getMoney() form the player class that controls changes in money.
-		 */
-		//adds the sunCounter to the plant buttons box
+		 * Importing the sun image and setting the counter with the getMoney() form the player class that controls changes in money.
+		 * adds the sunCounter to the plant buttons box
+		 */		
 		box.getChildren().add(getSunCounter(aPlayer));
 
 		//create empty array for garden buttons
@@ -220,7 +231,10 @@ public class GardenScene extends BaseScene {
 		grid.setPadding(new Insets(65, 60, 32, 0));
 		grid.setAlignment(Pos.BOTTOM_RIGHT);
 
-		//create garden plot buttons and attach handlers
+		/*
+		 * create garden plot buttons and attach handlers
+		 * add each created button to the gridpane
+		 */
 		int button = 0;
 		for (int row = 0; row < 5; ++row) {
 			for (int column = 0; column < 9; ++column) {
@@ -231,7 +245,7 @@ public class GardenScene extends BaseScene {
 					gardenButtons[i].setPrefSize(100,  106);	//set button size
 					gardenButtons[i].setOnAction(new GardenButtonHandler(aPlayer, aGame));
 				}
-				//add each created button to the gridpane
+				
 				grid.add(gardenButtons[button], column, row);
 				++button;
 			}
@@ -243,22 +257,34 @@ public class GardenScene extends BaseScene {
 		return root;
 	}
 
-	public void gameOver() {
-		//System.out.println(level.getZombies().get(0).getType());
+	/*
+	 * creates a gameovermessage saying "you win".
+	 * makes background transparent.
+	 */
+	public void youWin() {
+		System.out.println("YOU WIN");
+		GardenScene.gameOverMessage = new Button("YOU WIN");
+		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
+		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
+		GardenScene.gameOverMessage.setDisable(false);
 
-			System.out.println("YOU WIN");
-    		GardenScene.gameOverMessage = new Button("YOU WON");
-    		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
-    		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
-    		GardenScene.gameOverMessage.setDisable(false);
-
-    		GardenScene.gameOverMessage.setLayoutY(0);
-    		GardenScene.gameOverMessage.setLayoutX(0);
-    		GardenScene.gameOverMessage.setPrefSize(1220,720);
-
+		GardenScene.gameOverMessage.setLayoutY(0);
+		GardenScene.gameOverMessage.setLayoutX(0);
+		GardenScene.gameOverMessage.setPrefSize(1220,720);
 	}
 
 
+	/*
+	 * Main method that runs in a timer while the game is not over.
+	 * It checks multiple things at the same time.
+	 * --what plant is on a coordinate and is a zombie on the same row OR column as it is
+	 * --did a zombie die, if yes, add 1 to the deathcounter
+	 * --has the deathcounter reached the same amount of zombies programmed to deploy on the game
+	 * 
+	 * @param Game   game is the game that was run depending on which level was chosen
+	 * @param Level   contains the data of zombies (how many and which row it enter from)
+	 * 				  to be deployed depending on which level was chosen
+	 */
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
@@ -266,8 +292,8 @@ public class GardenScene extends BaseScene {
 		@Override
         public void run() {
 			Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
+            @Override
+            public void run() {
 
           	for(int i = 0; i<5; i++) {
         	    for(int j = 0; j<9; j++) {
@@ -310,7 +336,6 @@ public class GardenScene extends BaseScene {
 										z.setStopZombie(true);
 
 										if (p.getType().equals("Potato Mine")) {
-											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
 											GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 											 p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
@@ -335,29 +360,7 @@ public class GardenScene extends BaseScene {
 
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
-										}
-
-
-			//instead of the if potato mine loop above, i was trying to use this loop below
-
-			/*								if (p.getType().equals("Potato Mine")) {
-												if (p.isNewImageSet() == false) {
-													System.out.println("ImageSet");
-													GardenScene.fullImage.getChildren().removeAll(p.getPlantImage(), z.getZombieImage());
-													p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
-													p.setNewImageSet(true);
-												}
-												System.out.println(p.getHealth());
-												p.loseHealth(50);
-
-											}	if (p.getHealth() <= 6000) {
-												z.loseHealth(p.getAttack());
-												GardenScene.fullImage.getChildren().removeAll(p.getPlantImage());
-												p.setNotDestroyed(false);
-			 		                			game.resetPlot(p);
-											} */
-
-									else {
+										}	else {
 		 		                		p.loseHealth(z.getAttack());
 
 
@@ -366,8 +369,6 @@ public class GardenScene extends BaseScene {
 			 		                		z.startZombie();
 			 		                		if (p.getType().equals("Sunflower")) {
 			 		                			Plant.setSunflowerStillAlive(false);
-			 		                			//Plant.coloumnPosition = p.getColumn();
-			 		                			//Plant.rowPosition = p.getRow();
 			 		                			}
 			 		                		if (p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) {
 			 		                			p.setHasBullet(false);
@@ -380,12 +381,9 @@ public class GardenScene extends BaseScene {
 			 		                		}
 		 		                		}
 									}
-									//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
-
 									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.isNewImageSet() == false) {
 	 		                			GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
-	 		                			//GardenScene.fullImage.getChildren().add(p.plantImage);
 	 		                			p.setHasImage(false);
 	 		                			p.setNewImageSet(true);
 	 		                		}
@@ -408,14 +406,12 @@ public class GardenScene extends BaseScene {
 							}
 						}
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
         	    }
         	}
-
 				if (deathCounter == level.getZombies().size()) {
-					gameOver();
+					youWin();
 					timer.cancel();
 					timer.purge();
 

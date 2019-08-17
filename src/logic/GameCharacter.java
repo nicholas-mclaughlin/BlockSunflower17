@@ -1,13 +1,17 @@
 package logic;
 
-//Class that has all the attributes that all character will inherit from
+/*
+ * Class that has all the attributes that all character will inherit from
+ */
 public class GameCharacter {
-	private String type = " "; //The type of character ie. PeaShooter
-	private int health; //Health of character
-	private int attack; //Attack of character
+	/*
+	 * attributes child classes will inherit
+	 */
+	private String type = " ";
+	private int health;
+	private int attack;
 	private char firstChar; //The first character of the type of character ie. if PeaShooter than 'p'
-	
-	//Constructors
+
 	
 	public GameCharacter(String aType) {
 		this.type = new String(aType);
@@ -34,16 +38,14 @@ public class GameCharacter {
 	public void setHealth(int health) {
 		if (health > 0) {
 			this.health = health;
-		} else {
-			System.out.println(getType() + " died.");
 		}
 	}
-	//setting Attack, if it is an invalid negative number it is set to a default of 100
+	/*
+	 * setting Attack, if it is an invalid negative number it is set to a default of 100
+	 */
 	public void setAttack(int attack) {
 		if (attack >= 0 ) {
 			this.attack = attack;
-		} else {
-			this.attack = 100;
 		}
 	}
 	public String getType() {
@@ -61,7 +63,9 @@ public class GameCharacter {
 		this.firstChar = firstChar;
 	}
 	
-	//Method to make the character lose health when attacked
+	/*
+	 * Method to make the character lose health when attacked
+	 */
 	public void loseHealth(int damage) {
 		health -= damage;
 	}

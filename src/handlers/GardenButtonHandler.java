@@ -1,30 +1,15 @@
 package handlers;
-//package handlers;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import gui.GardenScene;
-import javafx.animation.TranslateTransition;
-//import gui.GardenScene;
 import handlers.SunButtonHandler;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
-import logic.Game;
-import logic.Plant;
-import logic.Player;
-//import logic.Sun;
-import logic.Zombie;
+import logic.*;
 
 
 /**
@@ -34,56 +19,26 @@ import logic.Zombie;
  */
 public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
-	//Give access to the session's game and the game's player.
+	/*
+	 * player gives access to the session's game and the game's player.
+	 * sunButton creates the sunflower sun button and the bullets so they are accessible inside the timers.
+	 */
 	private Player player;
 	private Game game;
-	//Creates the positions of the button that is clicked.
-	private double xPosition;
-	//public double yPosition;
-	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
 
 
-
-	//public static Button errorMessage = new Button("Buy a plant first!");
-
-	
-
-	//constructor
 	public GardenButtonHandler(Player aPlayer, Game aGame) {
 		this.player = aPlayer;
 		this.game = aGame;
 	}
 
 
-	/*public void trackBullet() {
-		int intervals = 100;
-		double startPoint = xPosition - 250;
-		int numOfMoves = 3000/intervals;
-		Timer t = new Timer();
-		t.schedule(new TimerTask() {
-		            @Override
-		             public void run() {
-
-		            	xPosition2 += startPoint/numOfMoves;
-		            	System.out.println(xPosition2);
-		             }
-		 }, 0, intervals);
-	} */
-
-	/**
-	 * Handle() will visually and logically place a plant onto a garden plot if the player has clicked a plant prior
-	 * to clicking a garden plot. It replaces the player's plantHeld back to default ("") at the end of the method.
-	 *
-	 * @param ActionEvent	event is the case when a (garden plot) button is clicked by the user.
-	 */
 	@SuppressWarnings("static-access")
 	@Override
 	public void handle(ActionEvent event) {
 
 		Button source = (Button) event.getSource();
-
-		//ImageView plantImage = null;
 		Plant plant = null;
 		try {
 			plant = new Plant(player.getPlantHeld());
@@ -93,25 +48,19 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		try {
 			plant.setRow(this.game, source.getText());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 		try {
 			plant.setColumn(this.game, source.getText());
 		} catch (Exception e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		//xPosition = source.getLayoutX() + 65;
-		//plant.setyPosition(source.getLayoutY());
 		System.out.println(player.getPlantHeld());
-		//getting button clicked position to know where to place suns or peas
 		plant.setxPosition(source.getLayoutX() + 25);
 		plant.setyPosition(source.getLayoutY() + 160);
 		plant.setBulletXPosition(source.getLayoutX() + 65);
 		plant.setBulletYPosition(source.getLayoutY() + 165);
 		plant.setBulletStartPosition(source.getLayoutX() + 65);
-		//int bulletEndPosition = (int) (1125 - xPosition);
 
 
 		/**
@@ -127,14 +76,16 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
-				//game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 
 
-			//placing the sun gifs which is a sunButton
+			/*
+			 * places the sun gifs which is a sunButton.
+			 * positions the sun button on the sunflower and
+			 * adds the sunButton after 6000 milliseconds
+			 */
 			sunButton = null;
 			try {
 				sunButton = new Plant("").getSunButton();
@@ -144,10 +95,8 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			sunButton.setText("sunflower button");
 			sunButton.setFont(new Font(0));
 			sunButton.setOnAction(new SunButtonHandler(player));
-			//positioning the sun button on the sunflower
 			sunButton.setLayoutX(plant.getxPosition() - 25);
 			sunButton.setLayoutY(plant.getyPosition() - 10);
-			//to add the sunButton after 6000 milliseconds
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
 			        @Override
@@ -162,55 +111,45 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			        }
 			    }, 6000);
 
-		} else if (plant.getType().equals("PeaShooter")) {
-
+		}
+		
+		else if (plant.getType().equals("PeaShooter")) {
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
-				//game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-
-
-
-
-
-		} else if (plant.getType().equals("Wallnut")) {
-
+		}
+		
+		else if (plant.getType().equals("Wallnut")) {
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
-				//game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} else if (plant.getType().equals("Potato Mine")) {
-
+		}
+		
+		else if (plant.getType().equals("Potato Mine")) {
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
-				//game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-		} else if (plant.getType().equals("Frozen PeaShooter")) {
-
+		}
+		
+		else if (plant.getType().equals("Frozen PeaShooter")) {
 			try {
 				game.placePlant(plant, plant.getRow(), plant.getColumn());
-				//game.placePlant2(plant, plant.getRow(), plant.getColumn());
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
+		}
+		
+		/*
+		 * if there was no plant being held, it was set to blank thus the error message is set to being seen
+		 */
+		else if (player.getPlantHeld().equals("")){
 			
-
-		} else if (player.getPlantHeld().equals("")){
-			//if there was no plant being held, it was set to blank thus the error message is set to being seen
 			GardenScene.getErrorMessage().setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
 			GardenScene.getErrorMessage().setLayoutX(710);
 			GardenScene.getErrorMessage().setLayoutY(3);
@@ -233,7 +172,6 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		
 		player.setPlantHeld("");
 		System.out.println(source.getText());
-		//System.out.println(game.gardenPlotString());
 		for(int i = 0; i<5; i++)
 		{
 		    for(int j = 0; j<9; j++)
