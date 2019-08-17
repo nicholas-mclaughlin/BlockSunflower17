@@ -171,6 +171,7 @@ public class Plant extends GameCharacter{
 		    setFreeze(true);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
 		    setPlantRect(getBounds(getPlantImage()));
+		    setBullet(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea-bullet.png"))));
 		    plantRect.setFill(Color.TRANSPARENT);
 		    plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
@@ -264,7 +265,6 @@ public class Plant extends GameCharacter{
     		 bullet.setLayoutY(bulletYPosition);
     				GardenScene.fullImage.getChildren().addAll(bullet);
     				hasBullet = true;
-    				
 		}
 	}
 	
