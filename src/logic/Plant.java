@@ -22,9 +22,7 @@ public class Plant extends GameCharacter{
 	private int row;
 	private int column;
 	public ImageView plantImage;
-	public Rectangle plantRect;
 	public ImageView bullet = null;
-	public Rectangle bulletRect = null;
 	public boolean freeze = false;
 	public boolean plantNotDestroyed = true;
 	public boolean hasImage = false;
@@ -127,7 +125,6 @@ public class Plant extends GameCharacter{
 		this.hasBullet = aPlant.hasBullet;
 		this.plantNotDestroyed = aPlant.plantNotDestroyed;
 		this.bullet = aPlant.bullet;
-		this.bulletRect = aPlant.bulletRect;
 	}
 
 	
@@ -145,10 +142,7 @@ public class Plant extends GameCharacter{
 		    setHealth(200);
 		    setPrice(100);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//pea-shooter.gif"))));
-		    setPlantRect(getBounds(getPlantImage()));
-		    plantRect.setFill(Color.TRANSPARENT);
-		    //plantRect.setStroke(Color.BLACK);
-		    plantRect.setStrokeWidth(2);
+
 
 		    setBullet(new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png"))));
 		    /*
@@ -170,11 +164,8 @@ public class Plant extends GameCharacter{
 		    setPrice(175);
 		    setFreeze(true);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea.gif"))));
-		    setPlantRect(getBounds(getPlantImage()));
 		    setBullet(new ImageView(new Image(new FileInputStream("PlantImages//frozen-pea-bullet.png"))));
-		    plantRect.setFill(Color.TRANSPARENT);
-		    plantRect.setStroke(Color.BLACK);
-		    plantRect.setStrokeWidth(2);
+
 		  
 		}
 
@@ -187,12 +178,7 @@ public class Plant extends GameCharacter{
 			setPrice(50);
 			setHealth(10000);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
-			setPlantRect(getBounds(getPlantImage()));
-		    plantRect.setFill(Color.TRANSPARENT);
-		    //plantRect.setStroke(Color.BLACK);
-		    plantRect.setStrokeWidth(2);
-		    plantRect.setHeight(80);
-		    plantRect.setWidth(70);
+
 		}
 		else if (typeOfPlant == "Potato Mine") {
 			this.plantNotDestroyed = true;
@@ -205,12 +191,7 @@ public class Plant extends GameCharacter{
 			setPlantImage(plantImage);
 			getPlantImage().setFitWidth(70);
 			getPlantImage().setPreserveRatio(true);
-			setPlantRect(getBounds(getPlantImage()));
-		    plantRect.setFill(Color.TRANSPARENT);
-		   // plantRect.setStroke(Color.BLACK);
-		    plantRect.setStrokeWidth(2);
-		    plantRect.setHeight(60);
-		    plantRect.setWidth(63);
+
 		}
 		else if (typeOfPlant == "Sunflower") {
 			this.plantNotDestroyed = true;
@@ -218,13 +199,6 @@ public class Plant extends GameCharacter{
 		    setHealth(300);
 		    setPrice(50);
 		    setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//Sunflower.gif"))));
-		    setPlantRect(getBounds(getPlantImage()));
-		    plantRect.setFill(Color.TRANSPARENT);
-		    //plantRect.setStroke(Color.BLACK);
-		    plantRect.setStrokeWidth(2);
-		    plantRect.setHeight(80);
-		    plantRect.setWidth(70);
-
 		}
 		
 		Player.setPlantHeld("");
@@ -356,14 +330,6 @@ public class Plant extends GameCharacter{
 		return row;
 	}
 
-	public Rectangle getPlantRect() {
-		return plantRect;
-	}
-
-	public void setPlantRect(Rectangle plantRect) {
-		this.plantRect = plantRect;
-	}
-
 	public ImageView getBullet() {
 		return bullet;
 	}
@@ -372,13 +338,6 @@ public class Plant extends GameCharacter{
 		this.bullet = bullet;
 	}
 
-	public Rectangle getBulletRect() {
-		return bulletRect;
-	}
-
-	public void setBulletRect(Rectangle bulletRect) {
-		this.bulletRect = bulletRect;
-	}
 
 	public Rectangle getBounds(ImageView z) {
 		return new Rectangle(z.getLayoutX(), z.getLayoutY(), 60, 65);

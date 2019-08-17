@@ -149,6 +149,7 @@ public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 			getZombieRow5().add(aZombie);
 		}
 		
+		/*
 		int delay = 0; //No delay
 		int updateTime = 100; //Gets the location to update every second
 		double j=  (aZombie.getSpeed() / updateTime);
@@ -161,6 +162,7 @@ public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 
 		             }
 		 }, delay, updateTime);
+		 */
 	} 
 	
 /*	public Zombie getClosestZombie(int row) throws FileNotFoundException {
