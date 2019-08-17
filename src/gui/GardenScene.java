@@ -168,7 +168,7 @@ public class GardenScene extends BaseScene {
 			//z.setRect(getBounds(z.getZombieImage()));
 			//createZombieTransition(z) ;
 
-			fullImage.getChildren().addAll(z.getZombieImage(), z.getRect());
+			fullImage.getChildren().addAll(z.getZombieImage());
 
 			//checkCollision(z.getRect(), home);
 			game.zombieTracker(z);

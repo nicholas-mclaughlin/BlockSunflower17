@@ -32,9 +32,6 @@ public class Zombie extends GameCharacter{
 	private boolean stopZombie = false;
 	private int column;
 	
-	private Rectangle rect = getBounds(zombieImage);
-	
-	
 	
 	/**
 	 *
@@ -76,31 +73,25 @@ public class Zombie extends GameCharacter{
 			setRow(3);
 		}
 		
-		rect = getBounds(zombieImage);
 	      zombieImage.setX(position); //Sets the image at the very right side of the garden
 	      //Sets the y coordinate of the image according to the row itll be in
-	      rect.setX(position);
+
 	      if (row == 1) {
 	    	  zombieImage.setY(215);
-	    	  rect.setY(215);
 	      }
 	      else if (row == 2) {
 	    	  zombieImage.setY(310);
-	    	  rect.setY(310);
 	      }
 
 	      else if (row == 3){
 	    	  zombieImage.setY(410);
-	    	  rect.setY(410);
 	      }
 	      else if (row == 4) {
 	    	  zombieImage.setY(525);
-	    	  rect.setY(525);
 	      }
 
 	      else if (row == 5) {
 	    	  zombieImage.setY(630);
-	    	  rect.setY(630);
 	    	  
 	      }
 	    //Size of the zombie
@@ -109,12 +100,7 @@ public class Zombie extends GameCharacter{
 
 	      //Setting the preserve ratio of the image view
 	      zombieImage.setPreserveRatio(true);
-	      
-	      
-	      rect.setFill(Color.TRANSPARENT);
-	      //rect.setStroke(Color.BLACK);
-	      rect.setStrokeWidth(2);
-	      
+
 	      startZombie();
 	}
 	
@@ -175,15 +161,6 @@ public class Zombie extends GameCharacter{
 		this.position += distance;
 	}
 	
-	
-
-	public Rectangle getRect() {
-		return rect;
-	}
-
-	public void setRect(Rectangle rect) {
-		this.rect = rect;
-	}
 
 	public ImageView getZombieImage() {
 		return zombieImage;
@@ -210,7 +187,6 @@ public class Zombie extends GameCharacter{
 		                	position -= speed;
 		                	columnNumber(position);
 		                	zombieImage.setX(position);
-		                	rect.setX(position);
 		                	
 		                	if (stopZombie == true) {
 		                    	  timer.cancel();
