@@ -444,6 +444,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
+											 GardenScene.fullImage.getChildren().remove(z.zombieImage);
 											game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
