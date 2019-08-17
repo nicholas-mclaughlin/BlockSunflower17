@@ -329,6 +329,7 @@ public class GardenScene extends BaseScene {
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter"))
 											&& (p.getRow()+1) == z.getRow()) {
+										
 										if ((p.getBulletXPosition() + 3) >= z.getPosition() &&
 												(p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());

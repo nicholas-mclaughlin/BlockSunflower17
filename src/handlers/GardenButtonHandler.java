@@ -228,58 +228,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			        }
 			    }, 2500);
 		}
-		/*
 		
-		//only if a plantImage was created, meaning there is a plant being held, that plant image will be added
-		 if (plant.getPlantImage() != null) {
-			//adding plant image to fullImage pane, along with the correct position
-			 plant.getPlantImage().setLayoutX(plant.getxPosition());
-			 plant.getPlantImage().setLayoutY(plant.getyPosition());
-			 plant.getPlantRect().setLayoutX(plant.getxPosition());
-			 plant.getPlantRect().setLayoutY(plant.getyPosition());
-			 GardenScene.fullImage.getChildren().addAll(plant.getPlantImage(), plant.getPlantRect());
-			 if (plant.getBullet() != null) {
-			 plant.getBullet().setLayoutX(xPosition);
-			 plant.getBullet().setLayoutY(plant.getBulletYPosition());
-			 plant.getBulletRect().setLayoutX(plant.getBulletXPosition());
-			 plant.getBulletRect().setLayoutY(plant.getBulletYPosition());
-			 
-			 GardenScene.fullImage.getChildren().addAll(plant.getBullet(), plant.getBulletRect());
-			 //plant.moveBullet();
-			 
-			 Timer timer = new Timer();
-		 		timer.schedule(new TimerTask() {
-		 		        @Override
-		 		        public void run() {
-		 		            Platform.runLater(new Runnable() {
-		 		                @Override
-		 		                public void run() {
-		 		                	xPosition += 1;
-		 		                	
-		 		                	if (plant.getHealth() <= 0) {
-		 				              timer.cancel();
-				                       timer.purge();
-		 		                	}
-									
-		 				
-
-		 		                	}
-
-
-		 		            });
-
-		 		        }
-		 		    }, 0, 10); 
-			 }
-		 
-			 
-			 
-			 
-			 
-			//disables that garden button if there exists a plantImage, which is true only if there is a plant being held
-			source.setDisable(true);
-		 } */
-
+		
+		
 		player.setPlantHeld("");
 		System.out.println(source.getText());
 		//System.out.println(game.gardenPlotString());
