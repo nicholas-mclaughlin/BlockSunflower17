@@ -1,5 +1,6 @@
 package gui;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
 import drivers.Session;
 import handlers.*;
@@ -275,6 +276,53 @@ public class GardenScene extends BaseScene {
 
 
 	/*
+	 * removes the image of a plant and replaces it with an explosion gif
+	 * for a certain amount of time and then removes the image again
+	 * 
+	 * @param Plant p is an object Plant that will 'explode' visually
+	 */
+	public void potatoExplosion(Plant p) throws FileNotFoundException {
+		GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+		 p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
+		 p.getPlantImage().setLayoutX(p.getxPosition() - 5);
+		 p.getPlantImage().setLayoutY(p.getyPosition() - 15);
+		 p.getPlantImage().setFitHeight(95);
+		 p.getPlantImage().setFitWidth(65);
+		 GardenScene.fullImage.getChildren().add(p.getPlantImage());
+		 Timer timer2 = new Timer();
+			timer2.schedule(new TimerTask() {
+			        @Override
+			        public void run() {
+			            Platform.runLater(new Runnable() {
+			                @Override
+			                public void run() {
+			                	 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+			                }
+			            });
+			        }
+			    }, 800);
+	}
+	
+	
+	/*
+	 * removes the image of a plant
+	 * if plant type is Sunflower, sunflowers' sun buttons get disabled
+	 * if plant type is PeaShooter or Frozen PeaShooter, bullets get removed
+	 * 
+	 * @param Plant p is an object Plant that will 'explode' visually
+	 */
+	public void plantRemoval(Plant p) {
+		GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+ 		if (p.getType().equals("Sunflower")) {
+ 			Plant.setSunflowerStillAlive(false);
+ 			}
+ 		if (p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) {
+ 			p.setHasBullet(false);
+ 			GardenScene.fullImage.getChildren().remove(p.getBullet());
+ 			}
+	}
+	
+	/*
 	 * Main method that runs in a timer while the game is not over.
 	 * It checks multiple things at the same time.
 	 * --what plant is on a coordinate and is a zombie on the same row OR column as it is
@@ -317,8 +365,8 @@ public class GardenScene extends BaseScene {
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter"))
 											&& (p.getRow()+1) == z.getRow()) {
 
-										if ((p.getBulletXPosition() + 3) >= z.getPosition() &&
-												(p.getBulletXPosition() - 3) <= z.getPosition()) {
+										if ((p.getBulletXPosition() + 3) >= z.getPosition()
+												&& (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											p.setBulletXPosition(10000); //Does this so that bullet won't also affect zombie behind it
 											fullImage.getChildren().remove(p.getBullet());
@@ -329,7 +377,6 @@ public class GardenScene extends BaseScene {
 												z.setFrozen(true);
 											}
 										}
-
 									}
 
 									if (p.getColumn() == z.getColumn() && p.isNotDestroyed()) {
@@ -337,46 +384,18 @@ public class GardenScene extends BaseScene {
 
 										if (p.getType().equals("Potato Mine")) {
 											z.loseHealth(p.getAttack());
-											GardenScene.fullImage.getChildren().remove(p.getPlantImage());
-											 p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
-											 p.getPlantImage().setLayoutX(p.getxPosition() - 5);
-											 p.getPlantImage().setLayoutY(p.getyPosition() - 15);
-											 p.getPlantImage().setFitHeight(95);
-											 p.getPlantImage().setFitWidth(65);
-											 GardenScene.fullImage.getChildren().add(p.getPlantImage());
-											 Timer timer2 = new Timer();
-												timer2.schedule(new TimerTask() {
-												        @Override
-												        public void run() {
-												            Platform.runLater(new Runnable() {
-												                @Override
-												                public void run() {
-												                	 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
-												                }
-												            });
-												        }
-												    }, 800);
-
-
+											potatoExplosion(p);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 										}	else {
+											
 		 		                		p.loseHealth(z.getAttack());
 
-
 			 		                	if (p.getPlantImage() != null && p.getHealth() < 0 && p.isNotDestroyed()) {
-			 		                		GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 			 		                		z.startZombie();
-			 		                		if (p.getType().equals("Sunflower")) {
-			 		                			Plant.setSunflowerStillAlive(false);
-			 		                			}
-			 		                		if (p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) {
-			 		                			p.setHasBullet(false);
-			 		                			GardenScene.fullImage.getChildren().remove(p.getBullet());
-			 		                			}
+			 		                		plantRemoval(p);
 			 		                		p.setNotDestroyed(false);
 			 		                		game.resetPlot(p);
-
 
 			 		                		}
 		 		                		}
