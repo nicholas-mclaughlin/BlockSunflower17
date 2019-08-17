@@ -443,6 +443,8 @@ public void checkBulletCollision(Plant p, Zombie z) {
 										if (p.getType().equals("Potato Mine")) {
 											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
+											 GardenScene.fullImage.getChildren().remove(p.plantImage);
+											 GardenScene.fullImage.getChildren().remove(z.zombieImage);
 											game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
@@ -471,7 +473,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			 		                				//Plant.coloumnPosition = p.getColumn();
 			 		                				//Plant.rowPosition = p.getRow();
 			 		                			}
-			 		                			
+
 			 		                			p.setNotDestroyed(false);
 			 		                			game.resetPlot(p);
 		//this just prints out grid again
@@ -492,12 +494,14 @@ public void checkBulletCollision(Plant p, Zombie z) {
 
 			 		                		}
 		 		                		}
+
 										if (p.getType().equals("PeaShooter")) {
 											System.out.println(p.getBulletXPosition());
 											if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
 												z.loseHealth(p.getAttack());
 												System.out.println(z.getHealth());
 											}
+
 										}
 									}
 								}

@@ -178,7 +178,7 @@ public class Plant extends GameCharacter{
 			setFrequency(0);
 			setAttack(0);
 			setPrice(50);
-			setHealth(1000);
+			setHealth(10000);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_full_life.gif"))));
 			setPlantRect(getBounds(getPlantImage()));
 		    plantRect.setFill(Color.TRANSPARENT);
