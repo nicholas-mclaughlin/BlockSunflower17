@@ -358,7 +358,6 @@ public class GardenScene extends BaseScene {
 									Zombie z = game.getZombieRow(i+1).get(k);
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
-										//System.out.println("looooooooooooooooooooop");
 										if ((p.getBulletXPosition() + 3) >= z.getPosition() && (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											fullImage.getChildren().remove(p.bullet);
@@ -372,11 +371,6 @@ public class GardenScene extends BaseScene {
 										}
 
 									}
-									/*
-	 		                		if (p.getPlantImage() != null && p.getType().equals("Wallnut") && p.getHealth() < 5000) {
-	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
-	 		                		}
-	 		                		*/
 
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
@@ -389,9 +383,6 @@ public class GardenScene extends BaseScene {
 										}
 									else {
 		 		                		p.loseHealth(z.getAttack());
-
-
-		 		                		//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
 
 
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
@@ -412,10 +403,13 @@ public class GardenScene extends BaseScene {
 			 		                		}
 		 		                		}
 									}
-									if (p.getType() == "Wallnut" && p.getHealth() <= 5000 && p.newImageSet == false) {
+									//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
+									
+									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.newImageSet == false) {
 	 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
 	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
-	 		                			GardenScene.fullImage.getChildren().add(p.plantImage);
+	 		                			//GardenScene.fullImage.getChildren().add(p.plantImage);
+	 		                			p.setHasImage(false);
 	 		                			p.newImageSet = true;
 	 		                		}
 
