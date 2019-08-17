@@ -346,33 +346,55 @@ public class GardenScene extends BaseScene {
 
 									if (p.getColumn() == z.getColumn() && p.isNotDestroyed()) {
 										z.setStopZombie(true);
+										
 										if (p.getType().equals("Potato Mine")) {
 											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
-											 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+											GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+											 p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
+											 p.getPlantImage().setLayoutX(p.getxPosition() - 5);
+											 p.getPlantImage().setLayoutY(p.getyPosition() - 15);
+											 p.getPlantImage().setFitHeight(95);
+											 p.getPlantImage().setFitWidth(65);
+											 GardenScene.fullImage.getChildren().add(p.getPlantImage());
+											 Timer timer2 = new Timer();
+												timer2.schedule(new TimerTask() {
+												        @Override
+												        public void run() {
+												            Platform.runLater(new Runnable() {
+												                @Override
+												                public void run() {
+												                	 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+												                }
+												            });
+												        }
+												    }, 1000); 
+											 
+											 
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 										}
+										
 
 			//instead of the if potato mine loop above, i was trying to use this loop below
 
 			/*								if (p.getType().equals("Potato Mine")) {
-												if (p.newImageSet == false) {
+												if (p.isNewImageSet() == false) {
 													System.out.println("ImageSet");
-													GardenScene.fullImage.getChildren().removeAll(p.plantImage, z.zombieImage);
+													GardenScene.fullImage.getChildren().removeAll(p.getPlantImage(), z.getZombieImage());
 													p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
-													p.newImageSet = true;
+													p.setNewImageSet(true);
 												}
 												System.out.println(p.getHealth());
 												p.loseHealth(50);
 
 											}	if (p.getHealth() <= 6000) {
 												z.loseHealth(p.getAttack());
-												GardenScene.fullImage.getChildren().removeAll(p.plantImage);
+												GardenScene.fullImage.getChildren().removeAll(p.getPlantImage());
 												p.setNotDestroyed(false);
 			 		                			game.resetPlot(p);
-											}
-			*/
+											} */
+			
 									else {
 		 		                		p.loseHealth(z.getAttack());
 
