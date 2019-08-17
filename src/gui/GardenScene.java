@@ -355,9 +355,17 @@ public class GardenScene extends BaseScene {
 
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
-
 									Zombie z = game.getZombieRow(i+1).get(k);
-									//System.out.println(z.getType() + " , " + z.getAttack());
+
+									if (p.getType().equals("PeaShooter") && (p.getRow()+1) == z.getRow()) {
+										//System.out.println("looooooooooooooooooooop");
+										if (p.getBulletXPosition() + 1 >= z.getPosition() && p.getBulletXPosition() - 1 <= z.getPosition()) {
+											z.loseHealth(p.getAttack());
+											System.out.println("Health" + z.getHealth());
+										}
+
+									}
+
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
@@ -418,16 +426,7 @@ public class GardenScene extends BaseScene {
 
 
 			 		                		}
-		 		                		}
-
-										if (p.getType().equals("PeaShooter")) {
-											System.out.println(p.getBulletXPosition());
-											if (p.getBulletXPosition() + 1 >= z.getPosition() && p.getBulletXPosition() - 1 <= z.getPosition()) {
-												z.loseHealth(p.getAttack());
-												System.out.println("Health" + z.getHealth());
-											}
-
-										}
+		 		                		}										
 									}
 								}
 							} else {
