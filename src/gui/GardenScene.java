@@ -40,13 +40,14 @@ public class GardenScene extends BaseScene {
 	private int levelNum;
 	private static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
-	static StackPane root = new StackPane();
-	private static Pane fullImage = new Pane(root);
+	static StackPane root = new StackPane(); //Has all default visuals
+	private static Pane fullImage = new Pane(root); //Displays everything
 
 	private static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
 	private static Button gameOverMessage = new Button("");
-	private static int deathCounter = 0;
+	private static int deathCounter = 0; /*A counter that goes up everytime a zombie is killed. Once it hits the num of zombies
+											in the level. Game displays "you won". */
 
 
 	public GardenScene(Session aSession, int levelNum) {

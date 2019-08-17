@@ -16,21 +16,21 @@ import javafx.scene.control.Button;
  */
 public class Zombie extends GameCharacter{
 	
-	private double speed = 0.2;
-	private int row;
+	private double speed = 0.2; //How many pixels the zombie will move over everytime the timer to move zombie goes off
+	private int row; //Row the zombie is on
 	
 	/**
 	 * Initial position is set far away from the edge of the right side of the garden in order
 	 * to time their entrance to the actual GUI of the garden
 	 */
-	private double position = 1650;
-	private int endOfGarden = 220;
+	private double position = 1650; //The X coordinate of the zombie. Will decrease with the timer
+	private final int endOfGarden = 220;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif")));
-	private int IMAGEHEIGHT = 100;
-	private int IMAGEWIDTH = 130;
+	private final int IMAGEHEIGHT = 100; //The size the zombie image will be
+	private final int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
-	private int column;
-	private boolean isFrozen = false;
+	private int column; //Column the zombie is on
+	private boolean isFrozen = false; //Checks whether the zombie is frozen or not
 	
 	
 	/**
