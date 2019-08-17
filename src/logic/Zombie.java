@@ -173,7 +173,6 @@ public class Zombie extends GameCharacter{
 	} */
 	public void addToPosition(int distance) {
 		this.position += distance;
-
 	}
 	
 	
