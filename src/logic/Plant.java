@@ -243,7 +243,7 @@ public class Plant extends GameCharacter{
 				                public void run() {
 				                	bulletTimer += 1;
 				                	if (bulletXPosition <= 1200) {
-				                		bulletXPosition += 0.70;
+				                		bulletXPosition += 0.75;
 				                		
 				                	}
 				                	else {
@@ -350,13 +350,6 @@ public class Plant extends GameCharacter{
 		this.bullet = bullet;
 	}
 
-
-	public Rectangle getBounds(ImageView z) {
-		return new Rectangle(z.getLayoutX(), z.getLayoutY(), 60, 65);
-	}
-	public Rectangle getBulletBounds(ImageView b) {
-		return new Rectangle(b.getLayoutX(), b.getLayoutY(), 25, 25);
-	}
 	
 	public Button getSunButton() {
 		//sets the background to transparent so only the sun image is seen.

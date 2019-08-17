@@ -358,7 +358,8 @@ public class GardenScene extends BaseScene {
 									Zombie z = game.getZombieRow(i+1).get(k);
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
-										if ((p.getBulletXPosition() + 2) >= z.getPosition() && (p.getBulletXPosition() - 2) <= z.getPosition()) {
+										//System.out.println("looooooooooooooooooooop");
+										if ((p.getBulletXPosition() + 3) >= z.getPosition() && (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											fullImage.getChildren().remove(p.bullet);
 											//p.setBulletXPosition(p.getBulletStartPosition());
@@ -380,7 +381,7 @@ public class GardenScene extends BaseScene {
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
-											System.out.println("HHHH");
+											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
 											p.setNotDestroyed(false);
@@ -388,10 +389,10 @@ public class GardenScene extends BaseScene {
 										}
 									else {
 		 		                		p.loseHealth(z.getAttack());
-		 		                		
-		 		                		
+
+
 		 		                		//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
-		 		                	
+
 
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
@@ -417,7 +418,7 @@ public class GardenScene extends BaseScene {
 	 		                			GardenScene.fullImage.getChildren().add(p.plantImage);
 	 		                			p.newImageSet = true;
 	 		                		}
-									
+
 									if (z.getHealth() <= 0) {
 										GardenScene.fullImage.getChildren().remove(z.zombieImage);
 										game.removeZombie(i+1, k);

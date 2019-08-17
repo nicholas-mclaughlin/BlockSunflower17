@@ -22,7 +22,7 @@ import javafx.stage.Stage;
 
 public class Zombie extends GameCharacter{
 	
-	private double speed = 0.35;
+	private double speed = 0.2;
 	private int row; //Which row the zombie will start walking down from
 	private double position = 1500; //1250 is the very right side of the garden
 	private int houseLength = 250;
@@ -141,11 +141,7 @@ public class Zombie extends GameCharacter{
 	}
 	//if it is an invalid negative number set speed to 45000.0
 	public void setSpeed(double d) {
-		if (d<0) {
-			this.speed = 50000.0;
-		} else {
 			this.speed = d;
-		}
 	}
 
 	public double getPosition() {
@@ -155,10 +151,6 @@ public class Zombie extends GameCharacter{
 		this.position = d;
 	}
 
-	/*public void multiplyPosition(int amount) {
-		this.position = amount * position;
-		this.speed = amount * speed;
-	} */
 	public void addToPosition(int distance) {
 		this.position += distance;
 	}
@@ -228,7 +220,6 @@ public class Zombie extends GameCharacter{
 		        }
 		    }, 3000, 10);	
 }
-	 
 	 
 
 	public boolean zombieOnRow(int rowNum) {
