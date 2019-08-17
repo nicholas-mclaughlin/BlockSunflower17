@@ -368,7 +368,7 @@ public class GardenScene extends BaseScene {
 												                }
 												            });
 												        }
-												    }, 1000); 
+												    }, 800); 
 											 
 											 
 											p.setNotDestroyed(false);
