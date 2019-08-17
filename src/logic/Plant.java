@@ -278,7 +278,7 @@ public class Plant extends GameCharacter{
 				            Platform.runLater(new Runnable() {
 				                @Override
 				                public void run() {
-				                	bulletXPosition += 1;
+				                	bulletXPosition += 0.5;
 				                	//System.out.println(bulletXPosition);
 				                	bullet.setLayoutX(bulletXPosition);
 				                	if (bulletXPosition >= 1200) {
@@ -290,7 +290,7 @@ public class Plant extends GameCharacter{
 				            });
 
 				        }
-				    }, 0, 2); 
+				    }, 0, 1); 
 		}
 	}
                 
