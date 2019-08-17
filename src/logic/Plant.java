@@ -115,7 +115,11 @@ public class Plant extends GameCharacter{
 		this.row = aPlant.getRow();
 		setxPosition(aPlant.getxPosition());
 		setyPosition(aPlant.getyPosition());
+		setBulletXPosition(aPlant.getBulletXPosition());
+		setBulletYPosition(aPlant.getBulletYPosition());
+		setBulletStartPosition(aPlant.getBulletStartPosition());
 		setPlantImage(aPlant.getPlantImage());
+		setBullet(aPlant.getBullet());
 		this.hasImage = aPlant.hasImage;
 		this.plantNotDestroyed = aPlant.plantNotDestroyed;
 		this.bullet = aPlant.bullet;
@@ -142,14 +146,14 @@ public class Plant extends GameCharacter{
 		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 
-		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
-		    
+		    setBullet(new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png"))));
+		    /*
 		    bulletRect = getBulletBounds(bullet);
 			
 		    bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-		    
+		    */
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -247,46 +251,38 @@ public class Plant extends GameCharacter{
                 		GardenScene.fullImage.getChildren().addAll(plantImage);
                 		hasImage = true;
                 		
-                	}
-                		 if (bullet != null) {
-                		 bullet.setLayoutX(bulletXPosition);
-                		 bullet.setLayoutY(bulletYPosition);
-                		 bulletRect.setLayoutX(bulletXPosition);
-                		 bulletRect.setLayoutY(bulletYPosition);
-                		 
-                		 
-                		 
-                		 }
-/*               }
-            });
-        }
-    }, 0, 10);
-*/	
-			
-	
-	if (bullet != null) {
-	GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
-	
-	Timer timer2 = new Timer();
-		timer2.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	bulletXPosition += 5;
-		                	if (bulletXPosition >= 1000) {
-		                		bulletXPosition = bulletStartPosition;
-		                	}
-		                	}
-
-
-		            });
-
-		        }
-		    }, 0, 10); 
-	 }
+    }
 	}
+	
+	public void setBulletImage() {
+		if (bullet != null) {
+    		 bullet.setLayoutX(bulletXPosition);
+    		 bullet.setLayoutY(bulletYPosition);
+    				GardenScene.fullImage.getChildren().addAll(bullet);
+    				
+    				Timer timer2 = new Timer();
+    					timer2.schedule(new TimerTask() {
+    					        @Override
+    					        public void run() {
+    					            Platform.runLater(new Runnable() {
+    					                @Override
+    					                public void run() {
+    					                	bulletXPosition += 5;
+    					                	if (bulletXPosition >= 1200) {
+    					                		bulletXPosition = bulletStartPosition;
+    					                	}
+    					                	}
+
+
+    					            });
+
+    					        }
+    					    }, 0, 10); 
+    					    
+		}
+
+	}
+                
 
 	public void setPrice(int price) {
 		this.price = price;
