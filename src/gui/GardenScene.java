@@ -358,15 +358,17 @@ public class GardenScene extends BaseScene {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
 									
-									if (p.getType().equals("PeaShooter") && (p.getRow()+1) == z.getRow()) {
+									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
 										//System.out.println("looooooooooooooooooooop");
 										if ((p.getBulletXPosition() + 2) >= z.getPosition() && (p.getBulletXPosition() - 2) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											p.setBulletXPosition(p.getBulletStartPosition());
 											System.out.println("Health" + z.getHealth());
+											/*
 											if (z.getHealth() <= 0) {
 												fullImage.getChildren().remove(z.zombieImage);
 											}
+											*/
 										}
 
 									}
