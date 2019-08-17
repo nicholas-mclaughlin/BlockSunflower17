@@ -366,6 +366,11 @@ public class GardenScene extends BaseScene {
 										}
 
 									}
+									/*
+	 		                		if (p.getPlantImage() != null && p.getType().equals("Wallnut") && p.getHealth() < 5000) {
+	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
+	 		                		}
+	 		                		*/
 
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
@@ -397,11 +402,7 @@ public class GardenScene extends BaseScene {
 									else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
-		 		                		/*
-		 		                		if (p.getPlantImage() != null && p.getType().equals("Wallnut") && p.getHealth() < 5000) {
-		 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
-		 		                		}
-		 		                		*/
+		 		                		
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
 			 		                		if (p.getType().equals("Sunflower")) {
