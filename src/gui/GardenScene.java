@@ -466,6 +466,12 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		 		                		//System.out.println(p.getHealth());
 			 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                			if (p.getType().equals("Sunflower")) {
+			 		                				Plant.sunflowerStillAlive = false;
+			 		                				//Plant.coloumnPosition = p.getColumn();
+			 		                				//Plant.rowPosition = p.getRow();
+			 		                			}
+			 		                			
 			 		                			p.setNotDestroyed(false);
 			 		                			game.resetPlot(p);
 		//this just prints out grid again
