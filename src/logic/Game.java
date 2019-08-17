@@ -103,15 +103,15 @@ public class Game {
 	public ArrayList<Zombie> getZombieRow(int row) throws FileNotFoundException {
 		ArrayList<Zombie> zombieRow = null;
 		if (row == 1) {
-			zombieRow = this.zombieRow1;
+			zombieRow = this.getZombieRow1();
 		} else if (row == 2) {
-			zombieRow = zombieRow2;
+			zombieRow = getZombieRow2();
 		} else if (row == 3) {
-			zombieRow = zombieRow3;
+			zombieRow = getZombieRow3();
 		} else if (row == 4) {
-			zombieRow = zombieRow4;
+			zombieRow = getZombieRow4();
 		} else if (row == 5) {
-			zombieRow = zombieRow5;
+			zombieRow = getZombieRow5();
 		}
 		ArrayList<Zombie> newZombieRow = new ArrayList<Zombie>();
 		for (Zombie z: zombieRow) {
@@ -122,15 +122,15 @@ public class Game {
 	
 	public void removeZombie(int row, int index) {
 		if (row == 1) {
-			zombieRow1.remove(index);
+			getZombieRow1().remove(index);
 		} else if (row == 2) {
-			zombieRow2.remove(index);
+			getZombieRow2().remove(index);
 		} else if (row == 3) {
-			zombieRow3.remove(index);
+			getZombieRow3().remove(index);
 		} else if (row == 4) {
-			zombieRow4.remove(index);
+			getZombieRow4().remove(index);
 		} else if (row == 5) {
-			zombieRow5.remove(index);
+			getZombieRow5().remove(index);
 		} System.out.println(rowsToString());
 	}
 
@@ -138,15 +138,15 @@ public class Game {
 public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		
 		if (aZombie.getRow() == 1) {
-			zombieRow1.add(aZombie);
+			getZombieRow1().add(aZombie);
 		} else if (aZombie.getRow() == 2) {
-			zombieRow2.add(aZombie);
+			getZombieRow2().add(aZombie);
 		} else if (aZombie.getRow() == 3) {
-			zombieRow3.add(aZombie);
+			getZombieRow3().add(aZombie);
 		} else if (aZombie.getRow() == 4) {
-			zombieRow4.add(aZombie);
+			getZombieRow4().add(aZombie);
 		} else if (aZombie.getRow() == 5) {
-			zombieRow5.add(aZombie);
+			getZombieRow5().add(aZombie);
 		}
 		
 		int delay = 0; //No delay
@@ -184,32 +184,72 @@ public void zombieTracker(Zombie aZombie) throws FileNotFoundException {
 		String zombieRow4 = "\nRow4: ";
 		String zombieRow5 = "\nRow5: ";
 		
-		if (this.zombieRow1 != null) {
-			for (Zombie z: this.zombieRow1) {
+		if (this.getZombieRow1() != null) {
+			for (Zombie z: this.getZombieRow1()) {
 				zombieRow1 += z.getType() + ", ";
 			}
 		}
-		if (this.zombieRow2 != null) {
-			for (Zombie z: this.zombieRow2) {
+		if (this.getZombieRow2() != null) {
+			for (Zombie z: this.getZombieRow2()) {
 				zombieRow2 += z.getType() + ", ";
 			}
 		}
-		if (this.zombieRow3 != null) {
-			for (Zombie z: this.zombieRow3) {
+		if (this.getZombieRow3() != null) {
+			for (Zombie z: this.getZombieRow3()) {
 				zombieRow3 += z.getType() + ", ";
 			}
 		}
-		if (this.zombieRow4 != null) {
-			for (Zombie z: this.zombieRow4) {
+		if (this.getZombieRow4() != null) {
+			for (Zombie z: this.getZombieRow4()) {
 				zombieRow4 += z.getType() + ", ";
 			}
 		}
-		if (this.zombieRow5 != null) {
-			for (Zombie z: this.zombieRow5) {
+		if (this.getZombieRow5() != null) {
+			for (Zombie z: this.getZombieRow5()) {
 				zombieRow5 += z.getType() + ", ";
 			}
 		}
 		return zombieRow1 + zombieRow2 + zombieRow3 + zombieRow4 + zombieRow5 + "\n";
+	}
+
+	public ArrayList<Zombie> getZombieRow1() {
+		return zombieRow1;
+	}
+
+	public void setZombieRow1(ArrayList<Zombie> zombieRow1) {
+		this.zombieRow1 = zombieRow1;
+	}
+
+	public ArrayList<Zombie> getZombieRow2() {
+		return zombieRow2;
+	}
+
+	public void setZombieRow2(ArrayList<Zombie> zombieRow2) {
+		this.zombieRow2 = zombieRow2;
+	}
+
+	public ArrayList<Zombie> getZombieRow3() {
+		return zombieRow3;
+	}
+
+	public void setZombieRow3(ArrayList<Zombie> zombieRow3) {
+		this.zombieRow3 = zombieRow3;
+	}
+
+	public ArrayList<Zombie> getZombieRow4() {
+		return zombieRow4;
+	}
+
+	public void setZombieRow4(ArrayList<Zombie> zombieRow4) {
+		this.zombieRow4 = zombieRow4;
+	}
+
+	public ArrayList<Zombie> getZombieRow5() {
+		return zombieRow5;
+	}
+
+	public void setZombieRow5(ArrayList<Zombie> zombieRow5) {
+		this.zombieRow5 = zombieRow5;
 	}
 	
 }
