@@ -8,15 +8,16 @@ import java.util.ArrayList;
  * a game depending on which level was desired.
  */
 public class Level {
-	private int levelNum;
-	private ArrayList<Zombie> zombies = new ArrayList<>();
-	static int counter = 0;
-	static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
+	private int levelNum; 
+	private ArrayList<Zombie> zombies = new ArrayList<>(); //All the zombies in a level
+	private static int counter = 0; //For spacing out each zombie
+	private static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}};
-	boolean collision = false;
+	private boolean collision = false; 
+	private int zombieSpacing = 230; //The amount to space out each zombie by
 	
 	/*
 	 * Adds certain zombies and sets their row
@@ -37,7 +38,7 @@ public class Level {
 			int counter = 0;
 			for (int z = 0; z < zombies.size(); z++) {
 				zombies.get(z).addToPosition(counter);
-				counter += 200;  
+				counter += zombieSpacing;  //Adds 230 to the xposition of each zombie, so that the zombies are spaced apart
 		} 
 		}
 		else if (levelNumber == 2) {
@@ -55,7 +56,7 @@ public class Level {
 			int counter = 0;
 			for (int z = 0; z < zombies.size(); z++) {
 				zombies.get(z).addToPosition(counter);
-				counter += 200;
+				counter += zombieSpacing;
 
 		}}
 		else if (levelNumber == 3) {
@@ -74,7 +75,7 @@ public class Level {
 			int counter = 0;
 			for (int z = 0; z < zombies.size(); z++) {
 				zombies.get(z).addToPosition(counter);
-				counter += 200;
+				counter += zombieSpacing;
 		}}
 	}
 	

@@ -11,7 +11,6 @@ import javafx.scene.image.ImageView;
 
 public class Plant extends GameCharacter{
 	private int price;
-	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
 	private int row;
 	private int column;
 	private ImageView plantImage; 
@@ -25,7 +24,8 @@ public class Plant extends GameCharacter{
 	private double bulletStartPosition; //Where the PeaShooters mouth is
 	private double bulletXPosition; //The x coordinate of the bullet 
 	private double bulletYPosition; //The x coordinate of the bullet
-	private int bulletTimer = 0;
+	private int bulletTimer = 0; //Checks how long each bullet has been shot out for. Resets once it hits bulletTimeLimit
+	private final int bulletTimeLimit = 1200; //How long each bullet can be shot out for
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
 	private static boolean sunflowerStillAlive = true;
@@ -77,7 +77,6 @@ public class Plant extends GameCharacter{
 			this.plantNotDestroyed = true;
 			//hasImage = true;
 			setFirstChar('P');
-			setFrequency(10);
 		    setAttack(20);
 		    setHealth(200);
 		    setPrice(100);
@@ -88,7 +87,6 @@ public class Plant extends GameCharacter{
 		else if (typeOfPlant == "Frozen PeaShooter") {
 			this.plantNotDestroyed = true;
 			setFirstChar('F');
-			setFrequency(10);
 			setAttack(12);
 			setHealth(200);
 		    setPrice(175);
@@ -101,7 +99,6 @@ public class Plant extends GameCharacter{
 		else if (typeOfPlant == "Wallnut") {
 			this.plantNotDestroyed = true;
 			setFirstChar('W');
-			setFrequency(0);
 			setAttack(0);
 			setPrice(50);
 			setHealth(10000);
@@ -111,7 +108,6 @@ public class Plant extends GameCharacter{
 		else if (typeOfPlant == "Potato Mine") {
 			this.plantNotDestroyed = true;
 			setFirstChar('M');
-			setFrequency(10);
 			setAttack(10000);
 			setPrice(25);
 			setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//potato-mine-active.gif"))));
@@ -183,7 +179,7 @@ public class Plant extends GameCharacter{
 				                	else {
 				                		GardenScene.getFullImage().getChildren().remove(bullet);
 				                	}
-				                	if (bulletTimer >= 1199 && bulletTimer <= 1201) {
+				                	if (bulletTimer >= (bulletTimeLimit - 1) && bulletTimer <= (bulletTimeLimit + 1)) {
 				                		bulletXPosition = bulletStartPosition;
 				                		GardenScene.getFullImage().getChildren().add(bullet);
 				                		bulletTimer = 0;
@@ -393,13 +389,6 @@ public class Plant extends GameCharacter{
 
 	public void setPlantImage(ImageView plantImage) {
 		this.plantImage = plantImage;
-	}
-
-	public int getFrequency() {
-		return frequency;
-	}
-	public void setFrequency(int frequency) {
-		this.frequency = frequency;
 	}
 	
 

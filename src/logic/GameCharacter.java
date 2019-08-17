@@ -10,7 +10,7 @@ public class GameCharacter {
 	private String type = " ";
 	private int health;
 	private int attack;
-	private char firstChar; //The first character of the type of character ie. if PeaShooter than 'p'
+	private char firstChar; //The first character of the type of character ie. if PeaShooter than 'p'. Used for text-based
 
 	
 	public GameCharacter(String aType) {

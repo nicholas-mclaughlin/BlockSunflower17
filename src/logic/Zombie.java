@@ -19,10 +19,10 @@ public class Zombie extends GameCharacter{
 	 * to time their entrance to the actual GUI of the garden
 	 */
 	private double position = 1650; //The X coordinate of the zombie. Will decrease with the timer
-	private int endOfGarden = 220;
+	private final int endOfGarden = 220;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif")));
-	private int IMAGEHEIGHT = 100; //The size the zombie image will be
-	private int IMAGEWIDTH = 130;
+	private final int IMAGEHEIGHT = 100; //The size the zombie image will be
+	private final int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
 	private int column; //Column the zombie is on
 	private boolean isFrozen = false; //Checks whether the zombie is frozen or not
