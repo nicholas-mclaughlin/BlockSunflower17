@@ -248,7 +248,7 @@ public class Plant extends GameCharacter{
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
                 		plantImage.setLayoutX(xPosition);
                 		plantImage.setLayoutY(yPosition);
-                		GardenScene.fullImage.getChildren().addAll(plantImage);
+                		GardenScene.getFullImage().getChildren().addAll(plantImage);
                 		hasImage = true;
                 		
                 	}
@@ -258,7 +258,7 @@ public class Plant extends GameCharacter{
 		if (bullet != null && hasBullet == false && plantNotDestroyed) {
     		 bullet.setLayoutX(bulletXPosition);
     		 bullet.setLayoutY(bulletYPosition);
-    				GardenScene.fullImage.getChildren().addAll(bullet);
+    				GardenScene.getFullImage().getChildren().addAll(bullet);
     				hasBullet = true;
     				moveBullet();
 		}
@@ -279,7 +279,7 @@ public class Plant extends GameCharacter{
 				                		
 				                	}
 				                	else {
-				                		GardenScene.fullImage.getChildren().remove(bullet);
+				                		GardenScene.getFullImage().getChildren().remove(bullet);
 				                	}
 				                	/*
 				                	else {
@@ -288,7 +288,7 @@ public class Plant extends GameCharacter{
 				                	*/
 				                	if (bulletTimer >= 1199 && bulletTimer <= 1201) {
 				                		bulletXPosition = bulletStartPosition;
-				                		GardenScene.fullImage.getChildren().add(bullet);
+				                		GardenScene.getFullImage().getChildren().add(bullet);
 				                		bulletTimer = 0;
 				                	}
 				                	//System.out.println(bulletXPosition);

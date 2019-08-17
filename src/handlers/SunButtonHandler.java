@@ -28,7 +28,7 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 		// TODO Auto-generated method stub
 		Button source = (Button) event.getSource();
 		
-		if (GardenScene.gameOverMessage.getText().equals("")) {
+		if (GardenScene.getGameOverMessage().getText().equals("")) {
 			//disables the sun button and makes it invisible
 			source.setDisable(true);
 			source.setStyle("-fx-opacity: 0.0;");

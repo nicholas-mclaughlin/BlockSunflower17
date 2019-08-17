@@ -40,14 +40,12 @@ public class GardenScene extends BaseScene {
 	private static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
 	static StackPane root = new StackPane();
-	public static Pane fullImage = new Pane(root);
-	
-	/*
-	 * This creates the error message that the player has to buy a plant before clicking on the garden buttons
-	 */
-	public static Button errorMessage = new Button("Buy a plant first!");
-	public static Button gameOverMessage = new Button("");
-	public static int deathCounter = 0;
+	private static Pane fullImage = new Pane(root);
+	//creates the error message that the player has to buy a plant before clicking on the garden buttons
+	private static Button errorMessage = new Button("Buy a plant first!");
+	private boolean gameOver = false;
+	private static Button gameOverMessage = new Button("");
+	private static int deathCounter = 0;
 
 
 	public GardenScene(Session aSession, int levelNum) {
@@ -292,6 +290,7 @@ public class GardenScene extends BaseScene {
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter"))
 											&& (p.getRow()+1) == z.getRow()) {
+
 										if ((p.getBulletXPosition() + 3) >= z.getPosition() &&
 												(p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
@@ -309,33 +308,55 @@ public class GardenScene extends BaseScene {
 
 									if (p.getColumn() == z.getColumn() && p.isNotDestroyed()) {
 										z.setStopZombie(true);
+
 										if (p.getType().equals("Potato Mine")) {
 											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
-											 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+											GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+											 p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
+											 p.getPlantImage().setLayoutX(p.getxPosition() - 5);
+											 p.getPlantImage().setLayoutY(p.getyPosition() - 15);
+											 p.getPlantImage().setFitHeight(95);
+											 p.getPlantImage().setFitWidth(65);
+											 GardenScene.fullImage.getChildren().add(p.getPlantImage());
+											 Timer timer2 = new Timer();
+												timer2.schedule(new TimerTask() {
+												        @Override
+												        public void run() {
+												            Platform.runLater(new Runnable() {
+												                @Override
+												                public void run() {
+												                	 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
+												                }
+												            });
+												        }
+												    }, 800);
+
+
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 										}
 
+
 			//instead of the if potato mine loop above, i was trying to use this loop below
 
 			/*								if (p.getType().equals("Potato Mine")) {
-												if (p.newImageSet == false) {
+												if (p.isNewImageSet() == false) {
 													System.out.println("ImageSet");
-													GardenScene.fullImage.getChildren().removeAll(p.plantImage, z.zombieImage);
+													GardenScene.fullImage.getChildren().removeAll(p.getPlantImage(), z.getZombieImage());
 													p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
-													p.newImageSet = true;
+													p.setNewImageSet(true);
 												}
 												System.out.println(p.getHealth());
 												p.loseHealth(50);
 
 											}	if (p.getHealth() <= 6000) {
 												z.loseHealth(p.getAttack());
-												GardenScene.fullImage.getChildren().removeAll(p.plantImage);
+												GardenScene.fullImage.getChildren().removeAll(p.getPlantImage());
 												p.setNotDestroyed(false);
 			 		                			game.resetPlot(p);
-											}
-			*/
+											} */
+
 									else {
 		 		                		p.loseHealth(z.getAttack());
 
@@ -416,6 +437,44 @@ public class GardenScene extends BaseScene {
 	public static void setSunCounter(Button sunCounter) {
 		GardenScene.sunCounter = sunCounter;
 	}
+
+
+
+	public static Pane getFullImage() {
+		return fullImage;
+	}
+
+
+
+	public static void setFullImage(Pane fullImage) {
+		GardenScene.fullImage = fullImage;
+	}
+
+
+
+	public static Button getGameOverMessage() {
+		return gameOverMessage;
+	}
+
+
+
+	public static void setGameOverMessage(Button gameOverMessage) {
+		GardenScene.gameOverMessage = gameOverMessage;
+	}
+
+
+
+	public static Button getErrorMessage() {
+		return errorMessage;
+	}
+
+
+
+	public static void setErrorMessage(Button errorMessage) {
+		GardenScene.errorMessage = errorMessage;
+	}
+
+
 
 
 }
