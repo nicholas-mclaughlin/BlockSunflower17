@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import gui.GardenScene;
+import logic.Plant;
 import logic.Player;
 
 
@@ -48,10 +49,8 @@ public class SunButtonHandler implements EventHandler<ActionEvent> {
 			sunCounter.setStyle("-fx-background-image: url('/gui/pvzsun.png')");
 			sunCounter.setPrefSize(170,  70);
 			sunCounter.setFont(new Font("Arial Bold", 38));
-			if (source.getText().equals("sunflower button")){
+			if (source.getText().equals("sunflower button") && Plant.sunflowerStillAlive) {
 				//disables the sun on the sunflower and makes it invisible until 6 seconds later when the sun appears again
-				source.setDisable(true);
-				source.setStyle("-fx-opacity: 0.0;");
 				Timer timer = new Timer();
 				timer.schedule(new TimerTask() {
 				        @Override

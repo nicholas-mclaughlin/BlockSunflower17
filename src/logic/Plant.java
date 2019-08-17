@@ -28,6 +28,7 @@ public class Plant extends GameCharacter{
 	public boolean freeze = false;
 	public boolean plantNotDestroyed = true;
 	public boolean hasImage = false;
+	public boolean hasBullet = false;
 	private double xPosition;
 	private double yPosition;
 	private double bulletStartPosition;
@@ -35,7 +36,9 @@ public class Plant extends GameCharacter{
 	private double bulletYPosition;
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
-	
+	public static boolean sunflowerStillAlive = true;
+	//public static int rowPosition;
+	//public static int coloumnPosition;
 	
 	public boolean isNotDestroyed() {
 		return plantNotDestroyed;
@@ -115,8 +118,13 @@ public class Plant extends GameCharacter{
 		this.row = aPlant.getRow();
 		setxPosition(aPlant.getxPosition());
 		setyPosition(aPlant.getyPosition());
+		setBulletXPosition(aPlant.getBulletXPosition());
+		setBulletYPosition(aPlant.getBulletYPosition());
+		setBulletStartPosition(aPlant.getBulletStartPosition());
 		setPlantImage(aPlant.getPlantImage());
+		setBullet(aPlant.getBullet());
 		this.hasImage = aPlant.hasImage;
+		this.hasBullet = aPlant.hasBullet;
 		this.plantNotDestroyed = aPlant.plantNotDestroyed;
 		this.bullet = aPlant.bullet;
 		this.bulletRect = aPlant.bulletRect;
@@ -142,14 +150,14 @@ public class Plant extends GameCharacter{
 		    //plantRect.setStroke(Color.BLACK);
 		    plantRect.setStrokeWidth(2);
 
-		    bullet = new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png")));
-		    
+		    setBullet(new ImageView(new Image( new FileInputStream("PlantImages//pea-bullet.png"))));
+		    /*
 		    bulletRect = getBulletBounds(bullet);
 			
 		    bulletRect.setFill(Color.TRANSPARENT);
 			bulletRect.setStroke(Color.BLACK);
 		    bulletRect.setStrokeWidth(2);
-		    
+		    */
 
 		}
 		else if (typeOfPlant == "Frozen PeaShooter") {
@@ -247,46 +255,42 @@ public class Plant extends GameCharacter{
                 		GardenScene.fullImage.getChildren().addAll(plantImage);
                 		hasImage = true;
                 		
-                	}
-                		 if (bullet != null) {
-                		 bullet.setLayoutX(bulletXPosition);
-                		 bullet.setLayoutY(bulletYPosition);
-                		 bulletRect.setLayoutX(bulletXPosition);
-                		 bulletRect.setLayoutY(bulletYPosition);
-                		 
-                		 
-                		 
-                		 }
-/*               }
-            });
-        }
-    }, 0, 10);
-*/	
-			
-	
-	if (bullet != null) {
-	GardenScene.fullImage.getChildren().addAll(bullet, bulletRect);
-	
-	Timer timer2 = new Timer();
-		timer2.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	bulletXPosition += 5;
-		                	if (bulletXPosition >= 1000) {
-		                		bulletXPosition = bulletStartPosition;
-		                	}
-		                	}
-
-
-		            });
-
-		        }
-		    }, 0, 10); 
-	 }
+    }
 	}
+	
+	public void setBulletImage() {
+		if (bullet != null && hasBullet == false && plantNotDestroyed) {
+    		 bullet.setLayoutX(bulletXPosition);
+    		 bullet.setLayoutY(bulletYPosition);
+    				GardenScene.fullImage.getChildren().addAll(bullet);
+    				hasBullet = true;
+    				
+		}
+	}
+	
+	public void moveBullet() {
+		if (bullet != null && plantNotDestroyed) {
+			Timer timer2 = new Timer();
+				timer2.schedule(new TimerTask() {
+				        @Override
+				        public void run() {
+				            Platform.runLater(new Runnable() {
+				                @Override
+				                public void run() {
+				                	bulletXPosition += 5;
+				                	if (bulletXPosition >= 1200) {
+				                		bulletXPosition = bulletStartPosition;
+				                	}
+				                	}
+
+
+				            });
+
+				        }
+				    }, 0, 10); 
+		}
+	}
+                
 
 	public void setPrice(int price) {
 		this.price = price;
@@ -404,33 +408,25 @@ public class Plant extends GameCharacter{
 	public void setFrequency(int frequency) {
 		this.frequency = frequency;
 	}
+	
 
-	public void moveBullet() {
-		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	bulletXPosition += 1;
- 		                	/*
- 		                	if (getHealth() <= 0) {
- 				              timer.cancel();
-		                       timer.purge();
- 		                	}
- 		                	*/
-						
- 				
-
- 		                	}
-
-
- 		            });
-
- 		        }
- 		    }, 0, 10);
+	public boolean isHasImage() {
+		return hasImage;
 	}
+
+	public void setHasImage(boolean hasImage) {
+		this.hasImage = hasImage;
+	}
+
+	public boolean isHasBullet() {
+		return hasBullet;
+	}
+
+	public void setHasBullet(boolean hasBullet) {
+		this.hasBullet = hasBullet;
+	}
+
+	
 
 /*	public void checkForZombie(game) {
 		Zombie zombie = game.level
