@@ -24,14 +24,14 @@ public class Zombie extends GameCharacter{
 	
 	private double speed = 0.2;
 	private int row; //Which row the zombie will start walking down from
-	private double position = 1500; //1250 is the very right side of the garden
+	private double position = 1750; //1250 is the very right side of the garden
 	private int houseLength = 250;
-	public ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
+	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif"))); //Original Zombie image
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
 	private int column;
-	public boolean isFrozen = false;
+	private boolean isFrozen = false;
 	
 	
 	/**
@@ -50,14 +50,14 @@ public class Zombie extends GameCharacter{
 		else if (typeOfZombie == "Flag Zombie") { // Sets attributes of zombie if it is flag zombie
 			setFirstChar('g');
 			setHealth(250);
-			
+			setSpeed(0.25);
 			setAttack(10);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//FlagZombie.gif")));
 		}
 		else if (typeOfZombie == "Football Zombie") { // Sets attributes of zombie if it is football
 			setFirstChar('f');
 			setHealth(500);
-			
+			setSpeed(0.33);
 			setAttack(10);
 			zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Football.gif")));
 		}
@@ -141,7 +141,12 @@ public class Zombie extends GameCharacter{
 	}
 	//if it is an invalid negative number set speed to 45000.0
 	public void setSpeed(double d) {
+		if (d < 0) {
+			this.speed = 0.2;
+	}
+		else {
 			this.speed = d;
+		}
 	}
 
 	public double getPosition() {
@@ -169,6 +174,12 @@ public class Zombie extends GameCharacter{
 		this.row = row;
 	}
 	
+	
+	public boolean isFrozen() {
+		return isFrozen;
+	}
+
+
 	public void startZombie() {
 	stopZombie = false;
 	Timer timer = new Timer();
@@ -189,7 +200,7 @@ public class Zombie extends GameCharacter{
 		                      }
 		                	
 		                	if (getHealth() <= 0) {
-		                		System.out.println("Dead Zombie");
+		                		System.out.println("Dead " + getType());
 		                		//zombieImage = null;
 		                		
 		                		timer.cancel();

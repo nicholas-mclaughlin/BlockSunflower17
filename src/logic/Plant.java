@@ -19,29 +19,61 @@ import javafx.util.Duration;
 public class Plant extends GameCharacter{
 	private int price;
 	private int frequency; //How often a plant will create something (ie: a pea, sun, etc.)
-	private int row;
-	private int column;
-	public ImageView plantImage;
-	public ImageView bullet = null;
-	public boolean freeze = false;
-	public boolean plantNotDestroyed = true;
-	public boolean hasImage = false;
-	public boolean hasBullet = false;
-	private double xPosition;
-	private double yPosition;
-	private double bulletStartPosition;
-	private double bulletXPosition;
-	private double bulletYPosition;
+	private int row; // Row of plant
+	private int column; //Column of plant
+	private ImageView plantImage; 
+	private ImageView bullet = null;
+	private boolean freeze = false; //Whether the bullet will freeze the zombie
+	private boolean plantNotDestroyed = true; //Used to check if the plant is alive or not
+	private boolean hasImage = false;
+	private boolean hasBullet = false;
+	
+	private double xPosition; //X coordinate of the plant
+	private double yPosition; //Y coordinate of the plant
+	private double bulletStartPosition; //Where the PeaShooters mouth is
+	private double bulletXPosition; //The x coordinate of the bullet 
+	private double bulletYPosition; //The x coordinate of the bullet
 	private int bulletTimer = 0;
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
-	public static boolean sunflowerStillAlive = true;
-	public boolean newImageSet = false;
+	private static boolean sunflowerStillAlive = true;
+	private boolean newImageSet = false;
 	//public static int rowPosition;
 	//public static int coloumnPosition;
 	
+	
+	
+	
+	
 	public boolean isNotDestroyed() {
 		return plantNotDestroyed;
+	}
+
+
+	public boolean isNewImageSet() {
+		return newImageSet;
+	}
+
+
+	public void setNewImageSet(boolean newImageSet) {
+		this.newImageSet = newImageSet;
+	}
+
+
+	public int getBulletTimer() {
+		return bulletTimer;
+	}
+
+	public void setBulletTimer(int bulletTimer) {
+		this.bulletTimer = bulletTimer;
+	}
+
+	public static boolean isSunflowerStillAlive() {
+		return sunflowerStillAlive;
+	}
+
+	public static void setSunflowerStillAlive(boolean sunflowerStillAlive) {
+		Plant.sunflowerStillAlive = sunflowerStillAlive;
 	}
 
 	public void setNotDestroyed(boolean bool) {
@@ -163,7 +195,7 @@ public class Plant extends GameCharacter{
 			//hasImage = true;
 			setFirstChar('F');
 			setFrequency(10);
-			setAttack(15);
+			setAttack(12);
 			setHealth(200);
 		    setPrice(175);
 		    setFreeze(true);
@@ -213,7 +245,6 @@ public class Plant extends GameCharacter{
 	public void setImage() {
              	
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
-                		System.out.println("I'm a little shit");
                 		plantImage.setLayoutX(xPosition);
                 		plantImage.setLayoutY(yPosition);
                 		GardenScene.fullImage.getChildren().addAll(plantImage);

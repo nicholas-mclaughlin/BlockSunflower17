@@ -15,9 +15,9 @@ import javafx.application.Platform;
 public class Game {
 	
 	private Player player;
-	public static String[][] theGarden = new String[5][9];
-	public Zombie zombie;
-	public Plant plant;
+	private static String[][] theGarden = new String[5][9];
+	private Zombie zombie;
+	private Plant plant;
 	
 	/**
 	 *  gardenPlots is a 2D array of GameCharacter with type string format "<row>,<column>"
@@ -43,6 +43,16 @@ public class Game {
 		return player;
 	}
 	
+	
+	
+	public static String[][] getTheGarden() {
+		return theGarden;
+	}
+
+	public static void setTheGarden(String[][] theGarden) {
+		Game.theGarden = theGarden;
+	}
+
 	public static Plant getPlant(int row, int column) throws Exception {
 		return gardenPlots[row][column];
 	}

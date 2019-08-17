@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Level {
 	private int levelNum;
-	public ArrayList<Zombie> zombies = new ArrayList<>();
+	private ArrayList<Zombie> zombies = new ArrayList<>();
 	static int counter = 0;
 	static char[][] textGarden = {{' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 
 								  {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}, 

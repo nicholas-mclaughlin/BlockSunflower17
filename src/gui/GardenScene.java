@@ -62,9 +62,8 @@ public class GardenScene extends BaseScene {
 	private final int LENGTH = 1220;
 	private final int WIDTH = 720;
 	private int levelNum;
-	public static Button sunCounter = new Button();
+	private static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
-	Rectangle home = new Rectangle(1100, 225, 100, 500);
 
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
@@ -122,10 +121,6 @@ public class GardenScene extends BaseScene {
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
 
-
-	//fullImage.getChildren().add(home);
-	home.setFill(Color.BLUE);
-
 	//the time for the first sun to appear in milliseconds
 		int timeBetweenSuns = 5000;
 		//adds the suns in a for loop
@@ -181,8 +176,6 @@ public class GardenScene extends BaseScene {
 		//}
 
 
-	/*Level level1 = new Level(1);
-	 root.getChildren().addAll(level1.getZombies()[0].getZombieImage(), level1.getZombies()[0].getRect()); */
 
 	//adds the error message but sets it up to not be visible
 	fullImage.getChildren().add(errorMessage);
@@ -289,29 +282,6 @@ public class GardenScene extends BaseScene {
 		return root;
 	}
 
-
-
-
-
-	public Rectangle getHome() {
-		return home;
-	}
-
-
-
-	public void setHome(Rectangle home) {
-		this.home = home;
-	}
-
-
-
-
-
-	public static Rectangle getBounds(ImageView z) {
-		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
-	}
-
-
 	public void gameOver() {
 		//System.out.println(level.getZombies().get(0).getType());
 
@@ -360,24 +330,24 @@ public class GardenScene extends BaseScene {
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
 										if ((p.getBulletXPosition() + 3) >= z.getPosition() && (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
-											fullImage.getChildren().remove(p.bullet);
-											//p.setBulletXPosition(p.getBulletStartPosition());
+											p.setBulletXPosition(10000); //Does this so that bullet won't also affect zombie behind it
+											fullImage.getChildren().remove(p.getBullet());
+										
 
-											if (p.isFreeze() && z.isFrozen == false) {
-												z.setSpeed(0.19);
+											if (p.isFreeze() && z.isFrozen() == false) {
+												z.setSpeed(0.12);
 												z.setFrozen(true);
-												System.out.println("Speed" + z.getSpeed());
 											}
 										}
 
 									}
 
-									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
+									if (p.getColumn() == z.getColumn() && p.isNotDestroyed()) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
 											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
-											 GardenScene.fullImage.getChildren().remove(p.plantImage);
+											 GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 										}
@@ -385,17 +355,17 @@ public class GardenScene extends BaseScene {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		
 
-			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
-			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                	if (p.getPlantImage() != null && p.getHealth() < 0 && p.isNotDestroyed()) {
+			 		                		GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 			 		                		z.startZombie();
 			 		                		if (p.getType().equals("Sunflower")) {
-			 		                			Plant.sunflowerStillAlive = false;
+			 		                			Plant.setSunflowerStillAlive(false);
 			 		                			//Plant.coloumnPosition = p.getColumn();
 			 		                			//Plant.rowPosition = p.getRow();
 			 		                			}
 			 		                		if (p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) {
 			 		                			p.setHasBullet(false);
-			 		                			GardenScene.fullImage.getChildren().remove(p.bullet);
+			 		                			GardenScene.fullImage.getChildren().remove(p.getBullet());
 			 		                			}
 			 		                		p.setNotDestroyed(false);
 			 		                		game.resetPlot(p);
@@ -406,22 +376,23 @@ public class GardenScene extends BaseScene {
 									}
 									//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
 									
-									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.newImageSet == false) {
-	 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
+									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.isNewImageSet() == false) {
+	 		                			GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
 	 		                			//GardenScene.fullImage.getChildren().add(p.plantImage);
 	 		                			p.setHasImage(false);
-	 		                			p.newImageSet = true;
+	 		                			p.setNewImageSet(true);
 	 		                		}
 
 									if (z.getHealth() <= 0) {
-										GardenScene.fullImage.getChildren().remove(z.zombieImage);
+										GardenScene.fullImage.getChildren().remove(z.getZombieImage());
 										game.removeZombie(i+1, k);
 										deathCounter += 1;
 									}
 								}
 
-							} else {
+							} 
+							else {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
 									if (p.getColumn() == z.getColumn()){
@@ -449,4 +420,17 @@ public class GardenScene extends BaseScene {
 		    }, 1, 10);
 		}
 
+
+
+	public static Button getSunCounter() {
+		return sunCounter;
+	}
+
+
+
+	public static void setSunCounter(Button sunCounter) {
+		GardenScene.sunCounter = sunCounter;
+	}
+		
+	
 }
