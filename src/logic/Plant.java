@@ -265,6 +265,7 @@ public class Plant extends GameCharacter{
     		 bullet.setLayoutY(bulletYPosition);
     				GardenScene.fullImage.getChildren().addAll(bullet);
     				hasBullet = true;
+    				moveBullet();
 		}
 	}
 	
@@ -277,7 +278,9 @@ public class Plant extends GameCharacter{
 				            Platform.runLater(new Runnable() {
 				                @Override
 				                public void run() {
-				                	bulletXPosition += 5;
+				                	bulletXPosition += 1;
+				                	//System.out.println(bulletXPosition);
+				                	bullet.setLayoutX(bulletXPosition);
 				                	if (bulletXPosition >= 1200) {
 				                		bulletXPosition = bulletStartPosition;
 				                	}
@@ -287,7 +290,7 @@ public class Plant extends GameCharacter{
 				            });
 
 				        }
-				    }, 0, 10); 
+				    }, 0, 2); 
 		}
 	}
                 
@@ -452,6 +455,7 @@ public class Plant extends GameCharacter{
  		    }, 0, 10);
 	}
 */
+	
 
 		
 }

@@ -343,7 +343,7 @@ public class GardenScene extends BaseScene {
         	        	Plant p = game.getPlant(i, j);
         	        	p.setImage();
         	        	p.setBulletImage();
-        	        	p.moveBullet();
+
 
 						if (p.getType().equals( "Wallnut")
 							|| p.getType().equals( "PeaShooter")
@@ -368,34 +368,36 @@ public class GardenScene extends BaseScene {
 											game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
-	//this just prints out grid again
-	//to make sure the plot hasbeen reset
-		for(int l = 0; l<5; l++)
-		{
-		    for(int m = 0; m<9; m++)
-		    {
-		        try {
-					System.out.print(Game.theGarden[l][m] + " ");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		    }System.out.println();
-		}
+		 		                			//this just prints out grid again
+		 		                			//to make sure the plot hasbeen reset
+		 		                			for(int l = 0; l<5; l++)
+		 		                			{
+		 		                				for(int m = 0; m<9; m++)
+		 		                				{
+		 		                					try {
+		 		                						System.out.print(Game.theGarden[l][m] + " ");
+		 		                						} 
+		 		                					catch (Exception e) {
+		 		                						e.printStackTrace();
+		 		                						}
+		 		                				}
+		 		                				System.out.println();
+		 		                			}
 
-										} else {
+										} 
+									else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
-			 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
-			 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
-			 		                			if (p.getType().equals("Sunflower")) {
-			 		                				Plant.sunflowerStillAlive = false;
-			 		                				//Plant.coloumnPosition = p.getColumn();
-			 		                				//Plant.rowPosition = p.getRow();
+			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
+			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                		if (p.getType().equals("Sunflower")) {
+			 		                			Plant.sunflowerStillAlive = false;
+			 		                			//Plant.coloumnPosition = p.getColumn();
+			 		                			//Plant.rowPosition = p.getRow();
 			 		                			}
-
-			 		                			p.setNotDestroyed(false);
-			 		                			game.resetPlot(p);
-		//this just prints out grid again
+			 		                		p.setNotDestroyed(false);
+			 		                		game.resetPlot(p);
+			 		                		//this just prints out grid again
 		//to make sure the plot hasbeen reset
 		for(int l = 0; l<5; l++)
 		{
@@ -415,9 +417,9 @@ public class GardenScene extends BaseScene {
 
 										if (p.getType().equals("PeaShooter")) {
 											System.out.println(p.getBulletXPosition());
-											if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
+											if (p.getBulletXPosition() + 1 >= z.getPosition() && p.getBulletXPosition() - 1 <= z.getPosition()) {
 												z.loseHealth(p.getAttack());
-												System.out.println(z.getHealth());
+												System.out.println("Health" + z.getHealth());
 											}
 
 										}

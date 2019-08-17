@@ -361,6 +361,7 @@ public class Zombie extends GameCharacter{
 		}
 	}
 		
+	/*
 		public ImageView zombieStops() {
 			 //Sets the image at the very right side of the garden
 		      //Sets the y coordinate of the image according to the row itll be in
@@ -400,7 +401,7 @@ public class Zombie extends GameCharacter{
 		      translateTransition.play();
 		      return zombieImage;
 		}
-
+	*/
 
 	public int getColumn() {
 		return this.column;
