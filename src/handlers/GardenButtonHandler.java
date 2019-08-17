@@ -155,7 +155,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			            Platform.runLater(new Runnable() {
 			                @Override
 			                public void run() {
-			                	GardenScene.fullImage.getChildren().add(sunButton);
+			                	GardenScene.getFullImage().getChildren().add(sunButton);
 			                }
 			            });
 
@@ -211,9 +211,9 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
 		} else if (player.getPlantHeld().equals("")){
 			//if there was no plant being held, it was set to blank thus the error message is set to being seen
-			GardenScene.errorMessage.setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
-			GardenScene.errorMessage.setLayoutX(710);
-			GardenScene.errorMessage.setLayoutY(3);
+			GardenScene.getErrorMessage().setStyle("-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;");
+			GardenScene.getErrorMessage().setLayoutX(710);
+			GardenScene.getErrorMessage().setLayoutY(3);
 			Timer timer = new Timer();
 			timer.schedule(new TimerTask() {
 
@@ -222,7 +222,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			            Platform.runLater(new Runnable() {
 			                @Override
 			                public void run() {
-			                	GardenScene.errorMessage.setStyle("-fx-opacity: 0.0;");
+			                	GardenScene.getErrorMessage().setStyle("-fx-opacity: 0.0;");
 			                }
 			            });
 			        }

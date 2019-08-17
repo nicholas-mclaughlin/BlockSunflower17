@@ -210,14 +210,14 @@ public class Zombie extends GameCharacter{
 		                	
 		                	if (position <= 220) {
 		                		System.out.println("GAMEOVER");
-		                		GardenScene.gameOverMessage = new Button("GAME OVER");
-		                		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
-		                		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
-		                		GardenScene.gameOverMessage.setDisable(false);
+		                		GardenScene.setGameOverMessage(new Button("GAME OVER"));
+		                		GardenScene.getFullImage().getChildren().add(GardenScene.getGameOverMessage());
+		                		GardenScene.getGameOverMessage().setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
+		                		GardenScene.getGameOverMessage().setDisable(false);
 		                		
-		                		GardenScene.gameOverMessage.setLayoutY(0);
-		                		GardenScene.gameOverMessage.setLayoutX(0);
-		                		GardenScene.gameOverMessage.setPrefSize(1220,720);
+		                		GardenScene.getGameOverMessage().setLayoutY(0);
+		                		GardenScene.getGameOverMessage().setLayoutX(0);
+		                		GardenScene.getGameOverMessage().setPrefSize(1220,720);
 		                	
 		                		timer.cancel();
 		                       timer.purge();

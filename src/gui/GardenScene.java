@@ -455,4 +455,42 @@ public class GardenScene extends BaseScene {
 	}
 
 
+
+	public static Pane getFullImage() {
+		return fullImage;
+	}
+
+
+
+	public static void setFullImage(Pane fullImage) {
+		GardenScene.fullImage = fullImage;
+	}
+
+
+
+	public static Button getGameOverMessage() {
+		return gameOverMessage;
+	}
+
+
+
+	public static void setGameOverMessage(Button gameOverMessage) {
+		GardenScene.gameOverMessage = gameOverMessage;
+	}
+
+
+
+	public static Button getErrorMessage() {
+		return errorMessage;
+	}
+
+
+
+	public static void setErrorMessage(Button errorMessage) {
+		GardenScene.errorMessage = errorMessage;
+	}
+	
+	
+	
+
 }

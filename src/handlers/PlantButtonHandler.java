@@ -68,8 +68,8 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		 */
 		if (disable) {
 			//if the error message is being seen while the player clicks a plant make it invisible again 
-			if (GardenScene.errorMessage.getStyle()=="-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;") {
-				 GardenScene.errorMessage.setStyle("-fx-opacity: 0.0;");
+			if (GardenScene.getErrorMessage().getStyle()=="-fx-font-size: 50; -fx-background-color: transparent; -fx-font-weight: bold;") {
+				 GardenScene.getErrorMessage().setStyle("-fx-opacity: 0.0;");
 			 }
 			 
 			source.setDisable(true);
