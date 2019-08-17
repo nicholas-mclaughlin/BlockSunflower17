@@ -72,6 +72,7 @@ public class GardenScene extends BaseScene {
 	public static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
 	public static Button gameOverMessage = new Button("");
+	public static int deathCounter = 0;
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
@@ -309,22 +310,21 @@ public class GardenScene extends BaseScene {
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
-	
 
-	public void checkIfGameOver(Level level) throws FileNotFoundException {
+
+	public void gameOver() {
 		//System.out.println(level.getZombies().get(0).getType());
-		
-		if (level.getZombies().get(0).getType() == null) {
-			System.out.println("GAMEOVER");
-    		GardenScene.gameOverMessage = new Button("GAME OVER");
+
+			System.out.println("YOU WIN");
+    		GardenScene.gameOverMessage = new Button("YOU WON");
     		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
     		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
     		GardenScene.gameOverMessage.setDisable(false);
-    		
+
     		GardenScene.gameOverMessage.setLayoutY(0);
     		GardenScene.gameOverMessage.setLayoutX(0);
     		GardenScene.gameOverMessage.setPrefSize(1220,720);
-		}
+
 	}
 
 
@@ -357,7 +357,7 @@ public class GardenScene extends BaseScene {
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
-									
+
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
 										//System.out.println("looooooooooooooooooooop");
 										if ((p.getBulletXPosition() + 2) >= z.getPosition() && (p.getBulletXPosition() - 2) <= z.getPosition()) {
@@ -388,8 +388,6 @@ public class GardenScene extends BaseScene {
 											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
-										//	 GardenScene.fullImage.getChildren().remove(z.zombieImage);
-										//	game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 		 		                			//this just prints out grid again
@@ -400,7 +398,7 @@ public class GardenScene extends BaseScene {
 		 		                				{
 		 		                					try {
 		 		                						System.out.print(Game.theGarden[l][m] + " ");
-		 		                						} 
+		 		                						}
 		 		                					catch (Exception e) {
 		 		                						e.printStackTrace();
 		 		                						}
@@ -408,11 +406,11 @@ public class GardenScene extends BaseScene {
 		 		                				System.out.println();
 		 		                			}
 
-										} 
+										}
 									else {
 		 		                		p.loseHealth(z.getAttack());
 		 		                		//System.out.println(p.getHealth());
-		 		                		
+
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
 			 		                		if (p.getType().equals("Sunflower")) {
@@ -426,30 +424,18 @@ public class GardenScene extends BaseScene {
 			 		                			}
 			 		                		p.setNotDestroyed(false);
 			 		                		game.resetPlot(p);
-			 		                		//this just prints out grid again
-		//to make sure the plot hasbeen reset
-		for(int l = 0; l<5; l++)
-		{
-		    for(int m = 0; m<9; m++)
-		    {
-		        try {
-					System.out.print(Game.theGarden[l][m] + " ");
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-		    }System.out.println();
-		}
 
 
 			 		                		}
-		 		                		}										
+		 		                		}
 									}
 									if (z.getHealth() <= 0) {
 										GardenScene.fullImage.getChildren().remove(z.zombieImage);
 										game.removeZombie(i+1, k);
-										}
-								} 
-								
+										deathCounter += 1;
+									}
+								}
+
 							} else {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
@@ -465,15 +451,17 @@ public class GardenScene extends BaseScene {
 					}
         	    }
         	}
-        	try {
-				checkIfGameOver(level);
-			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+
+				if (deathCounter == level.getZombies().size()) {
+					gameOver();
+					timer.cancel();
+					timer.purge();
+
+				}
+
                 }});
 			}
 		    }, 1, 10);
 		}
-	
+
 }
