@@ -1,54 +1,29 @@
 package gui;
-
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
-
+import java.util.*;
 import drivers.Session;
-import handlers.GardenButtonHandler;
-import handlers.PlantButtonHandler;
-import handlers.SunButtonHandler;
-
+import handlers.*;
 import java.io.File;
-
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.beans.binding.Bindings;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
-import javafx.util.Duration;
 import logic.Game;
-import logic.GameCharacter;
 import logic.Level;
 import logic.Plant;
 import logic.Player;
-//import logic.Sun;
 import logic.Zombie;
 
 /**
  * GardenScene is the second scene to appear after the 'start' button
  * is clicked on the first scene (Menu class).
- *
+ * This sets up main scene/GUI.
  */
 public class GardenScene extends BaseScene {
 
@@ -64,28 +39,26 @@ public class GardenScene extends BaseScene {
 	private int levelNum;
 	private static Button sunCounter = new Button();
 	private static MediaPlayer mediaPlayer;
-
 	static StackPane root = new StackPane();
 	public static Pane fullImage = new Pane(root);
-	//creates the error message that the player has to buy a plant before clicking on the garden buttons
+	
+	/*
+	 * This creates the error message that the player has to buy a plant before clicking on the garden buttons
+	 */
 	public static Button errorMessage = new Button("Buy a plant first!");
-	private boolean gameOver = false;
 	public static Button gameOverMessage = new Button("");
 	public static int deathCounter = 0;
 
-	//constructor
+
 	public GardenScene(Session aSession, int levelNum) {
 		super(aSession);
 		this.levelNum = levelNum;
 	}
 
 
-
-	//setup actual drawing in window
 	@Override
 	public void setup() throws Exception{
 
-	//initialize music in-game
 	String grasswalk = "MenuImages//grasswalk.mp3";
 	Media hit = new Media(new File(grasswalk).toURI().toString());
 	mediaPlayer = new MediaPlayer(hit);
@@ -101,8 +74,8 @@ public class GardenScene extends BaseScene {
 	/**
 	 * Initialize game and arguments needed for game
 	 * @param Player	player of the session being run
-	 * @param String[][]	gardenPlot is the logic version of the gardenplot buttons;
-	 * 			it keeps track of where a plant and/or zombie is.
+	 * @param Plant[][]	gardenPlot is the logic version of the gardenplot buttons;
+	 * 			it keeps track of where a plant is.
 	 */
 	Player player = new Player();
 	Plant[][] gardenPlot = {{new Plant("0,0"), new Plant("0,1"), new Plant("0,2"), new Plant("0,3"),
@@ -116,7 +89,9 @@ public class GardenScene extends BaseScene {
 			new Plant("4,6"), new Plant("4,7"), new Plant("4,8")}};
 	Game game = new Game(player, gardenPlot);
 
-	//setup stacks in stackpane
+	/*
+	 * Setup stacks in stackpane
+	 */
 	root.getChildren().add(Garden); //first stack
 	root.getChildren().add(gardenButtons(game.getPlayer(), game)); //second stack
 
@@ -157,24 +132,12 @@ public class GardenScene extends BaseScene {
 	Level level = new Level(this.levelNum);
 	ArrayList<Zombie> zombies = level.getZombies();
 
-		for (int i = 0; i < zombies.size(); i++) {
-			Zombie z = zombies.get(i);
-			//fullImage.getChildren().add(z.newZombieImage());
-			//fullImage.getChildren().add(z.newRectangle());
-			//z.setRect(getBounds(z.getZombieImage()));
-			//createZombieTransition(z) ;
+	for (int i = 0; i < zombies.size(); i++) {
+		Zombie z = zombies.get(i);
+		fullImage.getChildren().addAll(z.getZombieImage());
+		game.zombieTracker(z);
 
-			fullImage.getChildren().addAll(z.getZombieImage());
-
-			//checkCollision(z.getRect(), home);
-			game.zombieTracker(z);
-			//System.out.println(game.rowsToString());
-		}
-
-		//while (gameOver != true) {
-
-		//}
-
+	}
 
 
 	//adds the error message but sets it up to not be visible
