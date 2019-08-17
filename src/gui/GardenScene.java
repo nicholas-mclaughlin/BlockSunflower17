@@ -352,27 +352,22 @@ public class GardenScene extends BaseScene {
 							|| p.getType().equals("Sunflower")
 							|| p.getType().equals("Potato Mine")) {
 
-							//System.out.println(p.getType() + " , " + p.getPlantImage());
 
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
 
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) && (p.getRow()+1) == z.getRow()) {
-										//System.out.println("looooooooooooooooooooop");
 										if ((p.getBulletXPosition() + 2) >= z.getPosition() && (p.getBulletXPosition() - 2) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											fullImage.getChildren().remove(p.bullet);
 											//p.setBulletXPosition(p.getBulletStartPosition());
-											System.out.println("Health" + z.getHealth());
-											if (p.isFreeze()) {
-												System.out.println("FREEZEEEE");
+
+											if (p.isFreeze() && z.isFrozen == false) {
+												z.setSpeed(0.19);
+												z.setFrozen(true);
+												System.out.println("Speed" + z.getSpeed());
 											}
-											/*
-											if (z.getHealth() <= 0) {
-												fullImage.getChildren().remove(z.zombieImage);
-											}
-											*/
 										}
 
 									}
@@ -390,26 +385,13 @@ public class GardenScene extends BaseScene {
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
-		 		                			//this just prints out grid again
-		 		                			//to make sure the plot hasbeen reset
-		 		                			for(int l = 0; l<5; l++)
-		 		                			{
-		 		                				for(int m = 0; m<9; m++)
-		 		                				{
-		 		                					try {
-		 		                						System.out.print(Game.theGarden[l][m] + " ");
-		 		                						}
-		 		                					catch (Exception e) {
-		 		                						e.printStackTrace();
-		 		                						}
-		 		                				}
-		 		                				System.out.println();
-		 		                			}
-
 										}
 									else {
 		 		                		p.loseHealth(z.getAttack());
-		 		                		//System.out.println(p.getHealth());
+		 		                		
+		 		                		
+		 		                		//System.out.println(p.getType() + ", " + p.getHealth() + ", " + p.newImageSet);
+		 		                	
 
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
@@ -429,6 +411,13 @@ public class GardenScene extends BaseScene {
 			 		                		}
 		 		                		}
 									}
+									if (p.getType() == "Wallnut" && p.getHealth() <= 5000 && p.newImageSet == false) {
+	 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
+	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
+	 		                			GardenScene.fullImage.getChildren().add(p.plantImage);
+	 		                			p.newImageSet = true;
+	 		                		}
+									
 									if (z.getHealth() <= 0) {
 										GardenScene.fullImage.getChildren().remove(z.zombieImage);
 										game.removeZombie(i+1, k);

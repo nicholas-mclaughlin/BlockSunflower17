@@ -36,6 +36,7 @@ public class Plant extends GameCharacter{
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
 	public static boolean sunflowerStillAlive = true;
+	public boolean newImageSet = false;
 	//public static int rowPosition;
 	//public static int coloumnPosition;
 	
@@ -126,6 +127,8 @@ public class Plant extends GameCharacter{
 		this.hasBullet = aPlant.hasBullet;
 		this.plantNotDestroyed = aPlant.plantNotDestroyed;
 		this.bullet = aPlant.bullet;
+		this.freeze = aPlant.freeze;
+		this.newImageSet = aPlant.newImageSet;
 	}
 
 	
@@ -208,22 +211,7 @@ public class Plant extends GameCharacter{
 	 }
 		 
 	public void setImage() {
-		
-/*	Timer timer = new Timer();
-	
-	//plantNotDestroyed = true;
-	timer.schedule(new TimerTask() {
-
-        @Override
-        public void run() {
-            Platform.runLater(new Runnable() {
-                @Override
-                public void run() {
-               	System.out.println(getPlantImage());
-               	System.out.println("pImage" + (getPlantImage() != null));
-                	System.out.println("hasImage " + (hasImage == false));
-                	System.out.println("pnd" + plantNotDestroyed);
-*/                	
+             	
                 	if (getPlantImage() != null && hasImage == false && plantNotDestroyed) {
                 		System.out.println("I'm a little shit");
                 		plantImage.setLayoutX(xPosition);
@@ -231,7 +219,7 @@ public class Plant extends GameCharacter{
                 		GardenScene.fullImage.getChildren().addAll(plantImage);
                 		hasImage = true;
                 		
-    }
+                	}
 	}
 	
 	public void setBulletImage() {

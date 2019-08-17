@@ -31,6 +31,7 @@ public class Zombie extends GameCharacter{
 	private int IMAGEWIDTH = 130;
 	private boolean stopZombie = false;
 	private int column;
+	public boolean isFrozen = false;
 	
 	
 	/**
@@ -129,6 +130,10 @@ public class Zombie extends GameCharacter{
 
 	public void setStopZombie(boolean stopZombie) {
 		this.stopZombie = stopZombie;
+	}
+	
+	public void setFrozen(boolean frozen) {
+		this.isFrozen = frozen;
 	}
 
 	public int getRow() {
