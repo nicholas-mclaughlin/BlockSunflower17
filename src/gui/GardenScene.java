@@ -419,6 +419,9 @@ public class GardenScene extends BaseScene {
 			 		                			//Plant.coloumnPosition = p.getColumn();
 			 		                			//Plant.rowPosition = p.getRow();
 			 		                			}
+			 		                		if (p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter")) {
+			 		                			GardenScene.fullImage.getChildren().remove(p.bullet);
+			 		                			}
 			 		                		p.setNotDestroyed(false);
 			 		                		game.resetPlot(p);
 			 		                		//this just prints out grid again
