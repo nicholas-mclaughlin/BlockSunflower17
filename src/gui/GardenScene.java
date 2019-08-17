@@ -449,7 +449,7 @@ public class GardenScene extends BaseScene {
 					}
         	    }
         	}
-          	System.out.println("deathCounter " + deathCounter + "zlist   " + level.getZombies().size());
+
 				if (deathCounter == level.getZombies().size()) {
 					gameOver();
 					timer.cancel();
