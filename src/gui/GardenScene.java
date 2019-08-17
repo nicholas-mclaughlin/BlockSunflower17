@@ -463,17 +463,20 @@ public void checkBulletCollision(Plant p, Zombie z) {
 		    }
 		    System.out.println();
 		}
-		
 
-										} 
-										
-		else {
-			p.loseHealth(z.getAttack());
-			//System.out.println(p.getHealth());
-			 	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
-			 		   GardenScene.fullImage.getChildren().remove(p.plantImage);
-			 		   p.setNotDestroyed(false);
-			 		   game.resetPlot(p);
+										} else {
+		 		                		p.loseHealth(z.getAttack());
+		 		                		//System.out.println(p.getHealth());
+			 		                		if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
+			 		                			GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                			if (p.getType().equals("Sunflower")) {
+			 		                				Plant.sunflowerStillAlive = false;
+			 		                				//Plant.coloumnPosition = p.getColumn();
+			 		                				//Plant.rowPosition = p.getRow();
+			 		                			}
+
+			 		                			p.setNotDestroyed(false);
+			 		                			game.resetPlot(p);
 		//this just prints out grid again
 		//to make sure the plot hasbeen reset
 		for(int l = 0; l<5; l++)
@@ -492,14 +495,14 @@ public void checkBulletCollision(Plant p, Zombie z) {
 
 			 		                		}
 		 		                		}
-										
+
 										if (p.getType().equals("PeaShooter")) {
 											System.out.println(p.getBulletXPosition());
 											if (p.getBulletXPosition() + 5 >= z.getPosition() && p.getBulletXPosition() - 5 <= z.getPosition()) {
 												z.loseHealth(p.getAttack());
 												System.out.println(z.getHealth());
-											} 
-											
+											}
+
 										}
 									}
 								}

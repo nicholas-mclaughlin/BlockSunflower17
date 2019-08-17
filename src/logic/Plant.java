@@ -35,7 +35,9 @@ public class Plant extends GameCharacter{
 	private double bulletYPosition;
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
-	
+	public static boolean sunflowerStillAlive = true;
+	//public static int rowPosition;
+	//public static int coloumnPosition;
 	
 	public boolean isNotDestroyed() {
 		return plantNotDestroyed;
