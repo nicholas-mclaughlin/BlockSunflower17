@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -196,52 +197,6 @@ public class GardenScene extends BaseScene {
 	display();
 
 	checkAll(game, level);
-	//checkAll(game, level);
-
-	/*Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
-		        @Override
-		        public void run() {
-		            Platform.runLater(new Runnable() {
-		                @Override
-		                public void run() {
-		                	for(int i = 0; i<5; i++)
-		                	{
-		                	    for(int j = 0; j<9; j++)
-		                	    {
-
-		                	        if (game.getPlant(i, j).getType() == "Wallnut") {
-		                	        	for (int z = 0; z < level.zombies.length; z++) {
-		                	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
-		                	        	}
-		                	        }
-
-		                	    }
-		                	}
-
-
-				}
-
-		                	}
-
-
-		            });
-
-		        }
-		    }, 0, 10); */
-	/*for(int i = 0; i<5; i++)
-	{
-	    for(int j = 0; j<9; j++)
-	    {
-
-	        if (game.getPlant(i, j).getType() == "Wallnut") {
-	        	for (int z = 0; z < level.zombies.length; z++) {
-	        		checkCollision(game.getPlant(i, j).getPlantRect(), level.getZombies()[z].getRect());
-	        	}
-	        }
-
-	    }
-	} */
 
 	}
 
@@ -355,60 +310,22 @@ public class GardenScene extends BaseScene {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
 
-	public void checkPlantCollision(Plant p, Zombie z) {
-
-		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	if (p.getxPosition() == z.getPosition()){
- 		                		 System.out.println("Colliding");
- 		                		 z.setStopZombie(true);
- 				              timer.cancel();
-		                       timer.purge();
-
- 		                	}
- 		                }
-
- 		            });
-
- 		        }
- 		    }, 0, 10);
+	public void checkIfGameOver(Level level) throws FileNotFoundException {
+		//System.out.println(level.getZombies().get(0).getType());
+		
+		if (level.getZombies().get(0).getType() == null) {
+			System.out.println("GAMEOVER");
+    		GardenScene.gameOverMessage = new Button("GAME OVER");
+    		GardenScene.fullImage.getChildren().add(GardenScene.gameOverMessage);
+    		GardenScene.gameOverMessage.setStyle("-fx-font-size: 75; -fx-background-color: transparent; -fx-font-weight: bold;");
+    		GardenScene.gameOverMessage.setDisable(false);
+    		
+    		GardenScene.gameOverMessage.setLayoutY(0);
+    		GardenScene.gameOverMessage.setLayoutX(0);
+    		GardenScene.gameOverMessage.setPrefSize(1220,720);
+		}
 }
 
-public void checkBulletCollision(Plant p, Zombie z) {
-
-		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	if (p.getBulletRect().getBoundsInParent().intersects(z.getRect().getBoundsInParent())){
- 		                		 System.out.println("Zombie Hit");
- 		                		p.setBullet(null);
- 		                	p.setBulletRect(null);
- 		                	 fullImage.getChildren().removeAll(p.getBullet(), p.getBulletRect());
- 		                	 /*if (p.isFreeze()) {
- 		                	z.setStopZombie(true);
- 		                	 } */
- 				              timer.cancel();
-		                       timer.purge();
-
- 				}
-
- 		                	}
-
-
- 		            });
-
- 		        }
- 		    }, 0, 10);
-}
 
 	public void checkAll(Game game, Level level) {
 		Timer timer = new Timer();
@@ -419,6 +336,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
+
           	for(int i = 0; i<5; i++) {
         	    for(int j = 0; j<9; j++) {
         	        try {
@@ -459,8 +377,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		    }
-		    System.out.println();
+		    }System.out.println();
 		}
 		
 
@@ -484,8 +401,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-		    }
-		    System.out.println();
+		    }System.out.println();
 		}
 
 
@@ -517,7 +433,13 @@ public void checkBulletCollision(Plant p, Zombie z) {
 					}
         	    }
         	}
-			}});
+        	try {
+				checkIfGameOver(level);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+                }});
 			}
 		    }, 1, 100);
 		}
