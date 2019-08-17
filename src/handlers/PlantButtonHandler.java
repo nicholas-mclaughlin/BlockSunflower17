@@ -29,7 +29,7 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		if (player.getMoney() >= price) {
 			player.decreaseMoney(price);
 			player.setPlantHeld(plant); //sets plantHeld by player to plant bought
-			GardenScene.sunCounter.setText("  " + player.getMoney()); //changes sun amount
+			GardenScene.getSunCounter().setText("  " + player.getMoney()); //changes sun amount
 			disable = true;
 		} else {
 			disable = false;

@@ -9,7 +9,7 @@ import javafx.event.EventHandler;
 public class LevelHandler implements EventHandler<ActionEvent> {
 	
 	//This gives access to the session.
-	Session session;
+	private Session session;
 	private int levelNum;
 	
 	public LevelHandler(Session session, int levelNum) {

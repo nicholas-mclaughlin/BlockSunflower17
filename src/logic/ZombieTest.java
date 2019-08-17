@@ -65,7 +65,7 @@ public class ZombieTest {
 		public void test_setter_and_getter_speed_negativeNumber() throws FileNotFoundException {
 			Zombie c = new Zombie("Flag Zombie", 5);
 			c.setSpeed(-5);
-			assertEquals("Set speed to -5.", 50000, c.getSpeed(), 0.000001);
+			assertEquals("Set speed to -5.", 0.2, c.getSpeed(), 0.000001);
 		}
 		
 		@Test

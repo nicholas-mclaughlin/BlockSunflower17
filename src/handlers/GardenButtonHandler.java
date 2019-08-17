@@ -38,7 +38,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 	private Player player;
 	private Game game;
 	//Creates the positions of the button that is clicked.
-	public double xPosition;
+	private double xPosition;
 	//public double yPosition;
 	//Creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	private Button sunButton;
@@ -288,7 +288,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 		    for(int j = 0; j<9; j++)
 		    {
 		        try {
-					System.out.print(Game.theGarden[i][j] + " ");
+					System.out.print(Game.getTheGarden()[i][j] + " ");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
