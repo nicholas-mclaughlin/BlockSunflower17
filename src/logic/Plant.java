@@ -28,6 +28,7 @@ public class Plant extends GameCharacter{
 	public boolean freeze = false;
 	public boolean plantNotDestroyed = true;
 	public boolean hasImage = false;
+	public boolean hasBullet = false;
 	private double xPosition;
 	private double yPosition;
 	private double bulletStartPosition;
@@ -123,6 +124,7 @@ public class Plant extends GameCharacter{
 		setPlantImage(aPlant.getPlantImage());
 		setBullet(aPlant.getBullet());
 		this.hasImage = aPlant.hasImage;
+		this.hasBullet = aPlant.hasBullet;
 		this.plantNotDestroyed = aPlant.plantNotDestroyed;
 		this.bullet = aPlant.bullet;
 		this.bulletRect = aPlant.bulletRect;
@@ -257,32 +259,36 @@ public class Plant extends GameCharacter{
 	}
 	
 	public void setBulletImage() {
-		if (bullet != null) {
+		if (bullet != null && hasBullet == false && plantNotDestroyed) {
     		 bullet.setLayoutX(bulletXPosition);
     		 bullet.setLayoutY(bulletYPosition);
     				GardenScene.fullImage.getChildren().addAll(bullet);
+    				hasBullet = true;
     				
-    				Timer timer2 = new Timer();
-    					timer2.schedule(new TimerTask() {
-    					        @Override
-    					        public void run() {
-    					            Platform.runLater(new Runnable() {
-    					                @Override
-    					                public void run() {
-    					                	bulletXPosition += 5;
-    					                	if (bulletXPosition >= 1200) {
-    					                		bulletXPosition = bulletStartPosition;
-    					                	}
-    					                	}
-
-
-    					            });
-
-    					        }
-    					    }, 0, 10); 
-    					    
 		}
+	}
+	
+	public void moveBullet() {
+		if (bullet != null && plantNotDestroyed) {
+			Timer timer2 = new Timer();
+				timer2.schedule(new TimerTask() {
+				        @Override
+				        public void run() {
+				            Platform.runLater(new Runnable() {
+				                @Override
+				                public void run() {
+				                	bulletXPosition += 5;
+				                	if (bulletXPosition >= 1200) {
+				                		bulletXPosition = bulletStartPosition;
+				                	}
+				                	}
 
+
+				            });
+
+				        }
+				    }, 0, 10); 
+		}
 	}
                 
 
@@ -402,33 +408,25 @@ public class Plant extends GameCharacter{
 	public void setFrequency(int frequency) {
 		this.frequency = frequency;
 	}
+	
 
-	public void moveBullet() {
-		Timer timer = new Timer();
- 		timer.schedule(new TimerTask() {
- 		        @Override
- 		        public void run() {
- 		            Platform.runLater(new Runnable() {
- 		                @Override
- 		                public void run() {
- 		                	bulletXPosition += 1;
- 		                	/*
- 		                	if (getHealth() <= 0) {
- 				              timer.cancel();
-		                       timer.purge();
- 		                	}
- 		                	*/
-						
- 				
-
- 		                	}
-
-
- 		            });
-
- 		        }
- 		    }, 0, 10);
+	public boolean isHasImage() {
+		return hasImage;
 	}
+
+	public void setHasImage(boolean hasImage) {
+		this.hasImage = hasImage;
+	}
+
+	public boolean isHasBullet() {
+		return hasBullet;
+	}
+
+	public void setHasBullet(boolean hasBullet) {
+		this.hasBullet = hasBullet;
+	}
+
+	
 
 /*	public void checkForZombie(game) {
 		Zombie zombie = game.level

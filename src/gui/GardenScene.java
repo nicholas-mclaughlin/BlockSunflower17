@@ -425,6 +425,7 @@ public void checkBulletCollision(Plant p, Zombie z) {
         	        	Plant p = game.getPlant(i, j);
         	        	p.setImage();
         	        	p.setBulletImage();
+        	        	p.moveBullet();
 
 						if (p.getType().equals( "Wallnut")
 							|| p.getType().equals( "PeaShooter")
@@ -525,4 +526,5 @@ public void checkBulletCollision(Plant p, Zombie z) {
 			}
 		    }, 1, 100);
 		}
+	
 }
