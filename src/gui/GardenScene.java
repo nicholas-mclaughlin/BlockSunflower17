@@ -364,6 +364,9 @@ public class GardenScene extends BaseScene {
 											z.loseHealth(p.getAttack());
 											p.setBulletXPosition(p.getBulletStartPosition());
 											System.out.println("Health" + z.getHealth());
+											if (p.isFreeze()) {
+												System.out.println("FREEZEEEE");
+											}
 											/*
 											if (z.getHealth() <= 0) {
 												fullImage.getChildren().remove(z.zombieImage);
