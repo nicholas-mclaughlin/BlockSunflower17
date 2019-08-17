@@ -161,6 +161,10 @@ public class Plant extends GameCharacter{
 	
 	/*
 	 * translates a bullet's position using a timer
+	 * 
+	 * Shoots a new bullet after a certain amount of timer
+	 * 
+	 * Bullets stops at end of garden
 	 */
 	public void moveBullet() {
 		if (bullet != null && plantNotDestroyed) {
