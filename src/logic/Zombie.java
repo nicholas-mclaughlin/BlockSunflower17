@@ -104,9 +104,6 @@ public class Zombie extends GameCharacter{
 	      startZombie();
 	}
 	
-	public Rectangle getBounds(ImageView z) {
-		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
-	}
 
 	public Zombie(Zombie c) throws FileNotFoundException {
 		super(c);

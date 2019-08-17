@@ -32,6 +32,7 @@ public class Plant extends GameCharacter{
 	private double bulletStartPosition;
 	private double bulletXPosition;
 	private double bulletYPosition;
+	private int bulletTimer = 0;
 	private ImageView sunGIF = new ImageView(new Image(new FileInputStream("PlantImages//sun.gif")));
 	private Button sunGif = new Button("",sunGIF);
 	public static boolean sunflowerStillAlive = true;
@@ -252,12 +253,32 @@ public class Plant extends GameCharacter{
 				            Platform.runLater(new Runnable() {
 				                @Override
 				                public void run() {
-				                	bulletXPosition += 0.5;
-				                	//System.out.println(bulletXPosition);
-				                	bullet.setLayoutX(bulletXPosition);
-				                	if (bulletXPosition >= 1200) {
+				                	bulletTimer += 1;
+				                	if (bulletXPosition <= 1200) {
+				                		bulletXPosition += 0.70;
+				                		
+				                	}
+				                	else {
+				                		GardenScene.fullImage.getChildren().remove(bullet);
+				                	}
+				                	/*
+				                	else {
 				                		bulletXPosition = bulletStartPosition;
 				                	}
+				                	*/
+				                	if (bulletTimer >= 1199 && bulletTimer <= 1201) {
+				                		bulletXPosition = bulletStartPosition;
+				                		GardenScene.fullImage.getChildren().add(bullet);
+				                		bulletTimer = 0;
+				                	}
+				                	//System.out.println(bulletXPosition);
+				                	bullet.setLayoutX(bulletXPosition);
+				                	if (hasBullet == false) {
+				                		timer2.cancel();
+					                     timer2.purge();
+				                	}
+				                	
+				                	
 				                	}
 
 
@@ -275,7 +296,10 @@ public class Plant extends GameCharacter{
 	public int getPrice() {
 		return price;
 	}
-
+	
+	public void addToBulletTimer() {
+		bulletTimer += 1;
+	}
 	public void attack(Zombie aZombie) {
 		if (aZombie.getRow() == this.getRow()) {
 			aZombie.loseHealth(this.getAttack());
