@@ -19,7 +19,7 @@ public class Zombie extends GameCharacter{
 	 * to time their entrance to the actual GUI of the garden
 	 */
 	private double position = 1650;
-	
+	private int endOfGarden = 220;
 	private ImageView zombieImage = new ImageView(new Image(new FileInputStream("ZombieImages//Zombieidle.gif")));
 	private int IMAGEHEIGHT = 100;
 	private int IMAGEWIDTH = 130;
@@ -207,7 +207,7 @@ public class Zombie extends GameCharacter{
 		                	} 
 		                	
 		                	
-		                	if (position <= 220) {
+		                	if (position <= endOfGarden) {
 		                		System.out.println("GAMEOVER");
 		                		GardenScene.setGameOverMessage(new Button("GAME OVER"));
 		                		GardenScene.getFullImage().getChildren().add(GardenScene.getGameOverMessage());

@@ -64,7 +64,6 @@ public class Level {
 			zombies.add(new Zombie("Cone Zombie", 1));
 			zombies.add(new Zombie("Football Zombie", 5));
 			zombies.add(new Zombie("Zombie", 3));
-			zombies.add(new Zombie("Zombie", 3));
 			zombies.add(new Zombie("Flag Zombie", 2));
 			zombies.add(new Zombie("Football Zombie", 4));
 			zombies.add(new Zombie("Zombie", 1));
