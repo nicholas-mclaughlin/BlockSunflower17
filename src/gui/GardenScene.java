@@ -66,12 +66,12 @@ public class GardenScene extends BaseScene {
 	private static MediaPlayer mediaPlayer;
 
 	static StackPane root = new StackPane();
-	public static Pane fullImage = new Pane(root);
+	private static Pane fullImage = new Pane(root);
 	//creates the error message that the player has to buy a plant before clicking on the garden buttons
-	public static Button errorMessage = new Button("Buy a plant first!");
+	private static Button errorMessage = new Button("Buy a plant first!");
 	private boolean gameOver = false;
-	public static Button gameOverMessage = new Button("");
-	public static int deathCounter = 0;
+	private static Button gameOverMessage = new Button("");
+	private static int deathCounter = 0;
 
 	//constructor
 	public GardenScene(Session aSession, int levelNum) {
