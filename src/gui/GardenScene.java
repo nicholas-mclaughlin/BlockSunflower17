@@ -385,7 +385,7 @@ public class GardenScene extends BaseScene {
 									if (p.getColumn() == z.getColumn() && p.plantNotDestroyed) {
 										z.setStopZombie(true);
 										if (p.getType().equals("Potato Mine")) {
-											System.out.println("HHHH");
+											//p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//boom.gif"))));
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
 											p.setNotDestroyed(false);

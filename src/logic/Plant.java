@@ -362,13 +362,6 @@ public class Plant extends GameCharacter{
 		this.bullet = bullet;
 	}
 
-
-	public Rectangle getBounds(ImageView z) {
-		return new Rectangle(z.getLayoutX(), z.getLayoutY(), 60, 65);
-	}
-	public Rectangle getBulletBounds(ImageView b) {
-		return new Rectangle(b.getLayoutX(), b.getLayoutY(), 25, 25);
-	}
 	
 	public Button getSunButton() {
 		//sets the background to transparent so only the sun image is seen.

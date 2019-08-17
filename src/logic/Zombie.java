@@ -136,11 +136,7 @@ public class Zombie extends GameCharacter{
 	}
 	//if it is an invalid negative number set speed to 45000.0
 	public void setSpeed(double d) {
-		if (d<0) {
-			this.speed = 50000.0;
-		} else {
 			this.speed = d;
-		}
 	}
 
 	public double getPosition() {
@@ -219,7 +215,6 @@ public class Zombie extends GameCharacter{
 		        }
 		    }, 3000, 10);	
 }
-	 
 	 
 
 	public boolean zombieOnRow(int rowNum) {
