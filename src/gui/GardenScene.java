@@ -309,6 +309,7 @@ public class GardenScene extends BaseScene {
 	public static Rectangle getBounds(ImageView z) {
 		return new Rectangle( z.getLayoutX(), z.getLayoutY(), 80, 100);
 	}
+	
 
 	public void checkIfGameOver(Level level) throws FileNotFoundException {
 		//System.out.println(level.getZombies().get(0).getType());
@@ -324,7 +325,7 @@ public class GardenScene extends BaseScene {
     		GardenScene.gameOverMessage.setLayoutX(0);
     		GardenScene.gameOverMessage.setPrefSize(1220,720);
 		}
-}
+	}
 
 
 	public void checkAll(Game game, Level level) {
@@ -373,8 +374,8 @@ public class GardenScene extends BaseScene {
 											System.out.println("HHHH");
 											z.loseHealth(p.getAttack());
 											 GardenScene.fullImage.getChildren().remove(p.plantImage);
-											 GardenScene.fullImage.getChildren().remove(z.zombieImage);
-											game.removeZombie(i+1, k);
+										//	 GardenScene.fullImage.getChildren().remove(z.zombieImage);
+										//	game.removeZombie(i+1, k);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
 		 		                			//this just prints out grid again
@@ -429,7 +430,12 @@ public class GardenScene extends BaseScene {
 			 		                		}
 		 		                		}										
 									}
-								}
+									if (z.getHealth() <= 0) {
+										GardenScene.fullImage.getChildren().remove(z.zombieImage);
+										game.removeZombie(i+1, k);
+										}
+								} 
+								
 							} else {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
