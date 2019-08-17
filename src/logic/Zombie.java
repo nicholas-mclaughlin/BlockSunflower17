@@ -185,7 +185,7 @@ public class Zombie extends GameCharacter{
 		                	if (stopZombie == true) {
 		                    	  timer.cancel();
 			                       timer.purge();
-			                       startZombie();
+			                       
 		                      }
 		                	
 		                	if (getHealth() <= 0) {
@@ -218,7 +218,7 @@ public class Zombie extends GameCharacter{
 		            });
 		            
 		        }
-		    }, 3000, 10);	
+		    }, 0, 10);	
 }
 	 
 

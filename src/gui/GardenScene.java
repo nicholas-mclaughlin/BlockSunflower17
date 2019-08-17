@@ -383,10 +383,11 @@ public class GardenScene extends BaseScene {
 										}
 									else {
 		 		                		p.loseHealth(z.getAttack());
-
+		 		                		
 
 			 		                	if (p.plantImage!= null && p.getHealth() < 0 && p.plantNotDestroyed) {
 			 		                		GardenScene.fullImage.getChildren().remove(p.plantImage);
+			 		                		z.startZombie();
 			 		                		if (p.getType().equals("Sunflower")) {
 			 		                			Plant.sunflowerStillAlive = false;
 			 		                			//Plant.coloumnPosition = p.getColumn();
