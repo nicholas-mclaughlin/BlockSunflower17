@@ -66,11 +66,11 @@ This was the second iteration of our game that contained a GUI version. The plan
 had not yet been created. 
 
 ## Version 1 
-For version 1 (Text-based version of our game), navigate to the Text-Based branch, then download the zip-file, compile and run 
-MainClass.java.
+For version 1 (Text-based version of our game), navigate to the text-based file on the master branch, then compile and run 
+MainClass.java
 
 # Text-Based
-For the Text-based version of our game, navigate to the Text-Based branch, then download the zip-file, compile and run MainClass.java.
+For the Text-based version of our game, navigate to the text-based file on the master branch, then compile and run MainClass.java.
 
 # Authors
 Group 17:
