@@ -17,7 +17,7 @@ public class Game {
 	 */
 	private static Plant[][] gardenPlots;
 	
-	/*
+	/**
 	 *  keeps track of where zombies are (row) 
 	 */
 	private ArrayList<Zombie> zombieRow1 = new ArrayList<>();
@@ -83,7 +83,7 @@ public class Game {
 	}
 	
 	
-	/*
+	/**
 	 * resetPlot resets a plot of where a given plant was in the grid
 	 * it replaces a Plant in the grid with the default Plant object with
 	 * with type string format "<row>,<column>" just like when the game was initialized.
@@ -110,7 +110,7 @@ public class Game {
 		return s;
 	}
 	
-	/*
+	/**
 	 * getZombieRow gets an arraylist containing the zombies in a specified row
 	 * 
 	 * @param int 	row is the specified row
@@ -136,7 +136,7 @@ public class Game {
 		return newZombieRow;
 	}
 	
-	/*
+	/**
 	 * removes a zombie from a specified arraylist
 	 */
 	public void removeZombie(int row, int index) {
@@ -153,7 +153,7 @@ public class Game {
 		}
 	}
 
-	/*
+	/**
 	 * add a zombie to an arraylist depending which row it was in
 	 */
 	public void zombieTracker(Zombie aZombie) throws FileNotFoundException {

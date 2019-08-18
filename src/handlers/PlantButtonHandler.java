@@ -11,10 +11,13 @@ import logic.Player;
 import gui.GardenScene;
 
 
-
+/**
+ *  PlantButtonHandler is the button handler for the plant buttons for the game.
+ *  Contains method buyPlant() that lets the player buy plant if they have sufficient funds
+ */
 public class PlantButtonHandler implements EventHandler<ActionEvent> {
 	
-	/*
+	/**
 	 * This will give access to the game's player. 
 	 */
 	private Player player;
@@ -26,8 +29,8 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 		this.player = aPlayer;
 	}
 	
-	/*
-	 * buys plant only if they player has sufficient funds, after which it decreases the money.
+	/**
+	 * buys plant only if the player has sufficient funds, after which it decreases the money.
 	 * also if they were able to buy the plant, it disables the button to show they bought it.
 	 * buyPlant() sets plantHeld by player to plant bought and changes sun amount accordingly.
 	 */
@@ -68,7 +71,7 @@ public class PlantButtonHandler implements EventHandler<ActionEvent> {
 
 		buyPlant();
 		
-		/**
+		/*
 		 * First plant button is disabled, only if the plant was bought, and timer sets
 		 * the time for the later task, to enable the button again, to run after a time 0f 10000ms.
 		 * The error message also appears since a plant was bought.

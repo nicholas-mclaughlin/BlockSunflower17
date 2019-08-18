@@ -19,7 +19,7 @@ import logic.*;
  */
 public class GardenButtonHandler implements EventHandler<ActionEvent> {
 
-	/*
+	/**
 	 * player gives access to the session's game and the game's player.
 	 * sunButton creates the sunflower sun button and the bullets so they are accessible inside the timers.
 	 */
@@ -81,7 +81,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			}
 
 
-			/*
+			/**
 			 * places the sun gifs which is a sunButton.
 			 * positions the sun button on the sunflower and
 			 * adds the sunButton after 6000 milliseconds
@@ -145,7 +145,7 @@ public class GardenButtonHandler implements EventHandler<ActionEvent> {
 			}
 		}
 		
-		/*
+		/**
 		 * if there was no plant being held, it was set to blank thus the error message is set to being seen
 		 */
 		else if (player.getPlantHeld().equals("")){
