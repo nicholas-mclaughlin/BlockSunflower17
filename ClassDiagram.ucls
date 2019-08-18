@@ -129,7 +129,7 @@
   </class>  
   <class id="15" language="java" name="logic.Level" project="BlockSunflower17" 
     file="/BlockSunflower17/src/logic/Level.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="671" y="665"/>    
+    <position height="-1" width="-1" x="670" y="679"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
