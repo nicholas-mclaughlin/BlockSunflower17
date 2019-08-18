@@ -51,7 +51,7 @@ The final iteration of the game is completely playable and has all the features.
 level are destroyed. Collision also now occur between plants and zombies, and bullets and zombies. Each plant also are able to do
 different abilities. All of the animations were also switched from using translateTransition to using timers.
 
-# Version 4
+## Version 4
 This is the fourth iteration of the game which now has a start scene with a play button that leads to the levels and a credits scene 
 that shows the contributions. Both have a back button. The plants and zombies are logically interacting. There is now a "GAME OVER" sign
 that appears when the zombies reach the house and the buttons, suns, and garden are no longer clickable, thus the game ends. 
