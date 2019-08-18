@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class-diagram version="1.2.3" icons="true" automaticImage="JPEG" always-add-relationships="false" 
-  generalizations="true" realizations="true" associations="true" dependencies="false" nesting-relationships="true" 
-  router="FAN">  
+<class-diagram version="1.2.3" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="drivers.Session" project="BlockSunflower17" 
     file="/BlockSunflower17/src/drivers/Session.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="523" y="-287"/>    
@@ -22,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="handlers.CreditsHandler" project="BlockSunflower17" 
     file="/BlockSunflower17/src/handlers/CreditsHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="-296"/>    
+    <position height="-1" width="-1" x="778" y="-310"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -49,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="handlers.PlantButtonHandler" project="BlockSunflower17" 
     file="/BlockSunflower17/src/handlers/PlantButtonHandler.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="702" y="273"/>    
+    <position height="-1" width="-1" x="756" y="206"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -67,7 +66,7 @@
   </class>  
   <class id="8" language="java" name="gui.BaseScene" project="BlockSunflower17" 
     file="/BlockSunflower17/src/gui/BaseScene.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="272" y="187"/>    
+    <position height="-1" width="-1" x="311" y="153"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="false">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -76,7 +75,7 @@
   </class>  
   <class id="9" language="java" name="gui.Credits" project="BlockSunflower17" 
     file="/BlockSunflower17/src/gui/Credits.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="505" y="277"/>    
+    <position height="-1" width="-1" x="534" y="218"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -85,7 +84,7 @@
   </class>  
   <class id="10" language="java" name="gui.GardenScene" project="BlockSunflower17" 
     file="/BlockSunflower17/src/gui/GardenScene.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="147" y="679"/>    
+    <position height="-1" width="-1" x="147" y="637"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -94,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="gui.Homepage" project="BlockSunflower17" 
     file="/BlockSunflower17/src/gui/Homepage.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="385" y="521"/>    
+    <position height="-1" width="-1" x="461" y="477"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -103,7 +102,7 @@
   </class>  
   <class id="12" language="java" name="gui.Menu" project="BlockSunflower17" file="/BlockSunflower17/src/gui/Menu.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="523" y="440"/>    
+    <position height="-1" width="-1" x="570" y="342"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -148,7 +147,7 @@
   </class>  
   <class id="17" language="java" name="logic.Player" project="BlockSunflower17" 
     file="/BlockSunflower17/src/logic/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1006" y="51"/>    
+    <position height="-1" width="-1" x="997" y="9"/>    
     <display autosize="true" stereotype="false" package="false" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -216,10 +215,10 @@
   <association id="30">    
     <end type="SOURCE" refId="6" navigable="false">      
       <attribute id="31" name="player">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </attribute>      
       <multiplicity id="32" minimum="0" maximum="1">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
@@ -236,10 +235,10 @@
   <association id="35">    
     <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="36" name="player">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </attribute>      
       <multiplicity id="37" minimum="0" maximum="1">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
@@ -288,10 +287,10 @@
   <association id="48">    
     <end type="SOURCE" refId="4" navigable="false">      
       <attribute id="49" name="player">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </attribute>      
       <multiplicity id="50" minimum="0" maximum="1">        
-        <position height="0" width="0" x="51" y="-315"/>      
+        <position height="0" width="0" x="42" y="-357"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="17" navigable="true"/>    
