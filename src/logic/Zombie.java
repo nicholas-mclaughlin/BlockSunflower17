@@ -11,8 +11,8 @@ import javafx.scene.control.Button;
 
 
 /**
- * Plant is an object with attributes inherited from GameCharacter.
- * Different types of Plants have different attributes set as default.
+ * Zombie is an object with attributes inherited from GameCharacter.
+ * Different types of Zombies have different attributes set as default.
  */
 public class Zombie extends GameCharacter{
 	
