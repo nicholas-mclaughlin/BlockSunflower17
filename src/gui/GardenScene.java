@@ -363,36 +363,41 @@ public class GardenScene extends BaseScene {
 							if (game.getZombieRow(i+1) != null) {
 								for (int k = 0; k < game.getZombieRow(i+1).size(); k++) {
 									Zombie z = game.getZombieRow(i+1).get(k);
-
+									
+									//Checks if the plant is a peashooter in order to check bullet collision
 									if ((p.getType().equals("PeaShooter") || p.getType().equals("Frozen PeaShooter"))
 											&& (p.getRow()+1) == z.getRow()) {
-
+										
+										//Checking bullet collision
 										if ((p.getBulletXPosition() + 3) >= z.getPosition()
 												&& (p.getBulletXPosition() - 3) <= z.getPosition()) {
 											z.loseHealth(p.getAttack());
 											p.setBulletXPosition(10000); //Does this so that bullet won't also affect zombie behind it
 											fullImage.getChildren().remove(p.getBullet());
 
-
+											//Checks if bullet will freeze zombie
 											if (p.isFreeze() && z.isFrozen() == false) {
 												z.setSpeed(0.12);
 												z.setFrozen(true);
 											}
 										}
 									}
-
+									
+									//Checks for zombie and plant collision
 									if (p.getColumn() == z.getColumn() && p.isNotDestroyed()) {
 										z.setStopZombie(true);
-
+										
+										//checks if plant is potato mine
 										if (p.getType().equals("Potato Mine")) {
 											z.loseHealth(p.getAttack());
 											potatoExplosion(p);
 											p.setNotDestroyed(false);
 		 		                			game.resetPlot(p);
-										}	else {
-											
+										}	
+										else {
 		 		                		p.loseHealth(z.getAttack());
-
+		 		                		
+		 		                		//Checks if plant is dead 
 			 		                	if (p.getPlantImage() != null && p.getHealth() < 0 && p.isNotDestroyed()) {
 			 		                		z.startZombie();
 			 		                		plantRemoval(p);
@@ -402,13 +407,16 @@ public class GardenScene extends BaseScene {
 			 		                		}
 		 		                		}
 									}
+									
+									//Changes wallnut images when it hits its half life
 									if (p.getType().equals("Wallnut") && p.getHealth() <= 5000 && p.isNewImageSet() == false) {
 	 		                			GardenScene.fullImage.getChildren().remove(p.getPlantImage());
 	 		                			p.setPlantImage(new ImageView(new Image(new FileInputStream("PlantImages//walnut_half_life.gif"))));
 	 		                			p.setHasImage(false);
 	 		                			p.setNewImageSet(true);
 	 		                		}
-
+									
+									//Adds to the death counter when a zombie dies
 									if (z.getHealth() <= 0) {
 										GardenScene.fullImage.getChildren().remove(z.getZombieImage());
 										game.removeZombie(i+1, k);
@@ -431,6 +439,7 @@ public class GardenScene extends BaseScene {
 					}
         	    }
         	}
+          		//When the number of zombies dead equals number of zombies in the level you win
 				if (deathCounter == level.getZombies().size()) {
 					youWin();
 					timer.cancel();
