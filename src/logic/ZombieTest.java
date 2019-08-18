@@ -86,7 +86,7 @@ public class ZombieTest {
 		public void test_setter_and_getter_attack_negativeNumber() throws FileNotFoundException {
 			Zombie c = new Zombie("Flag Zombie", 5);
 			c.setAttack(-5);
-			assertEquals("Set attack to -5.", 100, c.getAttack());
+			assertEquals("Set attack to -5.", 10, c.getAttack());
 		}
 		
 		@Test
