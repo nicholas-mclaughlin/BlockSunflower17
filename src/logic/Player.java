@@ -44,14 +44,14 @@ public class Player {
 		plantHeld = aPlant;
 	}
 	
-	/*
+	/**
 	 * increases the money by 25 because each sun is worth 25 suns
 	 */
 	public void increaseMoney() {
 		this.money += 25;
 	}
 	
-	/*
+	/**
 	 * decreases the money by the amount which is the price
 	 */
 	public void decreaseMoney(int amount) {
